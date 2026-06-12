@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luba的IFS小课堂 · 进阶篇</title>
+<style>
+:root{
+  --bg:#FBF5EC;
+  --ink:#3D3329;
+  --ink-soft:#7A6E5F;
+  --card:#FFFFFF;
+  --accent:#E8853B;
+  --accent-deep:#C96A24;
+  --teal:#2F8F83;
+  --teal-soft:#E3F1EF;
+  --sand:#F4E9D9;
+  --lav:#EFE9F7;
+  --rose:#F9E8E3;
+  --line:#EADfCE;
+  --good:#3E9E6E;
+  --bad:#C9684A;
+  --shadow:0 4px 14px rgba(120,90,50,.10);
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:17px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+#app{max-width:860px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- 顶栏 ---------- */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(251,245,236,.92);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 4px 10px;border-bottom:1px solid var(--line);
+  margin-bottom:26px;
+}
+.topbar .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;cursor:pointer;user-select:none}
+.topbar .brand .cat-icon{width:34px;height:34px}
+.paw-progress{display:flex;gap:7px;align-items:center}
+.paw{
+  width:26px;height:26px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;background:var(--sand);
+  filter:grayscale(1) opacity(.45);
+  transition:all .4s ease;
+  cursor:pointer;
+}
+.paw.earned{filter:none;background:#FBE3CC;transform:scale(1.06)}
+.paw.earned.pop{animation:pawpop .6s ease}
+@keyframes pawpop{
+  0%{transform:scale(.4) rotate(-30deg)}
+  60%{transform:scale(1.45) rotate(12deg)}
+  100%{transform:scale(1.06) rotate(0)}
+}
+
+/* ---------- 屏幕切换 ---------- */
+.screen{display:none;animation:fadein .45s ease}
+.screen.active{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- 通用 ---------- */
+h1{font-size:30px;line-height:1.35;margin-bottom:6px}
+h2{font-size:22px;margin:38px 0 14px}
+h3{font-size:18px;margin:22px 0 10px}
+p{margin-bottom:12px}
+.kicker{
+  display:inline-block;font-size:13px;font-weight:700;letter-spacing:1px;
+  color:var(--accent-deep);background:#FBE9D7;border-radius:99px;
+  padding:3px 12px;margin-bottom:10px;
+}
+.muted{color:var(--ink-soft);font-size:15px}
+.en{font-size:.85em;color:var(--ink-soft);font-weight:500}
+.hl{background:linear-gradient(transparent 62%,#FBDDBA 62%);font-weight:600}
+.divider{border:none;border-top:1px dashed var(--line);margin:34px 0}
+
+.btn{
+  display:inline-block;border:none;cursor:pointer;
+  background:var(--accent);color:#fff;
+  font-size:16px;font-weight:600;font-family:inherit;
+  padding:11px 24px;border-radius:99px;
+  box-shadow:var(--shadow);
+  transition:transform .15s ease,background .2s;
+}
+.btn:hover{background:var(--accent-deep);transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--accent-deep);box-shadow:none;border:2px solid var(--accent)}
+.btn.ghost:hover{background:#FBE9D7}
+.btn.small{font-size:14px;padding:7px 16px}
+.btn:disabled{opacity:.45;cursor:default;transform:none}
+.navrow{display:flex;justify-content:space-between;gap:12px;margin-top:44px;flex-wrap:wrap}
+
+/* ---------- Luba 气泡 ---------- */
+.luba{display:flex;gap:14px;align-items:flex-start;margin:24px 0}
+.luba .cat-icon{width:58px;height:58px;flex-shrink:0;margin-top:2px}
+.bubble{
+  background:var(--card);border-radius:4px var(--radius) var(--radius) var(--radius);
+  padding:14px 18px;box-shadow:var(--shadow);
+  border:1px solid var(--line);
+  font-size:16px;
+}
+.bubble .who{font-size:12.5px;font-weight:700;color:var(--accent-deep);letter-spacing:.5px;margin-bottom:3px}
+.bubble p:last-child{margin-bottom:0}
+
+/* ---------- 卡片 ---------- */
+.panel{
+  background:var(--card);border-radius:var(--radius);
+  padding:22px 24px;box-shadow:var(--shadow);
+  border:1px solid var(--line);margin:18px 0;
+}
+.panel.tinted{background:var(--teal-soft);border-color:#D2E7E3}
+.panel.sand{background:var(--sand);border-color:var(--line)}
+
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:18px 0}
+
+/* 翻转卡 */
+.fcard{perspective:1000px;cursor:pointer;min-height:170px;outline:none}
+.fcard-inner{
+  position:relative;width:100%;height:100%;min-height:170px;
+  transition:transform .55s cubic-bezier(.4,.1,.2,1);
+  transform-style:preserve-3d;
+}
+.fcard.flipped .fcard-inner{transform:rotateY(180deg)}
+.fc-face{
+  position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:16px;padding:16px;display:flex;flex-direction:column;justify-content:center;
+  border:1px solid var(--line);
+}
+.fc-front{background:var(--card);box-shadow:var(--shadow);align-items:center;text-align:center;gap:8px}
+.fc-front .big{font-size:34px}
+.fc-front .name{font-weight:700;font-size:16.5px;line-height:1.4}
+.fc-front .tap{font-size:12px;color:var(--ink-soft)}
+.fc-back{background:var(--sand);transform:rotateY(180deg);font-size:14.5px;line-height:1.65;justify-content:flex-start;overflow:auto}
+.fc-back .quote{font-style:italic;color:var(--accent-deep);font-weight:600;margin-bottom:6px;font-size:14px}
+
+/* ---------- 内心声音 ---------- */
+.voices{display:flex;flex-direction:column;gap:12px;margin:16px 0}
+.voice{
+  display:none;align-self:flex-start;
+  background:var(--card);border:1px solid var(--line);border-radius:16px 16px 16px 4px;
+  padding:10px 16px;box-shadow:var(--shadow);max-width:88%;
+  animation:fadein .4s ease;
+}
+.voice.shown{display:block}
+.voice .vtag{font-size:12px;font-weight:700;color:var(--teal);display:block}
+.voice:nth-child(even){align-self:flex-end;border-radius:16px 16px 4px 16px}
+
+/* ---------- 测验 ---------- */
+.quiz{margin:18px 0}
+.qbox{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);margin-bottom:16px}
+.qbox .qtext{font-weight:700;margin-bottom:12px}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{
+  text-align:left;font-family:inherit;font-size:15.5px;cursor:pointer;
+  background:var(--bg);border:2px solid var(--line);border-radius:12px;
+  padding:10px 14px;transition:all .2s;line-height:1.55;
+}
+.opt:hover{border-color:var(--accent)}
+.opt.correct{border-color:var(--good);background:#EAF6EF}
+.opt.wrong{border-color:var(--bad);background:#FAEDE8;opacity:.85}
+.opt:disabled{cursor:default}
+.qfb{display:none;margin-top:12px;font-size:15px;border-radius:12px;padding:10px 14px}
+.qfb.show{display:block;animation:fadein .3s}
+.qfb.good{background:#EAF6EF;color:#2C7A52}
+.qfb.bad{background:#FAEDE8;color:#A85436}
+
+/* ---------- 分类游戏 ---------- */
+.sort-stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);text-align:center}
+.sort-scenario{font-size:18px;font-weight:600;line-height:1.7;min-height:84px;display:flex;align-items:center;justify-content:center;padding:6px 8px}
+.sort-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.sort-btn{
+  font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;
+  border:2px solid var(--line);background:var(--bg);border-radius:99px;
+  padding:9px 18px;transition:all .2s;
+}
+.sort-btn:hover{border-color:var(--accent);transform:translateY(-2px)}
+.sort-fb{min-height:56px;margin-top:14px;font-size:15px;color:var(--ink-soft)}
+.sort-fb .yes{color:var(--good);font-weight:700}
+.sort-fb .no{color:var(--bad);font-weight:700}
+.sort-meta{font-size:13.5px;color:var(--ink-soft);margin-top:10px}
+
+/* ---------- 8C ---------- */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:18px 0}
+.ccard{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:14px 16px;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s;
+}
+.ccard:hover{transform:translateY(-3px)}
+.ccard .chead{display:flex;align-items:center;gap:8px;font-weight:700}
+.ccard .cbody{display:none;font-size:14px;color:var(--ink-soft);margin-top:8px;line-height:1.6}
+.ccard.open .cbody{display:block;animation:fadein .3s}
+.ccheck-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.ccheck{
+  display:flex;align-items:center;gap:6px;
+  background:var(--card);border:1.5px solid var(--line);border-radius:99px;
+  padding:6px 14px;font-size:14.5px;cursor:pointer;user-select:none;transition:all .2s;
+}
+.ccheck:has(input:checked){background:var(--teal-soft);border-color:var(--teal);font-weight:600}
+.ccheck input{accent-color:var(--teal)}
+
+/* ---------- 6F 模拟器 ---------- */
+.sim{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.sim-steps{display:flex;gap:5px;margin-bottom:18px;flex-wrap:wrap}
+.sim-step-dot{
+  font-size:12.5px;font-weight:700;border-radius:99px;padding:4px 11px;
+  background:var(--sand);color:var(--ink-soft);
+}
+.sim-step-dot.now{background:var(--accent);color:#fff}
+.sim-step-dot.done{background:#EAF6EF;color:var(--good)}
+.sim-title{font-weight:700;font-size:18px;margin-bottom:8px}
+.sim-body{min-height:60px;margin-bottom:14px}
+.sim-part-line{
+  background:var(--lav);border-radius:14px 14px 14px 4px;padding:10px 14px;margin:10px 0;
+  font-size:15.5px;animation:fadein .4s;
+}
+.sim-part-line .who{font-size:12px;font-weight:700;color:#7A63A8;display:block}
+.sim-opts{display:flex;flex-direction:column;gap:9px}
+.sim-fb{display:none;margin-top:12px;background:var(--teal-soft);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.sim-fb.show{display:block;animation:fadein .3s}
+
+/* ---------- 前后对比开关 ---------- */
+.burden-wrap{margin:20px 0}
+.burden-toggle{display:flex;justify-content:center;gap:0;margin-bottom:18px}
+.bt-opt{
+  font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;
+  border:2px solid var(--accent);background:transparent;color:var(--accent-deep);
+  padding:9px 22px;transition:all .25s;
+}
+.bt-opt:first-child{border-radius:99px 0 0 99px;border-right-width:1px}
+.bt-opt:last-child{border-radius:0 99px 99px 0;border-left-width:1px}
+.bt-opt.on{background:var(--accent);color:#fff}
+.burden-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.bcol{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.bcol h4{font-size:16px;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.bcol ul{list-style:none}
+.bcol li{font-size:14.5px;padding:5px 0 5px 22px;position:relative;color:var(--ink-soft);line-height:1.55}
+.bcol li::before{content:"·";position:absolute;left:8px;color:var(--accent);font-weight:900}
+.bcol.healed li::before{content:"✓";color:var(--good);font-size:12px;left:4px;top:9px}
+
+/* ---------- 时间线 ---------- */
+.timeline{margin:20px 0;padding-left:26px;border-left:3px solid #F0D9BC}
+.tl-item{position:relative;margin-bottom:18px}
+.tl-item::before{
+  content:attr(data-n);position:absolute;left:-41px;top:0;
+  width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;
+  font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;
+}
+.tl-item h4{font-size:16px;margin-bottom:3px}
+.tl-item p{font-size:14.5px;color:var(--ink-soft);margin:0}
+
+/* ---------- 折叠 ---------- */
+details{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:14px 18px;margin:10px 0;box-shadow:var(--shadow);
+}
+details summary{cursor:pointer;font-weight:700;font-size:15.5px;list-style:none;display:flex;align-items:center;gap:8px}
+details summary::before{content:"▸";color:var(--accent);transition:transform .25s}
+details[open] summary::before{transform:rotate(90deg)}
+details .dbody{margin-top:10px;font-size:15px;color:var(--ink-soft)}
+details .dbody p{margin-bottom:8px}
+details .dbody ol,details .dbody ul{padding-left:22px;margin-bottom:8px}
+details .dbody li{margin-bottom:6px}
+
+/* ---------- 对照角 ---------- */
+.duizhao{
+  border:2px dashed var(--teal);border-radius:var(--radius);
+  background:var(--teal-soft);padding:20px 24px;margin:30px 0;
+}
+.duizhao .dz-tag{
+  display:inline-block;font-size:13px;font-weight:800;letter-spacing:.5px;
+  color:#fff;background:var(--teal);border-radius:99px;padding:3px 13px;margin-bottom:10px;
+}
+.duizhao p{font-size:15.5px}
+.duizhao .ask{
+  margin-top:12px;background:rgba(255,255,255,.75);border-radius:12px;
+  padding:10px 14px;font-size:14.5px;
+}
+.duizhao .ask b{color:var(--teal)}
+
+/* ---------- 小贴士 ---------- */
+.note{
+  display:flex;gap:10px;background:var(--rose);border-radius:14px;
+  padding:12px 16px;font-size:14.5px;color:#8A5444;margin:16px 0;line-height:1.6;
+}
+
+/* ---------- 目录卡 ---------- */
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:22px 0}
+.toc-card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:18px;cursor:pointer;box-shadow:var(--shadow);
+  transition:transform .15s ease;position:relative;
+}
+.toc-card:hover{transform:translateY(-4px)}
+.toc-card .tnum{font-size:12.5px;font-weight:800;color:var(--accent-deep);letter-spacing:1px}
+.toc-card h3{margin:4px 0 6px;font-size:17px}
+.toc-card p{font-size:13.5px;color:var(--ink-soft);margin:0}
+.toc-card .tdone{position:absolute;top:14px;right:14px;font-size:18px;display:none}
+.toc-card.done .tdone{display:block}
+.toc-card .ttime{font-size:12px;color:var(--ink-soft);margin-top:8px;display:block}
+
+/* ---------- 毕业 ---------- */
+.grad-hero{text-align:center;padding:30px 10px}
+.grad-hero .cat-icon{width:110px;height:110px}
+.badge-row{display:flex;justify-content:center;gap:10px;font-size:26px;margin:18px 0}
+.confetti{font-size:30px;letter-spacing:6px}
+
+footer{
+  margin-top:60px;border-top:1px solid var(--line);padding-top:18px;
+  font-size:13px;color:var(--ink-soft);line-height:1.7;
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  h1{font-size:25px}
+  .topbar .brand span{display:none}
+}
+
+/* ---------- 进阶组件 ---------- */
+.meter{height:18px;background:#F0E2CC;border-radius:99px;overflow:hidden;margin:6px 0 14px}
+.meter-fill{height:100%;border-radius:99px;transition:width .6s ease,background .6s ease}
+.tug-row{display:flex;justify-content:space-between;gap:10px;margin:4px 0 10px;flex-wrap:wrap}
+.tug-part{background:var(--lav);border-radius:14px;padding:10px 14px;font-size:14.5px;flex:1;min-width:200px}
+.tug-part .who{font-size:12px;font-weight:700;display:block;color:#7A63A8}
+.tug-part.right{background:var(--rose)}
+.tug-part.right .who{color:#A85436}
+.pmap-form{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pmap-form input,.pmap-form select{font-family:inherit;font-size:14.5px;padding:9px 12px;border:1.5px solid var(--line);border-radius:12px;outline:none;background:var(--bg)}
+.pmap-form input:focus{border-color:var(--teal)}
+#pmName{width:210px}
+#pmNote{flex:1;min-width:230px}
+.pm-group{margin-top:14px}
+.pm-group h4{font-size:14px;color:var(--ink-soft);margin:0 0 4px}
+.pm-chip{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;font-size:14.5px;flex-wrap:wrap}
+.pm-chip .x{margin-left:auto;cursor:pointer;border:none;background:none;color:var(--bad);font-size:15px;font-weight:700}
+.tagcard{background:var(--sand);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:10px 0}
+.backlink{color:var(--accent-deep);font-weight:600;text-decoration:none;border-bottom:1.5px dashed var(--accent)}
+</style>
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="cat" viewBox="0 0 100 100">
+    <path d="M22 38 L14 12 L36 24 Z" fill="#8A7258"/>
+    <path d="M78 38 L86 12 L64 24 Z" fill="#8A7258"/>
+    <path d="M24 36 L18 18 L34 27 Z" fill="#E9BFA0"/>
+    <path d="M76 36 L82 18 L66 27 Z" fill="#E9BFA0"/>
+    <ellipse cx="50" cy="58" rx="34" ry="31" fill="#A98E6C"/>
+    <path d="M40 30 Q41 38 39 43" stroke="#6E573E" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <path d="M50 28 Q50 36 50 42" stroke="#6E573E" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <path d="M60 30 Q59 38 61 43" stroke="#6E573E" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <path d="M19 46 Q25 47 29 45" stroke="#6E573E" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M81 46 Q75 47 71 45" stroke="#6E573E" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="50" cy="68" rx="19" ry="13" fill="#F2E7D3"/>
+    <circle cx="38" cy="52" r="5" fill="#6F8F4A"/>
+    <circle cx="62" cy="52" r="5" fill="#6F8F4A"/>
+    <circle cx="38" cy="52" r="2.6" fill="#2C2418"/>
+    <circle cx="62" cy="52" r="2.6" fill="#2C2418"/>
+    <circle cx="39.4" cy="50.6" r="1.3" fill="#fff"/>
+    <circle cx="63.4" cy="50.6" r="1.3" fill="#fff"/>
+    <path d="M50 59 L47 63 L53 63 Z" fill="#D98A66"/>
+    <path d="M46 65 Q50 69 54 65" stroke="#3D3329" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <line x1="12" y1="56" x2="30" y2="58" stroke="#7A6248" stroke-width="1.6" stroke-linecap="round"/>
+    <line x1="12" y1="64" x2="30" y2="62" stroke="#7A6248" stroke-width="1.6" stroke-linecap="round"/>
+    <line x1="88" y1="56" x2="70" y2="58" stroke="#7A6248" stroke-width="1.6" stroke-linecap="round"/>
+    <line x1="88" y1="64" x2="70" y2="62" stroke="#7A6248" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<div id="app">
+
+<header class="topbar">
+  <div class="brand" data-go="home">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <span>Luba的IFS小课堂 <em style="font-style:normal;font-size:12px;background:var(--teal);color:#fff;border-radius:99px;padding:2px 9px;margin-left:4px">进阶篇</em></span>
+  </div>
+  <nav class="paw-progress" id="pawbar" title="每完成一关的主挑战,点亮一个爪印"></nav>
+</header>
+
+<main>
+
+<!-- ============ 首页 ============ -->
+<section class="screen active" id="home">
+  <span class="kicker">IFS ADVANCED · 进阶篇</span>
+  <h1>欢迎回来。这次往深处走。</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>基础篇你认识了乘客和司机。进阶篇讲<b>系统怎么运转</b>:parts之间怎么打仗、谁在冒充司机、保护者为什么说不、炸点为什么是礼物、有些行李为什么不是你的。</p>
+      <p class="muted" style="font-size:14px">📌 诚实声明:这一篇<b>超出了基础篇所依据的入门手册</b>。内容来自IFS创始人Richard Schwartz的公开著作和IFS的通用术语(极化、Self-like parts、legacy burdens都是正式概念,不是我编的)——但正因为是我选编的,更要带去和therapist校对。</p>
+    </div>
+  </div>
+
+  <div class="panel sand">
+    <p style="margin:0"><b>玩法不变:</b>每关一个主挑战,完成点亮爪印🐾,集齐6个毕业2.0。还是那句话——无聊了随时关,这里没有"必须"。</p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-card" data-go="s1" data-s="s1">
+      <span class="tdone">🐾</span>
+      <span class="tnum">ADVANCED 1</span>
+      <h3>内战:Polarization</h3>
+      <p>两个保护者拔河,你夹中间 · 拆弹模拟器</p>
+      <span class="ttime">⏱ 约7分钟 · 含模拟器</span>
+    </div>
+    <div class="toc-card" data-go="s2" data-s="s2">
+      <span class="tdone">🐾</span>
+      <span class="tnum">ADVANCED 2</span>
+      <h3>假司机:Self-like Parts</h3>
+      <p>有些"冷静"是part演的 · 鉴别游戏</p>
+      <span class="ttime">⏱ 约7分钟 · 含鉴别游戏</span>
+    </div>
+    <div class="toc-card" data-go="s3" data-s="s3">
+      <span class="tdone">🐾</span>
+      <span class="tnum">ADVANCED 3</span>
+      <h3>跟保护者谈判</h3>
+      <p>它说"不"的四个原因 · backlash · 谈判模拟</p>
+      <span class="ttime">⏱ 约8分钟 · 含模拟器</span>
+    </div>
+    <div class="toc-card" data-go="s4" data-s="s4">
+      <span class="tdone">🐾</span>
+      <span class="tnum">ADVANCED 4</span>
+      <h3>炸点是路标:Trailheads</h3>
+      <p>反应&gt;事件=入口 · U-turn转身术</p>
+      <span class="ttime">⏱ 约6分钟 · 含场景训练</span>
+    </div>
+    <div class="toc-card" data-go="s5" data-s="s5">
+      <span class="tdone">🐾</span>
+      <span class="tnum">ADVANCED 5</span>
+      <h3>不是你的行李:Legacy Burdens</h3>
+      <p>有些担子是发下来的 · 行李牌检查</p>
+      <span class="ttime">⏱ 约7分钟 · 含反思器</span>
+    </div>
+    <div class="toc-card" data-go="s6" data-s="s6">
+      <span class="tdone">🐾</span>
+      <span class="tnum">ADVANCED 6</span>
+      <h3>把IFS过成日常 & 毕业2.0</h3>
+      <p>你自己的Parts地图(可保存) · 日常菜单</p>
+      <span class="ttime">⏱ 自定 · 毕业典礼2.0</span>
+    </div>
+  </div>
+
+  <p style="margin-top:18px"><a class="backlink" href="index.html">← 回基础篇</a></p>
+
+  <div class="note">🌱 还是那句:这是学习工具,不是治疗。进阶概念更接近深水区——所有练习做到"认出"为止,往下挖的部分留给你和therapist。</div>
+</section>
+
+<!-- ============ ADVANCED 1 ============ -->
+<section class="screen" id="s1">
+  <span class="kicker">ADVANCED 1 · 约7分钟</span>
+  <h1>内战:Polarization 极化</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>基础篇说parts都想保护你。进阶第一课:<b>两个保护者可以为了保护你而互相开战</b>——而战场是你。</p>
+    </div>
+  </div>
+
+  <div class="cards-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">什么是极化</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">两个parts朝相反方向用力,各自都认为:<b>如果对方赢了,你就完了</b>。所以谁都不敢松手。这在IFS里叫polarization,是系统内耗的主要来源。</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">为什么越打越极端</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">每一边都觉得必须<b>更用力</b>才能抵消对方:工作狂越逼,罢工的越摆烂;摆烂得越狠,工作狂越恐慌。极化的部分不是太强,是<b>太怕对方</b>。</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">常见的极化对</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">拼命干 ↔ 彻底瘫;讨好 ↔ 憋一肚子怨气;严格省钱 ↔ 突然血拼;全盘控制 ↔ 破罐破摔。每一对下面,通常都压着同一个exile。</p>
+    </div>
+  </div>
+
+  <div class="panel tinted">
+    <p style="margin:0"><b>Self在极化里的位置:</b>不当裁判,不选边。IFS的拆法有三步——① 分别听两边的恐惧;② 让它们发现彼此在保护<b>同一个人</b>;③ Self接过最终责任,两边才敢松手。光"折中"没用:五五分账解决不了"谁都不信任你"的问题。</p>
+  </div>
+
+  <h2>拆弹模拟器 🎮</h2>
+  <p class="muted">周日晚上10点,两个部分开始拔河。你来当Self——目标:把张力降下来。选错了也别慌,看看会发生什么(那才是教学重点)。</p>
+  <div class="sim" id="tugsim"></div>
+
+  <div class="duizhao dz-locked">
+    <span class="dz-tag">🔍 对照角</span>
+    <p>这一关的概念,让你想到自己身上的什么?在心里(或纸上)记一笔,带去和therapist聊——连线由你来画,别人猜的都不算数。</p>
+    <div class="dz-lock">🔒 <input type="password" class="dz-pass" placeholder="课程主人的口令"><button class="dz-unlock">解锁专属内容</button><span class="dz-err"></span></div>
+  </div>
+
+  <div class="navrow">
+    <button class="btn ghost" data-go="home">← 回目录</button>
+    <button class="btn" data-go="s2">下一关:假司机 →</button>
+  </div>
+</section>
+
+<!-- ============ ADVANCED 2 ============ -->
+<section class="screen" id="s2">
+  <span class="kicker">ADVANCED 2 · 约7分钟</span>
+  <h1>假司机:Self-like Parts</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>进阶篇最容易恍然大悟的一课。有些part<b>演技太好</b>,它学会了模仿Self:冷静、能干、会照顾人。IFS管它叫Self-like part——假司机。</p>
+    </div>
+  </div>
+
+  <div class="cards-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">它为什么存在</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">在司机长期被挡住的系统里,总得有人开车。于是某个能干的part顶上,一开很多年。它不是骗子——它是<b>代班代到忘了自己是代班</b>。</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">怎么分辨真假</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">Self的平静是<b>松</b>的,有好奇心,出错了天不会塌。假司机的平静是<b>绷</b>的:它"冷静"是因为不冷静会出事,它照顾人是因为不照顾会出事——底下有个"必须"。</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">一个实用信号</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">按IFS的说法:从Self出发做事,做完是<b>开阔</b>的;由part驱动做同样的事,做完是<b>被掏空</b>的。同一件事,两种油耗。</p>
+    </div>
+  </div>
+
+  <div class="panel tinted">
+    <p style="margin:0"><b>万能检查句(IFS的meta技巧):</b>随时问一句——"现在对这个part说话的,又是谁?"如果答案里有不耐烦、有任务感、有"快点搞定它",那说话的也是个part。发现假司机不是抓内鬼:<span class="hl">它往往是全系统干得最久、最累的员工</span>,值得的是感谢,不是拆穿。</p>
+  </div>
+
+  <h2>鉴别游戏:谁在说话?🎮</h2>
+  <p class="muted">7条内心独白,判断是谁在驾驶座上:<b>Self</b>(真司机)、<b>假司机</b>(Self-like part)、还是<b>上头</b>(blended,某个part整个穿在你身上)。</p>
+  <div class="quiz" data-quiz="s2"></div>
+
+  <div class="duizhao dz-locked">
+    <span class="dz-tag">🔍 对照角</span>
+    <p>这一关的概念,让你想到自己身上的什么?在心里(或纸上)记一笔,带去和therapist聊——连线由你来画,别人猜的都不算数。</p>
+    <div class="dz-lock">🔒 <input type="password" class="dz-pass" placeholder="课程主人的口令"><button class="dz-unlock">解锁专属内容</button><span class="dz-err"></span></div>
+  </div>
+
+  <div class="navrow">
+    <button class="btn ghost" data-go="s1">← 上一关</button>
+    <button class="btn" data-go="s3">下一关:跟保护者谈判 →</button>
+  </div>
+</section>
+<!-- ============ ADVANCED 3 ============ -->
+<section class="screen" id="s3">
+  <span class="kicker">ADVANCED 3 · 约8分钟</span>
+  <h1>跟保护者谈判</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>基础篇说过:接近exile要先过保护者这关。这一课讲<b>保护者说"不"的时候怎么办</b>——剧透:不是说服,是谈判。</p>
+    </div>
+  </div>
+
+  <h2>它说"不"的四个常见原因</h2>
+  <div class="cards-grid">
+    <div class="panel" style="margin:0;padding:16px"><b>1. 怕你被淹没</b><p class="muted" style="font-size:14px;margin:6px 0 0">"那个小孩的痛太大,你扛不住。"——它见过你扛不住的样子。</p></div>
+    <div class="panel" style="margin:0;padding:16px"><b>2. 怕失业</b><p class="muted" style="font-size:14px;margin:6px 0 0">这份工作它干了几十年,是它的身份。"不站岗,我是谁?"</p></div>
+    <div class="panel" style="margin:0;padding:16px"><b>3. 怕系统塌</b><p class="muted" style="font-size:14px;margin:6px 0 0">"现在这套虽然累,但能跑。你一动它,全得散。"</p></div>
+    <div class="panel" style="margin:0;padding:16px"><b>4. 不信任你</b><p class="muted" style="font-size:14px;margin:6px 0 0">它还没见过Self主事的样子。凭什么把钥匙交给一个没见过的领导?</p></div>
+  </div>
+
+  <div class="panel tinted">
+    <p><b>谈判的核心悖论:</b><span class="hl">给它说"不"的权利,它才可能说"好"</span>。被尊重否决权的保护者会放松;被强行绕过的保护者会升级。所以IFS的规矩是:不偷袭、不硬闯、它说停就停——这不是没效率,这就是效率。</p>
+    <p style="margin:0"><b>Backlash(反扑)预报:</b>有时聊得很好,第二天自我批评反而更凶、灭火行为反而更猛。IFS的读法:不是退步,是某个保护者被吓到了,在把系统拽回它熟悉的安全区。处理方式:回去找它,承认动作太快,重新约速度。</p>
+  </div>
+
+  <h2>谈判模拟器 🎮</h2>
+  <p class="muted">对象:一个"不让你对别人说'不'"的门卫部分。这是个常见的保护者,不针对谁。你来谈。</p>
+  <div class="sim" id="negsim"></div>
+
+  <div class="duizhao dz-locked">
+    <span class="dz-tag">🔍 对照角</span>
+    <p>这一关的概念,让你想到自己身上的什么?在心里(或纸上)记一笔,带去和therapist聊——连线由你来画,别人猜的都不算数。</p>
+    <div class="dz-lock">🔒 <input type="password" class="dz-pass" placeholder="课程主人的口令"><button class="dz-unlock">解锁专属内容</button><span class="dz-err"></span></div>
+  </div>
+
+  <div class="navrow">
+    <button class="btn ghost" data-go="s2">← 上一关</button>
+    <button class="btn" data-go="s4">下一关:炸点是路标 →</button>
+  </div>
+</section>
+
+<!-- ============ ADVANCED 4 ============ -->
+<section class="screen" id="s4">
+  <span class="kicker">ADVANCED 4 · 约6分钟</span>
+  <h1>炸点是路标:Trailheads & U-turn</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>这一课教两个日常技能。学会之后,生活里每次"反应过度"都会变成免费的藏宝图。猫追激光笔追的不是光点,是光点背后的手——你懂我意思吧。</p>
+    </div>
+  </div>
+
+  <div class="cards-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">Trailhead 小径入口</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">判定公式:<b>反应 &gt; 事件</b>。一句不重的话让你一下午缓不过来、一个小失误让你羞耻到想消失——事件本身装不下这么大的反应,多出来的部分来自一个被踩到的part。IFS把这种时刻叫trailhead:顺着走,能找到它。</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">U-turn 掉头</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">被触发时,注意力默认冲向外面("他怎么能这样?!")。U-turn是把注意力掉头向内:<b>"我里面是谁被踩到了?"</b>不是说外面没问题——是先照顾里面的,再处理外面的,顺序换一下,结局常常完全不同。</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">U-turn ≠ 自责</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">"都怪我太敏感"不是U-turn,那是批评家抢话筒。U-turn不判对错,<b>只回收你能动的那一半</b>:对方的行为你管不了,被踩到的part你可以去认识。</p>
+    </div>
+  </div>
+
+  <h2>场景训练 🐾</h2>
+  <div class="quiz" data-quiz="s4"></div>
+
+  <div class="panel sand">
+    <h3 style="margin-top:0">🏷 Trailhead便签法(可以抄走)</h3>
+    <p class="muted" style="font-size:14.5px;margin:0">被炸到的当下来不及做IFS,没关系——花20秒记四样:<b>① 事件</b>(一句话)<b>② 身体哪里有感觉</b> <b>③ 反应大小</b>(1-10)<b>④ 这个反应像谁</b>(认识这个part吗)。攒下来的便签,就是带去session的现成地图。Session 6的Parts地图可以直接记。</p>
+  </div>
+
+  <div class="duizhao dz-locked">
+    <span class="dz-tag">🔍 对照角</span>
+    <p>这一关的概念,让你想到自己身上的什么?在心里(或纸上)记一笔,带去和therapist聊——连线由你来画,别人猜的都不算数。</p>
+    <div class="dz-lock">🔒 <input type="password" class="dz-pass" placeholder="课程主人的口令"><button class="dz-unlock">解锁专属内容</button><span class="dz-err"></span></div>
+  </div>
+
+  <div class="navrow">
+    <button class="btn ghost" data-go="s3">← 上一关</button>
+    <button class="btn" data-go="s5">下一关:不是你的行李 →</button>
+  </div>
+</section>
+<!-- ============ ADVANCED 5 ============ -->
+<section class="screen" id="s5">
+  <span class="kicker">ADVANCED 5 · 约7分钟</span>
+  <h1>不是你的行李:Legacy Burdens</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>基础篇讲过burden——part背的极端信念和情绪。进阶版的发现是:<b>有些行李你根本没捡过,是发给你的</b>。出厂前就装好了。</p>
+    </div>
+  </div>
+
+  <div class="cards-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">什么是legacy burden</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">在家庭(甚至文化)里代代相传的恐惧、羞耻和规则:"不能给人添麻烦""出错很危险""情绪不能露"。像传家具一样传下来——<b>没人故意给你,但你确实收到了</b>。</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">怎么识别</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">三个检查问题:① 这条规则<b>第一次是谁说的</b>?② 它当年在保护<b>谁</b>、防什么?③ 我父母自己,是不是也背着它?如果一条信念在家谱里能往上追,它多半是发的,不是你捡的。</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">卸下 ≠ 背叛</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">很多人不敢放下家里传的规则,觉得那是背叛。IFS的立场:<b>把行李还回去,不等于把人推开</b>。规则当年可能真的救过上一代——承认它的功劳,和继续替它服役,是两件事。</p>
+    </div>
+  </div>
+
+  <div class="panel tinted">
+    <p style="margin:0"><b>这一课solo只做到"认出"为止。</b>真正卸legacy burden(IFS里有完整的仪式化流程)是和therapist一起做的深水区。但光是说出一句"这不是我的,是发给我的"——按IFS的经验,行李就已经开始松动了。</p>
+  </div>
+
+  <h2>行李牌检查 🏷</h2>
+  <p class="muted">6条常见"家规",一张一张过。不打分,不判对错——每张牌配三个检查问题,在心里答就行。</p>
+  <div class="sim" id="tagwalk"></div>
+
+  <div class="duizhao dz-locked">
+    <span class="dz-tag">🔍 对照角</span>
+    <p>这一关的概念,让你想到自己身上的什么?在心里(或纸上)记一笔,带去和therapist聊——连线由你来画,别人猜的都不算数。</p>
+    <div class="dz-lock">🔒 <input type="password" class="dz-pass" placeholder="课程主人的口令"><button class="dz-unlock">解锁专属内容</button><span class="dz-err"></span></div>
+  </div>
+
+  <div class="navrow">
+    <button class="btn ghost" data-go="s4">← 上一关</button>
+    <button class="btn" data-go="s6">最后一关:过成日常 →</button>
+  </div>
+</section>
+
+<!-- ============ ADVANCED 6 ============ -->
+<section class="screen" id="s6">
+  <span class="kicker">ADVANCED 6 · 时间自定</span>
+  <h1>把IFS过成日常 & 毕业2.0</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>最后一关送你一个真正的工具:<b>你自己的Parts地图</b>。在下面登记一个part(哪怕只是"还不确定是谁的一团紧绷"),这关就算过——地图存在你浏览器里,以后随时回来加。</p>
+    </div>
+  </div>
+
+  <h2>🗺 我的Parts地图(自动保存)</h2>
+  <div class="panel">
+    <div class="pmap-form">
+      <input type="text" id="pmName" placeholder="名字(比如:清单君 / 一团紧绷)" maxlength="20">
+      <select id="pmType">
+        <option value="M">🗂 Manager</option>
+        <option value="F">🧯 Firefighter</option>
+        <option value="E">🛋 Exile(轻轻记一笔就好)</option>
+        <option value="U">❓ 还不确定</option>
+      </select>
+      <input type="text" id="pmNote" placeholder="一句话:它常说什么/负责什么/在身体哪里" maxlength="60">
+      <button class="btn small" id="pmAdd">+ 登记</button>
+    </div>
+    <p class="muted" style="font-size:13.5px;margin:10px 0 0">💾 只存在这台设备的浏览器里,不上传。Exile只记名字和位置就够——认识它的工作留给session。</p>
+    <div id="pmList"></div>
+  </div>
+
+  <h2>日常菜单 2.0</h2>
+  <div class="cards-grid" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr))">
+    <div class="panel" style="margin:0;padding:16px"><b>☀️ 晨间点名(1分钟)</b><p class="muted" style="font-size:13.5px;margin:6px 0 0">"今天谁先上班了?"——不干预,只点名。点到名的part会安静一点,这是规律。</p></div>
+    <div class="panel" style="margin:0;padding:16px"><b>🏷 Trailhead便签(20秒)</b><p class="muted" style="font-size:13.5px;margin:6px 0 0">被炸到就记四样:事件/身体/大小/像谁。攒一周,session有的聊了。</p></div>
+    <div class="panel" style="margin:0;padding:16px"><b>📮 给part写三行信(5分钟)</b><p class="muted" style="font-size:13.5px;margin:6px 0 0">"我看见你了/谢谢你一直干这个/我在学着接手"。写完不用寄,它收得到。</p></div>
+    <div class="panel" style="margin:0;padding:16px"><b>🪞 油耗检查(随时)</b><p class="muted" style="font-size:13.5px;margin:6px 0 0">做完一件事问:开阔还是被掏空?掏空=刚才大概率是part在开车。只记录,不批评。</p></div>
+    <div class="panel" style="margin:0;padding:16px"><b>📵 8C不是KPI(长期)</b><p class="muted" style="font-size:13.5px;margin:6px 0 0">观察哪个C今天来过,但不考核。云散开就行,天空不用打卡。</p></div>
+  </div>
+
+  <div class="duizhao dz-locked">
+    <span class="dz-tag">🔍 对照角</span>
+    <p>这一关的概念,让你想到自己身上的什么?在心里(或纸上)记一笔,带去和therapist聊——连线由你来画,别人猜的都不算数。</p>
+    <div class="dz-lock">🔒 <input type="password" class="dz-pass" placeholder="课程主人的口令"><button class="dz-unlock">解锁专属内容</button><span class="dz-err"></span></div>
+  </div>
+
+  <hr class="divider">
+
+  <div id="gradLocked" class="panel sand" style="text-align:center">
+    <p style="margin:0">🔒 毕业2.0条件:点亮全部6个爪印。</p>
+    <p id="gradHint" class="muted" style="font-size:14px;margin:8px 0 0"></p>
+  </div>
+
+  <div id="gradOpen" style="display:none">
+    <div class="grad-hero">
+      <div class="confetti">🎓 🐾 ✨ 🐾 🎓</div>
+      <svg class="cat-icon"><use href="#cat"/></svg>
+      <h1 style="margin-top:10px">进阶毕业!</h1>
+      <div class="badge-row">🐾🐾🐾🐾🐾🐾</div>
+      <div class="panel" style="text-align:left">
+        <p><b>你现在的装备:</b>能认出极化(不选边,听两边的怕)· 能识破假司机(查油耗)· 会跟保护者谈判(否决权悖论,提防backlash)· 会把炸点读成路标(U-turn)· 能认出传下来的行李(三个检查问题)· 手里有一张活的Parts地图。</p>
+        <p>这已经超过很多人带进第一次IFS咨询的全部认知了。剩下的部分——exile的故事、卸担子、还行李——属于你和therapist的咨询室。把地图带上,把问题带上,把好奇心带上。</p>
+        <p class="muted" style="margin:0">Luba监修声明2.0:本猫审完进阶篇的评语是"嗯,人类的系统比猫复杂,猫只有一个part:饿"。(经查证,她至少还有"凌晨跑酷部"和"盯着空气炸毛部",但本编辑选择不与监修争论。)</p>
+      </div>
+      <button class="btn" data-go="home">回目录 🐾</button>
+    </div>
+  </div>
+
+  <div class="navrow">
+    <button class="btn ghost" data-go="s5">← 上一关</button>
+    <button class="btn ghost" data-go="home">回目录</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>📖 进阶篇内容基于Richard Schwartz的公开IFS著作与IFS通用概念(polarization、Self-like parts、legacy burdens、trailheads、U-turn、backlash均为IFS正式术语),超出了基础篇手册的范围——请与therapist校对后再当真。本页面是学习工具,不是治疗。所有练习做到"认出"为止;感到被淹没就停下,这是正确操作。美国境内心理危机:拨打/短信 <b>988</b>。</p>
+  <p style="margin-top:6px">🐾 进度与Parts地图只保存在你自己的设备里(浏览器本地),没有任何数据被上传。</p>
+</footer>
+
+</div>
+<script>
+(function(){
+"use strict";
+var $ = function(s){ return document.querySelector(s); };
+var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+/* ---------- 状态 ---------- */
+var KEY = "luba_ifs2_v1";
+var state = { badges:{}, map:[] };
+try {
+  var raw = localStorage.getItem(KEY);
+  if (raw) { var p = JSON.parse(raw); if (p && typeof p === "object") state = Object.assign(state, p); }
+} catch(e){}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+var SESSIONS = ["s1","s2","s3","s4","s5","s6"];
+
+function renderPaws(popKey){
+  var bar = $("#pawbar");
+  bar.innerHTML = "";
+  SESSIONS.forEach(function(s, i){
+    var d = document.createElement("div");
+    d.className = "paw" + (state.badges[s] ? " earned" : "") + (s === popKey ? " pop" : "");
+    d.textContent = "🐾";
+    d.title = "Advanced " + (i+1) + (state.badges[s] ? " · 已点亮" : " · 未点亮");
+    d.addEventListener("click", function(){ go(s); });
+    bar.appendChild(d);
+  });
+  $$(".toc-card").forEach(function(c){
+    c.classList.toggle("done", !!state.badges[c.getAttribute("data-s")]);
+  });
+}
+function toast(msg){
+  var t = document.createElement("div");
+  t.textContent = msg;
+  t.style.cssText = "position:fixed;left:50%;bottom:34px;transform:translateX(-50%);background:#3D3329;color:#fff;padding:11px 22px;border-radius:99px;font-size:15px;z-index:99;box-shadow:0 6px 20px rgba(0,0,0,.25);";
+  document.body.appendChild(t);
+  setTimeout(function(){ t.style.opacity = "0"; t.style.transition = "opacity .5s"; }, 2200);
+  setTimeout(function(){ t.remove(); }, 2800);
+}
+function award(s){
+  if (state.badges[s]) return;
+  state.badges[s] = true;
+  save();
+  renderPaws(s);
+  var n = SESSIONS.filter(function(k){ return state.badges[k]; }).length;
+  toast(n === 6 ? "🐾 集齐了!去Advanced 6领毕业2.0 🎓" : "🐾 爪印 +1!(" + n + "/6)");
+  checkGrad();
+}
+function go(id){
+  $$(".screen").forEach(function(sc){ sc.classList.remove("active"); });
+  var el = document.getElementById(id);
+  if (el) el.classList.add("active");
+  window.scrollTo({top:0});
+  if (id === "s6") checkGrad();
+}
+document.addEventListener("click", function(ev){
+  var t = ev.target.closest("[data-go]");
+  if (t) go(t.getAttribute("data-go"));
+});
+
+/* ---------- 测验引擎(s2鉴别 / s4场景) ---------- */
+var QUIZZES = {
+  s2: [
+    { q:"「我对这个生气的部分有点好奇——它今天怎么了?」",
+      opts:[
+        {t:"🚌 Self在场", ok:true, fb:"对。好奇、不急、把情绪当对象而不是当自己——8C的质感。"},
+        {t:"🎭 假司机", ok:false, fb:"假司机的标志是绷着的『必须』,这句里没有——它是松的。再品品?"},
+        {t:"🌊 上头了", ok:false, fb:"上头的话就不会有『这个部分』这种距离感了。再试试?"}
+      ]},
+    { q:"「我不生气。生气没有用。我们继续干活。」",
+      opts:[
+        {t:"🚌 Self在场", ok:false, fb:"细看:Self不需要宣布自己不生气。『没有用』是裁决,裁决后面是任务感。再试试?"},
+        {t:"🎭 假司机", ok:true, fb:"对。平静是绷的:情绪被『没有用』三个字按下去了,然后立刻回去干活——底下有个必须。"},
+        {t:"🌊 上头了", ok:false, fb:"接近了,但它没被情绪淹没——它是把情绪摁住了。这是高功能的演技,假司机。"}
+      ]},
+    { q:"「烦死了烦死了,这日子没法过了!」",
+      opts:[
+        {t:"🚌 Self在场", ok:false, fb:"司机要是这样,这趟车建议下车😼 再试试?"},
+        {t:"🎭 假司机", ok:false, fb:"假司机至少要装一下冷静——这位完全没装。再试试?"},
+        {t:"🌊 上头了", ok:true, fb:"对。没有观察者,只剩情绪本身在说话——part整个穿在身上了。这时候第一步永远是:『我注意到有个部分烦死了。』"}
+      ]},
+    { q:"「我必须立刻冷静下来,再不冷静就全完了!」",
+      opts:[
+        {t:"🚌 Self在场", ok:false, fb:"『必须』『立刻』『全完了』——这是恐慌的语法,不是Self的。再试试?"},
+        {t:"🎭 假司机", ok:false, fb:"它想当假司机来着,但露馅了——真假司机至少演得出从容。再试试?"},
+        {t:"🌊 上头了", ok:true, fb:"对。一个manager上头了,正在鞭打情绪。注意:『逼自己冷静』本身就是一个part在干活。"}
+      ]},
+    { q:"「我可以陪这种难受待一小会儿,不用急着修好它。」",
+      opts:[
+        {t:"🚌 Self在场", ok:true, fb:"对。『不急着修』是Self最大的特征之一——parts都急,Self不赶时间。"},
+        {t:"🎭 假司机", ok:false, fb:"假司机陪难受是带着秒表的:『好了吧?好了没?』这句没有秒表。再试试?"},
+        {t:"🌊 上头了", ok:false, fb:"上头的话就『是』难受了,不会『陪』难受。再试试?"}
+      ]},
+    { q:"「大家都靠我,我来安排就好。我不需要被照顾。」",
+      opts:[
+        {t:"🚌 Self在场", ok:false, fb:"前半句也许像,但『我不需要被照顾』暴露了——Self不拒绝照顾,它只是不匮乏。再试试?"},
+        {t:"🎭 假司机", ok:true, fb:"对。经典的Self-like caretaker:能干是真的,稳定是真的,但『不需要被照顾』是规则,不是事实。干这行的part,资历一般都很老。"},
+        {t:"🌊 上头了", ok:false, fb:"它太有条理了,不像被淹没——它是常驻管理层。再试试?"}
+      ]},
+    { q:"「它又开始焦虑了,真没出息。」",
+      opts:[
+        {t:"🚌 Self在场", ok:false, fb:"有距离感,但注意那句『没出息』——Self不骂人。再试试?"},
+        {t:"🎭 假司机", ok:false, fb:"接近,但这位不演温和,直接开骂了。再试试?"},
+        {t:"🌊 上头了", ok:true, fb:"对。说话的是批评家——你和一个part站在一起骂另一个part,这也是blending,只是blend的对象换了。第4步Feel toward查的就是这个。"}
+      ]}
+  ],
+  s4: [
+    { q:"哪个时刻是trailhead(小径入口)?",
+      opts:[
+        {t:"地铁晚点5分钟,你叹口气继续刷手机", ok:false, fb:"反应≈事件,正常损耗,不是入口。再试试?"},
+        {t:"同事一句「这个怎么还没好」,你一下午缓不过来", ok:true, fb:"对。一句话装不下一下午的沉——多出来的部分来自一个被踩到的part。这就是入口。"},
+        {t:"看到账单,核对无误后关掉", ok:false, fb:"无反应,无入口,继续生活😼 再试试?"}
+      ]},
+    { q:"被触发之后,哪句是U-turn?",
+      opts:[
+        {t:"「他凭什么这么跟我说话?」", ok:false, fb:"注意力全在外面——这是默认方向,不是掉头。再试试?"},
+        {t:"「我刚才里面是谁被踩到了?」", ok:true, fb:"对。掉头向内,先认领自己这半边。外面的事不会跑,回头再处理不迟。"},
+        {t:"「我是不是又太敏感了?」", ok:false, fb:"这句最迷惑——方向看着向内,但它是批评家在抢话筒。U-turn不判刑,只找人。再试试?"}
+      ]},
+    { q:"U-turn意味着「错都在我」吗?",
+      opts:[
+        {t:"是,凡事先检讨自己", ok:false, fb:"那是批评家的座右铭,不是IFS的。再试试?"},
+        {t:"不是——它只回收你能动的那一半", ok:true, fb:"对。对方的行为你管不了,被踩到的part你可以去认识。U-turn是夺回主动权,不是揽责。"},
+        {t:"是,但只限小事", ok:false, fb:"大事小事都一样:U-turn不算账,只找被踩到的人。再试试?"}
+      ]},
+    { q:"按这一课的逻辑,「反应大得离谱」说明什么?",
+      opts:[
+        {t:"说明你情绪管理有问题", ok:false, fb:"IFS不发这种诊断。再试试?"},
+        {t:"说明那里有个入口,门后有故事", ok:true, fb:"对。反应越大,门后的part越值得认识。炸点=藏宝图,这是进阶篇最划算的一次翻译。"},
+        {t:"说明对方坏透了", ok:false, fb:"对方什么样是另一回事——但反应里多出来的部分,户口在你这边。再试试?"}
+      ]}
+  ]
+};
+$$(".quiz").forEach(function(qz){
+  var key = qz.getAttribute("data-quiz");
+  var data = QUIZZES[key];
+  if (!data) return;
+  var solved = data.map(function(){ return false; });
+  data.forEach(function(item, qi){
+    var box = document.createElement("div");
+    box.className = "qbox";
+    var qt = document.createElement("div");
+    qt.className = "qtext";
+    qt.textContent = (qi+1) + " / " + data.length + " · " + item.q;
+    box.appendChild(qt);
+    var opts = document.createElement("div");
+    opts.className = "opts";
+    var fb = document.createElement("div");
+    fb.className = "qfb";
+    item.opts.forEach(function(o){
+      var b = document.createElement("button");
+      b.className = "opt";
+      b.textContent = o.t;
+      b.addEventListener("click", function(){
+        if (solved[qi]) return;
+        fb.classList.add("show");
+        if (o.ok) {
+          b.classList.add("correct");
+          fb.classList.remove("bad"); fb.classList.add("good");
+          fb.textContent = "✓ " + o.fb;
+          solved[qi] = true;
+          opts.querySelectorAll(".opt").forEach(function(x){ x.disabled = true; });
+          if (solved.every(function(x){ return x; })) {
+            setTimeout(function(){ award(key); }, 350);
+          }
+        } else {
+          b.classList.add("wrong");
+          b.disabled = true;
+          fb.classList.remove("good"); fb.classList.add("bad");
+          fb.textContent = "✗ " + o.fb;
+        }
+      });
+      opts.appendChild(b);
+    });
+    box.appendChild(opts);
+    box.appendChild(fb);
+    qz.appendChild(box);
+  });
+});
+
+/* ---------- A1 拔河模拟器 ---------- */
+(function(){
+  var el = $("#tugsim");
+  if (!el) return;
+  var tension = 80;
+  var phase = 0;
+  function meterColor(){ return tension > 70 ? "#C9684A" : (tension > 40 ? "#E8853B" : "#3E9E6E"); }
+  function header(aLine, bLine){
+    return '<div class="tug-row">' +
+      '<div class="tug-part"><span class="who">备战部(Manager)</span>' + aLine + '</div>' +
+      '<div class="tug-part right"><span class="who">罢工部(它的对家)</span>' + bLine + '</div>' +
+      '</div>' +
+      '<div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink-soft)"><span>系统张力</span><span>' + tension + '%</span></div>' +
+      '<div class="meter"><div class="meter-fill" style="width:' + tension + '%;background:' + meterColor() + '"></div></div>';
+  }
+  function opts(list){
+    return '<div class="sim-opts">' + list.map(function(o, i){ return '<button class="opt" data-i="' + i + '">' + o.t + '</button>'; }).join("") + '</div><div class="sim-fb" id="tugFb"></div>';
+  }
+  function bind(list, retry){
+    el.querySelectorAll(".opt").forEach(function(b){
+      b.addEventListener("click", function(){
+        var o = list[b.getAttribute("data-i")];
+        el.querySelectorAll(".opt").forEach(function(x){ x.disabled = true; if (x !== b) x.style.opacity = ".45"; });
+        tension = Math.max(8, Math.min(95, tension + o.dt));
+        var fb = $("#tugFb");
+        fb.innerHTML = o.fb + '<br><button class="btn small" id="tugNext" style="margin-top:10px">' + (o.next === "end" ? "收工 →" : (o.ok ? "继续 →" : "重新选 ↩")) + '</button>';
+        fb.classList.add("show");
+        $("#tugNext").addEventListener("click", function(){
+          if (o.ok) { phase = o.next; render(); }
+          else { render(); }
+        });
+      });
+    });
+  }
+  function render(){
+    if (phase === 0) {
+      var list = [
+        {t:"对备战部说:「它说得对,现在就起来准备」", dt:+12, ok:false, fb:"罢工部瞬间躺得更死:「看吧,它永远赢。那我摆烂给你看。」——选边的结果:输的那边加倍极端。这就是极化的引擎。"},
+        {t:"对罢工部说:「躺平是人权,别理它」", dt:+12, ok:false, fb:"备战部音量翻倍:「你们都疯了?!明天怎么办?!」——另一边也是一样:被否定的保护者只会更用力。"},
+        {t:"对两边说:「我都听到了。一个一个说,我先听备战部的。」", dt:-15, ok:true, next:1, fb:"两边同时安静了半秒——这个家很久没人主持过会议了。"}
+      ];
+      el.innerHTML = header("「现在!开始准备明天的!」", "「这周末一分钟都没歇过,门都没有。」") +
+        '<div class="sim-title">第1幕 · 两边都在拉</div><p class="muted" style="font-size:14.5px">你是Self。第一步做什么?</p>' + opts(list);
+      bind(list);
+    } else if (phase === 1) {
+      el.innerHTML = header("「……怕明天搞砸。怕你被批评。我见过你被批评之后那个样子。」", "(在听)") +
+        '<div class="sim-title">第2幕 · 听第一边</div><p class="muted" style="font-size:14.5px">你问备战部:「你在怕什么?」——它说了实话。注意:它防的不是工作,是工作搞砸之后的<b>那种感受</b>。</p>' +
+        '<div class="sim-opts"><button class="btn small" id="tugGo2">轮到罢工部 →</button></div>';
+      $("#tugGo2").addEventListener("click", function(){ phase = 2; render(); });
+    } else if (phase === 2) {
+      tension = 55;
+      el.innerHTML = header("(在听)", "「我怕你垮。一直这么干下去,你会垮的。我只有躺这一招。」") +
+        '<div class="sim-title">第2幕 · 听第二边</div><p class="muted" style="font-size:14.5px">罢工部不是懒——它是个只会用「关机」来保护你的部分。两份口供都拿到了,下一步是关键。</p>' +
+        '<div class="sim-opts"><button class="btn small" id="tugGo3">下一步 →</button></div>';
+      $("#tugGo3").addEventListener("click", function(){ phase = 3; render(); });
+    } else if (phase === 3) {
+      var list3 = [
+        {t:"「所以……你们到底谁说得对?」", dt:+10, ok:false, fb:"两边同时开始抢话——裁判模式失败。极化里没有「谁对」:两边都对一半,而且都不信对方那一半。"},
+        {t:"「你们发现没有,你们在保护同一个人。」", dt:-20, ok:true, next:4, fb:"短暂的沉默。备战部:「……它也是?」罢工部:「……哦。」——这是拆极化的轴心:让两边第一次看见彼此的工牌上写着同一个名字。"},
+        {t:"「要不折中:干一小时,躺一小时?」", dt:-5, ok:false, fb:"两边勉强点头,但都把手放在绳子上没松——折中可以应急,可它没解决根本问题:它们还是不信任对方,也不信任你。明晚大概率重打。"}
+      ];
+      el.innerHTML = header("「怕你搞砸之后难受。」", "「怕你垮。」") +
+        '<div class="sim-title">第3幕 · 关键一手</div><p class="muted" style="font-size:14.5px">张力降了一些,但绳子还绷着。你说哪句?</p>' + opts(list3);
+      bind(list3);
+    } else if (phase === 4) {
+      var list4 = [
+        {t:"「今晚的安排我来定。你们都可以提意见,出了问题,我负责。」", dt:-30, ok:true, next:"end", fb:"备战部慢慢松了手:「……你定就你定,但十点半前得有个计划。」罢工部:「先躺二十分钟,这是底线。」——它们开始跟你<b>谈条件</b>而不是互相开战。这就是Self接管的样子:不是赢了谁,是两边都敢松手了。"},
+        {t:"「那你们俩自己商量个方案告诉我。」", dt:+8, ok:false, fb:"五分钟后谈判桌再次掀翻——没有Self在场,极化双方没法单独和解。这一步躲不掉:责任得有人接。"}
+      ];
+      el.innerHTML = header("「……它也是?」", "「……哦。」") +
+        '<div class="sim-title">第4幕 · 收尾</div><p class="muted" style="font-size:14.5px">最后一步:</p>' + opts(list4);
+      bind(list4);
+    } else if (phase === "end") {
+      el.innerHTML = header("「十点半前要有计划。」", "「先躺二十分钟。」") +
+        '<div style="text-align:center;padding:8px 0"><p style="font-size:34px;margin-bottom:4px">🕊🐾</p>' +
+        '<p><b>张力 ' + tension + '%。拆弹完成。</b></p>' +
+        '<p class="muted" style="font-size:14.5px">复盘三步:①不选边,分别听恐惧 ②让两边看见在保护同一个人 ③Self接过责任。<br>注意结局:没有谁被赶走,备战部还在备战,罢工部还在守底线——只是不用再拔河了。</p>' +
+        '<button class="btn small ghost" id="tugReplay">再拆一次</button></div>';
+      $("#tugReplay").addEventListener("click", function(){ tension = 80; phase = 0; render(); });
+      award("s1");
+    }
+  }
+  render();
+})();
+
+/* ---------- A3 谈判模拟器 ---------- */
+(function(){
+  var el = $("#negsim");
+  if (!el) return;
+  var step = 0;
+  function partLine(t){ return '<div class="sim-part-line"><span class="who">门卫部分</span>' + t + '</div>'; }
+  function opts(list){
+    return '<div class="sim-opts">' + list.map(function(o, i){ return '<button class="opt" data-i="' + i + '">' + o.t + '</button>'; }).join("") + '</div><div class="sim-fb" id="negFb"></div>';
+  }
+  function bind(list){
+    el.querySelectorAll(".opt").forEach(function(b){
+      b.addEventListener("click", function(){
+        var o = list[b.getAttribute("data-i")];
+        el.querySelectorAll(".opt").forEach(function(x){ x.disabled = true; if (x !== b) x.style.opacity = ".45"; });
+        var fb = $("#negFb");
+        fb.innerHTML = o.fb + '<br><button class="btn small" id="negNext" style="margin-top:10px">' + (o.next === "end" ? "结束谈判 →" : (o.ok ? "继续 →" : "重新来 ↩")) + '</button>';
+        fb.classList.add("show");
+        $("#negNext").addEventListener("click", function(){ if (o.ok) step = o.next; render(); });
+      });
+    });
+  }
+  var dots = function(){
+    var names = ["开场", "听恐惧", "谈条件", "收尾"];
+    return '<div class="sim-steps">' + names.map(function(n, i){
+      var idx = (step === "end") ? 4 : step;
+      return '<span class="sim-step-dot ' + (i < idx ? "done" : (i === idx ? "now" : "")) + '">' + (i+1) + " " + n + '</span>';
+    }).join("") + '</div>';
+  };
+  function render(){
+    if (step === 0) {
+      var l0 = [
+        {t:"「为什么不行?!给我个理由!」", ok:false, fb:"它抱紧双臂,门焊死了。——逼问对保护者来说=攻击。它干这行的年头比你会写字还久,吓不动的。"},
+        {t:"「好,不行就不行——否决权在你。那能告诉我,你在担心什么吗?」", ok:true, next:1, fb:"它愣了一下。被尊重否决权,是它入职以来头一次。门开了一条缝。"},
+        {t:"(趁它不注意,绕过去直接找那个怕被拒绝的小孩)", ok:false, fb:"全系统警报拉响:门卫加岗,批评家加班,后面三天连书都不让你翻。——偷袭protector是IFS的头号大忌:你赢一次,失信十年。"}
+      ];
+      el.innerHTML = dots() +
+        '<div class="sim-title">开场</div><p class="muted" style="font-size:14.5px">你向门卫表明来意:「我想认识一下你保护的那个怕被拒绝的小孩。」</p>' +
+        partLine("「不行。」") + l0.map(function(){return "";}).join("") + opts(l0);
+      bind(l0);
+    } else if (step === 1) {
+      var l1 = [
+        {t:"「这不理性。成年人的关系不会因为一个『不』就崩掉。」", ok:false, fb:"它眼神冷下来:「你不懂。」——对part讲道理=告诉它你没听见。它的逻辑在它的出厂年代是成立的,先承认这个。"},
+        {t:"「我猜,你见过这件事真的发生。谢谢你从那时候起就一直在防它。」", ok:true, next:2, fb:"它沉默了几秒,肩膀降了一厘米。被看见工作年限,对老员工来说比加薪管用。"}
+      ];
+      el.innerHTML = dots() +
+        '<div class="sim-title">听恐惧</div>' +
+        partLine("「你一说『不』,别人就会失望。失望攒多了,人就走了。我见过。」") + opts(l1);
+      bind(l1);
+    } else if (step === 2) {
+      var l2 = [
+        {t:"「成交。我先挑一个最小、最安全的『不』练手。出任何事,我兜底,不让小孩疼。」", ok:true, next:3, fb:"它点头:「……就一次。我盯着。」——注意它还是会盯着:信任是按次发放的,这很正常,也很合理。"},
+        {t:"「你条件也太多了吧。」", ok:false, fb:"门又关上一半。——它开条件=它在考虑放行,这是进展不是刁难。谈判桌上别嫌对方出价。"}
+      ];
+      el.innerHTML = dots() +
+        '<div class="sim-title">谈条件</div><p class="muted" style="font-size:14.5px">你问:「那你需要什么,才肯让我试一次很小的『不』?」</p>' +
+        partLine("「……要试,就挑最安全的人、最小的事。出了事你来兜底,不准让那个小孩疼。」") + opts(l2);
+      bind(l2);
+    } else if (step === 3) {
+      el.innerHTML = dots() +
+        '<div class="sim-title">收尾 + 天气预报</div>' +
+        partLine("「就一次。我盯着。」") +
+        '<p style="font-size:14.5px">你谢过它。谈判完成——没有说服,没有战胜,只有一个被听完恐惧、保留否决权、拿到兜底承诺的老员工,决定让你试一次。</p>' +
+        '<div class="note" style="margin:12px 0">🌧 <b>Backlash预报:</b>明天它有可能反扑——批评突然变狠、或者一股莫名的烦躁。那不是谈判失败,是它夜里越想越怕。处理方式:回去找它,说「我知道是你吓到了,我们可以再慢一点」。慢,就是这条路的速度。</div>' +
+        '<div style="text-align:center"><button class="btn small" id="negDone">完成 🐾</button></div>';
+      $("#negDone").addEventListener("click", function(){ step = "end"; render(); });
+    } else {
+      el.innerHTML = dots() +
+        '<div style="text-align:center;padding:8px 0"><p style="font-size:34px;margin-bottom:4px">🤝🐾</p>' +
+        '<p><b>谈判课毕业。</b></p>' +
+        '<p class="muted" style="font-size:14.5px">心法一句话:否决权给它,责任你来背,速度它来定。</p>' +
+        '<button class="btn small ghost" id="negReplay">再谈一次</button></div>';
+      $("#negReplay").addEventListener("click", function(){ step = 0; render(); });
+      award("s3");
+    }
+  }
+  render();
+})();
+
+/* ---------- A5 行李牌 ---------- */
+(function(){
+  var el = $("#tagwalk");
+  if (!el) return;
+  var TAGS = [
+    {r:"不能给别人添麻烦", h:"常见出厂背景:资源紧张、人情债很重的年代——添麻烦真的有成本。"},
+    {r:"出错很危险", h:"常见出厂背景:出错代价真实巨大的家庭——疾病、动荡、一步错全盘输的年代。"},
+    {r:"休息 = 懒", h:"常见出厂背景:靠拼命才活下来的上一代——停下来,在当年真的等于危险。"},
+    {r:"情绪不能给人看", h:"常见出厂背景:情绪没人接得住的家——露出来没用还添乱,不如收着。"},
+    {r:"家里的事不能对外说", h:"常见出厂背景:「被议论」有真实代价的环境——面子曾经就是安全。"},
+    {r:"大人不容易,你要懂事", h:"常见出厂背景:大人自己也快撑不住的家——孩子懂事,系统才能不塌。"}
+  ];
+  var i = 0;
+  function render(){
+    if (i >= TAGS.length) {
+      el.innerHTML = '<div style="text-align:center;padding:8px 0"><p style="font-size:34px;margin-bottom:4px">🧳🐾</p>' +
+        '<p><b>六张行李牌检查完毕。</b></p>' +
+        '<p class="muted" style="font-size:14.5px">哪一张让你停了一下?那张最值得带去session。<br>记住这一课的边界:solo做到「认出」,卸下和归还——和therapist一起。</p>' +
+        '<button class="btn small ghost" id="tagReplay">再看一遍</button></div>';
+      $("#tagReplay").addEventListener("click", function(){ i = 0; render(); });
+      award("s5");
+      return;
+    }
+    var t = TAGS[i];
+    el.innerHTML = '<div class="sim-meta" style="font-size:13px;color:var(--ink-soft)">行李牌 ' + (i+1) + ' / ' + TAGS.length + '</div>' +
+      '<div class="tagcard"><p style="font-size:19px;font-weight:700;margin:0 0 6px">🏷 「' + t.r + '」</p>' +
+      '<p class="muted" style="font-size:14px;margin:0 0 12px">' + t.h + '</p>' +
+      '<p style="font-size:14.5px;margin:0">在心里答三个问题:<br>① 这条规则,我第一次是从<b>谁</b>那里听到的?<br>② 它当年在保护<b>谁</b>、防什么?<br>③ 它现在还需要<b>全职</b>服役吗——还是可以转成顾问?</p></div>' +
+      '<div style="text-align:center"><button class="btn small" id="tagNext">' + (i === TAGS.length-1 ? "检查完毕 →" : "下一张 →") + '</button></div>';
+    $("#tagNext").addEventListener("click", function(){ i++; render(); });
+  }
+  render();
+})();
+
+/* ---------- A6 Parts地图 ---------- */
+(function(){
+  var list = $("#pmList");
+  if (!list) return;
+  var TYPES = { M:"🗂 Managers", F:"🧯 Firefighters", E:"🛋 Exiles", U:"❓ 还不确定" };
+  function esc(s){ var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+  function render(){
+    if (!state.map.length) {
+      list.innerHTML = '<p class="muted" style="font-size:14px;margin-top:14px">地图还空着。登记第一位成员吧——不确定是谁也可以登记成「一团紧绷」。</p>';
+      return;
+    }
+    var html = "";
+    ["M","F","E","U"].forEach(function(tp){
+      var items = state.map.filter(function(m){ return m.t === tp; });
+      if (!items.length) return;
+      html += '<div class="pm-group"><h4>' + TYPES[tp] + '(' + items.length + ')</h4>' +
+        items.map(function(m){
+          return '<div class="pm-chip"><b>' + esc(m.n) + '</b><span class="muted" style="font-size:13.5px">' + esc(m.d) + '</span><button class="x" data-id="' + m.id + '" title="移出地图(它不会介意)">✕</button></div>';
+        }).join("") + '</div>';
+    });
+    list.innerHTML = html;
+    list.querySelectorAll(".x").forEach(function(b){
+      b.addEventListener("click", function(){
+        state.map = state.map.filter(function(m){ return String(m.id) !== b.getAttribute("data-id"); });
+        save(); render();
+      });
+    });
+  }
+  $("#pmAdd").addEventListener("click", function(){
+    var n = $("#pmName").value.trim();
+    var d = $("#pmNote").value.trim();
+    if (!n) { toast("先给它起个名字——「一团紧绷」也算名字"); return; }
+    state.map.push({ id: Date.now(), n: n, t: $("#pmType").value, d: d || "(待了解)" });
+    save(); render();
+    $("#pmName").value = ""; $("#pmNote").value = "";
+    award("s6");
+    toast("已登记。欢迎入图 🗺");
+  });
+  render();
+})();
+
+/* ---------- 毕业 ---------- */
+function checkGrad(){
+  var locked = $("#gradLocked"), open = $("#gradOpen");
+  if (!locked || !open) return;
+  var missing = SESSIONS.filter(function(s){ return !state.badges[s]; });
+  if (missing.length === 0) {
+    locked.style.display = "none";
+    open.style.display = "block";
+  } else {
+    locked.style.display = "block";
+    open.style.display = "none";
+    var names = { s1:"1(拆弹)", s2:"2(鉴别)", s3:"3(谈判)", s4:"4(场景)", s5:"5(行李牌)", s6:"6(登记一个part)" };
+    $("#gradHint").textContent = "还差:Advanced " + missing.map(function(s){ return names[s]; }).join("、");
+  }
+}
+
+renderPaws();
+checkGrad();
+})();
+</script>
+<style>
+.dz-lock{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:14px;color:var(--ink-soft)}
+.dz-pass{font-family:inherit;font-size:14px;padding:7px 12px;border:1.5px solid var(--line);border-radius:99px;outline:none;width:170px}
+.dz-pass:focus{border-color:var(--teal)}
+.dz-unlock{font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;border:none;background:var(--teal);color:#fff;border-radius:99px;padding:7px 14px}
+.dz-err{color:var(--bad);font-size:13px}
+</style>
+<script>
+(function(){
+"use strict";
+var SALT="u9pL2sI0chwlo30E75AimQ==";
+var ENC=[{"iv": "HpYpDYmQPLoghS4N", "ct": "8IjCjFPTRX3BD/GHYkayGwTyIXEp34NYxZpc1GCsCwF8PMC1u26HccJStaToAVa2noBTIX7kgsCGrcA49dknSghnUkftI5bFwuraW3T7tvdCS4f5XzChtZ4yhztBhGB8UiccB7YiPLppKJxCY3gJ68DBTF0pVlhUcuvO9+0jEahUgkRJj/++PILgvdMimxNBkW3u70I7s/i0WJ+QSC/mUFIuEtn+q1YjDsZdA1CSYOWxjNEk9tfzNNwv/N/KwHVy7EQabsX/evvGbg/nM1xbTLlVcfff81LxEZlsAKakB/XyUaP91YNayHaEnURNHuNv06PiG+znFeTfatWEhfXPtNtLcGhcMge5lC14tsrE54CvotrSahrwHHwXZSmHr0w+btfgUwnfOKcQRLIltpS2KwZIuqWYIgoNtOc2a7gIQeO08yoxPL+qP0bUzbnLRa3FJNpUZYTVw/ogbtmPflBW5gCzAi5qLmBsfT+Z+u0C1QyfAAdVQyQWQSMmioMpF6+Ycil5ovbdnDQd0iYjSQdypk4CRXZhreB+aXHNMJ6b1XLgMo4bAoIqtqE8R1tq8EYKyQ64cwLe/pTFHb4T6Bo+V/WUqzES3+e6Ik2itThSuFbo7Qb/+AQGiWZqN6nrIyTZLvcwiUCjiJw8mgX8seXRot8wYL2IchRcB8qffz7KtKk7ifz0yqlZMZvIFBqB5Zq2sjXqxIRH4167bUVCEjzqY7tCHJ4G1LwKKkykGHraIl/zSAJSxOa8isOmuwDg+I3B5O4bPXqmV4EM02etGUG6PHePo7bY3p6UwSJVsOEyOe7jWjExpmWUO6oSK2Ek5mjmEsA/k3nZJbTuKNSQSIz6gHRTax1WTxnB17Ma9ungaCHs2UjlLu6Ga4nuT6jHFlfndMJapoeICvR6iRb4YgnzgTWLI0aOznt3Qh5thMIj4mIMDeRDERbaryx5JUmb50tISje7mp79uesaN2umqfnGwe6GeTK4/tSMneNSMuvnLQ=="}, {"iv": "SBwsLp58LcCJchVB", "ct": "NLlY4uLtgx2RI+bNCbYIg9wDywzfSzooYmTWlDrckwRb/bhY8B7+6HbQRsTQk6CGm3S81EMsRhdJ6EpqPyTya4lXu1h1n0w8jdhGggjhTS37aAUvazjDPFUDJi2d9CJU+KIN9U3hgvxEzYLvPZe76qGFrEzpmGOQJ+vCv5UHRUTYU16pxivFpBX1XC2/IODgbRL+OYWlOuCs6AUzLDpH0gSTMn+5THYO0BVAfo+I4Dfi75OnVtPZLHNWh6vJfric2SDS/300gGQBE/hG7TmcexZnnBHUh72068dQZ4OyJlbURvMFjNRjErAqFYWjmgp6gD+fn+qqFZrxVwIEUWc79QomWaZi+fsu9VB11BpEmn8bhsGbBhFPtpOfNJrIdy6FwrvwtdSDmOMUEEjDlkLphJ0YuQvtvNOBIWABc/t5/rpYQ+Ts+braxv7uNEyrx53fxAp0FutBcES9zlD97un1EZLfz5rl2rj8RqlsxXtZxfEHpfR2qDpevlFZJkb62lWRNJh7lg0PGIIOTkluD50nANzQTcksgIENbbJnt+OsCIwefvlZyBfH773w5ll1deAFcHcG1Qadrr2JU3uBkY2g4szo1McNfH12GtYN5XB6wlwnNs+I1oru5crY3FHk/Skcf3iIsDTzMrI1Jk2b/5+a4fgKCx23K9Kr16s3PWCofF1M3vEQFNeUlati2EGSxlU7lcDuvednH2LJt8pomU3aPjMGRnbXjX0GoXtpo/tsY0Z0GWw2BQTIIgmjJBM6k4CAGtF9TWkFY3J/A17M+DwyB0bq+EEh5X5d34G1fJp2OKRdFn4vA7BLVQG8Bxol9rUNS/9ZWFLzRqjxjiFq2uwI/dYVXxzwAsH17fRfpGXJiKm5RwGpuWqVcK9TSjZmHir6CAufXdq9+mDhuwXfmNd4Iwr0yxMBtC/lI+76vKY2EQk0n+V/G1ausu645hksZJZ13PDMEunw9IpbjdbsSekLGa4LsmImUcg41B8D3Te+BVBq5GHCFrBncYwcEYLlSsZeZwqq7JQZozkr5aUfnQDILfgZdCc="}, {"iv": "c7W3x+jXun5d6F6W", "ct": "/lJOl+3CGWEvdAu8DuAdnnNJCYWb5uqhfpQxP7/8jqAf06bJHA58oKgr+BSEhlJ/CSHVF1Rv9AGDB8tD/LCv2BLHCW+IRvsyOLDaGYAQQxxHGrC7lCexJZp/fsrtUbhuwANT/bODSLfX43FIWMeuXWHFB+NjP61tS6UuuOpgbe4T2YC2V3lhDV/LvXPrrZHF+dUldnzZoIq0sSqOdU21nHBlX77I4/kljxLjTep0cPc6cyVcQ9RaQ1z2M2ZIBlRul+rxWHvIiIzSz9Ox4Xbg1X4VXdDiYjYuFxSWmNHbHPJvxwOSk/0lzzhvviQCuS7NwcDveQ8q0OMgxSHtaudyPxK4g6K6W5o4caQdI5bcqUS1HK7roDqxkSfND7/5+uQF80X+2MQYJ4/UYQrj1SGBNnRVjjg91GiVBntsL6YtvqId3LI0PsTZz1BeDJESZJaWUCaWhcYE6n6O6ZJDRiUV+OvhV9QJffFYvD3+1wh+PwXlBeUZIN/lZa3Jfvgkla6E/5nqcnFIssR5OXDqwykpPQnc5gPVBoq/QF8tc8/6dkcDJq9ddS0eT7Zt6hRxW4jPau2DJPs9pCQ0GYnudO+CJUow4fHZADeB1GtwHET3TEGsRT4dLicxGsmIix1FGL/5u9joowkSeOH9UoH2G4BYNGLEFvkIXZN96KTxVobYBNQD9/cuITWtZxkVHxmZEYubKnJSn5iBGO5ehVcDfkMdR6I0R0INjH77qxjsLQmJgFodoZA3WriAtGNfiVNVo6IqjQjAl1l3n6KfNBdo/61lOwNAbLoM0KDkae7Qd0Lqeaknm2670UB9CmkYmGLD7e1r8ePByvKHzJg9WQSpm95ZLR/6hvQhQrsaUx2xvB++PEAEfbuXxTQzaFcFABXcFnwyHg4ttrBOAMkFortLu73XIqrFLXdZPi7qVqSpIC/9z4bjAPWCm+BZDPrnEV9R7XqBm/HHlEFgqssy1XpPpU9sFF/I7mKRQ/wpHyMzWil5VlHNPNeAlBVNKtwsAylzdazP9f4zbXc2mExdnw=="}, {"iv": "QiR/wnOqhAwrWM1d", "ct": "UYeY4lZ6akdaG8VokYZMYMF8fAuYN/zZBJnKZeaLFATogA7/SZvEIis61Fnu++DBODJtvLl1YmSDqZXAWGHuAW2magAd9YpqVkJmyPFJdc/ZGJIwFiovNyrFAz4CIqA6u/nQeZG/q3Cmj21lNQLLL/PzlMu+B4UFbq50wmOdeT/TGBuwZjZyfizz0RX2MsnKXgcb9UAnl3mlXFWCihZyOFOIdBCiEalrRSlnta+lEKQX97KYNpu8aUuMg/76rm5WvKc3S9V1r+G4pwV/I3auVtjUZE+3STINsrFA49OT19qiMd/TC1TjTha8tieHtGR/72WZKGsNTjIojPiJmXZHMYfiqQB/kQmKnDchmlDrA+Rlxoju8kkyWJTeTucDDU4ZvTGdeW31jWCQDRgIdmoBs8QZeQVwMdBcGpmP+KuFfbVvUAvD1DkXx2acL9A2q9C5Y7d7pVd2E2ota/SEkzwKh9lppF6j9QLbnK/y84rZbqOM6dU58xDHOd6bzeJZBuM1HbA4U/F3wF450JrXgN9kZd6GYHnQLyROjwKwITXRwFofNLynVyxIHtEDMkulB2Sj5EfyJBqT9lXztzPHFjBXa/VRyepTVVHZK0A31A9JuQhdKtD/EARQ7gKsTKLEx9QKAPIh1NxjMhCqxwC4Ixl2jxHWBNW3jiLaYh8M40p4N4oSFIAyoYO5irsYQ8He+A3+j9vDJ2wTrWPkemKCLy1ViFDY8pV1SVtR5enHN8Yohab21bLtmAyQFcXN4S0tsLdYap9Ito1x9wOKQL5iRn3etdc+o684mkU0X1hmqaq66zxoGqQzTl5nyGVs9ZdMhkoZCEtB63WHHyQaF50mN0vURstePCq5Ubi4z/YHd2JaukU8yeLaYY4gcL8bVA=="}, {"iv": "S+GA9OCP9AH26sIp", "ct": "tAg8mDph+PQ1ft9bfOBwpwrGstNt6ctjlkyuIFqvjWCxKfNHcXHih0wdAzh36AeY23WgB4uDpfjP915pqJn9A/ITEUo92LhqLi3lxBp/X0YIWEXeVAyOn/ryrH7AZLfP7NndQs/YwFjXFWZXv2GSMOJGXQ97RvVmtBKx3FtdXyURBZusgrQiv2IObnkgj4giO1zUKNuJ1OiNVoC/J1H2XF4B9/29YyrpLFInhmFc/oBN4ShNKRK4aZ/dGfVhZp0bDJBLBg+se19EfgYkwR4bKm+D6v0UIkkVuZ2AsnDDz/7qXqpTtHyZ6TFAAidk7C/bQzyZyMIl8G06Iqg6dwpV5Wgla83OYupl3tPnd67mfm9kRTxUKQzdGKkIkem1NTSYT0G1bvcIeFOyNu7vwYGMP8OGj152/uoEkX71NqsJ9uuNeT1Br4xjTo+iB5Cl6y66NfaLyag/G1Cr9D65gU8Vmpi04nT8V8v2KzV3m+RftW2XBnsDxBeP/t2up9m90ECLAu5pkSWYmGnu09nthsvQ2ngFWFm9hLcRUPnl3RF+FYVJZc5y+kUgWg0z93XLPdNTw5f6ub5+gjVaas9UA7NHjQKr6ASetxJEM3oqW29hcvuawqDjPNUFbWyPBl/V7MdrSjvXXul9MVNKSxSVeVZUBnWrpl4FTKJ8wMywYMfdQslp1sZNAd+/wxUTczp5a581Bdm1MElBa1Uliio5NwABRnWm6Yv94ByfPeCo/PyTj59TNsDjqm2hx8V9mDN48X1wFvcb0G57Li9VhWSoipzVtWNJ5V0FElUhLvmd18Kx7k4w5EYvOaWZq8r2ZFSaaUGMpuorWC7FCt4ByIHt0oDZfZGsdj6qKrJTwQLtb1xIy/eaMxYSo6iNNCkTESSRX41iZXUAm0tjMEXna+6ZZMI48dZW80zgdJR4S06fIhUPh4+djUcUXno/FgZ4oRFQelUj1aK+h67w4nBtnHZWaFGJuWYiv1YbVdtGV/qZNBJn29f8nAZTbMtmsyaE5r/A2YsaegAu60Tedkwi5Lth5VWJhohUnqQkhZ+bJop+OfWY9KpahhqegGL34dY7Jn5OeGgy84a4ITi/d+4cQvP9ZzIcs6LO4nm46WBZEgyd01xLr11rUb8H2AUkmWkDYkXQHjFTHf773lGjz/HpHR+VZwp8LzOshivYmO9gMEEE8F+fZT3lhu1G/d0SJzP99131D1pTHbry/uSE+B6bU4ZIH7Ni7aa7hrJ3LPEKfQx2ARsNZABDjB8lUYRO8Auvc+yr13Y1eSrXrPTQovZYxOK6t8v366waVp4nVokIN6WBuYKQ8e+QH4gYzQ=="}, {"iv": "fDf6i0cVIAs6QKVQ", "ct": "W2fGBweKlq5WsW4yGSqnSteIQG+Ss3ywEO2tIUQiiBWVqc5ODPUhRz/qSQCuK81gO3+aOZI0QTvDclUslojd7ED0U/l7WEweJXTBQpVX3USACysmj5DBV23V/GcfUssMvSelXC7HfJ4VEAoNgL/Wb+sbfwxKOWqnUFQPe4oag+d/uMApTgps/Mu46AawgpZEPDFx6Pw09OcmQVHVt+Rz6GGOErgLvLfKOLr8gDFNzoQ2X9GhDpqT2ct2l6YOiDNWODiqKHg2D8umm6aNwj0l8yoD3Aqqp29xrgq4iv1oDaIjzF9QzITH3NFrEaO6yNxwinIJWH4C7eYx2AZ19SQ2LOzY/tFdUJebhS1PjXTXkLvVLFk495eHXhtoXADyixFEfqk1pBuf8FJnu+YZdvGmTH4FyhOwQdz6hx8XjG5xBg8g6ADxRq/wim+XA2dsoTm3izXQiXzCqEDrbhPnqx6YU5L2AAPSKA7mFBNSf9J9csXnApnyj59wvhuY0PKmOgBf2BMFp1bwKq1e3CttuPkRsXUx8WPAOqP/NGbnYOWrcVRQKteFK+yplX0WHOEXPlDP64bReMFLhnTSqNbWrOC4JhnnAL9Os8XMnLbqnp7IugAt+4Xu0cvz2004nWRO2DizEOBp5YiBfjMDjQQnCWEzurDKte72Y9q2Otpdxv+ZxoKN3PrGzAqE3fznhJ33Apmn+3maJjYxWUkJyWD/r7LbUAhlsWgLWbwGEXCy3oCZkcd1A9GpGoJNThbE5c5jEjdNJnRe/BYAGuP0o2ObPERxIc63wiEF9cvnsaGkI8T4gXPtaJHR73BnraWf3nUPW7rTxtx+qEiHWqFi5b6oJjTpDENGNZhbIzQob8S3Mf3of2YPTXo+KWTHRcMx9X000zNANS+9ktmOoyEkPcIeJ7MTsCi2jiwTS/agHSdv4lHu/X7a5I11LrkwkDul69exrQPa5MMo2cIJBimrgr6uWxn3fZsOoCHon+IVqHg5xB0MKSgyKi+6DO3X0CVoiTdIpnuXzDpksVw9Eypi6RlAmKkf24TiLFUNUlIO+H+KjZ3OWN85VcTQVvjDDu/cBJ4v6Vc="}];
+function b64d(s){return Uint8Array.from(atob(s),function(c){return c.charCodeAt(0);});}
+function deriveKey(pass){
+  var te=new TextEncoder();
+  return crypto.subtle.importKey("raw",te.encode(pass),"PBKDF2",false,["deriveKey"]).then(function(km){
+    return crypto.subtle.deriveKey({name:"PBKDF2",salt:b64d(SALT),iterations:150000,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["decrypt"]);
+  });
+}
+function tryUnlock(pass){
+  return deriveKey(pass).then(function(key){
+    return Promise.all(ENC.map(function(b){
+      return crypto.subtle.decrypt({name:"AES-GCM",iv:b64d(b.iv)},key,b64d(b.ct));
+    }));
+  }).then(function(bufs){
+    var td=new TextDecoder();
+    return bufs.map(function(b){return td.decode(b);});
+  }).catch(function(){return null;});
+}
+function swap(htmls){
+  var locked=document.querySelectorAll(".dz-locked");
+  for(var i=0;i<locked.length&&i<htmls.length;i++){
+    var wrap=document.createElement("div");
+    wrap.innerHTML=htmls[i];
+    locked[i].replaceWith(wrap.firstElementChild);
+  }
+}
+function attempt(pass,errEl){
+  tryUnlock(pass).then(function(res){
+    if(res){
+      try{localStorage.setItem("luba_ifs_pass",pass);}catch(e){}
+      swap(res);
+    }else if(errEl){
+      errEl.textContent="口令不对,再试试?";
+    }
+  });
+}
+document.addEventListener("click",function(ev){
+  if(ev.target.classList && ev.target.classList.contains("dz-unlock")){
+    var box=ev.target.closest(".dz-lock");
+    attempt(box.querySelector(".dz-pass").value.trim(),box.querySelector(".dz-err"));
+  }
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key==="Enter"&&ev.target.classList&&ev.target.classList.contains("dz-pass")){
+    var box=ev.target.closest(".dz-lock");
+    attempt(ev.target.value.trim(),box.querySelector(".dz-err"));
+  }
+});
+try{
+  var saved=localStorage.getItem("luba_ifs_pass");
+  if(saved&&window.crypto&&crypto.subtle){
+    tryUnlock(saved).then(function(res){
+      if(res)swap(res);
+      else{try{localStorage.removeItem("luba_ifs_pass");}catch(e){}}
+    });
+  }
+}catch(e){}
+})();
+</script>
+</body>
+</html>
