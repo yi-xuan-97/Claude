@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的股票互动课 · 4周从零入门</title>
+<style>
+  :root{
+    --bg1:#0f766e; --bg2:#134e4a; --accent:#f59e0b; --accent2:#10b981;
+    --ink:#1f2937; --soft:#6b7280; --card:#ffffff; --line:#e5e7eb;
+    --good:#16a34a; --bad:#dc2626; --goodbg:#dcfce7; --badbg:#fee2e2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:linear-gradient(160deg,#ecfeff 0%,#f0fdf4 50%,#fffbeb 100%);
+    min-height:100vh; line-height:1.7; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:20px 16px 80px}
+
+  /* ---------- HOME ---------- */
+  .hero{
+    background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    color:#fff;border-radius:24px;padding:30px 26px;
+    box-shadow:0 12px 30px rgba(15,118,110,.25);position:relative;overflow:hidden;
+  }
+  .hero h1{font-size:26px;font-weight:800;letter-spacing:.5px}
+  .hero p{opacity:.92;margin-top:8px;font-size:15px}
+  .hero .spark{position:absolute;right:-10px;top:-10px;font-size:120px;opacity:.12}
+  .pbar{margin-top:20px;background:rgba(255,255,255,.25);border-radius:99px;height:14px;overflow:hidden}
+  .pfill{height:100%;background:linear-gradient(90deg,var(--accent),#fbbf24);border-radius:99px;transition:width .5s ease}
+  .pmeta{display:flex;justify-content:space-between;margin-top:8px;font-size:13px;opacity:.92}
+  .btn{
+    display:inline-block;border:none;cursor:pointer;font-family:inherit;
+    background:var(--accent);color:#1f2937;font-weight:700;font-size:16px;
+    padding:14px 22px;border-radius:14px;margin-top:18px;transition:transform .1s, box-shadow .2s;
+    box-shadow:0 6px 14px rgba(245,158,11,.35);
+  }
+  .btn:hover{transform:translateY(-1px);box-shadow:0 9px 20px rgba(245,158,11,.45)}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:#fff;color:var(--bg1);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+
+  .week{margin-top:26px}
+  .week h2{font-size:17px;color:var(--bg2);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+  .week .sub{font-size:13px;color:var(--soft);margin-bottom:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .chip{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;
+    cursor:pointer;transition:transform .12s,box-shadow .2s,border-color .2s;position:relative;
+  }
+  .chip:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.08);border-color:var(--accent2)}
+  .chip .d{font-size:12px;color:var(--soft);font-weight:600}
+  .chip .t{font-size:14px;font-weight:600;margin-top:3px;line-height:1.4}
+  .chip .em{font-size:22px}
+  .chip.done{border-color:var(--accent2);background:linear-gradient(180deg,#f0fdf4,#fff)}
+  .chip.done .check{position:absolute;top:10px;right:12px;color:var(--good);font-weight:800}
+  .chip.current{border-color:var(--accent);box-shadow:0 0 0 3px rgba(245,158,11,.18)}
+  .chip.exam{background:linear-gradient(180deg,#fffbeb,#fff)}
+  .chip.exam .d{color:#b45309}
+
+  /* ---------- LESSON ---------- */
+  .lesson{background:var(--card);border-radius:24px;padding:0;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.08)}
+  .lhead{background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#fff;padding:24px 26px}
+  .lhead .tag{font-size:13px;opacity:.9;font-weight:600}
+  .lhead h2{font-size:23px;margin-top:6px;font-weight:800}
+  .lhead .em{font-size:40px;float:right;margin-top:-6px}
+  .lbody{padding:24px 26px}
+  .lbody p{margin-bottom:14px;font-size:16px}
+  .lbody p b{color:var(--bg1)}
+  .block{border-radius:16px;padding:16px 18px;margin:18px 0}
+  .analogy{background:#fffbeb;border:1px solid #fde68a}
+  .analogy .h{font-weight:700;color:#b45309;font-size:14px;margin-bottom:6px}
+  .tip{background:#ecfdf5;border:1px solid #a7f3d0}
+  .tip .h{font-weight:700;color:#047857;font-size:14px;margin-bottom:4px}
+  .hw{background:#eff6ff;border:1px solid #bfdbfe}
+  .hw .h{font-weight:700;color:#1d4ed8;font-size:14px;margin-bottom:4px}
+  .real{background:#f5f3ff;border:1px solid #ddd6fe}
+  .real .h{font-weight:700;color:#6d28d9;font-size:14px;margin-bottom:4px}
+
+  /* quiz */
+  .quiz{margin-top:20px;border-top:2px dashed var(--line);padding-top:18px}
+  .quiz .qhead{font-weight:800;font-size:16px;margin-bottom:6px;color:var(--bg2)}
+  .score{display:inline-block;background:#fef3c7;color:#92400e;font-weight:700;font-size:13px;padding:5px 12px;border-radius:99px;margin-bottom:12px}
+  .score.done{background:var(--goodbg);color:#166534}
+  .qitem{margin-bottom:18px}
+  .qitem .q{font-weight:700;font-size:15.5px;margin-bottom:10px}
+  .opt{
+    display:block;width:100%;text-align:left;font-family:inherit;font-size:15px;
+    background:#f9fafb;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;
+    margin-bottom:10px;cursor:pointer;transition:.15s;
+  }
+  .opt:hover{border-color:var(--accent2);background:#fff}
+  .opt.correct{background:var(--goodbg);border-color:var(--good);font-weight:600}
+  .opt.wrong{background:var(--badbg);border-color:var(--bad)}
+  .opt:disabled{cursor:default}
+  .explain{display:none;margin-top:8px;border-radius:12px;padding:12px 16px;font-size:14.5px;background:var(--goodbg);border:1px solid var(--good)}
+  .explain.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  /* widgets */
+  .widget{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:18px;margin:18px 0}
+  .widget h4{font-size:15px;color:var(--bg1);margin-bottom:12px}
+  .field{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .field label{font-size:14px;min-width:96px;color:var(--soft)}
+  .field input[type=number]{flex:1;min-width:90px;font-family:inherit;font-size:15px;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px}
+  .field input[type=range]{flex:1;min-width:120px;accent-color:var(--accent2)}
+  .rng-val{font-weight:700;color:var(--bg1);min-width:70px;text-align:right}
+  .out{margin-top:8px;background:#fff;border:1px dashed var(--accent2);border-radius:12px;padding:14px;font-size:15px}
+  .out .big{font-size:26px;font-weight:800;color:var(--accent2)}
+  .seg{display:inline-flex;background:#eef2f7;border-radius:10px;padding:4px;gap:4px}
+  .seg button{border:none;background:transparent;font-family:inherit;font-size:14px;padding:8px 16px;border-radius:8px;cursor:pointer;color:var(--soft);font-weight:600}
+  .seg button.on{background:#fff;color:var(--bg1);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+  .bars{display:flex;align-items:flex-end;gap:18px;height:90px;margin-top:18px;padding:0 10px}
+  .bars .bar{flex:1;border-radius:8px 8px 0 0;background:linear-gradient(180deg,var(--accent2),#34d399);min-height:6px;position:relative}
+  .bars .bar.put{background:linear-gradient(180deg,#94a3b8,#cbd5e1)}
+  .bars .bar span{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--soft);white-space:nowrap}
+
+  .lfoot{padding:20px 26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .backlink{background:none;border:none;color:var(--soft);font-family:inherit;font-size:15px;cursor:pointer;padding:8px}
+  .backlink:hover{color:var(--bg1)}
+
+  .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(120px);
+    background:var(--bg2);color:#fff;padding:14px 24px;border-radius:14px;font-weight:600;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .4s cubic-bezier(.2,1.3,.4,1);z-index:50;max-width:90vw;text-align:center}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .foot-note{text-align:center;color:var(--soft);font-size:12px;margin-top:30px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ 课程数据 ============ */
+const WEEKS = {
+  1:{t:"第一周 · 基础认知", s:"先搞懂股票和股市到底是什么"},
+  2:{t:"第二周 · 看懂一只股票", s:"学会读懂一只股票的关键信息"},
+  3:{t:"第三周 · 准备实操", s:"开户、下单、管风险,做好动手准备"},
+  4:{t:"第四周 · 实战与心态", s:"小钱试水,养成长期赚钱的好习惯"},
+  5:{t:"🎁 彩蛋课 · IPO 实战", s:"用真实的 SpaceX 上市,学会判断要不要买新股"}
+};
+
+const LESSONS = [
+{d:1,wk:1,em:"🧩",title:"股票到底是什么?",
+ real:`如果你用 iPhone,同时又买了苹果(AAPL)的股票,你就既是它的<b>顾客</b>、又是它的<b>小老板</b>——苹果每卖一台手机赚的钱,理论上也有你极小的一份。传奇基金经理彼得·林奇有句名言:"投资你了解的东西。"你每天在用的产品,往往是你最容易看懂的公司。`,
+ body:[`欢迎上车!我们从最最基础的开始,不用怕。买一只股票,意思就是你<b>买下了一家公司的一小块</b>。哪怕只买一股,你也成了这家公司的"小小股东"——公司赚钱了你能分一点,公司更值钱了,你手里这块也跟着值钱。`,
+ `比如你买了苹果公司(Apple)一股,你就拥有了苹果<b>极其微小</b>的一部分。整家公司被切成了几十亿"股",你手里攥着其中一股。就这么简单。`],
+ analogy:`想象楼下一家奶茶店要扩张,把整家店分成100份卖出去筹钱。你买了1份,就拥有这家店的1%。店生意火爆,你这份更值钱;店分利润,你也能拿到1%。股票就是这么回事,只是公司更大、份数更多。`,
+ tip:`一股 = 一家公司的一小块所有权。你是"小股东",不是债主、也不是员工。`,
+ qs:[{q:"买一股某公司的股票,意味着什么?",opts:["你借钱给了这家公司","你拥有了这家公司极小的一部分","你成了这家公司的员工"],a:1,
+   ex:`✅ 对!持有股票 = 持有公司的一小块所有权(你是股东)。这既不是借钱给公司(那叫债券),也不是被雇佣。`}],
+ hw:`想一家你<b>每天都会用到</b>它产品或服务的公司(你手机的牌子、常喝的饮料、常逛的网店都行),把名字写下来——它就是你以后练手研究的"第一只候选股"。`},
+
+{d:2,wk:1,em:"🏛️",title:"股市是个什么地方?",
+ real:`你现在就能试:打开 Google 搜 "AAPL"(苹果)或 "KO"(可口可乐),实时股价和它所在的交易所都会跳出来。苹果在<b>纳斯达克</b>,可口可乐在<b>纽交所</b>——这俩就是美股最大的两个"菜市场"。`,
+ body:[`股市,就是买家和卖家交易股票的<b>大集市</b>。美国最有名的两个交易所是 <b>NYSE(纽约证券交易所)</b>和 <b>Nasdaq(纳斯达克)</b>。你不用亲自跑去,网上券商会帮你下单。`,
+ `美股的交易时间是<b>美东时间 周一到周五 9:30–16:00</b>。你在爱荷华是中部时间,要减1小时,也就是 <b>8:30–15:00</b>。周末和节假日休市。每家公司都有一个"代号"(ticker),比如苹果是 AAPL、微软是 MSFT。`],
+ analogy:`把交易所想成一个巨大的菜市场,只不过卖的不是青菜,是各家公司的"股份"。代号就像摊位招牌——你报一声"AAPL",大家就知道你要买苹果。`,
+ tip:`股市 = 买卖股份的市场,有固定开市时间。每只股票有自己的代号(ticker)。`,
+ qs:[{q:"美股正常交易时间(按美东时间)是?",opts:["24小时全天候","周一到周五 9:30–16:00","只有周末开市"],a:1,
+   ex:`✅ 对。美东时间工作日 9:30 到 16:00。你在爱荷华(中部时间)要减1小时,即 8:30–15:00。`}],
+ hw:`上网或在券商 App 里,搜一下你昨天想到的那家公司,找到它的<b>代号(ticker)</b>,记下来。`},
+
+{d:3,wk:1,em:"📈",title:"股价为什么会涨会跌?",
+ real:`最典型的就是"财报日":公司每季度公布业绩,赚得比大家预期好,第二天可能<b>跳涨</b>;不及预期就<b>大跌</b>,哪怕它其实还在赚钱。2020年3月新冠刚爆发时,整个美股因恐慌几周内跌了三成多,几个月后又涨了回来——这就是"短期被情绪主导"的活教材。`,
+ body:[`一句话:<b>供求关系</b>。想买的人多过想卖的人,价格就涨;想卖的人多过想买的人,价格就跌。`,
+ `背后真正牵动情绪的,主要是这几样:公司赚钱能力(财报好不好)、各种新闻消息、整体经济环境,还有大家的<b>预期和情绪</b>。记住一个关键点:<b>短期</b>股价经常被情绪左右,<b>长期</b>才更看公司的真实价值。`],
+ analogy:`像演唱会门票。一个超红的歌手,票少人多,黄牛价飙到天上;冷门场次没人抢,价格就往下掉。股价也是被"有多少人想要"推动的。`,
+ tip:`短期看情绪和供求,长期看公司真实价值。别被一两天的涨跌牵着鼻子走。`,
+ qs:[{q:"短期内股价上涨,最直接的原因是?",opts:["公司一定变好了","想买的人多于想卖的人","政府规定要涨"],a:1,
+   ex:`✅ 对。短期价格由买卖力量(供求)决定,不一定代表公司真的变好了——这点新手务必记牢,别一涨就以为公司基本面变强了。`}],
+ hw:`看一眼你那家公司今天的股价,记下数字。<b>明天再看一次</b>,亲身感受它每天都会跳动。`},
+
+{d:4,wk:1,em:"📒",title:"新手必懂的几个词",
+ real:`这些词都对应着活生生的公司:苹果是全球市值最高的公司之一,曾突破<b>3万亿美元</b>;而"分红"的代表可口可乐,已经<b>连续60多年每年上调分红</b>,是巴菲特的最爱之一。`,
+ body:[`今天混个脸熟,不用背。<b>股(Share)</b>:公司被切成的一份。<b>市值(Market Cap)</b>:公司的总身价 = 股价 × 总股数。<b>分红(Dividend)</b>:公司把部分利润以现金分给股东。`,
+ `<b>买价/卖价(Bid / Ask)</b>:买家愿出的最高价,和卖家要的最低价,中间那点差叫"价差"。<b>成交量(Volume)</b>:一段时间内换手了多少股,反映这只股票热不热。`],
+ analogy:`这些词就像学做菜先认调料。今天不用记死,后面每一个都会单独拿出来细讲,现在脸熟就够了。`,
+ tip:`市值 = 股价 × 股数;分红 = 公司发给你的现金利润。其余词混个脸熟即可。`,
+ qs:[{q:'"市值(Market Cap)"是怎么算出来的?',opts:["股价 × 总股数","公司银行账户里的现金","今天涨了多少钱"],a:0,
+   ex:`✅ 对。市值 = 当前股价 × 公司总股数,代表市场认为这家公司整体值多少钱。`}],
+ hw:`在财经网站找到你那家公司的<b>市值(Market Cap)</b>,看看它是几千亿的大公司,还是几十亿的小公司。`},
+
+{d:5,wk:1,em:"🆚",title:"主动选股 vs 被动指数",
+ real:`2007年巴菲特公开打赌:一只最普通的标普500指数基金,10年后会跑赢一群顶级对冲基金经理精选的组合。十年后(2017)揭晓——<b>指数基金赢了,而且赢得不小</b>。这就是"被动指数常常打败主动选股"最有名的真实案例。`,
+ body:[`投资有两条路:<b>① 主动选股</b>——自己挑公司,押它表现好;<b>② 被动指数</b>——直接买一篮子(比如标普500里的500家公司),跟着整体市场走。`,
+ `一个反直觉但极其重要的事实:<b>长期看,大多数专业基金经理都跑不赢一个简单的指数基金</b>。所以对新手,指数(你退休账户里买的 FZROX 就是这一类)适合做稳健的"底仓",个股只当小仓位的"兴趣区"。`],
+ analogy:`主动选股像自己点菜,可能点到超好吃的,也可能踩雷;指数像吃自助餐,整桌平均水平,省心又不容易出大错。`,
+ tip:`指数打底求稳,个股小仓位练手。这是适合新手的黄金组合。`,
+ qs:[{q:'对新手来说,通常更稳健的"打底"方式是?',opts:["全部押在一只个股上","买宽基指数基金 / ETF","只买最近涨最多的那只"],a:1,
+   ex:`✅ 对。指数基金一篮子分散、成本低,长期连多数专业人士都跑不赢它。个股可以玩,但建议只用小仓位。`}],
+ hw:`查一下你退休账户里的 <b>FZROX</b> 是不是指数基金,它大概覆盖了多少只股票——感受一下"一篮子"有多大。`},
+
+{d:6,wk:1,em:"⚖️",title:"风险和回报是一对双胞胎",
+ real:`反面教材:麦道夫(Bernie Madoff)多年承诺"每年稳赚约10%、几乎不亏",骗到无数聪明人和名人,2008年骗局崩塌,是史上最大的庞氏骗局之一。<b>"稳赚不赔"四个字,本身就是最危险的信号。</b>`,
+ body:[`天下没有"高回报、零风险"的好事。想要更高的潜在回报,几乎一定要承受<b>更大的波动和亏损可能</b>。任何承诺"稳赚不赔 / 保证高收益"的,基本都是<b>骗局</b>。`,
+ `股票<b>长期(很多年)</b>向上的概率高,但<b>短期</b>可能大起大落。所以记一条铁律:<b>只用短期内用不到的闲钱投资</b>,千万别借钱、别拿房租和救命钱去炒股。`],
+ analogy:`像爬山:风景更好的山顶(高回报),路也更陡更险(高风险)。你能爬,但要量力、备好装备,别一时冲动往上冲。`,
+ tip:`只投闲钱;凡是承诺"稳赚不赔"的,一律当骗局远离。`,
+ qs:[{q:'看到"保证每月稳赚10%、零风险"的投资,你应该?',opts:["赶紧多投一点","高度警惕,这基本是骗局","借钱也要投"],a:1,
+   ex:`✅ 对!高回报必然伴随高风险,"保证稳赚高收益"几乎都是诈骗。记住这一条,能帮你躲掉人生一大坑。`}],
+ hw:`写下一句话:"我打算用来学习投资的闲钱大约是 ___ 美元。"(记得:一笔亏光也不影响生活的小钱。)`},
+
+{d:7,wk:1,em:"📝",title:"第一周 · 周考",
+ real:`这一周你已经认识了苹果、可口可乐、标普500指数,还有麦道夫这个反面教材。把这些真实的名字和概念一一对上号,你就是真的懂了,而不是死记硬背。`,
+ body:[`恭喜你坚持满一周!🎉 今天没有新概念,我们来一场<b>轻松的周考</b>——3 道题,检验一下这周学得怎么样。答完看看自己的得分。`,
+ `回顾一下本周关键词:股票=公司的一小块;股市有开市时间和代号;短期看供求情绪、长期看价值;市值=股价×股数;指数打底、个股小仓;只投闲钱、远离"稳赚"骗局。`],
+ analogy:`第一周像学游泳先熟悉水性——还没正式下水游,但你已经不怕水了。这场小考就是给自己一个"我真的懂了"的确认。`,
+ tip:`基础打牢,后面才稳。考完别忘了给自己鼓掌!👏`,
+ qs:[
+   {q:"股票代表的是什么?",opts:["你借给公司的一笔钱","公司的一小块所有权","一张抽奖券"],a:1,ex:`✅ 股票 = 公司的一小块所有权,你是股东。`},
+   {q:"短期股价主要由什么决定?",opts:["买卖双方的供求和情绪","政府每天定价","公司创始人心情"],a:0,ex:`✅ 短期看供求情绪,长期才看公司真实价值。`},
+   {q:"下面哪种做法最适合新手?",opts:["借钱重仓一只热门股",'指数打底 + 只投闲钱 + 远离"稳赚"承诺',"把全部存款押一只股"],a:1,ex:`✅ 指数打底、只投闲钱、远离骗局——稳。第一周通关!🏆`}
+ ],
+ hw:`把这一周的几条"一句话记住"再读一遍,挑你最有感觉的<b>一条</b>,存到手机便签里,当作你的投资座右铭。`},
+{d:8,wk:2,em:"🔎",title:"怎么看一个股票报价页",
+ body:[`打开任何券商或财经网站搜一只股票,你会看到:<b>当前价</b>、<b>今天涨跌</b>(数字+百分比,美国习惯绿涨红跌)、<b>成交量</b>,还有<b>52周最高/最低</b>(过去一年的价格区间)。`,
+ `给你一个关键习惯:看"涨跌<b>百分比</b>"比看"涨跌几块钱"更有意义,因为它考虑了股价基数。涨1块钱,对 $10 的股是10%,对 $1000 的股不到0.1%。`],
+ real:`现在就打开 Yahoo Finance 或 Google 搜 "AAPL":你会看到一个大大的当前价、下面一行绿色或红色的涨跌幅,右边还有 "52-week range"。换成你自己那家公司搜,布局一模一样——学会读一只,就会读所有。`,
+ analogy:`像看天气预报:不只看此刻几度,还要看一天的最高最低和趋势,才知道该穿什么。看股票也要看区间和涨跌幅,别只盯一个数。`,
+ tip:`看报价先看"涨跌%"和"52周区间",别被单个数字吓到或冲昏头。`,
+ qs:[{q:'"52周最高/最低"告诉你什么?',opts:["公司未来会涨到多少","过去一年的价格区间","今天必须买入的价格"],a:1,
+   ex:`✅ 对。它是过去一年的价格范围,帮你判断现在价位偏高还是偏低(只是参考,不是预测)。`}],
+ hw:`打开财经网站,找到你那家公司的报价页,把"今天涨跌%"和"52周最高/最低"记下来。`},
+
+{d:9,wk:2,em:"🏷️",title:"市值 = 公司的身价",
+ body:[`<b>市值 = 股价 × 总股数</b>。它决定一家公司算"大盘股"(大公司,通常更稳)、"中盘股",还是"小盘股"(小公司,弹性大但更波动)。`,
+ `划重点:<b>股价高 ≠ 公司大</b>。要比两家公司谁大,看市值,不是看每股多少钱。`],
+ real:`经典误区:巴菲特的公司伯克希尔(代号 BRK.A)一股要几十万美元,而苹果一股才一两百美元——但苹果是全球市值最高的公司之一。每股价格骗不了人,<b>市值</b>才说明谁大。苹果、微软、英伟达都是"万亿俱乐部"的大盘股。`,
+ analogy:`一块大蛋糕切成1000份,每份便宜;一块小蛋糕切成10份,每份反而贵。看每份价格判断不了蛋糕大小——要看整块,那就是市值。`,
+ tip:`比公司大小看市值(股价×股数),不是看每股多少钱。`,
+ qs:[{q:"想知道两家公司谁更大,应该比?",opts:["每股股价","市值","谁今天涨得多"],a:1,
+   ex:`✅ 对。市值=股价×股数才代表公司整体大小,单看每股价格会被误导。`}],
+ hw:`挑两家你熟悉的公司(比如苹果 vs 一家本地小公司),查一下它们的市值,看看谁更大。`},
+
+{d:10,wk:2,em:"🧮",title:"市盈率 P/E:贵还是便宜?",
+ body:[`市盈率(P/E)是最常用的"贵不贵"指标:<b>P/E = 股价 ÷ 每股盈利(EPS)</b>。它大致表示"按现在的盈利,多少年能把股价赚回来"。`,
+ `P/E 高,说明大家愿意为它现在的盈利付更多钱(期待它高成长);P/E 低,可能是便宜,也可能是公司有麻烦。没有绝对标准,<b>一定要和同行业比</b>。下面这个小工具,自己输数字算算看。`],
+ real:`实际中,一只高成长科技股的 P/E 可能高达三五十倍(大家赌它未来猛涨),而一家银行或电力公司可能只有十倍出头(稳但成长慢)。拿科技股的 P/E 标准去套银行股,会得出完全错误的结论——这就是"必须和同行比"的真实意义。`,
+ analogy:`像买下一家小店:店一年净赚10万,老板要价100万,那"回本年数"就是10年(P/E=10)。要价越高,回本越久,你就要越确定它将来能赚更多。`,
+ widget:"pe",
+ tip:`P/E = 股价 ÷ 每股盈利;高=贵/期待高,低=便宜/有隐忧,务必和同行比。`,
+ qs:[{q:"P/E(市盈率)等于?",opts:["股价 ÷ 每股盈利","股价 × 股数","分红 ÷ 股价"],a:0,
+   ex:`✅ 对。P/E = 股价 ÷ 每股盈利(EPS),用来大致衡量股票相对盈利贵不贵。`}],
+ hw:`用上面的 P/E 计算器,输入你那家公司的真实股价和 EPS(网上能查到),算出它的 P/E,再搜同行业另一家比一比。`},
+
+{d:11,wk:2,em:"🧾",title:"公司怎么赚钱:财报速览",
+ body:[`公司每季度公布"成绩单"(财报)。最该看两个数:<b>营收(Revenue,卖了多少钱)</b>和<b>净利润(Net Income,刨掉成本后真正赚的)</b>。两者持续增长,通常是好信号。`,
+ `财报有三张表:利润表(赚不赚钱)、资产负债表(家底和欠债)、现金流量表(钱的进出)。新手现在只要知道有这三张、先看"营收和利润有没有增长"就够了。`],
+ real:`最有名的例子是亚马逊:它早年<b>利润薄得可怜</b>,因为把赚的钱几乎全砸回去扩张仓库、搞云计算——但营收年年猛涨。看懂"它在故意不赚眼前的钱、换未来",才看得懂亚马逊。而 Netflix 每次财报,大家最盯的是"新增订阅用户"这个数,好不好直接决定当晚股价涨跌。`,
+ analogy:`看公司像看一个人的财务健康:挣得多不多(利润表)、家底厚不厚欠债多不多(资产负债表)、钱包现金顺不顺(现金流量表)。`,
+ tip:`财报先看营收和净利润有没有"持续增长",这是最核心的健康信号。`,
+ qs:[{q:"新手看财报,最先该关注哪个?",opts:["公司 logo 好不好看","营收和净利润有没有增长","CEO 长得帅不帅"],a:1,
+   ex:`✅ 对。先看营收(卖了多少)和净利润(真正赚多少)是否持续增长。`}],
+ hw:`找到你那家公司最近一季的"营收(Revenue)",看看它比去年同期是涨还是跌。`},
+
+{d:12,wk:2,em:"💵",title:"分红 Dividend",
+ body:[`有些成熟公司会定期把一部分利润<b>以现金发给股东</b>,这叫分红,直接打进你的账户。用<b>股息率 = 一年分红 ÷ 股价</b>衡量,比如股价 $100、一年分红 $3,股息率就是3%。`,
+ `不是所有公司都分红——很多成长型公司(尤其科技股)宁愿把钱再投入扩张,一分钱不发。分红股 vs 成长股只是两种风格,没有谁绝对好。`],
+ real:`"分红王"了解一下:可口可乐(KO)、强生(JNJ)、宝洁(PG)都<b>连续几十年年年上调分红</b>,是无数退休族的"现金奶牛"。而谷歌、亚马逊这类公司过去很多年一分红都不发,把钱全拿去扩张。两种都对,看你要现金流还是要成长。`,
+ analogy:`分红像你种的果树每年结的果子(现金);不分红的成长股,像把果子埋回去种更多树,指望将来一片果园。`,
+ tip:`分红 = 公司发现金给你;股息率 = 年分红 ÷ 股价。和股价涨跌是两回事。`,
+ qs:[{q:'"股息率 3%"大致是什么意思?',opts:["股价一年会涨3%","按股价算,一年分红相当于3%","手续费是3%"],a:1,
+   ex:`✅ 对。股息率 = 年分红 ÷ 股价,是公司发给你的现金回报,和股价涨跌分开看。`}],
+ hw:`查一下你那家公司有没有分红、股息率大概多少(没有也很正常,说明它可能更偏成长型)。`},
+
+{d:13,wk:2,em:"🧺",title:"ETF:一篮子股票",
+ body:[`ETF 是"打包好的一篮子股票",买一份就等于<b>同时买了里面几十上百家公司</b>,天然分散风险。最经典的是追踪标普500的 ETF,一把买下全美500家大公司。`,
+ `对新手,宽基指数 ETF 是最省心的起点:成本低、分散、长期跟着经济增长。你退休账户里的指数基金就是同一个思路,ETF 只是能像股票一样随时买卖的版本。`],
+ real:`记住两个真实代号:<b>VOO / SPY</b>(追踪标普500,一把买进全美500强)和 <b>QQQ</b>(追踪纳斯达克100,科技股为主)。很多人退休账户里的钱,本质上就是在买这种宽基 ETF——一次下单,自动分散到几百家公司。`,
+ analogy:`单买个股像点一道菜,可能惊艳也可能踩雷;ETF 像点一份"拼盘",一次尝很多家,某一家翻车也不至于全盘皆输。`,
+ tip:`ETF = 一篮子股票,一买就分散;宽基指数 ETF(如 VOO)是新手最稳的起点。`,
+ qs:[{q:"买一份标普500 ETF,相当于?",opts:["只买了1家公司","一次买进约500家大公司的一小份","买了政府债券"],a:1,
+   ex:`✅ 对。一份宽基 ETF = 一篮子公司,自动分散,是新手非常稳的起点。`}],
+ hw:`搜一下 <b>VOO</b> 或 <b>SPY</b>,点开看它的"前十大持仓(Top Holdings)"是哪些公司,你大概率都认识。`},
+
+{d:14,wk:2,em:"📝",title:"第二周 · 周考",
+ body:[`第二周你已经会"读"一只股票了!🎉 今天来场周考,3 道题检验一下。`,
+ `回顾本周武器库:报价页(涨跌%、52周区间)、市值(比大小)、P/E(贵不贵)、财报(看营收利润)、分红(股息率)、ETF(一篮子)。`],
+ real:`这一周你用到的全是真实公司和代号:苹果、伯克希尔、亚马逊、Netflix、可口可乐、VOO、QQQ。这些就是你以后真刀真枪研究股票时,天天会打交道的名字。`,
+ analogy:`就像学会看食品营养标签后,去超市随便拿一样东西翻过来看成分——看多了自然有手感。`,
+ tip:`会读报价、市值、P/E、财报、分红、ETF——你已经从"看热闹"变成"看门道"了。`,
+ qs:[
+   {q:"比较两家公司谁更大,应该看?",opts:["每股股价","市值","今天谁涨得多"],a:1,ex:`✅ 市值 = 股价 × 股数,才代表公司大小。`},
+   {q:"P/E 市盈率怎么算?",opts:["股价 ÷ 每股盈利","分红 ÷ 股价","股价 × 股数"],a:0,ex:`✅ P/E = 股价 ÷ 每股盈利,衡量相对盈利贵不贵,要和同行比。`},
+   {q:"买一份标普500 ETF 相当于?",opts:["只买1家公司","一次买进约500家大公司的一小份","买了一张彩票"],a:1,ex:`✅ ETF = 一篮子股票,自动分散。第二周通关!🏆`}
+ ],
+ hw:`挑一家你最熟的公司,把它的"当前价、市值、P/E"三个数字写在一起,完整做一次"看病历"练习。`},
+
+{d:15,wk:3,em:"🏦",title:"券商账户是你的入口",
+ body:[`想买股票,先得有个<b>券商账户(Brokerage Account)</b>。你已经在用 Fidelity,很好——它就是你买卖股票的入口。把钱转进去,就能下单了。`,
+ `两类账户要分清:<b>现金账户</b>(只花自己的钱,推荐新手用)和<b>保证金账户</b>(可以借券商的钱买,放大风险,新手先别碰)。先只用现金账户,稳。`],
+ real:`Fidelity 和 Schwab、Vanguard 一样,是最主流的正规券商。还有 Robinhood 这类把买股票做得像玩游戏一样的 App——方便,但也正因为太"好玩",容易让人手痒乱买。工具本身中性,关键看你怎么用。`,
+ analogy:`券商账户像你的"股票钱包 + 下单遥控器"。现金账户=花自己的钱;保证金账户=刷信用卡买,能买更多但要还、有风险。`,
+ tip:`新手用现金账户、只花闲钱,先别碰杠杆(保证金)。`,
+ qs:[{q:"新手开户,建议先用哪种账户?",opts:["保证金账户,能借钱买更多","现金账户,只花自己的钱","杠杆越高越好"],a:1,
+   ex:`✅ 对。先用现金账户、只花闲钱,避免借钱(保证金)带来的额外风险。`}],
+ hw:`登录你的 Fidelity,确认它是"现金账户(Cash)",并找一找"交易 / Trade"按钮在哪——先认门,不下单。`},
+
+{d:16,wk:3,em:"🎯",title:"市价单 vs 限价单",
+ body:[`下单主要两种:<b>市价单(Market Order)</b>="现在立刻成交,按当前市场价",快但价格不保证;<b>限价单(Limit Order)</b>="只按我定的价或更划算的价成交",价格可控但可能等不到。`,
+ `新手建议多用<b>限价单</b>,尤其买卖不活跃的小股票时,能防止以离谱价格成交。下面用一个模拟下单单子,亲手试试两者区别。`],
+ real:`真实场景:一只股票早上刚开盘那几分钟经常剧烈跳动。这时下"市价单",可能比你眼睛看到的价格买贵不少;改用"限价单"设个你能接受的价,就不会被"开盘乱价"坑到。`,
+ analogy:`市价单像打车"立刻走,多少钱都行";限价单像"只接受不超过 X 元我才上车"——可能要多等,但绝不被宰。`,
+ widget:"order",
+ tip:`要快用市价单,要控价用限价单。新手多用限价单更稳。`,
+ qs:[{q:'想"只在某个价格或更划算时才成交",该用哪种?',opts:["市价单","限价单","随便哪种都一样"],a:1,
+   ex:`✅ 对。限价单让你设定可接受的价格;市价单图快但价格不保证。`}],
+ hw:`用上面的模拟下单工具,分别试一次"市价单"和"限价单"(把限价设到比市价低),感受成交结果的区别。`},
+
+{d:17,wk:3,em:"🛒",title:"实际怎么下一个买单",
+ body:[`流程其实就5步:<b>① 搜到股票代号 → ② 选"买入(Buy)" → ③ 填数量 → ④ 选下单类型(市价/限价) → ⑤ 检查无误后提交。</b>`,
+ `成交后是 <b>T+1 交割</b>:周一买,周二正式"过户"到你名下;卖出拿到的现金通常也是 T+1 可用。第一次下单,建议金额很小,重点是把流程走熟。`],
+ real:`在 Fidelity 里,你甚至能买"碎股"——一股苹果两百多美元买不起?没关系,直接花 <b>$20 买 0.1 股</b>也行。第一次就用很小的钱,把这套流程完整走一遍,熟悉界面比赚钱重要得多。`,
+ analogy:`跟网购下单几乎一样:搜商品 → 加购 → 填数量 → 选配送方式 → 确认付款。别紧张,你网购熟得很。`,
+ tip:`下单像网购5步走;成交后 T+1(下一个工作日)正式到账。`,
+ qs:[{q:'"T+1 交割"是什么意思?',opts:["1分钟就到账","成交后下一个工作日正式结算","一年后才算数"],a:1,
+   ex:`✅ 对。美股现在是 T+1:成交后下一个工作日完成结算/过户。`}],
+ hw:`在 Fidelity 里走到"下单"那一步(填好股票、数量、类型)——但<b>先别点提交</b>,只熟悉整个界面和流程。`},
+
+{d:18,wk:3,em:"🍳",title:"仓位管理:别一次梭哈",
+ body:[`最容易让新手亏大钱的,不是选错股,而是<b>"一把全压"</b>。仓位管理,就是控制每一笔投入占你总资金的比例。一个常见稳健做法:<b>单只个股不超过你投资资金的 5%–10%</b>。`,
+ `这样即使某只股票腰斩,对你整体的伤害也有限,你能睡得着觉,也不会因为恐慌做傻决定。`],
+ real:`血泪真实案例:2001年安然(Enron)破产前,很多员工把退休金几乎<b>全押在自家公司股票</b>上。公司一倒,工作和养老钱一起没了。这就是"全压一只"的极端风险——哪怕你再看好一家公司,也绝不能把身家压上去。`,
+ analogy:`像点菜:别把整顿饭的预算全压在一道没吃过的菜上。每样点一点,踩雷了还有别的吃。`,
+ tip:`单只个股别超过总资金的 5–10%,永远不要梭哈。`,
+ qs:[{q:"关于单只个股的仓位,稳健的做法是?",opts:["把全部钱压一只","控制在总资金的一小部分(如5–10%)","越集中越好"],a:1,
+   ex:`✅ 对。分散仓位、单只占比小,某只大跌也伤不到筋骨。这是保命的核心习惯。`}],
+ hw:`算一笔:如果你的投资本金是 X,单只不超过10%,那一只最多投多少?把这个数字写下来,以后照着执行。`},
+
+{d:19,wk:3,em:"🧺",title:"分散投资:别把鸡蛋放一篮子",
+ body:[`分散(Diversification)= 把钱分散到<b>不同公司、不同行业</b>,甚至不同资产。这样某个公司或行业出事,你不会全军覆没。前面学的 ETF 就是天然分散的好工具。`,
+ `别犯新手常见错:看好科技就全买科技股——那其实是"集中"不是分散。真正的分散要<b>跨行业</b>(科技、医疗、消费、能源……)。`],
+ real:`2000年互联网泡沫破裂,满仓科技股的人损失惨重;而同时还持有医疗、消费、能源等不同行业的人,亏损就小得多。"不要把鸡蛋放一个篮子"不是空话,是无数人用真金白银换来的教训。`,
+ analogy:`篮子摔了,鸡蛋全碎;分几个篮子放,摔一个还剩一堆。投资同理。`,
+ tip:`跨公司、跨行业分散;宽基 ETF 是最省心的分散工具。`,
+ qs:[{q:'下面哪种更"分散"?',opts:["把钱全买5只科技股","分散在科技、医疗、消费等不同行业 + 宽基ETF","只买1只股票"],a:1,
+   ex:`✅ 对。跨行业再加宽基 ETF 才是真分散;全押同一行业仍是集中风险。`}],
+ hw:`列出 3 个你感兴趣的<b>不同行业</b>(比如科技、医疗、消费),每个行业各想出一家公司。`},
+
+{d:20,wk:3,em:"🧾",title:"税:长期 vs 短期",
+ body:[`卖股票赚的钱要交<b>资本利得税</b>,关键看你持有多久:<b>持有超过1年</b>再卖 = 长期,税率低(2026年是 0%/15%/20%,看你收入);<b>持有不到1年</b>就卖 = 短期,按你的普通工资税率交,通常更高。`,
+ `启示:频繁短炒不只风险大,税上也吃亏。而退休账户(401k、Roth IRA)里买卖,通常当下<b>不触发</b>这种税——这正是它们的厉害之处。`],
+ real:`实用细节:假设你持有一只股票快满一年又赚了钱,只要再多<b>等过"满1年"那个坎</b>再卖,税率可能从你的工资税率(也许20%以上)降到长期的15%甚至0%。光"晚卖几天",省下的税可能就不少。你的 Roth IRA 里赚的钱,将来更是<b>完全免这种税</b>。`,
+ analogy:`像摘水果:放够熟(>1年)再摘,税务"折扣"更大;没熟就摘(<1年),要付全价税。`,
+ tip:`持有超过1年更省税;退休账户内买卖当下不计税。`,
+ qs:[{q:"想在税上更划算,通常应该?",opts:["几天就买卖一次","持有超过1年再卖(长期)","完全不用考虑税"],a:1,
+   ex:`✅ 对。持有>1年享更低的长期资本利得税(0/15/20%);<1年按普通收入税率,更高。`}],
+ hw:`想一想并写下来:你打算<b>长期持有(>1年)</b>还是短炒?你的倾向是什么,为什么?`},
+
+{d:21,wk:3,em:"📝",title:"第三周 · 周考",
+ body:[`你现在已经会"动手"了!🎉 周考3题,然后做今天最重要的一件事——写下你自己的投资规则。`,
+ `回顾本周:用现金账户、市价/限价单、下单5步、T+1、单只仓位5–10%、跨行业分散、长短期税。`],
+ real:`巴菲特、彼得·林奇这些大师,无一例外都有自己<b>铁打的纪律</b>。规则不是束缚,而是在你冲动时拉住你的那只手。今天你也要给自己定几条。`,
+ analogy:`像开车前系安全带——平时觉得多余,关键时刻救命。`,
+ tip:`把你的3条投资铁律写下来,贴在看得见的地方,情绪上头时照着做。`,
+ qs:[
+   {q:"新手建议先用哪种账户?",opts:["保证金账户","现金账户","越多杠杆越好"],a:1,ex:`✅ 现金账户、只花闲钱,先别碰杠杆。`},
+   {q:"想控制成交价格,用哪种单?",opts:["市价单","限价单","都不行"],a:1,ex:`✅ 限价单能设定你能接受的价格。`},
+   {q:"单只个股仓位,稳健做法是?",opts:["全压一只","不超过总资金的5–10%","越集中越好"],a:1,ex:`✅ 分散仓位、单只占比小。第三周通关!🏆`}
+ ],
+ hw:`正式写下你的<b>"3条投资铁律"</b>(例:① 只用闲钱;② 单只不超过10%;③ 不追"稳赚"消息、不恐慌割肉),贴到手机或冰箱上。`},
+
+{d:22,wk:4,em:"👣",title:"用小钱迈出第一步",
+ body:[`学了三周,可以真正试水了——但记住一个"<b>小</b>"字。用一笔<b>就算亏光也完全不影响生活</b>的小钱(比如几十、一两百美元)。`,
+ `更稳的过渡:先"纸上交易"(模拟,不用真钱),或者第一笔只买一份宽基 ETF 走流程。目标不是赚钱,是熟悉"按下买入键"的感觉和心态。`],
+ real:`真实可行的第一步:在 Fidelity 用 <b>$20 买一份标普500 ETF(VOO)</b>,你瞬间就成了全美500家大公司的"超级迷你股东"。或者先用券商的模拟盘纸上交易,不花一分钱练手。`,
+ analogy:`像学游泳先在浅水区站站。第一笔不是为了赢,是为了不怕水、摸清流程。`,
+ tip:`第一笔用"小到亏光也不心疼"的钱,重在体验流程,不在赚钱。慢就是快。`,
+ qs:[{q:"你的第一笔真实交易,最合理的目标是?",opts:["尽量多赚快钱","用很小的钱熟悉流程和心态","把存款都投进去"],a:1,
+   ex:`✅ 对。第一步求"熟悉"不求"赚钱",金额要小到亏光也无所谓。`}],
+ hw:`决定你的第一步:是先<b>纸上模拟</b>,还是用很小的钱(比如 $20)买一份 ETF 走流程?写下你的选择。`},
+
+{d:23,wk:4,em:"📓",title:"记交易日志",
+ body:[`每次买卖,花1分钟记下来:<b>买了什么、价格、为什么买、你预期会怎样、当时心情</b>。这就是交易日志。`,
+ `它的威力在于:过段时间回看,你能发现自己的真实模式——是不是总在大涨时冲动追高?是不是一跌就慌着卖?<b>看见模式,才能改掉</b>。这比任何"内幕消息"都让你进步快。`],
+ real:`很多职业交易员都坚持写日志。你不用搞复杂——手机备忘录记一行就够:"6/15 花 $20 买了 VOO,因为想长期定投,心情:有点紧张。"三个月后回看,你会对自己的进步和坏习惯一目了然。`,
+ analogy:`像健身记录或减肥日记:写下来才看得见进步和坏毛病,凭感觉永远在原地打转。`,
+ tip:`每笔交易写下"为什么买",定期复盘,改掉情绪化的坏习惯。`,
+ qs:[{q:"交易日志最大的好处是?",opts:["能预测明天涨跌","帮你看清并改掉自己的坏习惯","让券商少收费"],a:1,
+   ex:`✅ 对。日志让你复盘自己的决策模式,发现并修正情绪化坏习惯——这是高手和新手的关键差别。`}],
+ hw:`现在就建一个"交易日志"(手机备忘录即可),写好表头:<b>日期 / 买了什么 / 价格 / 为什么买 / 心情</b>。`},
+
+{d:24,wk:4,em:"⚠️",title:"新手最常踩的坑",
+ body:[`四个最常见的坑:<b>① 追高(FOMO</b>,看到大涨怕错过,冲进去就套牢);<b>② 恐慌割肉</b>(一跌就慌着低价卖);<b>③ 听"小道消息/大V喊单"</b>就重仓;<b>④ 过度交易</b>(手痒频繁买卖,手续费和税都吃掉收益)。`,
+ `破解办法你都学过了:<b>闲钱 + 小仓位 + 分散 + 规则 + 日志</b>,这五样能帮你避开上面90%的坑。`],
+ real:`2021年 GameStop(GME)被网友炒上天,新闻铺天盖地,很多人怕错过暴富在最高点冲进去(典型 FOMO),结果股价崩盘后<b>套在山顶</b>。另一边,2020年3月大跌时恐慌割肉的人,卖在了最低点,错过了之后的大反弹。追高和割肉,是新手最贵的两堂学费。`,
+ analogy:`这些坑像减肥时的深夜外卖诱惑——明知不对还是想犯。靠的是<b>提前定规则</b>,而不是当下那点意志力。`,
+ tip:`追高、割肉、追消息、瞎频繁交易——四大坑,用"闲钱+小仓+分散+规则+日志"避开。`,
+ qs:[{q:"下面哪个是典型的新手坑?",opts:["看到大涨就冲动追高(FOMO)","坚持只投闲钱","按规则分散投资"],a:0,
+   ex:`✅ 对。追高、恐慌割肉、追消息、过度交易是四大坑。`}],
+ hw:`对照四大坑,诚实想想:你觉得自己<b>最容易犯哪一个</b>?写下来,以后专门提防它。`},
+
+{d:25,wk:4,em:"🕵️",title:'过滤噪音,看穿"内幕"骗局',
+ body:[`网上充满"稳赚""内幕""跟我抄作业月入翻倍"。真相是:真正的内幕交易<b>违法</b>;而能<b>公开喊给你</b>的,基本是想让你接盘(拉高出货 pump & dump),或者卖课割韭菜。`,
+ `几条护身符:任何"保证收益"都是假的;陌生人/群里热推的小股小币要躲;"日内交易暴富"对绝大多数人是亏钱机器。信息只看可靠来源——公司财报、正规财经媒体、政府的 investor.gov。`],
+ real:`现在社交媒体上一堆"财经网红"拉群带你买某只小股票或小币,很多是先自己低价买好,忽悠你高位接盘,然后悄悄卖给你。<b>真有稳赚的内幕,人家闷声发财,凭什么免费喊给你?</b>这个反问能帮你识破90%的套路。`,
+ analogy:`像"陌生短信说你中奖了,点链接领取"——越诱人越要捂紧钱包。股市里的"稳赚秘籍"是同一类东西。`,
+ tip:`凡是"稳赚 / 内幕 / 快进"的喊单,一律远离。只信财报和正规来源。`,
+ qs:[{q:'群里有人天天喊"这只必涨,有内幕,快进",你应该?',opts:["赶紧重仓跟上","远离它,这是典型割韭菜套路","借钱也要买"],a:1,
+   ex:`✅ 对。公开喊单的"内幕"几乎都是拉高出货或卖课。远离"保证收益"。`}],
+ hw:`取关或屏蔽一个总喊"稳赚/内幕"的账号或群;同时<b>收藏一个可靠来源</b>(比如政府的 investor.gov)。`},
+
+{d:26,wk:4,em:"⏳",title:"定投和复利的力量",
+ body:[`你不必猜准买卖时机。<b>定投(定期定额)</b>——比如每月固定投一笔进指数 ETF——能摊平成本、避免"追高杀低",特别适合上班族。`,
+ `再加上<b>复利</b>:赚的钱继续钱生钱,时间越久滚得越大。下面这个小工具,拉一拉看看"每月投一点、坚持很多年"会变成多少——你会被时间的力量惊到。`],
+ real:`你其实<b>已经在做</b>最聪明的事了:每个月从工资自动扣钱进 401(k) 和 Roth IRA,这就是定投!不用猜高低点,长期摊平成本。标普500过去几十年的长期年化大约 <b>7%–10%</b>(不保证未来),配合复利,几十年能滚成一大笔。早开始,比投得多更重要。`,
+ analogy:`像滚雪球:一开始很小,但只要不停往前滚(时间够长),会越滚越大。巴菲特的财富,绝大部分是50岁以后靠复利滚出来的。`,
+ widget:"compound",
+ tip:`定期定额 + 长期复利,时间是新手最好的朋友。早开始 > 投得多。`,
+ qs:[{q:"定投(每月定额投)对上班族最大的好处是?",opts:["保证每月赚钱","不用猜时机、摊平成本、靠纪律取胜","能避税"],a:1,
+   ex:`✅ 对。定投靠纪律和时间取胜,摊平买入成本,配合复利长期威力巨大。`}],
+ hw:`用上面的复利计算器,拉到"每月 $300、坚持30年",截图保存下来,贴在能看到的地方激励自己。`},
+
+{d:27,wk:4,em:"🚪",title:"什么时候该卖?",
+ body:[`卖出该有<b>理由</b>,而不是凭情绪。合理的卖出时机:<b>① 你当初买它的逻辑不成立了</b>(公司基本面变坏);<b>② 你需要用钱了</b>;<b>③ 再平衡</b>(某只涨太多、占比过高,卖一点恢复分散)。`,
+ `不该卖的时候:仅仅因为今天大跌就恐慌卖、或因为别人喊"快跑"。对长期指数定投,"几乎不卖、一直拿着"往往就是最优解。`],
+ real:`经典案例:Blockbuster(百视达)曾是租碟巨头,当 Netflix 用在线流媒体崛起时,它的生意根基已被彻底改变——这时"当初看好它的逻辑"已经不成立,就该离场。它最终2010年破产。卖出该因为"故事真的变了",而不是因为今天大盘跌了你害怕。`,
+ analogy:`卖股像分手——该因为"这段关系真的变了"而理性结束,而不是吵一次架(一天大跌)就冲动甩手。`,
+ tip:`有理由才卖(逻辑变了 / 要用钱 / 再平衡),别因一天下跌就恐慌卖。`,
+ qs:[{q:'下面哪个是"合理"的卖出理由?',opts:["今天跌了我好慌","当初看好的逻辑已经不成立了","群里有人喊跑"],a:1,
+   ex:`✅ 对。基本面变坏、需要用钱、再平衡才是理性卖出;单纯因下跌或别人喊话而卖,往往是错的。`}],
+ hw:`写下你的"卖出规则":在哪几种情况下你<b>才</b>会卖出?(参考:逻辑变了 / 要用钱 / 再平衡)`},
+
+{d:28,wk:4,em:"🎓",title:"毕业!你的长期计划",
+ body:[`恭喜你坚持满4周!🎉 你已经从零做到:懂股票是什么、会读一只股票、会下单、会管风险、会避坑和管理心态——这比绝大多数人都强了。`,
+ `给你一套<b>简单可长期执行</b>的系统:大部分钱定投宽基指数 ETF(省心打底)+ 一小部分闲钱玩个股练手(单只≤10%)+ 坚持记日志、按规则、不追"稳赚"。想深入,可靠免费资源:政府的 investor.gov、Investopedia、券商自带的学习中心。`],
+ real:`巴菲特给普通人的建议一直很朴素:<b>把大部分钱定投一只低成本的标普500指数基金,长期拿着,别瞎折腾</b>。你这4周学的,正是让你既能稳稳做到这一点,又能用小钱享受研究个股的乐趣。投资是马拉松,不是冲刺——时间会站在你这边。📈`,
+ analogy:`你现在拿到的是"驾照"——会开车了,但路上的经验要慢慢攒。稳着开,别飙车,你会走得很远。`,
+ tip:`指数定投打底 + 小仓位个股练手 + 守纪律记日志,投资是一场马拉松。毕业快乐!🎓`,
+ qs:[
+   {q:"适合新手的长期核心策略是?",opts:["频繁短炒追热点","指数定投打底 + 小仓位个股练手 + 守纪律","全押一只必涨股"],a:1,ex:`✅ 指数打底、个股小仓、守规则记日志——稳健致远。`},
+   {q:"下面哪个是合理的卖出理由?",opts:["今天跌了好害怕","当初看好的逻辑不成立了","网红喊跑"],a:1,ex:`✅ 因"逻辑变了/要用钱/再平衡"而卖,不因情绪而卖。`},
+   {q:'看到"保证稳赚高收益"的机会,你应该?',opts:["重仓上","远离,这是骗局信号","借钱上"],a:1,ex:`✅ "稳赚不赔"=骗局信号。你毕业了!🎓🏆`}
+ ],
+ hw:`写下你的"长期投资一句话计划",并设一个<b>一年后的提醒</b>,到时回来看看自己的成长。你已经超过绝大多数从不学习就乱买的人了!`},
+{d:29,wk:5,em:"🚀",title:"彩蛋课:IPO 怎么看(SpaceX 实战)",
+ body:[`这是一节特别课,因为正好赶上一件大事:<b>SpaceX 要上市了</b>。先补一个你之前撞到的概念——<b>私人公司 vs 上市公司</b>。`,
+ `私人公司没在交易所挂牌,普通人买不到(所以你之前搜 SpaceX 没代号、没价格、也算不出 P/E);<b>IPO(首次公开募股)</b>就是它第一次把股票卖给大众、开始交易的那一刻,之后你才买得到。IPO 是"特别难"的一类——新股没有长期公开记录、炒作情绪重,连专业人士都常看走眼。用下面的"五问清单"一条条问自己,你就能像模像样地判断。`],
+ real:`SpaceX 实时情况(截至 2026 年 6 月初):代号 <b>SPCX</b>、纳斯达克、发行价约 <b>$135</b>、估值约 <b>1.75 万亿美元</b>(史上最大 IPO)、预计 <b>6/12 左右</b>开始交易。注意:据其招股文件,它目前<b>仍在亏损</b>(钱砸进火箭和星链),所以暂时<b>算不出 P/E</b>——这正是 IPO 高风险的典型写照。`,
+ analogy:`IPO 像一家爆红的网红餐厅第一天对公众开放:人山人海、价格被炒高,但你其实还没尝过它能不能长期保持水准。别被"开业当天的排队"冲昏头。`,
+ widget:"ipochecklist",
+ tip:`IPO 原理和普通股票一样,但风险更高:小仓位、用限价单、别冲首日、看不懂就观望。`,
+ qs:[{q:"关于买 IPO 新股,下面哪个做法对新手最稳?",opts:["上市首日用市价单全仓冲进去","用一小笔闲钱 + 限价单,别追首日热度","借钱买,反正新股都会涨"],a:1,
+   ex:`✅ 对。IPO 头几天常暴涨暴跌,别 FOMO 冲首日;小仓位 + 限价单 + 看不懂就观望,才是新手稳的做法。`}],
+ hw:`等 SpaceX(SPCX)6/12 上市后,打开上面的清单,对照 5 条逐一打勾——凑齐了你才更有底气。记住:<b>打勾多 ≠ 一定要买</b>,它只是帮你把该想的都想清楚。`},
+/*__INSERT_LESSONS__*/
+];
+
+/* ============ 状态 ============ */
+const KEY="myStockCourseProgress_v1";
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{done:{}}}catch(e){return{done:{}}}}
+function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+let state=load();
+let view={page:"home"};
+let LQ=null;
+
+function doneCount(){return Object.keys(state.done).filter(k=>state.done[k]).length}
+function firstUndone(){for(const L of LESSONS){if(!state.done[L.d])return L.d}return LESSONS.length}
+
+/* ============ 渲染 ============ */
+const app=document.getElementById("app");
+function render(){
+  if(view.page==="home")renderHome();
+  else renderLesson(view.day);
+  window.scrollTo(0,0);
+}
+
+function renderHome(){
+  const total=LESSONS.length, done=doneCount();
+  const pct=Math.round(done/total*100);
+  const cur=firstUndone();
+  let weeksHtml="";
+  for(const w of [1,2,3,4,5]){
+    const ls=LESSONS.filter(l=>l.wk===w);
+    let chips="";
+    for(const l of ls){
+      const isDone=!!state.done[l.d];
+      const isCur=l.d===cur && !isDone;
+      const isExam=l.qs.length>1;
+      chips+=`<div class="chip ${isDone?'done':''} ${isCur?'current':''} ${isExam?'exam':''}" onclick="open_(${l.d})">
+        ${isDone?'<span class="check">✓</span>':''}
+        <div class="em">${l.em}</div>
+        <div class="d">${isExam?'📝 周考 · 第 '+l.d+' 天':'第 '+l.d+' 天'}</div>
+        <div class="t">${l.title}</div>
+      </div>`;
+    }
+    weeksHtml+=`<div class="week"><h2>${WEEKS[w].t}</h2><div class="sub">${WEEKS[w].s}</div><div class="grid">${chips}</div></div>`;
+  }
+  app.innerHTML=`
+    <div class="hero">
+      <div class="spark">📈</div>
+      <h1>我的股票互动课</h1>
+      <p>4 周 · 28 节 + 🎁 彩蛋课 · 每天 10–15 分钟。每课带小测验,每周末有周考。</p>
+      <div class="pbar"><div class="pfill" style="width:${pct}%"></div></div>
+      <div class="pmeta"><span>已完成 ${done} / ${total} 节</span><span>${pct}%</span></div>
+      <button class="btn" onclick="open_(${cur})">${done===0?'开始第 1 课 →':(done===total?'🎓 全部学完 · 复习':'继续学习 · 第 '+cur+' 课 →')}</button>
+    </div>
+    ${weeksHtml}
+    <div class="foot-note">这是一份学习资料,不构成任何投资建议。投资有风险,请只用闲钱、独立决策。<br>进度自动保存在本浏览器里。每天学一点,坚持就是胜利 💪</div>
+  `;
+}
+
+function renderLesson(day){
+  const L=LESSONS.find(l=>l.d===day);
+  const multi=L.qs.length>1;
+  LQ={answered:Array(L.qs.length).fill(false),correct:0,total:L.qs.length};
+  const bodyHtml=L.body.map(p=>`<p>${p}</p>`).join("");
+  const widgetHtml=L.widget?renderWidget(L.widget):"";
+  let qsHtml="";
+  L.qs.forEach((q,qi)=>{
+    let opts="";
+    q.opts.forEach((o,oi)=>{opts+=`<button class="opt" id="o-${qi}-${oi}" onclick="ans(${qi},${oi},${q.a})">${o}</button>`});
+    qsHtml+=`<div class="qitem"><div class="q">${multi?(qi+1)+". ":""}${q.q}</div><div id="opts-${qi}">${opts}</div><div class="explain" id="ex-${qi}">${q.ex}</div></div>`;
+  });
+  const quizHead=multi?`📝 本周小考 · 共 ${L.qs.length} 题`:`🧠 今日小测验`;
+  const scoreHtml=multi?`<div class="score" id="score">答对 0 / ${L.qs.length}</div><br>`:``;
+  const isLast=day===LESSONS.length;
+  const nextDay=day<LESSONS.length?day+1:null;
+  app.innerHTML=`
+    <div class="lesson">
+      <div class="lhead">
+        <span class="em">${L.em}</span>
+        <div class="tag">${WEEKS[L.wk].t} · 第 ${L.d} 天 / 共 28 天</div>
+        <h2>${L.title}</h2>
+      </div>
+      <div class="lbody">
+        ${bodyHtml}
+        ${L.real?`<div class="block real"><div class="h">🌍 真实案例</div>${L.real}</div>`:""}
+        <div class="block analogy"><div class="h">💡 打个比方</div>${L.analogy}</div>
+        ${widgetHtml}
+        <div class="block tip"><div class="h">📌 一句话记住</div>${L.tip}</div>
+        <div class="quiz">
+          <div class="qhead">${quizHead}</div>
+          ${scoreHtml}
+          ${qsHtml}
+        </div>
+        <div class="block hw"><div class="h">📝 今日作业(2 分钟)</div>${L.hw}</div>
+      </div>
+      <div class="lfoot">
+        <button class="backlink" onclick="home_()">← 返回目录</button>
+        <button class="btn" onclick="complete(${L.d})">${state.done[L.d]?(nextDay?'下一课 →':'🎉 回到目录'):(isLast?'🎓 完成,我毕业了!':'完成本课 →')}</button>
+      </div>
+    </div>
+  `;
+  if(L.widget)initWidget(L.widget);
+}
+
+/* ============ 交互 ============ */
+function open_(d){view={page:"lesson",day:d};render()}
+function home_(){view={page:"home"};render()}
+function ans(qi,oi,correct){
+  if(LQ.answered[qi])return;
+  LQ.answered[qi]=true;
+  const opts=document.querySelectorAll(`#opts-${qi} .opt`);
+  opts.forEach((b,idx)=>{b.disabled=true;if(idx===correct)b.classList.add("correct");if(idx===oi&&oi!==correct)b.classList.add("wrong")});
+  document.getElementById(`ex-${qi}`).classList.add("show");
+  if(oi===correct)LQ.correct++;
+  const sc=document.getElementById("score");
+  if(sc){
+    const answered=LQ.answered.filter(Boolean).length;
+    if(answered===LQ.total){
+      sc.textContent=`周考完成:答对 ${LQ.correct} / ${LQ.total} ${LQ.correct===LQ.total?"🏆 满分!太强了!":"👍 不错,继续加油!"}`;
+      sc.classList.add("done");
+    }else{
+      sc.textContent=`答对 ${LQ.correct} / ${LQ.total} · 还剩 ${LQ.total-answered} 题`;
+    }
+  }
+}
+function complete(d){
+  const wasDone=state.done[d];
+  state.done[d]=true;save(state);
+  if(!wasDone){
+    const c=doneCount();
+    let msg="✅ 完成第 "+d+" 课!";
+    if(d%7===0)msg="🎉 太棒了!完成了一整周 + 周考!";
+    if(c===LESSONS.length)msg="🎓 恭喜毕业!你已掌握新手全部核心知识!";
+    toast(msg);
+  }
+  const nextDay=d<LESSONS.length?d+1:null;
+  setTimeout(()=>{ if(nextDay && !wasDone){open_(nextDay)} else {home_()} }, wasDone?0:750);
+}
+let toastTimer;
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2400)}
+
+/* ============ 小工具 widget ============ */
+function renderWidget(type){
+  if(type==="pe")return `<div class="widget" id="w-pe"><h4>🧮 市盈率 P/E 计算器(自己输数字试试)</h4>
+    <div class="field"><label>股价 ($)</label><input type="number" id="pe-price" value="100" min="0" step="0.01"></div>
+    <div class="field"><label>每股盈利 EPS ($)</label><input type="number" id="pe-eps" value="5" min="0" step="0.01"></div>
+    <div class="out">市盈率 P/E = <span class="big" id="pe-out">20.0</span> 倍<div id="pe-note" style="font-size:13px;color:#6b7280;margin-top:6px"></div></div></div>`;
+  if(type==="order")return `<div class="widget" id="w-order"><h4>🎯 模拟下单:感受市价单 vs 限价单</h4>
+    <div style="font-size:14px;color:#6b7280;margin-bottom:10px">假设某股票当前市价 <b style="color:#0f766e">$50.00</b>。</div>
+    <div class="seg" id="ord-seg"><button class="on" onclick="ordType('market')">市价单</button><button onclick="ordType('limit')">限价单</button></div>
+    <div class="field" id="ord-limit-row" style="display:none;margin-top:12px"><label>我的限价 ($)</label><input type="number" id="ord-limit" value="49" min="0" step="0.01"></div>
+    <button class="btn ghost" style="margin-top:12px" onclick="ordSubmit()">提交模拟订单</button>
+    <div class="out" id="ord-out" style="display:none"></div></div>`;
+  if(type==="compound")return `<div class="widget" id="w-comp"><h4>⏳ 复利计算器:每月投一点,坚持很多年</h4>
+    <div class="field"><label>每月投入 ($)</label><input type="range" id="c-amt" min="50" max="1000" step="50" value="300"><span class="rng-val" id="c-amt-v">$300</span></div>
+    <div class="field"><label>坚持年数</label><input type="range" id="c-yrs" min="1" max="40" step="1" value="20"><span class="rng-val" id="c-yrs-v">20 年</span></div>
+    <div class="field"><label>年化收益</label><input type="range" id="c-ret" min="2" max="12" step="1" value="7"><span class="rng-val" id="c-ret-v">7%</span></div>
+    <div class="out">很多年后大约变成 <span class="big" id="c-out">$0</span>
+      <div id="c-note" style="font-size:13px;color:#6b7280;margin-top:6px"></div>
+      <div class="bars"><div class="bar put" id="c-bar-put"><span id="c-put-l"></span></div><div class="bar" id="c-bar-tot"><span id="c-tot-l"></span></div></div>
+      <div style="display:flex;justify-content:space-around;font-size:12px;color:#6b7280;margin-top:6px"><span>你投入的本金</span><span>最终总额</span></div>
+    </div></div>`;
+  if(type==="ipochecklist")return `<div class="widget" id="w-ipo"><h4>🚀 SpaceX(SPCX)上市速查 + 自检清单</h4>
+    <div style="font-size:13px;color:#6b7280;margin-bottom:12px;line-height:1.7">截至 2026 年 6 月初:代号 <b>SPCX</b> · 纳斯达克 · 发行价约 <b>$135</b> · 估值约 <b>1.75 万亿</b> · 预计 <b>6/12 左右</b>开始交易 · 目前<b>仍亏损</b>(暂无 P/E)。</div>
+    <div id="ipo-list">${["我理解 SpaceX 靠什么赚钱(火箭 + 星链),并长期看好它","我知道它现在还在亏损、暂时没有 P/E,我能接受这种高风险","我清楚它一上市估值就已极高(约 1.75 万亿),很多预期已被算进价格","我不会在上市首日冲进去追高,会等热度退一退或用限价单","我只打算用一小笔闲钱(不超过总投资的 5–10%),亏了也不影响生活"].map((t,i)=>`<label style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;margin-bottom:8px;background:#fff;border:1px solid var(--line);border-radius:12px;cursor:pointer;font-size:14.5px"><input type="checkbox" data-ipo="${i}" style="margin-top:3px;width:18px;height:18px;accent-color:var(--accent2);flex-shrink:0"><span>${t}</span></label>`).join("")}</div>
+    <div class="out" id="ipo-out"></div></div>`;
+  return "";
+}
+function initWidget(type){
+  if(type==="pe"){const p=document.getElementById("pe-price"),e=document.getElementById("pe-eps");
+    const calc=()=>{const pr=+p.value,ep=+e.value;const o=document.getElementById("pe-out"),n=document.getElementById("pe-note");
+      if(ep<=0){o.textContent="—";n.textContent="公司没有盈利(EPS≤0)时 P/E 算不出来,这类股票通常风险更高。";return}
+      const v=pr/ep;o.textContent=v.toFixed(1);
+      n.textContent=v<15?"相对偏低——可能便宜,也可能公司有隐忧,要和同行比。":v<30?"中等区间——较常见,仍需和同行业对比判断。":"偏高——市场对它成长期待很高,风险也更大。";};
+    p.oninput=calc;e.oninput=calc;calc();}
+  if(type==="compound"){
+    const amt=document.getElementById("c-amt"),yrs=document.getElementById("c-yrs"),ret=document.getElementById("c-ret");
+    const calc=()=>{
+      const P=+amt.value,Y=+yrs.value,R=+ret.value/100;
+      document.getElementById("c-amt-v").textContent="$"+P;
+      document.getElementById("c-yrs-v").textContent=Y+" 年";
+      document.getElementById("c-ret-v").textContent=(+ret.value)+"%";
+      const r=R/12,n=Y*12;
+      const fv=r>0?P*((Math.pow(1+r,n)-1)/r):P*n;
+      const put=P*n;
+      const fmt=x=>"$"+Math.round(x).toLocaleString("en-US");
+      document.getElementById("c-out").textContent=fmt(fv);
+      document.getElementById("c-note").textContent="你一共投入 "+fmt(put)+",其中约 "+fmt(fv-put)+" 是靠利滚利赚来的。早开始、时间越长,差距越惊人。";
+      const max=Math.max(fv,put);
+      document.getElementById("c-bar-put").style.height=(put/max*100)+"%";
+      document.getElementById("c-bar-tot").style.height=(fv/max*100)+"%";
+      document.getElementById("c-put-l").textContent=fmt(put);
+      document.getElementById("c-tot-l").textContent=fmt(fv);
+    };
+    amt.oninput=calc;yrs.oninput=calc;ret.oninput=calc;calc();
+  }
+  if(type==="ipochecklist"){
+    var KEY2="spacexIpoChecklist_v1";
+    var saved={};try{saved=JSON.parse(localStorage.getItem(KEY2))||{}}catch(e){}
+    var boxes=document.querySelectorAll("#ipo-list input[type=checkbox]");
+    var out=document.getElementById("ipo-out");
+    var upd=function(){var n=0;boxes.forEach(function(b){if(b.checked)n++});
+      out.innerHTML="已勾选 "+n+" / "+boxes.length+" —— 打勾只是帮你想清楚,<b>不是买入信号</b>。"+(n===boxes.length?" 🎯 五条都想透了,你已经像个有纪律的投资者了!":"");};
+    boxes.forEach(function(b){var i=b.getAttribute("data-ipo");if(saved[i])b.checked=true;
+      b.onchange=function(){saved[i]=b.checked;try{localStorage.setItem(KEY2,JSON.stringify(saved))}catch(e){}upd();};});
+    upd();
+  }
+}
+let _ord="market";
+function ordType(t){_ord=t;document.querySelectorAll("#ord-seg button").forEach(b=>b.classList.remove("on"));
+  document.querySelectorAll("#ord-seg button")[t==="market"?0:1].classList.add("on");
+  document.getElementById("ord-limit-row").style.display=t==="limit"?"flex":"none";
+  document.getElementById("ord-out").style.display="none";}
+function ordSubmit(){
+  const out=document.getElementById("ord-out");out.style.display="block";
+  if(_ord==="market"){out.innerHTML="<b>市价单</b>:立刻成交,大约按当前 <b>$50</b> 买到。优点是快、几乎一定成交;缺点是价格不由你定,行情跳动时可能比你想的略贵或略便宜。";}
+  else{const lp=+document.getElementById("ord-limit").value;
+    if(lp>=50)out.innerHTML="<b>限价单</b>:你的限价 $"+lp+" ≥ 当前 $50,会很快以 $50 左右成交(你愿意出更高,系统仍按更划算的市价给你)。";
+    else out.innerHTML="<b>限价单</b>:你只愿出 $"+lp+",低于当前 $50,所以<b>暂时不会成交</b>,要等股价跌到 $"+lp+" 才买得到。好处是绝不会买贵,代价是可能等不到。";}
+}
+
+render();
+</script>
+</body>
+</html>
