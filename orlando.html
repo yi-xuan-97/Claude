@@ -28,7 +28,6 @@
   .lead{color:var(--muted);margin:2px 0 16px;font-size:14px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;
     box-shadow:0 1px 2px rgba(0,0,0,.03);margin-bottom:14px}
-  /* confirmed setup */
   .setup{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
   .su{background:#fff;border:1px solid var(--line);border-left:4px solid var(--pine2);border-radius:10px;padding:12px 14px}
   .su .k{font-size:12px;color:var(--muted);margin-bottom:3px}
@@ -36,14 +35,13 @@
   .su .v small{font-weight:400;color:var(--muted);font-size:12px}
   .flag{background:#fdeef0;border:1px solid #f3c9cf;border-radius:12px;padding:13px 17px;font-size:13.5px}
   .flag b{color:var(--red)}
-  /* day cards */
   details.day{background:#fff;border:1px solid var(--line);border-radius:13px;margin-bottom:11px;overflow:hidden}
   details.day>summary{list-style:none;cursor:pointer;padding:14px 17px;display:flex;align-items:center;gap:13px;font-weight:600}
   details.day>summary::-webkit-details-marker{display:none}
   .daynum{flex:0 0 auto;width:46px;height:46px;border-radius:11px;background:var(--pine);color:#fff;
     display:flex;align-items:center;justify-content:center;font-weight:700;flex-direction:column;line-height:1.05;text-align:center}
   .daynum b{font-size:13px}.daynum small{font-size:9px;font-weight:500;opacity:.9}
-  .dn-rest{background:var(--aqua)}.dn-arr{background:#7a8a86}
+  .dn-rest{background:var(--aqua)}.dn-arr{background:#7a8a86}.dn-d{background:var(--red)}
   .daytitle{flex:1}.daytitle .t{font-size:15.5px}.daytitle .s{font-size:12.3px;color:var(--muted);font-weight:400}
   .chev{color:var(--gold);font-size:13px;transition:.2s}
   details.day[open] .chev{transform:rotate(90deg)}
@@ -56,7 +54,7 @@
   .meal b{color:var(--food)}
   .tip{background:#fff8e8;border-left:4px solid var(--gold);padding:9px 13px;border-radius:0 8px 8px 0;font-size:13px;margin-top:10px}
   .tip b{color:#9a6b00}
-  /* tabs */
+  h3.sub{margin:0 0 9px;color:var(--pine);font-size:15.5px}
   .tabs{display:flex;gap:6px;flex-wrap:wrap}
   .tabbtn{border:1px solid var(--line);background:#fff;padding:7px 14px;border-radius:10px 10px 0 0;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);border-bottom:none}
   .tabbtn.active{background:var(--pine);color:#fff;border-color:var(--pine)}
@@ -66,7 +64,6 @@
   .ride:last-child{border-bottom:none}
   .ride .pri{flex:0 0 auto;font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:6px;height:fit-content}
   .pri.must{background:#fdeceb;color:var(--red)}.pri.top{background:#fff2d9;color:#a06b00}
-  /* food map */
   .foodgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:13px}
   .fz{background:#fff;border:1px solid var(--line);border-top:4px solid var(--food);border-radius:11px;padding:14px 16px}
   .fz h4{margin:0 0 3px;font-size:14.5px;color:var(--food)}
@@ -91,27 +88,27 @@
 <body>
 <header class="hero">
   <h1>🎄 奥兰多圣诞 5 天 · v2(按你的实际选择)</h1>
-  <p class="sub">12/23–27 · 住外面 Sheraton Vistana + Turo 自驾 · 环球(含 Epic)+ 海牛浮潜 + 你的想去清单 & 美食<br>已根据你 Google Doc 里的真实决定重做,并把你的 10 家餐厅排进每天</p>
+  <p class="sub">12/22 夜到 – 12/27 深夜飞(5 个整天)· 住外面 Sheraton Vistana + Turo 自驾<br><b>2 天环球(3 园全扫)+ 2 天迪士尼(AK + EPCOT)+ 1 天海牛浮潜</b> + 你的美食清单</p>
   <div class="badges">
     <span class="badge">🚗 自驾(无免费快通)</span>
-    <span class="badge">🏠 Vistana 带厨房</span>
+    <span class="badge">🎢 环球 3 园 · 2 天扫完</span>
+    <span class="badge">🏰 迪士尼 AK + EPCOT</span>
     <span class="badge">🦭 Crystal River 浮潜</span>
-    <span class="badge">🍜 美食清单已排进行程</span>
   </div>
 </header>
 <div class="wrap">
 
 <!-- CONFIRMED SETUP -->
 <section>
-  <h2><span class="em">✅</span>你已经定下的(来自你的 Google Doc)</h2>
+  <h2><span class="em">✅</span>你已经定下的</h2>
   <div class="card">
     <div class="setup">
-      <div class="su"><div class="k">日期</div><div class="v">12/23–27 <small>4 晚 / 5 天</small></div></div>
+      <div class="su"><div class="k">日期</div><div class="v">12/22 夜到–12/27 深夜飞 <small>5 晚 · 5 个整天</small></div></div>
       <div class="su"><div class="k">住</div><div class="v">Sheraton Vistana <small>Lake Buena Vista,带厨房,近 Disney Springs</small></div></div>
-      <div class="su"><div class="k">车</div><div class="v">Turo 自取 <small>MCO 机场现场取</small></div></div>
-      <div class="su"><div class="k">海牛</div><div class="v">Gray Line 浮潜团 <small>Crystal River,可下水</small></div></div>
-      <div class="su"><div class="k">乐园</div><div class="v">3–4 天 <small>环球为主(含 Epic)+ 迪士尼</small></div></div>
-      <div class="su"><div class="k">想去</div><div class="v">泉水/自然 <small>Silver Springs · King's Landing · Kelly Park</small></div></div>
+      <div class="su"><div class="k">车</div><div class="v">Turo 自取 <small>MCO 现场取,还车设到航班后</small></div></div>
+      <div class="su"><div class="k">乐园</div><div class="v">环球 2 天 + 迪士尼 2 天 <small>环球 3 园(含 Epic)2 天扫完;迪士尼 AK + EPCOT</small></div></div>
+      <div class="su"><div class="k">海牛</div><div class="v">Gray Line 浮潜团 <small>Crystal River,可下水(12/26)</small></div></div>
+      <div class="su"><div class="k">美食</div><div class="v">10 家清单 <small>已按区域排进每天</small></div></div>
     </div>
   </div>
 </section>
@@ -120,43 +117,43 @@
 <section>
   <h2><span class="em">⚡</span>因为住外面:快通策略这样改</h2>
   <div class="card">
-    <p style="margin:0 0 10px;font-size:14px">住 Sheraton Vistana = <b>没有环球的免费快通</b>(那是住 Signature 酒店才送的)。所以这样最省又不太累:</p>
+    <p style="margin:0 0 10px;font-size:14px">住 Sheraton Vistana = <b>没有环球的免费快通</b>(那是住 Signature 酒店才送的)。所以:</p>
     <table>
       <tr><th>园</th><th>怎么少排队</th><th>花费</th></tr>
-      <tr><td><b>Epic Universe</b></td><td>建议<b>单买 Epic Express</b>(项目精但排队凶,尤其 Battle at the Ministry)</td><td class="num">~$130–300/人/天</td></tr>
-      <tr><td><b>IOA + USF</b></td><td><b>不用买</b>:开门前到(rope drop)+ 两人多用 <b>single rider 单人通道</b>,能省超多。除非那天特别挤再考虑买</td><td class="num">$0(或 ~$300/人)</td></tr>
-      <tr><td><b>迪士尼</b></td><td>只<b>单买</b> 1–2 个最想玩的 Lightning Lane Single Pass,别买全套($429 太狠)</td><td class="num">$13–25/个</td></tr>
+      <tr><td><b>Epic Universe</b>(12/23)</td><td>建议<b>单买 Epic Express</b>(项目精但排队凶,尤其 Battle at the Ministry)+ single rider</td><td class="num">~$130–300/人</td></tr>
+      <tr><td><b>IOA + USF</b>(12/24)</td><td>想<b>一天扫两园</b>:开门前到 + 狂用 <b>single rider</b>;想更稳可单买这 1 天的 Express</td><td class="num">$0(或 ~$300/人)</td></tr>
+      <tr><td><b>迪士尼</b>(AK + EPCOT)</td><td>只给 <b>Flight of Passage</b>(AK)和 <b>Cosmic Rewind</b>(EPCOT)<b>单买 Single Pass</b>,别买全套</td><td class="num">$15–35/个</td></tr>
     </table>
-    <div class="tip"><b>省下来的钱:</b>住外面比住 Signature 省了房费,可以拿去买 Epic Express + 多吃几顿你清单上的馆子 🍜。两个人用 single rider 在环球老两园基本能顶大半个 Express。</div>
+    <div class="tip"><b>省下来的钱:</b>住外面比住 Signature 省了房费,正好拿去买 Epic Express + 迪士尼那两个热门的 Single Pass + 多吃几顿你清单上的馆子 🍜。</div>
   </div>
 </section>
 
 <!-- DAY BY DAY -->
 <section>
-  <h2><span class="em">🗺️</span>5 天行程(已把你的餐厅排进去)</h2>
-  <p class="lead">基地:Sheraton Vistana(到环球 ~20 分钟、到迪士尼 ~15 分钟、近 I-Drive)。节奏:上午猛冲、下午歇、傍晚吃好的。点开看每天。</p>
+  <h2><span class="em">🗺️</span>5 整天行程(2 环球 + 2 迪士尼 + 海牛)</h2>
+  <p class="lead">12/22 夜里到、12/27 深夜飞 = <b>12/23–27 五个完整玩乐日</b>。基地 Sheraton Vistana(到环球 ~20 分钟、迪士尼 ~15 分钟)。节奏:上午猛冲、下午歇、傍晚吃好的。点开看每天。</p>
 
-  <details class="day" open>
+  <details class="day">
     <summary>
-      <div class="daynum dn-arr"><b>23</b><small>周三·抵达</small></div>
-      <div class="daytitle"><div class="t">抵达 + 安顿 + Disney Springs</div><div class="s">取车、入住、轻松开吃,不进园</div></div>
+      <div class="daynum dn-arr"><b>22</b><small>周二·到达夜</small></div>
+      <div class="daytitle"><div class="t">夜里抵达 + 取车 + 入住</div><div class="s">当晚不玩,避开 22 号白天人潮,养精神</div></div>
       <div class="chev">▶</div>
     </summary>
     <div class="daybody">
       <ul>
-        <li>落地 MCO → <b>Turo 现场取车</b>(那辆 Kia K4 / 或 Camry Hybrid)</li>
-        <li>入住 <b>Sheraton Vistana</b>(有厨房,可去超市囤水和早餐,省钱)</li>
-        <li>傍晚:<b>Disney Springs</b>(免费逛、餐厅多、有圣诞气氛)就在你酒店旁边</li>
+        <li>落地 MCO → <b>Turo 现场取车</b>(William 的 Kia K4;还车时间记得设到航班之后)</li>
+        <li>入住 <b>Sheraton Vistana</b>(有厨房,顺路超市囤水 + 早餐,省钱)</li>
+        <li>早点睡,第二天满血开玩</li>
       </ul>
-      <div class="meal">🍽️ <b>第一顿(近酒店/南区):</b> Jollibee(菲律宾炸鸡,近 Florida Mall)或 Gaga Yummy。<b>注意查营业时间——平安夜/圣诞当天很多店提早关或不开。</b></div>
-      <div class="tip">12/23 园区已经很挤,当抵达+缓冲日最舒服,不浪费门票。</div>
+      <div class="meal">🍽️ <b>到得晚就来顿宵夜:</b> Pocha 93(韩式,"宵夜"本命)。</div>
+      <div class="tip">12/22 是圣诞前高峰日,<b>当晚到、不进园</b>正好躲过,还把 12/23 整天空出来。</div>
     </div>
   </details>
 
-  <details class="day">
+  <details class="day" open>
     <summary>
-      <div class="daynum"><b>24</b><small>周四·平安夜</small></div>
-      <div class="daytitle"><div class="t">环球 Epic Universe <span class="tag u">环球</span></div><div class="s">全新园,买 Epic Express;平安夜傍晚人变少</div></div>
+      <div class="daynum"><b>23</b><small>周三·环球①</small></div>
+      <div class="daytitle"><div class="t">环球 Epic Universe <span class="tag u">环球</span></div><div class="s">3 园第 1 天:Epic 一整天玩透(见下方 🎢 专区)</div></div>
       <div class="chev">▶</div>
     </summary>
     <div class="daybody">
@@ -166,25 +163,42 @@
         <li>两人多用 <b>single rider</b> + 已买的 <b>Epic Express</b> = 不累</li>
         <li>晚上看新夜秀 <b>Universal Celestial Goodnight</b></li>
       </ul>
-      <div class="meal">🍽️ <b>晚饭(西区/近环球):</b> Pocha 93(韩式宵夜,离环球很近——你已经在地图上标了)。</div>
+      <div class="meal">🍽️ <b>晚饭(西区/近环球):</b> Pocha 93 / Walala 手拉面 / Gaga Yummy。</div>
+    </div>
+  </details>
+
+  <details class="day">
+    <summary>
+      <div class="daynum"><b>24</b><small>周四·环球②平安夜</small></div>
+      <div class="daytitle"><div class="t">环球 Islands of Adventure + Universal Studios <span class="tag u">环球</span></div><div class="s">3 园第 2 天:一天扫两园 = 3 园 2 天搞定!</div></div>
+      <div class="chev">▶</div>
+    </summary>
+    <div class="daybody">
+      <ul>
+        <li>一开门在 IOA:<b>Hagrid's</b>(第一个冲)→ <b>VelociCoaster</b> → Forbidden Journey → Hulk / Spider-Man</li>
+        <li>中段坐 <b>Hogwarts Express</b> 从 Hogsmeade(IOA)→ Diagon Alley(USF)(需 Park-to-Park 票)</li>
+        <li>USF 下午:Escape from Gringotts → Mummy → Transformers → Men in Black</li>
+        <li><b>狂用 single rider</b> —— 这是一天扫两园的关键</li>
+        <li>圣诞:<b>Grinchmas</b>、哈利波特城堡灯光秀、USF <b>Macy's 游行</b></li>
+      </ul>
+      <div class="meal">🍽️ <b>晚饭:</b> SUSURU 拉面 / Zaru 米其林乌冬。<b>⚠️ 平安夜部分餐馆早关,先用 Google Maps 查!</b></div>
       <div class="tip"><b>平安夜傍晚</b>园内人流明显回落,是全周难得的软窗口,留到晚上玩。</div>
     </div>
   </details>
 
   <details class="day">
     <summary>
-      <div class="daynum"><b>25</b><small>周五·圣诞</small></div>
-      <div class="daytitle"><div class="t">环球 Islands of Adventure + Universal Studios <span class="tag u">环球</span></div><div class="s">买 Park-to-Park 票,坐 Hogwarts Express 穿两园</div></div>
+      <div class="daynum dn-d"><b>25</b><small>周五·圣诞</small></div>
+      <div class="daytitle"><div class="t">迪士尼 EPCOT <span class="tag d">迪士尼</span></div><div class="s">圣诞氛围最足:美食节 + 烛光颂(见下方 🏰 专区)</div></div>
       <div class="chev">▶</div>
     </summary>
     <div class="daybody">
       <ul>
-        <li>圣诞当天很挤——<b>一定开门前到</b>,先冲 <b>Hagrid's</b> 和 <b>VelociCoaster</b></li>
-        <li>IOA:Forbidden Journey · Spider-Man · Hulk;USF:Escape from Gringotts · Mummy · Transformers</li>
-        <li>坐 <b>Hogwarts Express</b> 往返霍格莫德↔对角巷;两园多用 <b>single rider</b></li>
-        <li>圣诞特色(含门票):<b>Grinchmas</b>、哈利波特<b>圣诞城堡灯光秀</b>、USF 的 <b>Macy's 圣诞游行</b></li>
+        <li>开门冲 <b>Guardians: Cosmic Rewind</b>(抢免费虚拟排队 / 单买 Single Pass)· Test Track · Frozen Ever After</li>
+        <li>圣诞限定:<b>Festival of the Holidays</b> 各国美食摊 + <b>Candlelight Processional</b> 烛光颂(想坐着看订餐饮套票)</li>
+        <li>傍晚逛 World Showcase 边吃边喝,晚上看烟花 <b>Luminous</b></li>
       </ul>
-      <div class="meal">🍽️ <b>晚饭(西区/Dr. Phillips 或 Mills 50):</b> Walala 手拉面 / SUSURU 拉面 / Zaru 乌冬(米其林)。<b>⚠️ 圣诞当天部分中餐馆关门,出发前用 Google Maps 确认!</b></div>
+      <div class="meal">🍽️ <b>晚饭:</b> 直接吃遍 EPCOT World Showcase 的圣诞美食摊;或回程 Mills 50 补一家(圣诞当天先查营业)。</div>
     </div>
   </details>
 
@@ -198,39 +212,70 @@
       <ul>
         <li><b>Gray Line 浮潜团</b>(你 Doc 里那个):全天约 10.5 小时,含接送、船、浮潜装备、午餐、Homosassa 野生动物园;另付 $15 潜水服</li>
         <li><b>泳衣穿在里面</b>,带毛巾 + 换洗衣;早上冷(海牛最多的时候就是最冷的早上)</li>
-        <li>把它放在 <b>12/26</b> 很聪明——这天是全年园区最挤的开始,正好出城躲开</li>
+        <li>放在 <b>12/26</b> 很聪明——这天是全年园区最挤的开始,正好出城躲开</li>
       </ul>
-      <div class="meal">🍽️ <b>回程顺路(Mills 50 亚洲美食区):</b> 把你清单里的中餐一次扫——Tieling 烧烤 / 好味坊 Haoweifang / YH Seafood / Caravan 新疆菜。Mills 50 在北边回程路上,很顺。</div>
-      <div class="tip"><b>不想自己开车？</b>Gray Line 是接送团,正好。<b>想省钱+任何一天去？</b>你有车,也可以自驾去 Crystal River 当地潜店(~$65–85/人)或先看 Blue Spring 栈道(天天开、$6/车、圣诞也开)。</div>
+      <div class="meal">🍽️ <b>回程顺路(Mills 50 亚洲美食区):</b> Tieling 烧烤 / 好味坊 Haoweifang / YH Seafood / Caravan 新疆菜,一次扫。</div>
+      <div class="tip"><b>想省钱?</b>你有车,也可自驾去 Crystal River 当地潜店(~$65–85/人)或先看 Blue Spring 栈道(天天开、$6/车、圣诞也开)。</div>
     </div>
   </details>
 
   <details class="day">
     <summary>
-      <div class="daynum dn-arr"><b>27</b><small>周日·离开</small></div>
-      <div class="daytitle"><div class="t">迪士尼半天 或 泉水点,然后还车飞走</div><div class="s">看航班时间二选一</div></div>
+      <div class="daynum dn-d"><b>27</b><small>周日·末日+飞</small></div>
+      <div class="daytitle"><div class="t">迪士尼 Animal Kingdom → 深夜红眼飞 <span class="tag d">迪士尼</span></div><div class="s">AK 关门早,玩完正好赶红眼</div></div>
       <div class="chev">▶</div>
     </summary>
     <div class="daybody">
       <ul>
-        <li><b>航班晚 → 迪士尼 Magic Kingdom 半天</b><span class="tag d">迪士尼</span>:最经典圣诞氛围、城堡、必玩 Seven Dwarfs / TRON / Space Mountain(只单买 1–2 个 Lightning Lane)</li>
-        <li><b>想要自然 → 你清单上的泉水点</b><span class="tag n">自然</span>:King's Landing 皮划艇 或 Kelly Park-Rock Springs(都在北边 ~35 分钟)。<b>⚠️ 12 月泉水漂流/玩水偏冷</b>,坐皮划艇还行、下水漂流会冻;想轻松看风景可选 Silver Springs 玻璃底船(看猴子+短吻鳄,~1.5 小时车程)</li>
-        <li><b>航班早 → 睡到自然醒 + 最后一顿,还车走</b></li>
+        <li>早退房、行李放车上;开门冲 <b>Avatar Flight of Passage</b>(单买 Single Pass / 一早先冲)</li>
+        <li><b>Kilimanjaro Safaris</b> 真动物巡游(一早最活跃)· <b>Expedition Everest</b> · Festival of the Lion King 秀</li>
+        <li>AK 通常 <b>下午 5–6 点关</b>——玩完早点吃晚饭 → 还 Turo 车(MCO)→ 赶 <b>12/27 深夜 / 12/28 凌晨</b>航班</li>
+        <li>这天<b>别太赶</b>,后面是红眼 + 你朋友要上班</li>
       </ul>
-      <div class="meal">🍽️ <b>最后一顿:</b> 清单里还没吃的随便补(机场方向顺路那家)。</div>
-      <div class="tip">留足<b>还 Turo 车 + 到 MCO</b> 的时间(机场取还都在现场,方便)。</div>
+      <div class="meal">🍽️ <b>最后一顿:</b> 机场方向顺路那家(Jollibee 近 Florida Mall),或 Disney Springs。</div>
+      <div class="tip"><b>红眼提醒:</b>跟车主 William 确认<b>深夜/凌晨 MCO 还车</b> OK;留足还车 + 安检时间。AK 关门早,这天安排得正好。</div>
     </div>
   </details>
 </section>
 
+<!-- UNIVERSAL 3-IN-2 -->
+<section>
+  <h2><span class="em">🎢</span>环球:3 个园 2 天扫完(你要的 plan)</h2>
+  <p class="lead">关键:买 <b>多日 Park-to-Park 票</b>(才能当天用 Hogwarts Express 在 USF↔IOA 穿梭)。没免费快通,靠 <b>开门前到(rope drop)+ 两人 single rider</b>;想更轻松可只在第 2 天买 1 日 Express。</p>
+
+  <div class="card">
+    <h3 class="sub">📅 第 1 天(12/23):Epic Universe 整整一天</h3>
+    <ul style="margin:0;padding-left:19px;font-size:14px">
+      <li>Epic 是独立的园、项目最精,<b>值一整天</b>,别和别的园挤一起</li>
+      <li>开门即冲 <b>Harry Potter and the Battle at the Ministry</b>(排队最长)</li>
+      <li>再扫 <b>Stardust Racers</b> · <b>Mario Kart: Bowser's Challenge</b> · Mine-Cart Madness · Hiccup's Wing Gliders · Monsters Unchained</li>
+      <li><b>单买 Epic Express</b>(Epic 不在任何酒店免费快通范围)+ 两人多用 single rider</li>
+      <li>留到晚上看 <b>Celestial Goodnight</b> 夜秀</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="sub">📅 第 2 天(12/24):IOA + USF 一天扫两园</h3>
+    <ul style="margin:0;padding-left:19px;font-size:14px">
+      <li><b>一开门先在 IOA:</b> Hagrid's(全环球最佳、排最久,第一个冲)→ VelociCoaster → Forbidden Journey → Hulk / Spider-Man / Jurassic World</li>
+      <li><b>中段坐 Hogwarts Express</b>:Hogsmeade(IOA)→ Diagon Alley(USF),需 Park-to-Park 票</li>
+      <li><b>USF 下午:</b> Escape from Gringotts → Revenge of the Mummy → Transformers → Men in Black</li>
+      <li><b>single rider 用到底</b>(两人分开坐省一大半排队)——这是 2 天扫完的核心</li>
+      <li>最满的一天,<b>想稳就买这 1 天的 Express</b>(覆盖 USF+IOA,不含 Epic)</li>
+    </ul>
+    <div class="tip"><b>能 2 天扫完吗?</b>能 —— Epic 占 1 天、IOA+USF 合 1 天,是很多人的标准打法。诀窍就是 <b>天天开门前到 + single rider 用到底</b>,主攻头牌、不纠结小项目。</div>
+  </div>
+</section>
+
 <!-- PARK HIT LISTS -->
 <section>
-  <h2><span class="em">🎢</span>各园"不能错过"(快速版)</h2>
+  <h2><span class="em">📋</span>各园"不能错过"(快速版)</h2>
   <div class="tabs" id="tabs">
     <button class="tabbtn active" data-t="epic">Epic Universe</button>
     <button class="tabbtn" data-t="ioa">Islands of Adventure</button>
     <button class="tabbtn" data-t="usf">Universal Studios</button>
-    <button class="tabbtn" data-t="mk">Magic Kingdom</button>
+    <button class="tabbtn" data-t="ak">Animal Kingdom</button>
+    <button class="tabbtn" data-t="epcot">EPCOT</button>
   </div>
   <div class="tabpane active" data-p="epic">
     <div class="ride"><span class="pri must">必玩</span><div><b>Harry Potter and the Battle at the Ministry</b> — 全园头牌,排队最长,开门先冲。single rider 有</div></div>
@@ -246,41 +291,42 @@
     <div class="ride"><span class="pri must">必玩</span><div><b>Harry Potter and the Escape from Gringotts</b> · <b>Revenge of the Mummy</b></div></div>
     <div class="ride"><span class="pri top">推荐</span><div>Transformers 3-D · Men in Black · Hogwarts Express(需 Park-to-Park 票)</div></div>
   </div>
-  <div class="tabpane" data-p="mk">
-    <div class="ride"><span class="pri must">必玩</span><div><b>Seven Dwarfs Mine Train</b> · <b>TRON Lightcycle/Run</b> · Space Mountain</div></div>
-    <div class="ride"><span class="pri top">推荐</span><div>Big Thunder Mountain · Haunted Mansion · Peter Pan's Flight</div></div>
+  <div class="tabpane" data-p="ak">
+    <div class="ride"><span class="pri must">必玩</span><div><b>Avatar Flight of Passage</b> — 全迪士尼最佳骑乘之一,排最久。单买 Single Pass / 一早先冲</div></div>
+    <div class="ride"><span class="pri must">必玩</span><div><b>Expedition Everest</b> · <b>Kilimanjaro Safaris</b>(真动物,清晨/傍晚最活跃)</div></div>
+    <div class="ride"><span class="pri top">推荐</span><div>Na'vi River Journey · Festival of the Lion King 音乐秀 · DINOSAUR · Maharajah Jungle Trek</div></div>
+  </div>
+  <div class="tabpane" data-p="epcot">
+    <div class="ride"><span class="pri must">必玩</span><div><b>Guardians of the Galaxy: Cosmic Rewind</b> — 全迪士尼最好的过山车。抢免费虚拟排队 / 单买 Single Pass</div></div>
+    <div class="ride"><span class="pri top">推荐</span><div>Test Track · Frozen Ever After · Remy's Ratatouille · Soarin' · Spaceship Earth</div></div>
+    <div class="ride"><span class="pri top">圣诞</span><div>Festival of the Holidays 各国美食 · Candlelight Processional 烛光颂 · Luminous 烟花</div></div>
   </div>
 </section>
 
-<!-- DISNEY MAGIC KINGDOM -->
+<!-- DISNEY AK + EPCOT -->
 <section>
-  <h2><span class="em">🏰</span>迪士尼那 1 天:Magic Kingdom 详细 plan</h2>
-  <p class="lead">迪士尼世界有 4 个园,1 天就挑最精华的 <b>Magic Kingdom</b>——必玩最多、最经典、圣诞氛围最浓。3 环球 : 1 迪士尼 对你(偏环球)是很合适的比例。你住外面没免费快通,迪士尼用它自己的<b>付费 Lightning Lane</b>。</p>
+  <h2><span class="em">🏰</span>迪士尼 2 天:Animal Kingdom + EPCOT 详细 plan</h2>
+  <p class="lead">你选的这两个园很搭:<b>AK</b> 偏动物/自然/白天(关门早),<b>EPCOT</b> 偏未来/美食/夜晚(圣诞氛围足)。没免费快通,用迪士尼自己的付费 Lightning Lane,只<b>单买最热门那 1–2 个</b>。</p>
 
   <div class="card">
-    <h3 style="margin:0 0 10px;color:var(--pine);font-size:15.5px">⏰ 当天流程</h3>
+    <h3 class="sub">🐘 Animal Kingdom(排 12/27,关门早正好赶红眼)</h3>
     <ul style="margin:0;padding-left:19px;font-size:14px">
-      <li><b>开门前 45 分钟到(rope drop):</b>先冲排队最长的 <b>Seven Dwarfs Mine Train(七矮人矿车)</b> → Peter Pan's Flight → Space Mountain / Big Thunder Mountain(2026/5 翻新重开)</li>
-      <li><b>上午晚些:</b>TRON Lightcycle/Run(用<b>免费虚拟排队 virtual queue</b>,早 7:00 和入园后各放一次,记得抢)、Haunted Mansion、Pirates of the Caribbean</li>
-      <li><b>中午:</b>吃饭 + 室内经典项目;手机 <b>mobile order</b> 点快餐省排队。peak 时段最挤,悠着点</li>
-      <li><b>傍晚圣诞重头戏:</b>Mickey's Once Upon a Christmastime 圣诞游行 · 城堡圣诞灯光/投影 · 节日烟花</li>
+      <li>必玩:<b>Avatar Flight of Passage</b>(全迪士尼最佳之一,排最久——单买 Single Pass 或一早 rope drop 先冲)· Na'vi River Journey · <b>Expedition Everest</b></li>
+      <li><b>Kilimanjaro Safaris</b> 真动物巡游:<b>清晨或傍晚</b>动物最活跃</li>
+      <li>看 <b>Festival of the Lion King</b> 音乐秀 · 走 Maharajah Jungle Trek · 看 Tree of Life</li>
+      <li>AK 通常 <b>下午 5–6 点就关</b>——正好玩完吃晚饭、还车、赶 12/27 深夜红眼</li>
     </ul>
-    <div class="meal">🎄 <b>圣诞彩蛋:</b>Jungle Cruise 圣诞期间变成 <b>"Jingle Cruise"</b>,超应景,别错过。</div>
   </div>
 
   <div class="card">
-    <h3 style="margin:0 0 8px;color:var(--pine);font-size:15.5px">🎟️ 快通策略(别花冤枉钱)</h3>
-    <p style="margin:0 0 4px;font-size:14px"><b>别买全套 Multi Pass</b>(圣诞峰值 ~$429/人太狠)。只<b>单买 1–2 个 Lightning Lane Single Pass</b>($15–25/个)给最想玩、排队最久的(七矮人、TRON)。其余靠 rope drop + 免费虚拟排队。</p>
-    <div class="tip"><b>最划算玩法:</b>如果你那天碰上 <b>Mickey's Very Merry Christmas Party(圣诞派对夜)</b>,晚 6 点后园区只对买票的人开放,白天人少很多 + 独享游行/烟花/主街"下雪"。门票约 $199–229/人。<b>2026 日期迪士尼还没公布,出来第一时间查。</b></div>
+    <h3 class="sub">🌐 EPCOT(排 12/25 圣诞,氛围最足)</h3>
+    <ul style="margin:0;padding-left:19px;font-size:14px">
+      <li>必玩:<b>Guardians: Cosmic Rewind</b>(全迪士尼最好的过山车,抢免费虚拟排队或单买 Single Pass)· <b>Test Track</b> · Frozen Ever After · Remy's Ratatouille · Soarin' · Spaceship Earth</li>
+      <li>圣诞限定:<b>Festival of the Holidays</b> 各国节日美食摊 + <b>Candlelight Processional</b> 烛光圣诞颂(名人朗读 + 大合唱;想保证座位订"餐饮套票")</li>
+      <li>傍晚逛 World Showcase 边吃边喝,晚上看烟花 <b>Luminous</b></li>
+    </ul>
+    <div class="tip"><b>快通策略:</b>别买全套。只给 <b>Flight of Passage</b>(AK)和 <b>Cosmic Rewind</b>(EPCOT)单买 Lightning Lane Single Pass,其余靠 rope drop + 免费虚拟排队。</div>
   </div>
-
-  <div class="card">
-    <h3 style="margin:0 0 8px;color:var(--pine);font-size:15.5px">🎢 必玩清单</h3>
-    <div class="ride"><span class="pri must">必玩</span><div><b>Seven Dwarfs Mine Train · TRON Lightcycle/Run · Space Mountain</b></div></div>
-    <div class="ride"><span class="pri top">推荐</span><div>Big Thunder Mountain · Haunted Mansion · Pirates of the Caribbean · Peter Pan's Flight · Jingle Cruise(圣诞版丛林巡航)</div></div>
-  </div>
-
-  <div class="tip"><b>放哪天:</b>若 12/27 离开那天航班晚,可当天上午玩 MK 再飞;更从容的是和某个环球日对调,别赶在离开当天。<b>想升级成 2 天迪士尼</b>(加 EPCOT 的圣诞美食 + 烛光颂 + Cosmic Rewind 过山车)随时说,我帮你重排比例。</div>
 </section>
 
 <!-- NATURE -->
@@ -289,13 +335,13 @@
   <div class="card">
     <table>
       <tr><th>地方</th><th>车程</th><th>冬天合适吗</th></tr>
-      <tr><td><b>🦭 Crystal River 浮潜</b>(你的主选)</td><td class="num">1.5–2 时</td><td>✅ <b>12 月正是黄金季</b>,唯一能合法和野生海牛同游</td></tr>
+      <tr><td><b>🦭 Crystal River 浮潜</b>(你的主选 · 12/26)</td><td class="num">1.5–2 时</td><td>✅ <b>12 月正是黄金季</b>,唯一能合法和野生海牛同游</td></tr>
       <tr><td><b>Blue Spring SP</b>(栈道看海牛,备选)</td><td class="num">45 分</td><td>✅ 天天开、$6/车、几百只海牛;冬天不能下水,栈道看</td></tr>
-      <tr><td><b>Silver Springs SP</b>(你列的)</td><td class="num">~1.5 时</td><td>✅ 玻璃底船看泉、猴子、短吻鳄;冬天也行(不下水)。<small>注:这不是看海牛的地方,别和 Blue Spring 搞混</small></td></tr>
-      <tr><td><b>King's Landing</b>(你列的)</td><td class="num">~35 分</td><td>🟡 皮划艇划 Rock Springs Run,很美;中午暖和时还行,人坐船上不太冷</td></tr>
-      <tr><td><b>Kelly Park - Rock Springs</b>(你列的)</td><td class="num">~35 分</td><td>🟡 天然漂流,但 <b>12 月下水漂流会冻</b>(水 68°F + 冬天气温);想玩水建议暖季再来,这次可步行/野餐</td></tr>
+      <tr><td><b>Silver Springs SP</b>(你列的)</td><td class="num">~1.5 时</td><td>✅ 玻璃底船看泉、猴子、短吻鳄;冬天也行(不下水)。<small>注:这不是看海牛的地方</small></td></tr>
+      <tr><td><b>King's Landing</b>(你列的)</td><td class="num">~35 分</td><td>🟡 皮划艇划 Rock Springs Run,很美;中午暖和时还行</td></tr>
+      <tr><td><b>Kelly Park - Rock Springs</b>(你列的)</td><td class="num">~35 分</td><td>🟡 天然漂流,但 <b>12 月下水会冻</b>;想玩水建议暖季再来</td></tr>
     </table>
-    <div class="tip"><b>取舍提醒:</b>5 天里塞不下"全部乐园 + 海牛浮潜 + 三个泉水点"。冬天的重头是<b>海牛(全年最佳)</b>,泉水漂流偏冷——建议这次主打海牛浮潜,泉水点留作第 5 天弹性(选 King's Landing 皮划艇或 Silver Springs 玻璃底船),其余等暖季再玩。</div>
+    <div class="tip"><b>取舍提醒:</b>这趟 5 天排满了(2 环球 + 2 迪士尼 + 海牛),<b>三个泉水点这次塞不下,留暖季再来</b>。野生动物已由海牛日(12/26)+ Animal Kingdom 覆盖,不亏。</div>
   </div>
 </section>
 
@@ -305,16 +351,16 @@
   <p class="lead">把你 Doc 里 10 家店按位置分组,配进顺路的那天。<b>⚠️ 圣诞前后(12/24–25)很多家庭餐馆关门,出发前务必用 Google Maps 查营业时间。</b></p>
   <div class="foodgrid">
     <div class="fz">
-      <h4>🎢 环球/西区(玩环球那两天)</h4>
+      <h4>🎢 环球/西区(玩环球那两天 12/23–24)</h4>
       <div class="area">离环球近,玩完顺路吃</div>
       <ul>
-        <li><b>Pocha 93</b> — 韩式宵夜(你已标地图,最近)</li>
+        <li><b>Pocha 93</b> — 韩式宵夜(你已标地图,最近;到达夜或 12/23)</li>
         <li>Walala Hand-Pulled Noodle — 手拉面</li>
         <li>Gaga Yummy</li>
       </ul>
     </div>
     <div class="fz">
-      <h4>🍲 Mills 50 亚洲美食区(海牛日回程顺路)</h4>
+      <h4>🍲 Mills 50 亚洲美食区(海牛日回程顺路 12/26)</h4>
       <div class="area">奥兰多亚洲餐饮中心,北边回程路上</div>
       <ul>
         <li>SUSURU — 拉面</li>
@@ -326,47 +372,50 @@
       </ul>
     </div>
     <div class="fz">
-      <h4>🏠 酒店/南区(抵达日 & 离开日)</h4>
+      <h4>🏠 酒店/南区 & 迪士尼方向(12/25 · 12/27)</h4>
       <div class="area">近 Vistana / Disney Springs / Florida Mall</div>
       <ul>
-        <li>Jollibee — 菲律宾炸鸡(近 Florida Mall)</li>
-        <li>(清单里没吃到的,机场方向顺路补)</li>
+        <li>Jollibee — 菲律宾炸鸡(近 Florida Mall,机场方向顺路,适合末日)</li>
+        <li>12/25 可直接吃 EPCOT 各国美食摊</li>
+        <li>(清单没吃到的,末日补)</li>
       </ul>
     </div>
   </div>
-  <div class="tip" style="margin-top:6px"><b>分组是按"大概位置"排的</b>——有几家(好味坊、YH、Caravan 等)确切地址我没百分百确认,出发前在 Google Maps 上确认位置+营业时间最稳。要的话我可以帮你把 10 家逐一查地址、标到地图上、配进每天的精确路线。</div>
+  <div class="tip" style="margin-top:6px"><b>分组是按"大概位置"排的</b>——有几家(好味坊、YH、Caravan 等)确切地址我没百分百确认,出发前在 Google Maps 上确认位置 + 营业时间最稳。要的话我可以帮你把 10 家逐一查地址、标到地图上。</div>
 </section>
 
 <!-- BUDGET -->
 <section>
-  <h2><span class="em">💰</span>预算(2 人 · 按你的选择:住外面+自驾)</h2>
+  <h2><span class="em">💰</span>预算(2 人 · 2 环球 + 2 迪士尼 + 海牛)</h2>
   <div class="card">
     <table>
-      <tr><th>项目</th><th class="num">估算</th><th>说明(多为实时数)</th></tr>
-      <tr><td>酒店 Sheraton Vistana 4 晚</td><td class="num">$806</td><td>1 卧 villa 实时价;停车另 +$32/晚 ≈ $128</td></tr>
-      <tr><td>Turo 租车 4 天</td><td class="num">~$250–340</td><td>Kia K4 $247 / Camry Hybrid $198(税前)+ 园区停车 ~$105</td></tr>
-      <tr><td>环球门票(2 人,含 Epic 多日 P2P)</td><td class="num">~$750–1,000</td><td>按 2–3 天</td></tr>
-      <tr><td>Epic Express(2 人 ×1 天)</td><td class="num">~$300–500</td><td>住外面无免费快通,Epic 那天单买</td></tr>
-      <tr><td>迪士尼 1 天票(2 人,若第 5 天去)</td><td class="num">~$300–360</td><td>+ 选 1–2 个 Single Pass ~$30–50</td></tr>
+      <tr><th>项目</th><th class="num">估算</th><th>说明</th></tr>
+      <tr><td>酒店 Sheraton Vistana 5 晚</td><td class="num">~$1,000</td><td>1 卧 villa ~$179/晚×5;停车另 +$32/晚 ≈ $160</td></tr>
+      <tr><td>Turo 租车 ~5–6 天</td><td class="num">~$320–430</td><td>Kia K4 ~$62/天;深夜还车跟车主确认;+ 园区停车 ~$105</td></tr>
+      <tr><td>环球门票(2 人,含 Epic 多日 P2P)</td><td class="num">~$700–950</td><td>多日 Park-to-Park,2 天用,含 Epic + Hogwarts Express</td></tr>
+      <tr><td>Epic Express(2 人 ×1 天)</td><td class="num">~$300–500</td><td>住外面无免费快通,12/23 Epic 那天单买</td></tr>
+      <tr><td>IOA+USF 1 日 Express(可选)</td><td class="num">$0–600</td><td>12/24 想更省力可买;靠 rope drop + single rider 也能扫完</td></tr>
+      <tr><td>迪士尼 2 天票(2 人,AK + EPCOT)</td><td class="num">~$600–760</td><td>按 2 个 1 日票或 2 日票</td></tr>
+      <tr><td>迪士尼 Single Pass(Flight of Passage + Cosmic Rewind)</td><td class="num">~$60–120</td><td>只买这两个最热门的</td></tr>
       <tr><td>海牛 Gray Line(2 人)</td><td class="num">$368</td><td>$169/人 + $15 潜水服</td></tr>
-      <tr><td>吃饭(你清单那些 + 日常)</td><td class="num">~$600–900</td><td>住有厨房可省早餐</td></tr>
+      <tr><td>吃饭(你清单那些 + 日常)</td><td class="num">~$700–1,000</td><td>住有厨房可省早餐</td></tr>
     </table>
     <div style="margin-top:8px">
-      <span class="pill">全程估 ≈ $3,600–4,400(不含机票)</span>
-      <span class="pill">比住 Signature 省了房费,够买 Epic 快通 + 多吃几顿</span>
+      <span class="pill">全程估 ≈ $4,400–5,600(不含机票)</span>
+      <span class="pill">不买 IOA+USF Express 可省 ~$600</span>
     </div>
   </div>
 </section>
 
 <!-- ACTION -->
 <section>
-  <h2><span class="em">📋</span>出发前行动清单</h2>
+  <h2><span class="em">✅</span>出发前行动清单</h2>
   <div class="card">
     <div class="deadline"><span class="when">现在</span><div>订<b>环球多日票(含 Epic,Park-to-Park)</b> + <b>Epic Express</b>(圣诞周会涨/售罄)</div></div>
-    <div class="deadline"><span class="when">现在</span><div>订 <b>Sheraton Vistana</b> + <b>Turo 车</b>(确认司机年龄/保险方案)</div></div>
+    <div class="deadline"><span class="when">现在</span><div>订<b>迪士尼票(AK + EPCOT 两天)</b>;给 <b>Flight of Passage</b> / <b>Cosmic Rewind</b> 单买 Single Pass;想看烛光颂订 EPCOT 餐饮套票</div></div>
+    <div class="deadline"><span class="when">现在</span><div>订 <b>Sheraton Vistana(12/22 入住 · 5 晚)</b> + <b>Turo 车(12/22 取,还车设到航班后)</b>;跟车主确认深夜/凌晨 MCO 还车</div></div>
     <div class="deadline"><span class="when">现在</span><div>订 <b>Gray Line 海牛团</b>(选 12/26,确认那天发车)</div></div>
-    <div class="deadline"><span class="when">出发前2周</span><div>用 <b>Google Maps</b> 把 10 家餐厅查清营业时间(<b>圣诞很多关门</b>),标记到地图</div></div>
-    <div class="deadline"><span class="when">出发前1周</span><div>看天气;若想去 King's Landing/Silver Springs,挑暖和的那天</div></div>
+    <div class="deadline"><span class="when">出发前2周</span><div>用 <b>Google Maps</b> 把 10 家餐厅查清营业时间(<b>圣诞很多关门</b>),标到地图</div></div>
     <div class="deadline"><span class="when">每天</span><div>开门前到、用官方 App 看排队、两人多用 single rider</div></div>
   </div>
 </section>
@@ -389,12 +438,13 @@
   <h2><span class="em">🔗</span>你的链接 & 来源</h2>
   <div class="card src">
     你的预订:<a href="https://turo.com/us/en/search">Turo 租车</a> · <a href="https://www.expedia.com/Orlando-Hotels-Sheraton-Vistana-Resort-Villas.h23110.Hotel-Information">Sheraton Vistana</a> · <a href="https://graylineorlando.com/tours/manatees-swim-snorkel-and-boat-day-tour-from-orlando/">Gray Line 海牛浮潜团</a><br>
-    人流/玩法:<a href="https://www.disneytouristblog.com/december-disney-world/">Dec 人流</a> · <a href="https://orlando-themeparks.com/universal-orlando/epic-universe/rides-list-epic-universe/">Epic 项目</a> · <a href="https://orlando-themeparks.com/universal-orlando/epic-universe/express-pass-epic-universe/">Epic Express</a><br>
+    环球:<a href="https://orlando-themeparks.com/universal-orlando/epic-universe/rides-list-epic-universe/">Epic 项目</a> · <a href="https://orlando-themeparks.com/universal-orlando/epic-universe/express-pass-epic-universe/">Epic Express</a><br>
+    迪士尼:<a href="https://disneyworld.disney.go.com/admission/tickets/">门票</a> · <a href="https://disneyworld.disney.go.com/events-tours/holidays/">圣诞活动(EPCOT 烛光颂等)</a><br>
     自然:<a href="https://www.floridastateparks.org/parks-and-trails/blue-spring-state-park/manatees-blue-spring-state-park">Blue Spring 海牛</a> · <a href="https://www.crystalriverfl.org/sisters/page/how-can-i-swim-three-sisters-springs">Crystal River 浮潜规则</a>
   </div>
 </section>
 
-<footer>🎄 v2 · 按你 Google Doc 的真实选择重做 · 生成于 2026 年 6 月 · 价格会变,出发前按行动清单复核</footer>
+<footer>🎄 v2 · 2 环球(3 园 2 天)+ 2 迪士尼(AK + EPCOT)+ 海牛 · 12/22–27 五整天 · 更新于 2026 年 6 月 · 价格会变,出发前按行动清单复核</footer>
 </div>
 <script>
   document.getElementById('tabs').addEventListener('click',function(e){
