@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colorado 6天5晚 — Pikes Peak + San Juans + Strawberry Park</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+:root {
+  --d1: #6366f1; --d2: #06b6d4; --d3: #f59e0b; --d4: #ef4444; --d5: #84cc16; --d6: #ec4899;
+  --bg: #f8fafc; --card: #fff; --text: #0f172a; --muted: #64748b; --border: #e2e8f0;
+  --urgent: #dc2626; --warn: #ea580c;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0f172a; --card: #1e293b; --text: #e2e8f0; --muted: #94a3b8; --border: #334155; }
+}
+html { font-size: 15px; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.55;
+  padding-bottom: 80px;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 16px; }
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+  color: white; padding: 20px 16px; border-radius: 16px; margin-bottom: 16px;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.3);
+}
+.header h1 { font-size: 1.4em; margin-bottom: 8px; line-height: 1.3; }
+.header .meta { font-size: 0.85em; opacity: 0.95; }
+.header .meta div { margin-bottom: 3px; }
+
+/* URGENT */
+.urgent {
+  background: var(--urgent); color: white; padding: 14px 16px; border-radius: 12px;
+  margin-bottom: 16px; box-shadow: 0 4px 12px rgba(220,38,38,0.3);
+}
+.urgent h2 { font-size: 1.05em; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.urgent ol { padding-left: 20px; font-size: 0.92em; }
+.urgent li { margin-bottom: 6px; }
+.urgent a { color: white; text-decoration: underline; font-weight: 600; }
+
+/* NAV TABS */
+.nav-wrap { position: sticky; top: 0; z-index: 100; background: var(--bg); padding: 8px 0; margin: 0 -16px 16px; padding-left: 16px; padding-right: 16px; }
+.nav { display: flex; gap: 6px; overflow-x: auto; padding: 4px 0 8px; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.nav button {
+  flex: 0 0 auto; padding: 8px 14px; border: none; border-radius: 20px;
+  background: var(--card); color: var(--text); font-size: 0.85em; font-weight: 600;
+  cursor: pointer; white-space: nowrap; box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  border: 1.5px solid var(--border); transition: all 0.15s;
+}
+.nav button.active { color: white; border-color: transparent; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+.nav button[data-day="1"].active { background: var(--d1); }
+.nav button[data-day="2"].active { background: var(--d2); }
+.nav button[data-day="3"].active { background: var(--d3); }
+.nav button[data-day="4"].active { background: var(--d4); }
+.nav button[data-day="5"].active { background: var(--d5); }
+.nav button[data-day="6"].active { background: var(--d6); }
+.nav button[data-day="hotels"].active, .nav button[data-day="budget"].active { background: #475569; }
+
+/* DAY CARD */
+.day {
+  background: var(--card); border-radius: 14px; padding: 16px; margin-bottom: 14px;
+  border: 1.5px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  display: none;
+}
+.day.show { display: block; }
+.day-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1.5px dashed var(--border); }
+.day-badge {
+  flex: 0 0 auto; width: 52px; height: 52px; border-radius: 12px; color: white;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.75em;
+}
+.day-badge .num { font-size: 1.4em; line-height: 1; margin-bottom: 1px; }
+.day-1 .day-badge { background: var(--d1); }
+.day-2 .day-badge { background: var(--d2); }
+.day-3 .day-badge { background: var(--d3); }
+.day-4 .day-badge { background: var(--d4); }
+.day-5 .day-badge { background: var(--d5); }
+.day-6 .day-badge { background: var(--d6); }
+.day-title { flex: 1; }
+.day-title h2 { font-size: 1.05em; margin-bottom: 3px; }
+.day-title .sub { font-size: 0.78em; color: var(--muted); }
+
+.tag {
+  display: inline-block; padding: 3px 8px; border-radius: 8px; font-size: 0.7em;
+  font-weight: 600; margin-right: 4px;
+}
+.tag-chill { background: #d1fae5; color: #065f46; }
+.tag-medium { background: #fef3c7; color: #92400e; }
+.tag-hard { background: #fee2e2; color: #991b1b; }
+
+/* TIME TABLE */
+.timetable { font-size: 0.88em; }
+.row { display: grid; grid-template-columns: 60px 1fr; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.row:last-child { border-bottom: none; }
+.time { color: var(--muted); font-weight: 600; font-size: 0.85em; padding-top: 1px; }
+.activity { color: var(--text); }
+.activity strong { color: #4338ca; }
+.activity a { color: #4338ca; text-decoration: none; border-bottom: 1px dotted #4338ca; }
+.activity .note { display: block; color: var(--muted); font-size: 0.85em; margin-top: 2px; }
+.activity .warn { color: #ea580c; font-weight: 600; }
+.activity .star { color: #f59e0b; }
+
+.callout {
+  margin-top: 14px; padding: 10px 12px; border-radius: 8px;
+  font-size: 0.84em; border-left: 3px solid;
+}
+.callout-tip { background: rgba(99,102,241,0.08); border-color: var(--d1); color: var(--text); }
+.callout-warn { background: rgba(234,88,12,0.1); border-color: var(--warn); color: var(--text); }
+
+/* HOTELS / BUDGET TABLE */
+.day-table { font-size: 0.88em; width: 100%; border-collapse: collapse; }
+.day-table th { text-align: left; padding: 8px 6px; background: var(--bg); font-size: 0.82em; color: var(--muted); border-bottom: 2px solid var(--border); }
+.day-table td { padding: 10px 6px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.day-table tr:last-child td { border-bottom: none; }
+.day-table strong { color: #4338ca; }
+
+/* FAB */
+.fab {
+  position: fixed; bottom: 20px; right: 20px; z-index: 200;
+  background: linear-gradient(135deg, var(--d1), var(--d6));
+  color: white; border: none; padding: 12px 16px; border-radius: 24px;
+  font-size: 0.9em; font-weight: 600; cursor: pointer;
+  box-shadow: 0 6px 20px rgba(99,102,241,0.4);
+}
+
+@media (min-width: 600px) {
+  html { font-size: 16px; }
+  .header h1 { font-size: 1.6em; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+  <h1>🏔️ Colorado 6天5晚 顺时针环游</h1>
+  <div class="meta">
+    <div>📅 <strong>2026-07-01 周三 → 2026-07-06 周一</strong></div>
+    <div>👯 Yixuan / Erica + 1 朋友</div>
+    <div>✈️ United DSM→DEN 13:40→14:51 ｜ SW 2940 DEN→DSM 19:35→22:25 <span style="font-size:0.8em; opacity:0.85;">(混合 PNR ⚠️)</span></div>
+    <div>🚗 全程自驾 ~1,500 mi ｜ 💰 ~$1,900/人</div>
+    <div style="margin-top:6px; font-size:0.78em; opacity:0.85;">v6.1 · 2026-06-19 · United+SW 航班锁定</div>
+  </div>
+</div>
+
+<!-- URGENT -->
+<div class="urgent">
+  <h2>🚨 立即必做（按紧急度）</h2>
+  <ol>
+    <li><strong>🚂 Pikes Peak Cog Railway 7/3 9:20am</strong> → <a href="https://www.cograilway.com/" target="_blank">cograilway.com</a> 今晚抢</li>
+    <li><strong>♨️ Strawberry Park 7/6 10am-12pm</strong> → <a href="https://strawberryhotsprings.com/" target="_blank">strawberryhotsprings.com</a>（现金/支票）</li>
+    <li><strong>🏨 5 晚酒店今晚定</strong> — Ouray 7/4 周末已抢半年</li>
+  </ol>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-wrap">
+  <div class="nav" id="nav">
+    <button data-day="1" class="active">Day 1 · 7/1 Wed</button>
+    <button data-day="2">Day 2 · 7/2 Thu</button>
+    <button data-day="3">Day 3 · 7/3 Fri</button>
+    <button data-day="4">Day 4 · 7/4 Sat</button>
+    <button data-day="5">Day 5 · 7/5 Sun</button>
+    <button data-day="6">Day 6 · 7/6 Mon</button>
+    <button data-day="hotels">🏨 酒店</button>
+    <button data-day="budget">💰 预算</button>
+  </div>
+</div>
+
+<!-- DAY 1 -->
+<div class="day day-1 show" data-day="1">
+  <div class="day-head">
+    <div class="day-badge"><span class="num">1</span><span>WED</span></div>
+    <div class="day-title">
+      <h2>抵达 + Red Rocks 黄昏 ⭐</h2>
+      <div class="sub">DSM → DEN → Red Rocks · 5,280 ft · 驾驶 1.5h</div>
+      <div style="margin-top:4px;"><span class="tag tag-chill">🟢 CHILL</span></div>
+    </div>
+  </div>
+  <div class="timetable">
+    <div class="row"><div class="time">12:00</div><div class="activity">DSM 机场办登机<span class="note">United Main Cabin 推荐 +$30-50 含 carry-on</span></div></div>
+    <div class="row"><div class="time">13:40</div><div class="activity"><strong>United DSM → DEN</strong><span class="note">2h11min 直飞</span></div></div>
+    <div class="row"><div class="time">14:51</div><div class="activity">抵 DEN MT 时间<span class="note">时差 -1h</span></div></div>
+    <div class="row"><div class="time">15:30</div><div class="activity">取行李 + 取车 Alamo<span class="note">Mid-size SUV 6 天 + additional driver</span></div></div>
+    <div class="row"><div class="time">16:00</div><div class="activity">出发 → <strong>Red Rocks Park</strong><span class="note">25 min 车 I-70 W to Morrison</span></div></div>
+    <div class="row"><div class="time">16:30</div><div class="activity">抵 <a href="https://www.redrocksonline.com/" target="_blank">Red Rocks Park & Amphitheatre</a><span class="note">免费入园 ⭐ 全球唯一天然声学完美剧场</span></div></div>
+    <div class="row"><div class="time">17:00-18:30</div><div class="activity"><strong>📸 Trading Post Trail 1.4 mi + Amphitheatre 台阶拍照</strong><span class="note">黄昏 golden hour 红岩最饱和</span></div></div>
+    <div class="row"><div class="time">19:00</div><div class="activity">晚餐 <a href="https://www.thefort.com/" target="_blank">The Fort</a><span class="note">Morrison 镇内西部牛排招牌</span></div></div>
+    <div class="row"><div class="time">20:30</div><div class="activity">Morrison → Aurora 30 min 回机场</div></div>
+    <div class="row"><div class="time">21:00</div><div class="activity">入住 <a href="https://www.marriott.com/hotels/travel/denbg-aloft-denver-airport-at-gateway-park/" target="_blank">Aloft Denver Airport</a><span class="note">机场旁 5 min 车</span></div></div>
+    <div class="row"><div class="time">22:00</div><div class="activity">睡 — 多喝水适应 5,280 ft</div></div>
+  </div>
+  <div class="callout callout-tip">🌅 <strong>Day 1 v6.1 升级</strong>：早 4h 落地解锁 Red Rocks 黄昏拍照（全球唯一天然声学完美露天剧场）。Day 6 可以直接还车飞，不路过 = 时间 buffer +1h 更稳。</div>
+</div>
+
+<!-- DAY 2 -->
+<div class="day day-2" data-day="2">
+  <div class="day-head">
+    <div class="day-badge"><span class="num">2</span><span>THU</span></div>
+    <div class="day-title">
+      <h2>南下 — Garden of the Gods + Manitou</h2>
+      <div class="sub">DEN → Manitou Springs · 海拔 6,400 ft · 驾驶 2.5h</div>
+      <div style="margin-top:4px;"><span class="tag tag-chill">🟢 CHILL</span></div>
+    </div>
+  </div>
+  <div class="timetable">
+    <div class="row"><div class="time">08:00</div><div class="activity">酒店早餐 + 多喝水</div></div>
+    <div class="row"><div class="time">09:30</div><div class="activity">退房 → 上 I-25 S → Colorado Springs<span class="note">1h15min, 70 mi</span></div></div>
+    <div class="row"><div class="time">10:45</div><div class="activity"><strong>🪨 <a href="https://gardenofgods.com/" target="_blank">Garden of the Gods</a> 游客中心</strong><span class="note">免费！包括停车</span></div></div>
+    <div class="row"><div class="time">11:00</div><div class="activity"><strong>Perkins Central Garden Trail 1.5 mi</strong> 铺装无障碍道<span class="note">看 Kissing Camels + Steamboat Rock</span></div></div>
+    <div class="row"><div class="time">12:30</div><div class="activity">Siamese Twins overlook 短上去<span class="note">拍 Pikes Peak 远景 15 min</span></div></div>
+    <div class="row"><div class="time">13:30</div><div class="activity">午餐 <a href="https://www.marigoldcafeandbakery.com/" target="_blank">Marigold Cafe & Bakery</a><span class="note">CO Springs 高分法式 brunch</span></div></div>
+    <div class="row"><div class="time">15:00</div><div class="activity">开 25 min 到 <strong>Manitou Springs 老镇</strong><span class="note">Victorian 时代温泉度假镇 6,400 ft</span></div></div>
+    <div class="row"><div class="time">15:30</div><div class="activity">入住 <a href="https://www.thecliffhouse.com/" target="_blank">The Cliff House at Pikes Peak</a><span class="note">1873 年历史酒店</span></div></div>
+    <div class="row"><div class="time">16:30</div><div class="activity">Manitou Main St 逛 + <strong>Penny Arcade</strong> 古董投币游戏厅<span class="note">免费看，玩几个 quarter</span></div></div>
+    <div class="row"><div class="time">18:00</div><div class="activity">晚餐 <a href="https://www.heartofjerusalemcafe.com/" target="_blank">Heart of Jerusalem Cafe</a><span class="note">地中海菜换口味</span></div></div>
+    <div class="row"><div class="time">20:00</div><div class="activity">回酒店早睡<span class="note">明天 Pikes Peak 14,115 ft</span></div></div>
+  </div>
+  <div class="callout callout-tip">🎯 <strong>Day 2 用意</strong>：6,035 ft 二级缓冲，给明天 14k 攒人本。看 Pikes Peak 远景预热。</div>
+</div>
+
+<!-- DAY 3 -->
+<div class="day day-3" data-day="3">
+  <div class="day-head">
+    <div class="day-badge"><span class="num">3</span><span>FRI</span></div>
+    <div class="day-title">
+      <h2>🚂 Pikes Peak Cog + 西移</h2>
+      <div class="sub">Manitou → Montrose · 顶 14,115 ft · 驾驶 5.5h</div>
+      <div style="margin-top:4px;"><span class="tag tag-medium">🟡 充实</span></div>
+    </div>
+  </div>
+  <div class="timetable">
+    <div class="row"><div class="time">07:00</div><div class="activity">起床、酒店早餐<span class="warn">务必吃饱、喝水</span></div></div>
+    <div class="row"><div class="time">08:30</div><div class="activity">退房，开 5 min 到 Cog Rail Depot<span class="note">515 Ruxton Ave, Manitou Springs</span></div></div>
+    <div class="row"><div class="time">09:00</div><div class="activity">Cog Rail check-in<span class="note">务必提前 20 min</span></div></div>
+    <div class="row"><div class="time">09:20</div><div class="activity"><strong>🚂 Pikes Peak Cog Railway 出发</strong><span class="note">1h15 上 + 40 min 顶 + 1h15 下</span></div></div>
+    <div class="row"><div class="time">10:35</div><div class="activity"><strong>抵 Pikes Peak Summit 14,115 ft</strong><span class="warn">⚠️ 缺氧 + 冷 + 风大——厚外套，慢动作</span></div></div>
+    <div class="row"><div class="time">10:35-11:15</div><div class="activity">Summit Complex + 拍 "America the Beautiful" 写诗处<span class="note">Katherine Lee Bates 1893 写诗地点</span></div></div>
+    <div class="row"><div class="time">12:30</div><div class="activity">Cog Rail 回到 Manitou<span class="note">微高反正常，下来就好</span></div></div>
+    <div class="row"><div class="time">13:00</div><div class="activity">午餐 <a href="https://www.adamsmountain.com/" target="_blank">Adam's Mountain Cafe</a><span class="note">健康有机</span></div></div>
+    <div class="row"><div class="time">14:30</div><div class="activity"><strong>🚗 Manitou → Montrose</strong><span class="note">5h, 290 mi via US-24 W → US-285 → US-50 W</span></div></div>
+    <div class="row"><div class="time">17:00</div><div class="activity">中途停 <strong>Salida</strong> 老镇 stretch<span class="note">Arkansas River 边 15 min</span></div></div>
+    <div class="row"><div class="time">18:00</div><div class="activity">Gunnison 简餐 / coffee</div></div>
+    <div class="row"><div class="time">20:00</div><div class="activity">抵 <strong>Montrose 5,810 ft</strong><span class="note">入住 <a href="https://www.ihg.com/holidayinnexpress/hotels/us/en/montrose/mtjco/hoteldetail" target="_blank">Holiday Inn Express Montrose</a></span></div></div>
+    <div class="row"><div class="time">20:30</div><div class="activity">简餐 <a href="https://www.coloradoboy.com/" target="_blank">Colorado Boy Brewery</a><span class="note">当地精酿 + pizza</span></div></div>
+    <div class="row"><div class="time">22:00</div><div class="activity">睡 — 明天 San Juans 主菜</div></div>
+  </div>
+  <div class="callout callout-warn">🌬️ <strong>Pikes Peak 高反 SOP</strong>：上山前喝 1L 水 + Ibuprofen 备用。症状（头痛/恶心/气短）下山就好。Yixuan 经期 + 高海拔双叠加，<strong>只走 summit 平地，不爬任何高台</strong>。</div>
+</div>
+
+<!-- DAY 4 -->
+<div class="day day-4" data-day="4">
+  <div class="day-head">
+    <div class="day-badge"><span class="num">4</span><span>SAT</span></div>
+    <div class="day-title">
+      <h2>🏔️ San Juans 主菜 — 朋友心愿</h2>
+      <div class="sub">Million Dollar Hwy + Silverton + Telluride 环线 · 驾驶 5h</div>
+      <div style="margin-top:4px;"><span class="tag tag-medium">🟡 风景日</span></div>
+    </div>
+  </div>
+  <div class="timetable">
+    <div class="row"><div class="time">07:30</div><div class="activity">早餐 <a href="https://www.camprobber.com/" target="_blank">Camp Robber Cafe</a><span class="note">Montrose 当地早餐天花板</span></div></div>
+    <div class="row"><div class="time">08:30</div><div class="activity">Montrose → Ouray 45 min (US-550 S)<span class="note">进入 San Juans 视觉震撼</span></div></div>
+    <div class="row"><div class="time">09:15</div><div class="activity"><strong>📸 Box Canyon Falls $5/人</strong><span class="note">5 min 步道，一线天瀑布</span></div></div>
+    <div class="row"><div class="time">10:00</div><div class="activity">Ouray Main St 拍照 + 咖啡<span class="note">"美版瑞士" 老街</span></div></div>
+    <div class="row"><div class="time">10:45</div><div class="activity"><strong>🛣️ Million Dollar Hwy US-550 S → Silverton</strong><span class="warn">⚠️ 无护栏 + 悬崖 + 急弯——双人轮流开</span></div></div>
+    <div class="row"><div class="time">11:45</div><div class="activity"><strong>抵 Silverton 9,318 ft</strong><span class="note">国家历史地标小镇</span></div></div>
+    <div class="row"><div class="time">12:00</div><div class="activity">Silverton Main St 逛 + 老金矿氛围</div></div>
+    <div class="row"><div class="time">13:00</div><div class="activity">午餐 <a href="https://www.avalanchebrewingco.com/" target="_blank">Avalanche Brewing</a><span class="note">山区精酿 + burger</span></div></div>
+    <div class="row"><div class="time">14:30</div><div class="activity">Silverton → Telluride 经 CO-145<span class="note">2h 山阻隔绕路，风景超好</span></div></div>
+    <div class="row"><div class="time">16:30</div><div class="activity"><strong>抵 Telluride 8,750 ft</strong><span class="note">小资圣地</span></div></div>
+    <div class="row"><div class="time">17:00</div><div class="activity"><strong>🚡 Telluride Gondola</strong><span class="note">全美唯一免费高空缆车，13 min 跨山到 Mountain Village 10,540 ft</span></div></div>
+    <div class="row"><div class="time">17:45</div><div class="activity">Telluride 镇内 + <strong>Bridal Veil Falls</strong> 远景<span class="note">Colorado 最高瀑布 365 ft</span></div></div>
+    <div class="row"><div class="time">18:30</div><div class="activity">晚餐 <a href="https://butcherandbakercafe.com/" target="_blank">The Butcher & The Baker</a><span class="note">$40-60/人 高分美式</span></div></div>
+    <div class="row"><div class="time">20:00</div><div class="activity">Telluride → Ouray 经 Dallas Divide<span class="note">1.5h 黄昏山口</span></div></div>
+    <div class="row"><div class="time">21:30</div><div class="activity">抵 <a href="https://www.boxcanyonouray.com/" target="_blank">Box Canyon Lodge Ouray</a><span class="note">房间自带私人温泉桶</span></div></div>
+    <div class="row"><div class="time">22:00</div><div class="activity">朋友泡温泉桶 ｜ Yixuan 经期跳过 chill<span class="note">绕开 Main St 烟花人潮</span></div></div>
+  </div>
+  <div class="callout callout-warn">🎆 <strong>7/4 Ouray 现实</strong>：Ouray 是 Colorado 著名"老式 4th of July 小镇" — 上午 parade，21:00-22:00 烟花峰值。<strong>主动绕开 Main St</strong>，从 Dallas Divide 进 Box Canyon Lodge 后方入口。</div>
+</div>
+
+<!-- DAY 5 -->
+<div class="day day-5" data-day="5">
+  <div class="day-head">
+    <div class="day-badge"><span class="num">5</span><span>SUN</span></div>
+    <div class="day-title">
+      <h2>北转移 — 最长驾驶日</h2>
+      <div class="sub">Ouray → Steamboat Springs · 驾驶 6h</div>
+      <div style="margin-top:4px;"><span class="tag tag-hard">🔴 最累的一天</span></div>
+    </div>
+  </div>
+  <div class="timetable">
+    <div class="row"><div class="time">07:30</div><div class="activity">起床、酒店早餐</div></div>
+    <div class="row"><div class="time">08:30</div><div class="activity">Ouray <strong>Cascade Falls</strong> 短走 0.5 mi<span class="note">镇北边最后一拍</span></div></div>
+    <div class="row"><div class="time">09:30</div><div class="activity">退房，出发 <strong>Ouray → Steamboat Springs</strong><span class="note">6h, 370 mi via US-550 N → US-50 E → I-70 → US-40 N</span></div></div>
+    <div class="row"><div class="time">12:30</div><div class="activity">中途停 <strong>Glenwood Springs</strong> 午餐 <a href="https://www.slopeandhatchgws.com/" target="_blank">Slope & Hatch</a><span class="note">Mexican fusion</span></div></div>
+    <div class="row"><div class="time">13:30</div><div class="activity">继续北上 US-40 N<span class="note">Glenwood Canyon I-70 段全美最美州际</span></div></div>
+    <div class="row"><div class="time">16:30</div><div class="activity">抵 <strong>Steamboat Springs 6,732 ft</strong><span class="note">入住 <a href="https://www.ihg.com/holidayinn/hotels/us/en/steamboat-springs/hdnco/hoteldetail" target="_blank">Holiday Inn Steamboat Springs</a></span></div></div>
+    <div class="row"><div class="time">17:30</div><div class="activity"><strong>📸 Fish Creek Falls 1.0 mi RT easy walk</strong><span class="note">瀑布 280 ft 高，镇内 5 min 车</span></div></div>
+    <div class="row"><div class="time">19:00</div><div class="activity">晚餐 <a href="https://carlstavern.com/" target="_blank">Carl's Tavern</a><span class="note">Steamboat 高分美式</span></div></div>
+    <div class="row"><div class="time">21:00</div><div class="activity">镇上 Main St 逛 / coffee<span class="note">早睡，明天 Strawberry</span></div></div>
+  </div>
+  <div class="callout callout-tip">🚗 <strong>Day 5 驾驶 6h</strong>：副驾接管 2-3h 给主驾喘气，I-70 Glenwood Canyon 段最美——副驾抓拍。中午 1h 吃饭散步。</div>
+</div>
+
+<!-- DAY 6 -->
+<div class="day day-6" data-day="6">
+  <div class="day-head">
+    <div class="day-badge"><span class="num">6</span><span>MON</span></div>
+    <div class="day-title">
+      <h2>♨️ Strawberry Park + 回家</h2>
+      <div class="sub">Steamboat → DEN → DSM · 驾驶 3h</div>
+      <div style="margin-top:4px;"><span class="tag tag-medium">🟡 紧凑</span></div>
+    </div>
+  </div>
+  <div class="timetable">
+    <div class="row"><div class="time">08:00</div><div class="activity">起床、酒店早餐</div></div>
+    <div class="row"><div class="time">09:15</div><div class="activity">退房，开 15 min 到 <a href="https://strawberryhotsprings.com/" target="_blank">Strawberry Park Hot Springs</a><span class="note">44200 Co Rd 36, Steamboat Springs</span></div></div>
+    <div class="row"><div class="time">09:50</div><div class="activity">到 Strawberry Park 入园<span class="warn">现金 $20/人 + 自带毛巾</span></div></div>
+    <div class="row"><div class="time">10:00-12:00</div><div class="activity"><strong>♨️ Strawberry Park Hot Springs 2h 泡汤</strong><span class="note">4 个天然池 95-104°F</span></div></div>
+    <div class="row"><div class="time">12:15</div><div class="activity">离开 Strawberry Park</div></div>
+    <div class="row"><div class="time">12:30</div><div class="activity">简餐 <a href="https://www.yampasandwich.com/" target="_blank">Yampa Sandwich Co</a><span class="note">Steamboat 路上</span></div></div>
+    <div class="row"><div class="time">13:00</div><div class="activity"><strong>🚗 Steamboat → Denver</strong><span class="note">3h, 160 mi via US-40 E → I-70 E（Red Rocks Day 1 已去过）</span></div></div>
+    <div class="row"><div class="time">16:00</div><div class="activity">抵 Denver Aurora 区</div></div>
+    <div class="row"><div class="time">16:30</div><div class="activity">还车 Alamo + 摆渡机场<span class="note">30 min</span></div></div>
+    <div class="row"><div class="time">17:30</div><div class="activity">DEN 安检<span class="note">提前 2h buffer 应付雷暴延误</span></div></div>
+    <div class="row"><div class="time">19:35</div><div class="activity"><strong>SW 2940 DEN → DSM</strong><span class="note">1h50min</span></div></div>
+    <div class="row"><div class="time">22:25</div><div class="activity">抵 DSM</div></div>
+    <div class="row"><div class="time">23:30</div><div class="activity">到家，Luba 抱抱 🐱</div></div>
+  </div>
+  <div class="callout callout-warn">⚠️ <strong>Day 6 时间紧</strong>：任何 Steamboat 出发延误都吃掉 Red Rocks 路过环节。优先级：飞机 > Strawberry > Red Rocks 路过。</div>
+</div>
+
+<!-- HOTELS -->
+<div class="day" data-day="hotels">
+  <div class="day-head">
+    <div class="day-badge" style="background:#475569;"><span style="font-size:1.4em;">🏨</span></div>
+    <div class="day-title">
+      <h2>5 晚酒店明细</h2>
+      <div class="sub">total $1,110 = $555/人</div>
+    </div>
+  </div>
+  <table class="day-table">
+    <thead><tr><th>Night</th><th>城市</th><th>酒店</th><th>$/晚</th></tr></thead>
+    <tbody>
+      <tr><td><strong>7/1 Wed</strong></td><td>DEN airport</td><td><a href="https://www.marriott.com/hotels/travel/denbg-aloft-denver-airport-at-gateway-park/" target="_blank">Aloft Denver Airport</a></td><td>$130</td></tr>
+      <tr><td><strong>7/2 Thu</strong></td><td>Manitou Springs</td><td><a href="https://www.thecliffhouse.com/" target="_blank">Cliff House at Pikes Peak</a></td><td>$260</td></tr>
+      <tr><td><strong>7/3 Fri</strong></td><td>Montrose</td><td><a href="https://www.ihg.com/holidayinnexpress/hotels/us/en/montrose/mtjco/hoteldetail" target="_blank">Holiday Inn Express</a></td><td>$180</td></tr>
+      <tr><td><strong>7/4 Sat</strong></td><td>Ouray ⭐</td><td><a href="https://www.boxcanyonouray.com/" target="_blank">Box Canyon Lodge</a></td><td>$320 ⚠️</td></tr>
+      <tr><td><strong>7/5 Sun</strong></td><td>Steamboat Springs</td><td><a href="https://www.ihg.com/holidayinn/hotels/us/en/steamboat-springs/hdnco/hoteldetail" target="_blank">Holiday Inn</a></td><td>$220</td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-tip">💸 <strong>省钱版</strong>：Ouray 改 Twin Peaks Lodge ~$220（无私人温泉桶）；Manitou 改 Holiday Inn Express ~$160 — 5 晚 total 砍到 $830 = $415/人</div>
+</div>
+
+<!-- BUDGET -->
+<div class="day" data-day="budget">
+  <div class="day-head">
+    <div class="day-badge" style="background:#475569;"><span style="font-size:1.4em;">💰</span></div>
+    <div class="day-title">
+      <h2>预算总览</h2>
+      <div class="sub">朋友 $1,736 ｜ Yixuan $1,886（含猫）</div>
+    </div>
+  </div>
+  <table class="day-table">
+    <thead><tr><th>项目</th><th>Total</th><th>人均</th></tr></thead>
+    <tbody>
+      <tr><td>酒店 5 晚</td><td>$1,110</td><td>$555</td></tr>
+      <tr><td>租车 SUV 6 天 + 加驾 + 保险</td><td>$648</td><td>$324</td></tr>
+      <tr><td>油 ~1,500 mi</td><td>$215</td><td>$108</td></tr>
+      <tr><td>停车 + 景点入园</td><td>$70</td><td>$35</td></tr>
+      <tr><td>机票 RT (United 去 + SW 回)</td><td>$740</td><td>$370</td></tr>
+      <tr><td>🚂 Pikes Peak Cog Rail</td><td>$117</td><td>$58.50</td></tr>
+      <tr><td>♨️ Strawberry Park + 毛巾</td><td>$50</td><td>$25</td></tr>
+      <tr><td>餐饮 6 天</td><td>$560</td><td>$280</td></tr>
+      <tr><td>装备 + 现金 buffer</td><td>$80</td><td>$40</td></tr>
+      <tr><td>Luba sitter × 6 (Yixuan only)</td><td>$150</td><td>—</td></tr>
+      <tr><td><strong>朋友 total</strong></td><td>—</td><td><strong>$1,796</strong></td></tr>
+      <tr><td><strong>Yixuan total</strong></td><td>—</td><td><strong>$1,946</strong></td></tr>
+      <tr><td><strong>双人 grand total</strong></td><td><strong>$3,742</strong></td><td>—</td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-tip">✅ 在 $1,100-1,900/人区间舒适落点</div>
+</div>
+
+</div>
+
+<button class="fab" onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆ 顶部</button>
+
+<script>
+const nav = document.getElementById('nav');
+const buttons = nav.querySelectorAll('button');
+const days = document.querySelectorAll('.day');
+buttons.forEach(b => {
+  b.addEventListener('click', () => {
+    buttons.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    const target = b.dataset.day;
+    days.forEach(d => {
+      if (d.dataset.day === target) d.classList.add('show');
+      else d.classList.remove('show');
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+</script>
+
+</body>
+</html>
