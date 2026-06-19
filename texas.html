@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>德州自驾 6天5晚 · 保姆级攻略</title>
+<style>
+  :root{
+    --sand:#f6efe3; --sand2:#efe4d2; --ink:#2b2118; --muted:#7a6a55;
+    --sun:#e8722e; --sun2:#f2a33c; --cactus:#5b7a4b; --cactus-d:#3f5a34;
+    --grape:#7d4a78; --card:#fffdf8; --line:#e4d8c2;
+    --red:#c0392b; --blue:#2d6cb5;
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,sans-serif;
+    background:var(--sand);color:var(--ink);line-height:1.65;font-size:16px;-webkit-text-size-adjust:100%}
+  a{color:var(--blue);text-decoration:none}
+
+  header.hero{background:linear-gradient(160deg,var(--sun) 0%,var(--sun2) 45%,#d9b25a 100%);
+    color:#fff;padding:34px 16px 28px;text-align:center;position:relative;overflow:hidden}
+  header.hero h1{margin:0 0 6px;font-size:27px;letter-spacing:.5px}
+  header.hero .sub{font-size:15px;opacity:.95;font-weight:500}
+  .route-line{display:flex;flex-wrap:wrap;gap:6px 4px;justify-content:center;align-items:center;margin-top:14px;font-size:13px;font-weight:600}
+  .route-line span.node{background:rgba(255,255,255,.22);padding:4px 10px;border-radius:20px;white-space:nowrap}
+  .route-line span.arw{opacity:.85}
+  .facts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+  .fact{background:rgba(0,0,0,.14);border-radius:12px;padding:8px 12px;font-size:12.5px;min-width:90px}
+  .fact b{display:block;font-size:15px;margin-top:2px}
+
+  nav.jump{position:sticky;top:0;z-index:50;background:var(--sand2);border-bottom:1px solid var(--line);
+    display:flex;gap:4px;overflow-x:auto;padding:8px 10px;-webkit-overflow-scrolling:touch}
+  nav.jump a{flex:0 0 auto;font-size:13px;font-weight:600;color:var(--cactus-d);background:#fff;
+    border:1px solid var(--line);padding:6px 11px;border-radius:18px}
+  nav.jump a:active{background:var(--cactus);color:#fff}
+
+  h2.sec{font-size:20px;margin:30px 0 12px;padding-left:12px;border-left:5px solid var(--sun);color:var(--ink)}
+
+  .alerts{background:#fff6ed;border:1px solid #f3cda3;border-radius:14px;padding:14px 16px;margin-top:18px}
+  .alerts .a{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed #f0d9bf;font-size:14px}
+  .alerts .a:last-child{border-bottom:none}
+  .alerts .a .ic{font-size:18px;flex:0 0 22px;text-align:center}
+  .alerts .a b{color:var(--red)}
+
+  .day{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-top:16px;
+    box-shadow:0 2px 10px rgba(120,90,40,.06);overflow:hidden}
+  .day .dh{background:var(--cactus);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .day.h .dh{background:#3a6ea5}
+  .day.w .dh{background:var(--grape)}
+  .day .dh .dt{font-size:16px;font-weight:700}
+  .day .dh .dd{font-size:12.5px;opacity:.92;text-align:right;line-height:1.4}
+  .day .db{padding:6px 16px 16px}
+  .step{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #f1eadc}
+  .step:last-child{border-bottom:none}
+  .step .tm{flex:0 0 58px;font-size:12.5px;font-weight:700;color:var(--sun);padding-top:1px}
+  .step .ct{flex:1}
+  .step .ct .ti{font-weight:600}
+  .step .ct .ds{font-size:13.5px;color:var(--muted);margin-top:2px}
+  .tag{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:10px;margin-left:6px;vertical-align:1px}
+  .tag.cost{background:#eef5e8;color:var(--cactus-d)}
+  .tag.time{background:#fdeede;color:#b5601f}
+  .tag.hot{background:#fde2dd;color:var(--red)}
+  .tag.book{background:#e7eefb;color:#2d5aa8}
+  .maplink{font-size:12.5px;font-weight:600;color:var(--blue);white-space:nowrap}
+  .maplink::before{content:"📍"}
+  .drive{background:#f4f1e8;border-radius:10px;padding:9px 12px;margin:10px 0;font-size:13px;color:#6a5b44;display:flex;gap:8px;align-items:flex-start}
+  .drive::before{content:"🚗";font-size:16px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:16px}
+  .card h3{margin:0 0 8px;font-size:16px}
+  ul.clean{margin:6px 0 0;padding-left:20px}
+  ul.clean li{margin:5px 0;font-size:14.5px}
+
+  .food{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid #f1eadc;font-size:14px}
+  .food:last-child{border-bottom:none}
+  .food .em{font-size:20px;flex:0 0 26px}
+  .food b{display:block}
+
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
+  @media(max-width:560px){.checks{grid-template-columns:1fr}}
+  .checks label{display:flex;gap:8px;align-items:flex-start;font-size:14px;padding:4px 0;cursor:pointer}
+  .checks input{margin-top:3px;width:17px;height:17px;accent-color:var(--cactus);flex:0 0 auto}
+  .checks label.done span{text-decoration:line-through;color:#aa9}
+
+  table.bud{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+  table.bud th,table.bud td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  table.bud th{color:var(--muted);font-weight:600;font-size:12.5px}
+  table.bud td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  table.bud tr.tot td{font-weight:700;border-top:2px solid var(--cactus);border-bottom:none;font-size:15px}
+
+  .pill{display:inline-block;background:#eef5e8;color:var(--cactus-d);border-radius:8px;padding:2px 8px;font-size:12.5px;font-weight:600;margin:2px 4px 2px 0}
+  .note{font-size:12.5px;color:var(--muted);margin-top:10px}
+  .booknow{background:#fff;border:1px dashed var(--cactus);border-radius:10px;padding:8px 12px;font-size:13px;margin-top:8px}
+  footer{text-align:center;font-size:12px;color:var(--muted);margin-top:34px;padding-top:16px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>🤠 德州自驾 6天5晚 · 保姆级攻略</h1>
+  <div class="sub">圣安东尼奥 · 酒乡巨石 · 休斯顿 · 奥斯汀 ｜ 2026年7月1日–6日</div>
+  <div class="route-line">
+    <span class="node">✈️ Des Moines</span><span class="arw">→</span>
+    <span class="node">🌵 San Antonio 大本营</span><span class="arw">→</span>
+    <span class="node">🍷 Hill Country</span><span class="arw">→</span>
+    <span class="node">🚀 Houston</span><span class="arw">→</span>
+    <span class="node">🎆 San Antonio</span><span class="arw">→</span>
+    <span class="node">🦇 Austin</span><span class="arw">→</span>
+    <span class="node">✈️ 返程</span>
+  </div>
+  <div class="facts">
+    <div class="fact">出行<b>7/1–7/6</b></div>
+    <div class="fact">人数<b>1–2人</b></div>
+    <div class="fact">总车程<b>约700英里·轻松</b></div>
+    <div class="fact">大本营<b>圣安东尼奥</b></div>
+  </div>
+</header>
+
+<nav class="jump">
+  <a href="#alerts">⚠️ 必读</a>
+  <a href="#days">📅 每日行程</a>
+  <a href="#tips">🌡️ 实用贴士</a>
+  <a href="#food">🍽️ 吃吃喝喝</a>
+  <a href="#pack">🎒 打包清单</a>
+  <a href="#budget">💰 预算</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- ALERTS -->
+  <h2 class="sec" id="alerts">出发前必做（4件事）</h2>
+  <div class="alerts">
+    <div class="a"><div class="ic">🎟️</div><div><b>Enchanted Rock 必须提前预约门票！</b>巨石公园要 <b>$8/人 day pass</b>，只能网上预约（最多提前30天，<b>现在就能订7/2</b>）。夏天+独立日周末常常<b>提前几天就售罄</b>，先去 <a href="https://tpwd.texas.gov/state-parks/enchanted-rock" target="_blank">德州州立公园官网</a> 抢一个清晨时段。</div></div>
+    <div class="a"><div class="ic">🚀</div><div><b>NASA 门票 + Tram Tour 提前网上订。</b>Space Center Houston 成人 $29.95（网上订省$5）；土星五号火箭那条 Tram Tour 很热门、<b>常提前售罄</b>，订票时一起选好时段。</div></div>
+    <div class="a"><div class="ic">🥵</div><div><b>7月很晒。</b>Enchanted Rock 是裸露花岗岩巨石、几乎没遮荫——<b>清晨爬、每人带1加仑水</b>、帽子墨镜防晒。其它日子尽量把暴晒活动放早晚，正午躲进空调馆。</div></div>
+    <div class="a"><div class="ic">🍷</div><div><b>酒庄别酒驾。</b>Fredericksburg 品酒时指定一名不喝的司机，或多用 Main Street 步行可达的品酒室；品酒可以"抿了吐"控制酒量。</div></div>
+  </div>
+
+  <!-- DAYS -->
+  <h2 class="sec" id="days">每日行程</h2>
+
+  <!-- DAY 0 -->
+  <div class="day">
+    <div class="dh"><div class="dt">Day 0 · 抵达</div><div class="dd">周三 7/1<br>圣安东尼奥</div></div>
+    <div class="db">
+      <div class="step"><div class="tm">21:06</div><div class="ct"><div class="ti">落地 San Antonio (SAT)</div><div class="ds">取租车（先确认柜台营业到夜里；到港+行李+取车约30–45分钟）。建议租 SUV/中型车，几段公路更稳。</div></div></div>
+      <div class="step"><div class="tm">22:00</div><div class="ct"><div class="ti">入住 + 补给 <span class="tag time">今晚搞定</span></div><div class="ds">住市区/机场附近。顺手去 H-E-B 超市买好水、电解质、零食；把明天去 Enchanted Rock 的门票和清晨时段再确认一遍。太累就直接睡，明天早起。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=H-E-B+San+Antonio" target="_blank"> H-E-B 超市</a></span></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 1 · HILL COUNTRY -->
+  <div class="day w">
+    <div class="dh"><div class="dt">Day 1 · 巨石 + 酒乡</div><div class="dd">周四 7/2<br>Hill Country 一日</div></div>
+    <div class="db">
+      <div class="drive">圣安东尼奥 → Enchanted Rock 约 <b>95 英里 / 1.5 小时</b>；巨石 → Fredericksburg 仅 18 英里 / 25 分钟。平日去人少、好停车。</div>
+      <div class="step"><div class="tm">07:00</div><div class="ct"><div class="ti">出发去 Enchanted Rock <span class="tag book">需预约</span></div><div class="ds">趁清晨凉快爬巨石。<b>Summit Trail</b> 往返约1.3英里、爬升约130米的光滑花岗岩穹顶，登顶视野极好。务必带足水、防晒、抓地鞋。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Enchanted+Rock+State+Natural+Area" target="_blank"> Enchanted Rock</a></span></div></div>
+      <div class="step"><div class="tm">11:30</div><div class="ct"><div class="ti">Fredericksburg 德式小镇午餐</div><div class="ds">1846年德国移民建的小镇。Main Street 逛街，吃地道德餐（猪排schnitzel、香肠、德式啤酒），7月正是<b>蜜桃季</b>🍑——路边农摊买新鲜德州蜜桃、桃冰淇淋。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Main+Street+Fredericksburg+TX" target="_blank"> Main Street</a></span></div></div>
+      <div class="step"><div class="tm">14:00</div><div class="ct"><div class="ti">290 号酒庄之路品酒 <span class="tag cost">品酒约$15–25/家</span></div><div class="ds">从 Johnson City 到 Fburg 的290公路上有50+家酒庄（德州的"纳帕谷"）。挑1–2家坐下慢品；不想开车就用 Main Street 上步行可达的品酒室。<b>记得指定司机。</b></div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Wine+Road+290+Fredericksburg" target="_blank"> Wine Road 290</a></span></div></div>
+      <div class="step"><div class="tm">17:30</div><div class="ct"><div class="ti">开回圣安东尼奥</div><div class="ds">约1.5小时。晚上河滨步道(River Walk)吃晚饭、散步。</div></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 2 · HOUSTON -->
+  <div class="day h">
+    <div class="dh"><div class="dt">Day 2 · 奔休斯顿看NASA</div><div class="dd">周五 7/3<br>SA → Houston</div></div>
+    <div class="db">
+      <div class="drive">圣安东尼奥 → 休斯顿 · 约 <b>197 英里 / 3–3.5 小时</b>（I-10 东，进城可能堵）。<a href="https://www.google.com/maps/dir/?api=1&origin=San+Antonio,TX&destination=Space+Center+Houston&travelmode=driving" target="_blank">查看路线</a></div>
+      <div class="step"><div class="tm">07:30</div><div class="ct"><div class="ti">早点出发去休斯顿</div><div class="ds">早走避开晚高峰、给 NASA 留足时间。路上可在 Luling/Buc-ee's 停一下补给。</div></div></div>
+      <div class="step"><div class="tm">11:30</div><div class="ct"><div class="ti">Space Center Houston <span class="tag cost">成人$29.95</span> <span class="tag book">订Tram</span></div><div class="ds">休斯顿的重头戏，也是你那篇小红书的高光。预留 <b>4–6小时</b>：展厅有各种航天设备拆解，<b>Tram Tour</b> 带你看阿波罗发射控制中心、土星五号巨型火箭（"巨大的推进器太震撼"就是这）。Tram 常售罄，订票时选好时段。周五10:00–18:00开。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Space+Center+Houston" target="_blank"> Space Center Houston</a></span></div></div>
+      <div class="step"><div class="tm">18:30</div><div class="ct"><div class="ti">休斯顿中国城晚饭 🧋</div><div class="ds">Bellaire Blvd 一带是全美最大华人区之一，新疆菜、川菜、烤串、奶茶、亚洲甜品都很地道——正好解一路西餐的腻。入住休斯顿（1晚）。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Houston+Chinatown+Bellaire+Blvd" target="_blank"> 休斯顿中国城</a></span></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 3 · HOUSTON → SA, JULY 4 -->
+  <div class="day">
+    <div class="dh"><div class="dt">Day 3 · 休斯顿城区 + 独立日</div><div class="dd">周六 7/4 🎆<br>Houston → SA</div></div>
+    <div class="db">
+      <div class="drive">上午逛休斯顿，下午开回圣安东尼奥（约3–3.5小时），赶上晚上独立日烟花。</div>
+      <div class="step"><div class="tm">09:30</div><div class="ct"><div class="ti">Waterwall Park + Galleria <span class="tag hot">避暑好去处</span></div><div class="ds">20米高的水幕墙(Waterwall)喷11000加仑/分钟，水雾边特别凉、出片；旁边 Galleria 是德州最大商场（有溜冰场），停车走过去约10分钟。喜茶/奶茶慢慢逛。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Gerald+D+Hines+Waterwall+Park" target="_blank"> Waterwall Park</a></span> <span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=The+Galleria+Houston" target="_blank"> Galleria</a></span></div></div>
+      <div class="step"><div class="tm">11:00</div><div class="ct"><div class="ti">（可选）博物馆区</div><div class="ds">时间够可去 Museum District——休斯顿自然科学博物馆很赞，全室内空调，适合大热天。不赶时间再去。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Houston+Museum+District" target="_blank"> Museum District</a></span></div></div>
+      <div class="step"><div class="tm">13:30</div><div class="ct"><div class="ti">开回圣安东尼奥</div><div class="ds">路上吃个 In-N-Out（小红书心心念念的加州汉堡）。</div></div></div>
+      <div class="step"><div class="tm">20:00</div><div class="ct"><div class="ti">独立日烟花 @ Woodlawn Lake <span class="tag cost">免费</span></div><div class="ds">H-E-B 独立日庆典（10:00–21:30），<b>21:00 无人机秀+烟花</b>压轴，今年美国250周年更隆重。带椅子/毯子/水。<br><span class="note">想看更大场面也可选择留休斯顿过 Freedom Over Texas（全美最大烟花秀之一），但那样要多住1晚休斯顿、并打乱后面奥斯汀的安排。</span></div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Woodlawn+Lake+Park+San+Antonio" target="_blank"> Woodlawn Lake Park</a></span></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 4 · AUSTIN -->
+  <div class="day">
+    <div class="dh"><div class="dt">Day 4 · 奥斯汀一日</div><div class="dd">周日 7/5<br>SA → Austin → SA</div></div>
+    <div class="db">
+      <div class="drive">圣安东尼奥 ⇄ 奥斯汀 · 单程约 80 英里 / 1.5 小时。可顺路在 New Braunfels 的巨型 Buc-ee's 打卡补给。</div>
+      <div class="step"><div class="tm">10:00</div><div class="ct"><div class="ti">出发 + Buc-ee's 海狸加油站</div><div class="ds">I-35 旁巨型店：牛肉干试吃、德州纪念品、干净厕所一绝——小红书同款。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Buc-ee%27s+New+Braunfels" target="_blank"> Buc-ee's</a></span></div></div>
+      <div class="step"><div class="tm">12:00</div><div class="ct"><div class="ti">奥斯汀市区 + BBQ 午餐</div><div class="ds">德州州议会大厦（免费）、South Congress(SoCo)逛街。BBQ：<b>Franklin</b>（最有名但排长队，要趁早）或更好排的 <b>la Barbecue / Terry Black's / Stiles Switch</b>。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Texas+State+Capitol+Austin" target="_blank"> Texas Capitol</a></span></div></div>
+      <div class="step"><div class="tm">15:30</div><div class="ct"><div class="ti">Barton Springs 天然泉水泳池 <span class="tag hot">大热天必跳</span></div><div class="ds">常年约20°C的泉水泳池，暴晒一天后跳进去最爽。带泳衣。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Barton+Springs+Pool+Austin" target="_blank"> Barton Springs</a></span></div></div>
+      <div class="step"><div class="tm">20:00</div><div class="ct"><div class="ti">Congress 大桥蝙蝠 <span class="tag cost">免费</span></div><div class="ds">北美最大城市蝙蝠群（约150万只），日落前30分钟陆续出洞成河——<b>7–8月正是高峰季</b>。看完开回 SA（约1.5小时）。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Congress+Avenue+Bridge+Bats+Austin" target="_blank"> 蝙蝠桥</a></span></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 5 · SA + DEPART -->
+  <div class="day">
+    <div class="dh"><div class="dt">Day 5 · 圣安东尼奥 + 返程</div><div class="dd">周一 7/6 ✈️<br>San Antonio</div></div>
+    <div class="db">
+      <div class="step"><div class="tm">09:00</div><div class="ct"><div class="ti">SA 核心打卡（都在市区，不用长途开车）</div><div class="ds">The Alamo（免费）→ River Walk 坐船游（约$15）→ Pearl 珍珠区早午餐 + 周末农夫市集。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=The+Alamo+San+Antonio" target="_blank"> The Alamo</a></span> <span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Pearl+District+San+Antonio" target="_blank"> Pearl District</a></span></div></div>
+      <div class="step"><div class="tm">12:00</div><div class="ct"><div class="ti">Mission San José（UNESCO遗产）+ 告别午餐</div><div class="ds">保存最完整的西班牙传教站之一，和小红书提到的 San Jose Church 同款，免费。午餐 <b>Mi Tierra</b>（市集广场百年 Tex-Mex，装饰超热闹）。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Mission+San+Jose+San+Antonio" target="_blank"> Mission San José</a></span> <span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Mi+Tierra+Cafe+San+Antonio" target="_blank"> Mi Tierra</a></span></div></div>
+      <div class="step"><div class="tm">16:30</div><div class="ct"><div class="ti">还车 → 安检 <span class="tag time">航班前2小时</span></div><div class="ds">16:30前把车还到 SAT，留足还车+安检时间。</div></div></div>
+      <div class="step"><div class="tm">19:08</div><div class="ct"><div class="ti">起飞回 Des Moines</div><div class="ds">23:58 到家，行程结束。🎉</div></div></div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <h2 class="sec" id="tips">🌡️ 实用贴士</h2>
+  <div class="card">
+    <h3>预约与门票（别忘）</h3>
+    <ul class="clean">
+      <li><b>Enchanted Rock：</b>$8/人 day pass，<a href="https://tpwd.texas.gov/state-parks/enchanted-rock" target="_blank">德州州立公园官网</a>提前订（最多30天），选清晨时段；周末/节假日常售罄。</li>
+      <li><b>NASA Space Center：</b>成人$29.95（网上订省$5），<b>Tram Tour 一起订</b>，否则到场可能没位。</li>
+      <li><b>River Walk 游船</b>约$15、<b>酒庄品酒</b>约$15–25/家，现场或网上都行。</li>
+    </ul>
+    <h3 style="margin-top:14px">高温与防晒（7月德州）</h3>
+    <ul class="clean">
+      <li>水：每人每天1加仑起；爬 Enchanted Rock 随身至少2升 + 电解质。</li>
+      <li>时段：暴晒活动放清晨/傍晚；正午躲进 NASA、博物馆、商场等空调馆。</li>
+      <li>装备：宽檐帽 + 墨镜 + SPF50 + 轻薄长袖比短袖更防晒；抓地徒步鞋。</li>
+      <li>中暑信号（头晕/恶心/不出汗）→ 立刻到阴凉、降温、补电解质。</li>
+    </ul>
+    <h3 style="margin-top:14px">开车</h3>
+    <ul class="clean">
+      <li>整趟约700英里，最长一段是 SA↔休斯顿（3–3.5小时）；进休斯顿可能堵，留余量。</li>
+      <li>酒乡品酒务必指定司机，别酒驾。</li>
+      <li>下载离线地图、备好车充和充电宝。</li>
+    </ul>
+  </div>
+
+  <!-- FOOD -->
+  <h2 class="sec" id="food">🍽️ 吃吃喝喝</h2>
+  <div class="card">
+    <div class="food"><div class="em">🚀</div><div><b>休斯顿中国城（Bellaire Blvd）</b>全美最大华人区之一：新疆菜麻酱毛肚、川菜、烤串、奶茶、亚洲甜品，解腻首选。</div></div>
+    <div class="food"><div class="em">🍑</div><div><b>Fredericksburg 德餐 + 蜜桃</b>猪排、香肠、德式啤酒花园；7月德州蜜桃当季，桃子冰淇淋、路边农摊别错过。</div></div>
+    <div class="food"><div class="em">🍖</div><div><b>德州 BBQ</b>奥斯汀 Franklin / la Barbecue / Terry Black's；圣安东尼奥 2M Smokehouse、The Smoke Shack。自选肉、像广式烧腊那样点。</div></div>
+    <div class="food"><div class="em">🌮</div><div><b>Tex-Mex / 墨西哥菜</b>Mi Tierra（SA百年老店）、早餐 taco、Torchy's Tacos。来德州必吃。</div></div>
+    <div class="food"><div class="em">🍔</div><div><b>In-N-Out</b>SA、Austin、Houston 都有，小红书心心念念的加州汉堡。</div></div>
+    <div class="food"><div class="em">🦫</div><div><b>Buc-ee's 海狸加油站</b>New Braunfels 巨型店：十几款牛肉干试吃、德州纪念品、干净厕所一绝。</div></div>
+  </div>
+
+  <!-- PACK -->
+  <h2 class="sec" id="pack">🎒 打包清单（可勾选）</h2>
+  <div class="card">
+    <div class="checks" id="checklist">
+      <label><input type="checkbox"><span>水壶 + 大瓶水（每人每天1加仑）</span></label>
+      <label><input type="checkbox"><span>电解质泡腾片 / 盐丸</span></label>
+      <label><input type="checkbox"><span>防晒霜 SPF50</span></label>
+      <label><input type="checkbox"><span>宽檐帽 + 墨镜</span></label>
+      <label><input type="checkbox"><span>抓地徒步鞋（爬巨石）</span></label>
+      <label><input type="checkbox"><span>轻薄长袖防晒衣</span></label>
+      <label><input type="checkbox"><span>泳衣（Barton Springs）</span></label>
+      <label><input type="checkbox"><span>Enchanted Rock 门票已预约</span></label>
+      <label><input type="checkbox"><span>NASA 门票 + Tram 已订</span></label>
+      <label><input type="checkbox"><span>充电宝 + 车载充电器</span></label>
+      <label><input type="checkbox"><span>离线地图已下载</span></label>
+      <label><input type="checkbox"><span>常用药 + 创可贴 + 湿巾</span></label>
+      <label><input type="checkbox"><span>信用卡 + 少量现金</span></label>
+      <label><input type="checkbox"><span>驾照 / ID</span></label>
+      <label><input type="checkbox"><span>相机 / 手机支架</span></label>
+      <label><input type="checkbox"><span>独立日烟花用：折叠椅/毯子</span></label>
+    </div>
+    <p class="note">勾选状态会自动保存在本机浏览器，下次打开还在。</p>
+  </div>
+
+  <!-- BUDGET -->
+  <h2 class="sec" id="budget">💰 预算估算（单人，含已订机票）</h2>
+  <div class="card">
+    <table class="bud">
+      <tr><th>项目</th><th>说明</th><th class="n">估算 (USD)</th></tr>
+      <tr><td>✈️ 机票</td><td>DSM↔SAT（已订）</td><td class="n">$421</td></tr>
+      <tr><td>🚙 租车 5天</td><td>SUV + 油费（约700英里）</td><td class="n">$350–500</td></tr>
+      <tr><td>🏨 住宿 SA 4晚</td><td>$120–160/晚</td><td class="n">$480–640</td></tr>
+      <tr><td>🏨 住宿 休斯顿 1晚</td><td>NASA 附近或市区</td><td class="n">$120–160</td></tr>
+      <tr><td>🎟️ 门票</td><td>NASA$30 + 巨石$8 + 游船$15 + 品酒$30–50</td><td class="n">$85–105</td></tr>
+      <tr><td>🍽️ 餐饮 6天</td><td>约$45–65/天</td><td class="n">$270–390</td></tr>
+      <tr class="tot"><td>合计</td><td>单人估算</td><td class="n">约 $1,750–2,250</td></tr>
+    </table>
+    <p class="note">两人同行：机票×2，但住宿/租车/油费分摊，人均反而更省。仅供参考，按实际预订为准。</p>
+  </div>
+
+  <footer>
+    为你定制 · 2026年7月德州自驾（圣安东尼奥·酒乡巨石·休斯顿·奥斯汀）<br>
+    票价/营业时间以官方为准，出行前再核对一遍 🤠 ｜ 来源：Space Center Houston、德州州立公园(TPWD)、Visit Fredericksburg、Austin/San Antonio 官方旅游
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  try{
+    var KEY='tx_pack_2026_v2';
+    var saved=JSON.parse(localStorage.getItem(KEY)||'[]');
+    var boxes=document.querySelectorAll('#checklist input');
+    boxes.forEach(function(b,i){
+      if(saved[i]){b.checked=true;b.closest('label').classList.add('done');}
+      b.addEventListener('change',function(){
+        b.closest('label').classList.toggle('done',b.checked);
+        var arr=[];boxes.forEach(function(x){arr.push(x.checked?1:0);});
+        try{localStorage.setItem(KEY,JSON.stringify(arr));}catch(e){}
+      });
+    });
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
