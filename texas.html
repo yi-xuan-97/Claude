@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>德州自驾 6天5晚 · 保姆级攻略</title>
+<title>德州自驾 6天5晚 · 最终版</title>
 <style>
   :root{
     --sand:#f6efe3; --sand2:#efe4d2; --ink:#2b2118; --muted:#7a6a55;
     --sun:#e8722e; --sun2:#f2a33c; --cactus:#5b7a4b; --cactus-d:#3f5a34;
     --grape:#7d4a78; --austin:#c2603a; --houston:#3a6ea5; --card:#fffdf8; --line:#e4d8c2;
-    --red:#c0392b; --blue:#2d6cb5;
+    --red:#c0392b; --blue:#2d6cb5; --ok:#3f7a46;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -17,9 +17,8 @@
     background:var(--sand);color:var(--ink);line-height:1.65;font-size:16px;-webkit-text-size-adjust:100%}
   a{color:var(--blue);text-decoration:none}
   .wrap{max-width:860px;margin:0 auto;padding:0 16px 80px}
-
   header.hero{background:linear-gradient(160deg,var(--sun) 0%,var(--sun2) 45%,#d9b25a 100%);
-    color:#fff;padding:34px 16px 28px;text-align:center;position:relative;overflow:hidden}
+    color:#fff;padding:34px 16px 28px;text-align:center}
   header.hero h1{margin:0 0 6px;font-size:27px;letter-spacing:.5px}
   header.hero .sub{font-size:15px;opacity:.95;font-weight:500}
   .route-line{display:flex;flex-wrap:wrap;gap:6px 4px;justify-content:center;align-items:center;margin-top:14px;font-size:13px;font-weight:600}
@@ -28,23 +27,20 @@
   .facts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
   .fact{background:rgba(0,0,0,.14);border-radius:12px;padding:8px 12px;font-size:12.5px;min-width:90px}
   .fact b{display:block;font-size:15px;margin-top:2px}
-
   nav.jump{position:sticky;top:0;z-index:50;background:var(--sand2);border-bottom:1px solid var(--line);
     display:flex;gap:4px;overflow-x:auto;padding:8px 10px;-webkit-overflow-scrolling:touch}
   nav.jump a{flex:0 0 auto;font-size:13px;font-weight:600;color:var(--cactus-d);background:#fff;
     border:1px solid var(--line);padding:6px 11px;border-radius:18px}
   nav.jump a:active{background:var(--cactus);color:#fff}
-
   h2.sec{font-size:20px;margin:30px 0 12px;padding-left:12px;border-left:5px solid var(--sun);color:var(--ink)}
-
-  .alerts{background:#fff6ed;border:1px solid #f3cda3;border-radius:14px;padding:14px 16px;margin-top:18px}
+  .booked{background:#eaf5ea;border:1px solid #b8dcb8;border-radius:14px;padding:13px 16px;margin-top:18px;font-size:14px;color:#2f5d35}
+  .booked b{color:var(--ok)}
+  .alerts{background:#fff6ed;border:1px solid #f3cda3;border-radius:14px;padding:14px 16px;margin-top:14px}
   .alerts .a{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed #f0d9bf;font-size:14px}
   .alerts .a:last-child{border-bottom:none}
   .alerts .a .ic{font-size:18px;flex:0 0 22px;text-align:center}
   .alerts .a b{color:var(--red)}
-
-  .day{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-top:16px;
-    box-shadow:0 2px 10px rgba(120,90,40,.06);overflow:hidden}
+  .day{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-top:16px;box-shadow:0 2px 10px rgba(120,90,40,.06);overflow:hidden}
   .day .dh{background:var(--cactus);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
   .day.w .dh{background:var(--grape)}
   .day.au .dh{background:var(--austin)}
@@ -52,6 +48,8 @@
   .day .dh .dt{font-size:16px;font-weight:700}
   .day .dh .dd{font-size:12.5px;opacity:.92;text-align:right;line-height:1.4}
   .day .db{padding:6px 16px 16px}
+  .hotel{font-size:12.5px;color:var(--cactus-d);background:#eef5e8;border-radius:8px;padding:6px 10px;margin:8px 0 4px}
+  .hotel::before{content:"🏨 "}
   .step{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #f1eadc}
   .step:last-child{border-bottom:none}
   .step .tm{flex:0 0 58px;font-size:12.5px;font-weight:700;color:var(--sun);padding-top:1px}
@@ -62,192 +60,166 @@
   .tag.cost{background:#eef5e8;color:var(--cactus-d)}
   .tag.time{background:#fdeede;color:#b5601f}
   .tag.hot{background:#fde2dd;color:var(--red)}
-  .tag.book{background:#e7eefb;color:#2d5aa8}
   .tag.cool{background:#e3f1f5;color:#2a7a91}
+  .tag.book{background:#eaf5ea;color:var(--ok)}
+  .tag.eat{background:#f3e9f2;color:#7d4a78}
   .maplink{font-size:12.5px;font-weight:600;color:var(--blue);white-space:nowrap}
   .maplink::before{content:"📍"}
   .drive{background:#f4f1e8;border-radius:10px;padding:9px 12px;margin:10px 0;font-size:13px;color:#6a5b44;display:flex;gap:8px;align-items:flex-start}
   .drive::before{content:"🚗";font-size:16px}
-
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:16px}
   .card h3{margin:0 0 8px;font-size:16px}
   ul.clean{margin:6px 0 0;padding-left:20px}
   ul.clean li{margin:5px 0;font-size:14.5px}
-
   .food{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid #f1eadc;font-size:14px}
   .food:last-child{border-bottom:none}
   .food .em{font-size:20px;flex:0 0 26px}
   .food b{display:block}
-
   .checks{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
   @media(max-width:560px){.checks{grid-template-columns:1fr}}
   .checks label{display:flex;gap:8px;align-items:flex-start;font-size:14px;padding:4px 0;cursor:pointer}
   .checks input{margin-top:3px;width:17px;height:17px;accent-color:var(--cactus);flex:0 0 auto}
   .checks label.done span{text-decoration:line-through;color:#aa9}
-
-  table.bud{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
-  table.bud th,table.bud td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
-  table.bud th{color:var(--muted);font-weight:600;font-size:12.5px}
-  table.bud td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-  table.bud tr.tot td{font-weight:700;border-top:2px solid var(--cactus);border-bottom:none;font-size:15px}
-
-  .pill{display:inline-block;background:#eef5e8;color:var(--cactus-d);border-radius:8px;padding:2px 8px;font-size:12.5px;font-weight:600;margin:2px 4px 2px 0}
   .note{font-size:12.5px;color:var(--muted);margin-top:10px}
-  .booknow{background:#fff;border:1px dashed var(--cactus);border-radius:10px;padding:8px 12px;font-size:13px;margin-top:8px}
   footer{text-align:center;font-size:12px;color:var(--muted);margin-top:34px;padding-top:16px;border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
 
 <header class="hero">
-  <h1>🤠 德州自驾 6天5晚 · 保姆级攻略</h1>
-  <div class="sub">圣安东尼奥 · Hill Country · 奥斯汀(2天) · 休斯顿NASA ｜ 2026年7月1日–6日</div>
+  <h1>🤠 德州自驾 6天5晚 · 最终版</h1>
+  <div class="sub">圣安东尼奥 · Hill Country · 奥斯汀 · 休斯顿NASA ｜ 2026年7月1日–6日 ｜ 2人</div>
   <div class="route-line">
     <span class="node">✈️ Des Moines</span><span class="arw">→</span>
     <span class="node">🌵 San Antonio</span><span class="arw">→</span>
     <span class="node">🏞️ Hill Country</span><span class="arw">→</span>
-    <span class="node">🎸 Austin ×2</span><span class="arw">→</span>
-    <span class="node">🚀 Houston(当天往返)</span><span class="arw">→</span>
+    <span class="node">🎸 Austin</span><span class="arw">→</span>
+    <span class="node">🚀 Houston(NASA)</span><span class="arw">→</span>
     <span class="node">🌮 San Antonio</span><span class="arw">→</span>
     <span class="node">✈️</span>
   </div>
   <div class="facts">
     <div class="fact">出行<b>7/1–7/6</b></div>
-    <div class="fact">人数<b>1–2人</b></div>
+    <div class="fact">人数<b>2人</b></div>
     <div class="fact">总车程<b>约750英里</b></div>
-    <div class="fact">住宿<b>SA2·山乡1·奥斯汀2</b></div>
+    <div class="fact">状态<b>全部已订 ✅</b></div>
   </div>
 </header>
 
 <nav class="jump">
   <a href="#alerts">⚠️ 必读</a>
   <a href="#days">📅 每日行程</a>
-  <a href="#tips">🌡️ 实用贴士</a>
-  <a href="#food">🍽️ 吃吃喝喝</a>
-  <a href="#chinese">🥢 中餐</a>
-  <a href="#pack">🎒 打包清单</a>
-  <a href="#budget">💰 预算</a>
+  <a href="#food">🍴 美食</a>
+  <a href="#pack">🎒 打包</a>
 </nav>
 
 <div class="wrap">
 
-  <!-- ALERTS -->
-  <h2 class="sec" id="alerts">出发前必做</h2>
+  <div class="booked">✅ <b>全部已预订：</b>机票 · 4段住宿 · Enchanted Rock · Longhorn Cavern · Exotic Resort Zoo · NASA。<br><span class="note" style="margin-top:4px;display:block">（确认号在你电脑的「德州行程-更新版.md」私人文档 + 确认邮件里——不在这个公开网页上。）</span></div>
+
+  <h2 class="sec" id="alerts">出发前必读</h2>
   <div class="alerts">
-    <div class="a"><div class="ic">🎟️</div><div><b>三个要提前预约：</b>① <b>Enchanted Rock</b> $8/人，<a href="https://tpwd.texas.gov/state-parks/enchanted-rock" target="_blank">官网</a>抢7/2清晨时段；② <b>Longhorn Cavern</b> 溶洞导览（平日 11/12/1/2/3点整点发团），<a href="https://visitlonghorncavern.com" target="_blank">VisitLonghornCavern.com</a> 订~1点的团；③ <b>NASA</b> 门票+Tram Tour 网上订（常售罄）。</div></div>
-    <div class="a"><div class="ic">🗓️</div><div><b>周四是大半天 Hill Country（3站）。</b>巨石→Fredericksburg→溶洞，<b>今晚就住动物园附近（Johnson City / Marble Falls）</b>；周五一早逛动物园再开去奥斯汀，省得来回折返。清晨爬巨石躲热、正午进溶洞避暑。</div></div>
-    <div class="a"><div class="ic">🎆</div><div><b>7/4 在奥斯汀过独立日。</b>Vic Mathias Shores（Lady Bird Lake）有交响乐+烟花（今年美国250周年），晚8:30音乐会、随后烟花；市区 Riverside / Cesar Chavez 当天封路，<b>早点去占位、坐 Uber 更省心</b>。</div></div>
-    <div class="a"><div class="ic">🚗</div><div><b>周日是"长途日"。</b>奥斯汀→休斯顿(3h)看NASA、吃晚饭，再夜里开回圣安东尼奥(3.5h)。两人轮流开、备咖啡，别太晚出发。</div></div>
-    <div class="a"><div class="ic">🥵</div><div><b>7月很晒。</b>Enchanted Rock 清晨爬、每人1加仑水；溶洞和博物馆是天然避暑；正午别硬晒。</div></div>
+    <div class="a"><div class="ic">⏰</div><div><b>周四 6:15 就要从 SA 出发！</b>巨石是 6:30–8:30 入园窗口，<b>必须 8:30 前到门口</b>，别睡过头。</div></div>
+    <div class="a"><div class="ic">🚀</div><div><b>NASA 电车 12:40 定时、别迟到</b>（Apollo Mission Control）；想看<b>土星五号火箭</b>要另搭 <b>Rocket Park 电车</b>。</div></div>
+    <div class="a"><div class="ic">🎆</div><div><b>7/4 奥斯汀独立日。</b>Vic Mathias Shores 8:30 音乐会+烟花；市区封路、早去、用 Uber。周六晚饭在 Round Rock（城北），<b>早点吃、~6:45前出发</b>。</div></div>
+    <div class="a"><div class="ic">🪪</div><div><b>巨石门票车牌要对上</b>——开租车的话改成租车车牌，或入园出示预约。</div></div>
   </div>
+
+  <h2 class="sec" id="days">每日行程</h2>
 
   <!-- DAY 0 -->
   <div class="day">
     <div class="dh"><div class="dt">Day 0 · 抵达</div><div class="dd">周三 7/1<br>圣安东尼奥</div></div>
     <div class="db">
-      <div class="step"><div class="tm">21:06</div><div class="ct"><div class="ti">落地 San Antonio (SAT)</div><div class="ds">取租车（建议 SUV/中型车）。入住市区/机场附近。去 H-E-B 超市囤水、电解质、零食；确认明天 Enchanted Rock + Longhorn Cavern 的预约时段。早点睡，明天要早起出发。</div></div></div>
+      <div class="hotel">今晚：Wyndham Garden SA Airport（机场旁）</div>
+      <div class="step"><div class="tm">21:06</div><div class="ct"><div class="ti">落地 SAT → 取租车 → 入住</div><div class="ds">H-E-B 囤水、零食；确认明天巨石、溶洞预约。<b>早睡——明早 6:15 出发。</b></div></div></div>
     </div>
   </div>
 
-  <!-- DAY 1 · HILL COUNTRY -->
+  <!-- DAY 1 -->
   <div class="day w">
-    <div class="dh"><div class="dt">Day 1 · Hill Country</div><div class="dd">周四 7/2<br>SA → 山乡（住近动物园）</div></div>
+    <div class="dh"><div class="dt">Day 1 · Hill Country</div><div class="dd">周四 7/2<br>SA → 山乡</div></div>
     <div class="db">
-      <div class="drive">沿 US-281 一条线：SA → Enchanted Rock（1.5h）→ Fredericksburg（25分）→ Longhorn Cavern/Burnet（约1h）。<b>今晚住 Johnson City / Marble Falls 一带（动物园附近）</b>，明早先逛动物园再去奥斯汀。退房带上行李。</div>
-      <div class="step"><div class="tm">07:00</div><div class="ct"><div class="ti">Enchanted Rock 爬巨石 <span class="tag book">需预约</span> <span class="tag hot">趁清晨</span></div><div class="ds">花岗岩穹顶，Summit Trail 往返约1.3英里、爬升约130米。趁早凉快、登顶视野绝佳；带足水+防晒+抓地鞋。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Enchanted+Rock+State+Natural+Area" target="_blank"> Enchanted Rock</a></span></div></div>
-      <div class="step"><div class="tm">11:00</div><div class="ct"><div class="ti">Fredericksburg 德式午餐 🍑</div><div class="ds">德国移民小镇：Main Street 吃猪排/香肠/德啤；7月是蜜桃季，路边农摊买桃、桃冰淇淋。今天少了动物园那站、能悠着点，甚至顺道在290公路上品个酒（记得指定司机）。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Main+Street+Fredericksburg+TX" target="_blank"> Main Street</a></span></div></div>
-      <div class="step"><div class="tm">13:00</div><div class="ct"><div class="ti">🦇 Longhorn Cavern 溶洞导览 <span class="tag cost">成人$18.50</span> <span class="tag cool">洞里超凉</span></div><div class="ds">Burnet 的步行溶洞团，约1.5小时、走约1英里灯光通道。导游讲石头与故事，途中会<b>全灭灯体验伸手不见五指的黑</b>，水晶很美，还有小蝙蝠！洞内常年约20°C，是正午最佳避暑。<b>平日整点团11/12/1/2/3点</b>，提前订~1点的。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Longhorn+Cavern+State+Park" target="_blank"> Longhorn Cavern</a></span></div></div>
-      <div class="step"><div class="tm">15:00</div><div class="ct"><div class="ti">下午自由 → 入住山乡（近动物园）</div><div class="ds">出溶洞后下午很轻松：可去 Marble Falls 湖边逛逛/吃饭，或直接 check in。<b>住 Johnson City（离动物园最近，甚至可住动物园的 safari 小木屋）或 Marble Falls（湖景酒店多）。</b>不用赶去奥斯汀，养精神，明早逛动物园。</div></div></div>
+      <div class="hotel">今晚：The Retreat on the Hill（Horseshoe Bay）· 入住16:00后</div>
+      <div class="step"><div class="tm">06:15</div><div class="ct"><div class="ti">出发 → Enchanted Rock 爬巨石 <span class="tag book">已订·6:30–8:30入园</span> <span class="tag hot">必须8:30前到</span></div><div class="ds">车程约1.5h（~7:45到）。趁清晨爬 Summit Trail（往返约1.3英里花岗岩穹顶），~10点下山。带足水+防晒+抓地鞋。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Enchanted+Rock+State+Natural+Area" target="_blank"> Enchanted Rock</a></span></div></div>
+      <div class="step"><div class="tm">11:00</div><div class="ct"><div class="ti">Fredericksburg 德式午餐 🍑 + 品酒</div><div class="ds">猪排/香肠/德啤 + 7月蜜桃；Main Street 可步行品酒室，或 290 上 <b>Becker / Grape Creek</b>。指定司机。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Main+Street+Fredericksburg+TX" target="_blank"> Fredericksburg</a></span></div></div>
+      <div class="step"><div class="tm">16:00</div><div class="ct"><div class="ti">🦇 Longhorn Cavern 溶洞导览 <span class="tag book">已订·4:00 PM</span> <span class="tag cool">洞里超凉</span></div><div class="ds">Burnet 步行溶洞团约1.5h，正午躲进20°C凉洞——导游讲解、<b>全灭灯体验全黑</b>、水晶、小蝙蝠！</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Longhorn+Cavern+State+Park" target="_blank"> Longhorn Cavern</a></span></div></div>
+      <div class="step"><div class="tm">17:30</div><div class="ct"><div class="ti">入住 The Retreat on the Hill + 晚饭</div><div class="ds">从溶洞约25分钟到 Horseshoe Bay；Marble Falls 一带吃晚饭。</div></div></div>
     </div>
   </div>
 
-  <!-- DAY 2 · AUSTIN 1 -->
+  <!-- DAY 2 -->
   <div class="day au">
-    <div class="dh"><div class="dt">Day 2 · 奥斯汀 Day 1</div><div class="dd">周五 7/3<br>动物园 → 奥斯汀 → Mount Bonnell</div></div>
+    <div class="dh"><div class="dt">Day 2 · 动物园 → 奥斯汀</div><div class="dd">周五 7/3<br>Hill Country → Austin</div></div>
     <div class="db">
-      <div class="step"><div class="tm">09:00</div><div class="ct"><div class="ti">🦓 The Exotic Resort Zoo（Johnson City）<span class="tag cost">约$16–19</span> <span class="tag hot">趁早凉快</span></div><div class="ds">昨晚就住附近，<b>一开门(9:00)就进去</b>，人少动物活跃又凉快。家族经营 safari，700+动物；坐导览 tram，动物从你手里吃食、能摸（很多奶瓶养大超亲人），Yelp 4.6★。买一桶 feed（$8–12）。约1–1.5小时。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=The+Exotic+Resort+Zoo+Johnson+City" target="_blank"> Exotic Resort Zoo</a></span></div></div>
-      <div class="step"><div class="tm">11:00</div><div class="ct"><div class="ti">开往奥斯汀（约1h）→ 入住</div><div class="ds">Johnson City 到奥斯汀约1小时。到了先 check in、吃个午饭（想吃中餐：三峡川菜 / Julie's Noodles）。</div></div></div>
-      <div class="step"><div class="tm">13:30</div><div class="ct"><div class="ti">Texas State Capitol + 下午自由</div><div class="ds">逛粉色花岗岩圆顶的州议会大厦（免费、凉快）；之后回酒店避暑小憩/泡泡池，养精神等傍晚 Mount Bonnell。（SoCo 放到了周六。）</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Texas+State+Capitol+Austin" target="_blank"> Texas Capitol</a></span></div></div>
-      <div class="step"><div class="tm">19:45</div><div class="ct"><div class="ti">Mount Bonnell 看日落 <span class="tag cost">免费</span></div><div class="ds">奥斯汀最高点（781英尺/Covert Park），爬约106级台阶到顶，俯瞰 Lake Austin 和城市，日落金光超出片。开放5:00–22:00；<b>没厕所、停车位少、近期有砸车盗窃——贵重物品别留车里</b>。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Mount+Bonnell+Covert+Park+Austin" target="_blank"> Mount Bonnell</a></span></div></div>
+      <div class="hotel">今晚+明晚：Aloft by Marriott Austin Downtown</div>
+      <div class="step"><div class="tm">08:15</div><div class="ct"><div class="ti">出发 → 🦓 Exotic Resort Zoo（Johnson City）<span class="tag book">已订·导览拖拉机</span></div><div class="ds">从 Horseshoe Bay 约40分钟。<b>9点一开门就到</b>，坐导览拖拉机、大桶feed喂动物，约1–1.5h。带条小毛巾。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=The+Exotic+Resort+Zoo+Johnson+City" target="_blank"> Exotic Resort Zoo</a></span></div></div>
+      <div class="step"><div class="tm">12:00</div><div class="ct"><div class="ti">开往奥斯汀 → 入住 + 午饭 <span class="tag eat">🍖 BBQ</span></div><div class="ds">约1h到 Austin。午饭可顺路 <b>Salt Lick BBQ</b>（Driftwood，家庭式大份、BYOB/带现金）或市区简餐。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Salt+Lick+BBQ+Driftwood" target="_blank"> Salt Lick</a></span></div></div>
+      <div class="step"><div class="tm">14:00</div><div class="ct"><div class="ti">Texas State Capitol + 🧋 吃茶三千 <span class="tag cost">免费</span></div><div class="ds">逛粉色花岗岩圆顶州议会大厦（凉快）；下午茶来杯 <b>吃茶三千 Chicha San Chen</b>（6501 Airport Blvd，鲜茶拿铁）。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Chicha+San+Chen+Austin+Airport+Blvd" target="_blank"> 吃茶三千</a></span></div></div>
+      <div class="step"><div class="tm">18:00</div><div class="ct"><div class="ti">🇨🇳 晚餐 · 湘里人家 Hunan Bistro <span class="tag eat">4.7★</span></div><div class="ds">10700 Anderson Mill Rd（西北区）。必点 <b>辣椒皮蛋茄子 · 辣椒炒牛柳 · 酸菜鸭血 · 担担面</b>。离 Mount Bonnell 约15分钟、顺路。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Hunan+Bistro+Anderson+Mill+Austin" target="_blank"> 湘里人家</a></span></div></div>
+      <div class="step"><div class="tm">19:45</div><div class="ct"><div class="ti">Mount Bonnell 看日落 <span class="tag cost">免费</span></div><div class="ds">奥斯汀最高点，俯瞰 Lake Austin，日落超出片。<b>停车少、有砸车——贵重物随身。</b></div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Mount+Bonnell+Covert+Park+Austin" target="_blank"> Mount Bonnell</a></span></div></div>
     </div>
   </div>
 
-  <!-- DAY 3 · AUSTIN 2 / JULY 4 -->
+  <!-- DAY 3 -->
   <div class="day au">
-    <div class="dh"><div class="dt">Day 3 · 奥斯汀 Day 2 · 独立日</div><div class="dd">周六 7/4 🎆<br>BBQ + 蝙蝠 + 烟花</div></div>
+    <div class="dh"><div class="dt">Day 3 · 奥斯汀 · 独立日</div><div class="dd">周六 7/4 🎆<br>SoCo + 韩餐 + 烟花</div></div>
     <div class="db">
-      <div class="step"><div class="tm">10:30</div><div class="ct"><div class="ti">德州 BBQ 早午餐</div><div class="ds"><b>Franklin BBQ</b> 最有名但排队几小时（要趁早或线上预订）；想省事选 <b>la Barbecue / Terry Black's / Stiles Switch</b>。自选肉、像广式烧腊那样点。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Terry+Black%27s+Barbecue+Austin" target="_blank"> Terry Black's BBQ</a></span></div></div>
-      <div class="step"><div class="tm">13:00</div><div class="ct"><div class="ti">South Congress（SoCo）逛吃 ⭐必去</div><div class="ds">奥斯汀最潮街区：独立设计店、复古店、咖啡馆。打卡 <b>Allens Boots</b>（超有名牛仔靴店）、<b>Jo's Coffee 的绿墙</b>("I love you so much"网红墙)、<b>Two Hands</b> 澳式 brunch、<b>Manana</b> 咖啡豆；逛 alo / Hermès / Reformation / lululemon / Madewell。太热就进 Bullock 博物馆吹空调。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=South+Congress+Avenue+Austin" target="_blank"> South Congress</a></span></div></div>
-      <div class="step"><div class="tm">20:00</div><div class="ct"><div class="ti">🦇 Congress 大桥蝙蝠</div><div class="ds">桥下住着约150万只墨西哥无尾蝙蝠，全球最大城市蝙蝠群之一；3–10月日落时分成群飞出像黑色"烟雾"，非常壮观（<b>7月正高峰</b>）。<b>付费停车场地址 227½ S Congress Ave</b>，下车走1分钟到桥底。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Congress+Avenue+Bat+Bridge+Austin" target="_blank"> Bat Bridge</a></span></div></div>
-      <div class="step"><div class="tm">20:30</div><div class="ct"><div class="ti">🎆 独立日烟花 @ Vic Mathias Shores <span class="tag cost">免费</span></div><div class="ds">就在 Lady Bird Lake 边（蝙蝠桥旁）：Austin Symphony 爱国音乐会8:30开始、随后烟花，庆美国250周年。<b>下午4点起就有活动，早点去占草坪位</b>；市区封路、停车难，建议 Uber。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Vic+Mathias+Shores+Austin" target="_blank"> Vic Mathias Shores</a></span></div></div>
+      <div class="hotel">今晚：Aloft Austin Downtown</div>
+      <div class="step"><div class="tm">12:30</div><div class="ct"><div class="ti">🦆 午餐 · Bamboo House 北京烤鸭 <span class="tag eat">4.3★</span></div><div class="ds">7010 Easy Wind Dr · 经典北京烤鸭。<b>＊周六两顿不想太满，午饭也可改 SoCo 轻食。</b>（德州BBQ已选周五的 Salt Lick。）</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Bamboo+House+Austin+Easy+Wind" target="_blank"> Bamboo House</a></span></div></div>
+      <div class="step"><div class="tm">13:00</div><div class="ct"><div class="ti">South Congress（SoCo）逛吃 ⭐必去</div><div class="ds"><b>Allens Boots</b>、<b>Jo's Coffee 绿墙</b>、<b>Two Hands</b> brunch、<b>Manana</b> 咖啡；逛 alo / Hermès / Reformation / lululemon / Madewell。太热进 Bullock 博物馆。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=South+Congress+Avenue+Austin" target="_blank"> South Congress</a></span></div></div>
+      <div class="step"><div class="tm">17:00</div><div class="ct"><div class="ti">🇰🇷 早晚餐 · Ghama Zone 韩餐 <span class="tag eat">4.6★</span></div><div class="ds">118 E Main St, <b>Round Rock</b>（城北，离市区约30分钟）。必点 <b>部队锅(army stew)加面 · 海鲜煎饼 · 酱蟹</b>。⚠️ <b>早点吃、~6:45前出发</b>回市区看烟花，避开独立日封路。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Ghama+Zone+Korean+Food+Round+Rock" target="_blank"> Ghama Zone</a></span></div></div>
+      <div class="step"><div class="tm">20:00</div><div class="ct"><div class="ti">🦇 Congress 大桥蝙蝠</div><div class="ds">约150万只日落出洞。<b>付费停车场 227½ S Congress Ave</b>，走1分钟到桥底。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Congress+Avenue+Bat+Bridge+Austin" target="_blank"> Bat Bridge</a></span></div></div>
+      <div class="step"><div class="tm">20:30</div><div class="ct"><div class="ti">🎆 独立日烟花 @ Vic Mathias Shores <span class="tag cost">免费</span></div><div class="ds">蝙蝠桥旁的湖边：Austin Symphony 8:30+烟花，庆美国250周年。<b>早占位、用 Uber</b>。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Vic+Mathias+Shores+Austin" target="_blank"> Vic Mathias Shores</a></span></div></div>
     </div>
   </div>
 
-  <!-- DAY 4 · HOUSTON DAYTRIP -->
+  <!-- DAY 4 -->
   <div class="day h">
-    <div class="dh"><div class="dt">Day 4 · 休斯顿当天往返</div><div class="dd">周日 7/5<br>Austin → NASA → SA</div></div>
+    <div class="dh"><div class="dt">Day 4 · 休斯顿当天往返 NASA</div><div class="dd">周日 7/5<br>Austin → Houston → SA</div></div>
     <div class="db">
-      <div class="drive">奥斯汀 → 休斯顿 约 <b>165 英里 / 3 小时</b>（I-10/290 东）；晚上 休斯顿 → 圣安东尼奥 约 <b>197 英里 / 3.5 小时</b>。今天开车多，两人轮流。</div>
-      <div class="step"><div class="tm">07:00</div><div class="ct"><div class="ti">早出发去休斯顿</div><div class="ds">退房带行李（今晚住回圣安东尼奥）。早走避堵、给 NASA 留足时间。</div></div></div>
-      <div class="step"><div class="tm">10:30</div><div class="ct"><div class="ti">Space Center Houston <span class="tag cost">成人$29.95</span> <span class="tag book">订Tram</span></div><div class="ds">你那篇小红书的高光。预留 <b>4–5小时</b>：航天设备拆解展厅 + <b>Tram Tour</b>（阿波罗发射控制中心、土星五号巨型火箭——"巨大的推进器太震撼"）。周日9:00–18:00。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Space+Center+Houston" target="_blank"> Space Center Houston</a></span></div></div>
-      <div class="step"><div class="tm">16:30</div><div class="ct"><div class="ti">🥢 休斯顿 Chinatown 正宗中餐</div><div class="ds">看完NASA往回开正好路过 Bellaire 中国城（全德州最强中餐区，就在回SA的 I-10 西线上）：<b>Mala Sichuan 麻辣川菜</b>（米其林必比登）、<b>Xin Jiang BBQ 新疆烧烤</b>（孜然羊肉，小红书同款）、<b>San Dong 山东手拉面</b>（牛肉面/水饺）。吃饱再上路。<br><span class="note">想吃海鲜看落日，也可改去 NASA 旁的 Kemah Boardwalk（往东、反方向）。</span></div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Bellaire+Chinatown+Houston" target="_blank"> Bellaire 中国城</a></span></div></div>
-      <div class="step"><div class="tm">18:30</div><div class="ct"><div class="ti">夜里开回圣安东尼奥</div><div class="ds">从中国城上 I-10 西，约3.5小时、~22:00 到 SA 入住。两人轮流开、备咖啡，注意安全。</div></div></div>
+      <div class="hotel">今晚：Canopy by Hilton SA Riverwalk（河滨步道）</div>
+      <div class="drive">奥斯汀 → 休斯顿 约 3 小时；晚上 休斯顿 → 圣安东尼奥 约 3.5 小时。两人轮流开。</div>
+      <div class="step"><div class="tm">08:00</div><div class="ct"><div class="ti">从 Aloft 退房出发去休斯顿</div><div class="ds">约3h、11点左右到，留缓冲（入园定时12:00）。</div></div></div>
+      <div class="step"><div class="tm">12:00</div><div class="ct"><div class="ti">Space Center Houston 🚀 <span class="tag book">已订·12:00入园</span></div><div class="ds"><b>12:40 Apollo Mission Control 电车</b>（登月真实控制室，定时别迟到）。之后<b>再搭 Rocket Park 电车看土星五号巨型火箭</b>。逛展厅到~16:00。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Space+Center+Houston" target="_blank"> Space Center Houston</a></span></div></div>
+      <div class="step"><div class="tm">16:30</div><div class="ct"><div class="ti">🦞 晚饭 · Arco Seafood 东海酒家</div><div class="ds">9896 Bellaire · 粤式海鲜 + 全天点心 · 回SA顺路。<br>🧋 <b>茉莉奶白 Molly Tea</b>（9889 Bellaire，3.2★，想稳选同栋 <b>喜茶</b>）+ 🍞 <b>Le Kream 爆浆吐司</b>（9393 Bellaire，网红、可能排队）打包路上吃。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Arco+Seafood+Restaurant+Bellaire+Houston" target="_blank"> Arco Seafood</a></span></div></div>
+      <div class="step"><div class="tm">18:00</div><div class="ct"><div class="ti">夜里开回圣安东尼奥</div><div class="ds">上 I-10 西，约3.5h、~21:30到，入住 Canopy（河滨步道）。轮流开、备咖啡。</div></div></div>
     </div>
   </div>
 
-  <!-- DAY 5 · SA + DEPART -->
+  <!-- DAY 5 -->
   <div class="day">
     <div class="dh"><div class="dt">Day 5 · 圣安东尼奥 + 返程</div><div class="dd">周一 7/6 ✈️<br>San Antonio</div></div>
     <div class="db">
-      <div class="step"><div class="tm">09:00</div><div class="ct"><div class="ti">SA 核心打卡（市区不用长途开车）</div><div class="ds">The Alamo（免费）→ River Walk 坐船游（约$15）→ Pearl 珍珠区早午餐 + 周末农夫市集。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=The+Alamo+San+Antonio" target="_blank"> The Alamo</a></span> <span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=River+Walk+San+Antonio" target="_blank"> River Walk</a></span></div></div>
-      <div class="step"><div class="tm">12:00</div><div class="ct"><div class="ti">Mission San José + 告别午餐</div><div class="ds">联合国教科文遗产、最完整的西班牙传教站（小红书 San Jose Church 同款，免费）。午餐 <b>Mi Tierra</b>（市集广场百年 Tex-Mex）。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Mission+San+Jose+San+Antonio" target="_blank"> Mission San José</a></span></div></div>
-      <div class="step"><div class="tm">16:30</div><div class="ct"><div class="ti">还车 → 安检 <span class="tag time">航班前2小时</span></div><div class="ds">16:30前还车回 SAT。</div></div></div>
-      <div class="step"><div class="tm">19:08</div><div class="ct"><div class="ti">起飞回 Des Moines</div><div class="ds">23:58 到家，行程结束。🎉</div></div></div>
+      <div class="step"><div class="tm">09:00</div><div class="ct"><div class="ti">SA 核心打卡（酒店就在河滨步道）</div><div class="ds">The Alamo（免费）→ River Walk 坐船（约$15）→ Pearl 珍珠区早午餐。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=The+Alamo+San+Antonio" target="_blank"> The Alamo</a></span></div></div>
+      <div class="step"><div class="tm">11:00</div><div class="ct"><div class="ti">退房 → Mission San José + 午餐 Mi Tierra</div><div class="ds">联合国教科文遗产传教站（免费）；百年 Tex-Mex Mi Tierra。行李放车上。</div><span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Mission+San+Jose+San+Antonio" target="_blank"> Mission San José</a></span></div></div>
+      <div class="step"><div class="tm">16:30</div><div class="ct"><div class="ti">还车回 SAT <span class="tag time">航班前2小时</span></div><div class="ds">19:08 起飞回 Des Moines，23:58 到家。🎉</div></div></div>
     </div>
   </div>
 
-  <!-- TIPS -->
-  <h2 class="sec" id="tips">🌡️ 实用贴士</h2>
-  <div class="card">
-    <h3>🟠 山乡过夜：少绕路的关键</h3>
-    <p style="font-size:14.5px;margin:6px 0 0"><b>周四</b>玩完溶洞后不赶去奥斯汀，<b>就近住 Johnson City / Marble Falls（动物园旁）</b>；<b>周五</b>一早(9:00)逛完动物园，再开1小时到奥斯汀——这样不用来回折返，两天都轻松。</p>
-    <ul class="clean">
-      <li>住宿：Johnson City 离动物园最近（甚至可住动物园 safari 小木屋）；想要好酒店选 Marble Falls 湖景。</li>
-      <li>周四溶洞团订~1点的；少了赶路，下午能顺道在290品个酒。</li>
-    </ul>
-    <p class="note">还想再调就告诉我。</p>
-    <h3 style="margin-top:14px">预约与门票</h3>
-    <ul class="clean">
-      <li><b>Enchanted Rock</b> $8/人；<b>Longhorn Cavern</b> $18.5/人（平日团11–15点整点，订~13点）；<b>NASA</b> $29.95 + Tram；都尽早网上订。</li>
-      <li><b>Exotic Resort Zoo</b> $16–19 + feed；最后 tram 16:30。</li>
-      <li>Mount Bonnell、蝙蝠、独立日烟花都免费。</li>
-    </ul>
-    <h3 style="margin-top:14px">高温 & 开车</h3>
-    <ul class="clean">
-      <li>每人每天1加仑水；暴晒活动放早晚，正午进溶洞/博物馆/商场。</li>
-      <li>周日长途日两人轮流开；7/4 奥斯汀市区封路、停车难，多用 Uber。</li>
-      <li>Mount Bonnell 停车位少且有砸车，贵重物品随身带。</li>
-    </ul>
-  </div>
-
   <!-- FOOD -->
-  <h2 class="sec" id="food">🍽️ 吃吃喝喝</h2>
+  <h2 class="sec" id="food">🍴 美食候选（按城市 · 自己挑）</h2>
   <div class="card">
-    <div class="food"><div class="em">☕</div><div><b>奥斯汀 SoCo</b>Jo's Coffee 绿墙打卡、Two Hands 澳式 brunch、Manana 咖啡；逛累了 South Congress 一路都是吃的。</div></div>
-    <div class="food"><div class="em">🍖</div><div><b>德州 BBQ</b>奥斯汀 Franklin / la Barbecue / Terry Black's；自选肉超满足。</div></div>
-    <div class="food"><div class="em">🍑</div><div><b>Fredericksburg</b>德式猪排香肠 + 7月当季蜜桃/桃冰淇淋。</div></div>
-    <div class="food"><div class="em">🦐</div><div><b>休斯顿（海鲜版）</b>想吃海鲜看落日：NASA 旁 Kemah Boardwalk。正宗中餐见下方"🥢 中餐地图"。</div></div>
-    <div class="food"><div class="em">🌮</div><div><b>圣安东尼奥</b>Mi Tierra 百年 Tex-Mex、早餐 taco。</div></div>
-    <div class="food"><div class="em">🍔</div><div><b>In-N-Out</b>三城都有，小红书心心念念的加州汉堡。</div></div>
+    <h3>🚀 休斯顿（周日晚 · 回SA顺路过 Bellaire 中国城）</h3>
+    <div class="food"><div class="em">🦐</div><div><b>Arco Seafood 东海酒家</b>广式海鲜 + 早茶一绝。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Arco+Seafood+Restaurant+Houston" target="_blank"> 地图</a></span></div></div>
+    <div class="food"><div class="em">🍜</div><div><b>金大碗 House of Bowls</b>经典港式：干炒牛河香、甜品花生酱多士。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=House+of+Bowls+Houston" target="_blank"> 地图</a></span></div></div>
+    <div class="food"><div class="em">🥟</div><div><b>Lucky Bento V.I.P.</b>东北菜：酸菜猪肉(不太酸)、溜肥肠、地三鲜，地道实惠（9262 Bellaire）。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Lucky+Bento+VIP+9262+Bellaire+Houston" target="_blank"> 地图</a></span></div></div>
+    <div class="food"><div class="em">🌶️</div><div><b>湘知湘味</b>不踩雷的湘菜（9889 Bellaire）。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Hunan+Bistro+9889+Bellaire+Houston" target="_blank"> 地图</a></span></div></div>
+    <div class="food"><div class="em">🧋</div><div><b>茉莉奶白 Molly Tea</b>奶茶（评分一般，也可喜茶）+ 🍞 <b>Le Kream</b> 爆浆吐司（甜品）。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Molly+Tea+Bellaire+Houston" target="_blank"> 地图</a></span></div></div>
   </div>
-
-  <!-- CHINESE -->
-  <h2 class="sec" id="chinese">🥢 正宗中餐地图（按城市 · 小红书/本地口碑）</h2>
   <div class="card">
-    <div class="food"><div class="em">🚀</div><div><b>休斯顿 Chinatown（Bellaire Blvd）· 全德州最强</b>都在 Bellaire 大道沿线：<b>Mala Sichuan 麻辣川菜</b>（米其林必比登，麻婆豆腐/干煸四季豆）、<b>Xin Jiang BBQ 新疆烧烤</b>（孜然羊肉，小红书同款）、<b>San Dong 山东手拉面</b>（牛肉面/水饺）、<b>Fung's Kitchen 凤庭</b>（推车港式点心）。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Mala+Sichuan+Bistro+Bellaire+Houston" target="_blank"> Mala Sichuan</a></span></div></div>
-    <div class="food"><div class="em">🎸</div><div><b>奥斯汀</b><b>House of Three Gorges 三峡</b>（北奥斯汀正宗川菜）、<b>Mian &amp; Bao</b>（川菜+上海菜，牛肉面一绝）、<b>Julie's Noodles</b>（手拉面、蟹粉小笼）、<b>Asia Cafe</b>（藏在亚洲超市里，超平价地道）。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=House+of+Three+Gorges+Austin" target="_blank"> 三峡川菜</a></span></div></div>
-    <div class="food"><div class="em">🌵</div><div><b>圣安东尼奥</b><b>Sichuan House 川味轩</b>（本地最强川菜，上过 DDD 美食节目）、<b>Duck &amp; Dumpling</b>（手工水饺+川菜）、<b>Kung Fu Noodle 功夫面馆</b>（现拉牛肉面+猪肉韭菜饺）。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Sichuan+House+San+Antonio" target="_blank"> Sichuan House</a></span></div></div>
-    <div class="food"><div class="em">🧋</div><div><b>奶茶/甜品</b>三城都有 boba 茶饮（小红书爱提的"吃茶三千"风格），逛累了来一杯。</div></div>
+    <h3>🎸 奥斯汀（周五–六）</h3>
+    <div class="food"><div class="em">🦆</div><div><b>Bamboo House</b>经典北京烤鸭 / 川菜（市区）。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Bamboo+House+Austin" target="_blank"> 地图</a></span></div></div>
+    <div class="food"><div class="em">🌶️</div><div><b>湘里人家</b>湘菜（4.7★，北Austin · Anderson Mill Rd）｜推荐：辣椒皮蛋茄子、辣椒炒牛柳、酸菜鸭血、担担面。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Hunan+Bistro+Anderson+Mill+Austin" target="_blank"> 地图</a></span></div></div>
+    <div class="food"><div class="em">🦆</div><div><b>Shanghai Chinese Restaurant</b>粤菜：干炒牛河、牛腩煲、菠萝叉烧、粤式烤鸭。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Shanghai+Chinese+Restaurant+Austin" target="_blank"> 地图</a></span></div></div>
+    <div class="food"><div class="em">🇰🇷</div><div><b>Ghama Zone</b>韩餐（4.6★，Round Rock 北Austin）：部队锅、海鲜煎饼、酱蟹。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Ghama+Zone+Korean+Round+Rock" target="_blank"> 地图</a></span></div></div>
+    <div class="food"><div class="em">🍖</div><div><b>Texas BBQ</b>Salt Lick（Driftwood，经典农家乐）/ Franklin（网红，排队长）。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Salt+Lick+BBQ+Driftwood" target="_blank"> 地图</a></span></div></div>
+    <div class="food"><div class="em">🧋</div><div><b>吃茶三千 Chicha San Chen</b>奶茶（6501 Airport Blvd）。<span class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Chicha+San+Chen+Austin" target="_blank"> 地图</a></span></div></div>
+  </div>
+  <div class="card">
+    <h3>🌵 圣安东尼奥（周一）+ 路上</h3>
+    <div class="food"><div class="em">🌮</div><div><b>圣安东尼奥</b>Mi Tierra（百年 Tex-Mex）、Sichuan House 川味轩、Kung Fu Noodle 功夫面馆。</div></div>
+    <div class="food"><div class="em">🍔</div><div><b>路上</b>In-N-Out（三城都有）、Fredericksburg 德餐 + 7月蜜桃。</div></div>
   </div>
 
   <!-- PACK -->
@@ -259,49 +231,26 @@
       <label><input type="checkbox"><span>防晒霜 SPF50 + 宽檐帽 + 墨镜</span></label>
       <label><input type="checkbox"><span>抓地徒步鞋（爬巨石）</span></label>
       <label><input type="checkbox"><span>溶洞穿的薄外套（洞里约20°C）</span></label>
-      <label><input type="checkbox"><span>驱蚊液（黄昏看蝙蝠/湖边）</span></label>
-      <label><input type="checkbox"><span>Enchanted Rock 门票已约</span></label>
-      <label><input type="checkbox"><span>Longhorn Cavern 溶洞团已约</span></label>
-      <label><input type="checkbox"><span>NASA 门票 + Tram 已订</span></label>
+      <label><input type="checkbox"><span>小毛巾（动物园喂动物）</span></label>
       <label><input type="checkbox"><span>充电宝 + 车载充电器</span></label>
       <label><input type="checkbox"><span>离线地图已下载</span></label>
       <label><input type="checkbox"><span>独立日：折叠椅/毯子</span></label>
-      <label><input type="checkbox"><span>常用药 + 创可贴 + 湿巾</span></label>
-      <label><input type="checkbox"><span>信用卡 + 少量现金 + ID/驾照</span></label>
-      <label><input type="checkbox"><span>相机 / 手机支架</span></label>
+      <label><input type="checkbox"><span>所有确认邮件/票（手机存好）</span></label>
+      <label><input type="checkbox"><span>现金（Salt Lick/部分小店）</span></label>
+      <label><input type="checkbox"><span>信用卡 + 驾照</span></label>
       <label><input type="checkbox"><span>下载好 Uber（7/4市区封路用）</span></label>
+      <label><input type="checkbox"><span>租车后更新巨石门票车牌</span></label>
     </div>
     <p class="note">勾选状态会自动保存在本机浏览器，下次打开还在。</p>
   </div>
 
-  <!-- BUDGET -->
-  <h2 class="sec" id="budget">💰 预算估算（单人，含已订机票）</h2>
-  <div class="card">
-    <table class="bud">
-      <tr><th>项目</th><th>说明</th><th class="n">估算 (USD)</th></tr>
-      <tr><td>✈️ 机票</td><td>DSM↔SAT（已订）</td><td class="n">$421</td></tr>
-      <tr><td>🚙 租车5天</td><td>SUV + 油费（约750英里）</td><td class="n">$370–520</td></tr>
-      <tr><td>🏨 住宿 奥斯汀2晚</td><td>$160–220/晚（7/4周末偏贵）</td><td class="n">$320–440</td></tr>
-      <tr><td>🏨 住宿 山乡1晚</td><td>Johnson City / Marble Falls（近动物园）</td><td class="n">$120–180</td></tr>
-      <tr><td>🏨 住宿 SA 2晚</td><td>$120–160/晚</td><td class="n">$240–320</td></tr>
-      <tr><td>🎟️ 门票</td><td>NASA30 + 巨石8 + 溶洞18.5 + 动物园18 + 游船15</td><td class="n">$90–110</td></tr>
-      <tr><td>🍽️ 餐饮6天</td><td>约$50–70/天</td><td class="n">$300–420</td></tr>
-      <tr class="tot"><td>合计</td><td>单人估算</td><td class="n">约 $1,860–2,420</td></tr>
-    </table>
-    <p class="note">两人同行：机票×2，但住宿/租车/油费分摊，人均更省。仅供参考，按实际预订为准。</p>
-  </div>
-
-  <footer>
-    为你定制 · 2026年7月德州自驾（SA · Hill Country · 奥斯汀×2 · 休斯顿NASA）<br>
-    票价/营业时间/活动以官方为准，出行前再核对 🤠 ｜ 来源：TPWD、Space Center Houston、Visit Austin、Austin Symphony、Visit Fredericksburg 等
-  </footer>
-
+  <footer>为你定制 · 2026年7月德州自驾 · 2人 · 全部已预订 🤠<br>时间/票务以官方确认为准，出行前再核对。</footer>
 </div>
 
 <script>
 (function(){
   try{
-    var KEY='tx_pack_2026_v3';
+    var KEY='tx_pack_final2';
     var saved=JSON.parse(localStorage.getItem(KEY)||'[]');
     var boxes=document.querySelectorAll('#checklist input');
     boxes.forEach(function(b,i){
