@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oregon Cascades · 8-Stop Loop Road Trip</title>
+<style>
+  :root{
+    --forest:#1f4d3a; --forest2:#2e6b50; --lake:#1d7fa6; --lake2:#3aa6c9;
+    --sky:#eaf4f1; --sand:#f6f1e7; --ink:#1b2622; --muted:#5e6f68;
+    --gold:#d9a441; --alert:#c0532b; --card:#ffffff; --line:#dfe7e2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:linear-gradient(180deg,#eaf4f1 0%,#f6f1e7 100%);line-height:1.6;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 18px 60px;}
+
+  header.hero{background:linear-gradient(135deg,var(--forest) 0%,var(--lake) 130%);
+    color:#fff;padding:20px 22px 34px;border-radius:0 0 26px 26px;box-shadow:0 10px 30px rgba(31,77,58,.25);}
+  .hero-inner{max-width:1000px;margin:0 auto;}
+  .langsw{display:flex;gap:6px;justify-content:flex-end;margin-bottom:14px;flex-wrap:wrap;}
+  .langsw button{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);color:#fff;
+    padding:6px 12px;border-radius:20px;font-size:13px;cursor:pointer;font-weight:600;transition:.15s;}
+  .langsw button:hover{background:rgba(255,255,255,.25);}
+  .langsw button.on{background:#fff;color:var(--forest);}
+  .eyebrow{letter-spacing:3px;font-size:12px;text-transform:uppercase;opacity:.85;}
+  h1{font-size:30px;margin:6px 0 4px;font-weight:800;letter-spacing:.5px;}
+  .sub{opacity:.92;font-size:15px;}
+  .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+  .stat{background:rgba(255,255,255,.14);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.22);
+    padding:9px 14px;border-radius:12px;font-size:13px;}
+  .stat b{font-size:17px;display:block;}
+
+  section{margin-top:26px;}
+  h2{font-size:20px;color:var(--forest);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;
+    box-shadow:0 4px 14px rgba(31,77,58,.06);}
+
+  .months{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin:10px 0 6px;}
+  .m{padding:7px 2px;text-align:center;border-radius:7px;font-size:11px;font-weight:600;color:#fff;}
+  .m.no{background:#c2cbc6;color:#5e6f68;}
+  .m.ok{background:#8bbf9f;}
+  .m.best{background:var(--forest2);}
+  .m.peak{background:var(--gold);color:#3a2c08;}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px;}
+  .legend span{display:inline-flex;align-items:center;gap:5px;}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr;}}
+
+  .alert{background:#fdf3ee;border:1px solid #f0cdb9;border-left:5px solid var(--alert);
+    border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;}
+  .alert b{color:var(--alert);}
+
+  .route{display:flex;flex-direction:column;gap:0;}
+  .leg{display:flex;align-items:flex-start;gap:14px;}
+  .leg .pin{flex:0 0 auto;min-width:34px;height:30px;padding:0 6px;border-radius:16px;background:var(--lake);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;z-index:2;position:relative;}
+  .leg .body{padding-bottom:18px;flex:1;}
+  .leg .body .nm{font-weight:700;}
+  .leg .body .en{color:var(--muted);font-size:13px;}
+  .leg .body .drv{font-size:12px;color:var(--lake);background:#e7f3f8;display:inline-block;
+    padding:2px 9px;border-radius:20px;margin-top:4px;}
+  .leg .rail{position:relative;align-self:stretch;}
+  .leg .rail:before{content:"";position:absolute;left:16px;top:0;bottom:0;width:2px;background:var(--line);}
+  .leg:last-child .rail:before{display:none;}
+
+  .tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+  .tab{flex:1;min-width:150px;cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:13px;
+    padding:12px 14px;transition:.15s;}
+  .tab.active{background:var(--forest);color:#fff;border-color:var(--forest);box-shadow:0 6px 16px rgba(31,77,58,.25);}
+  .tab .d{font-size:12px;letter-spacing:1px;opacity:.8;text-transform:uppercase;}
+  .tab .t{font-weight:700;font-size:15px;margin-top:2px;}
+  .day{display:none;}
+  .day.show{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .stop{display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line);}
+  .stop:last-child{border-bottom:none;}
+  .stop .time{flex:0 0 64px;font-weight:700;color:var(--lake);font-size:13px;padding-top:2px;}
+  .stop .ico{flex:0 0 34px;font-size:24px;text-align:center;}
+  .stop .info h4{font-size:16px;margin-bottom:2px;}
+  .stop .info .en{color:var(--muted);font-size:12.5px;font-weight:500;}
+  .stop .info p{font-size:13.5px;color:#3a4742;margin-top:5px;}
+  .tagrow{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;}
+  .tag{font-size:11px;padding:2px 8px;border-radius:20px;background:#eef4f1;color:var(--forest2);font-weight:600;}
+  .tag.warn{background:#fdeee6;color:var(--alert);}
+  .tag.drive{background:#e7f3f8;color:var(--lake);}
+
+  .hotelbox{background:#f4faf7;border:1px solid #d6e9df;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:13.5px;}
+  .hotelbox h4{color:var(--forest);font-size:14px;margin-bottom:6px;}
+  .hotelbox .h{margin:4px 0;}
+  .hotelbox .h b{color:var(--ink);}
+
+  ul.chk{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;}
+  @media(max-width:680px){ul.chk{grid-template-columns:1fr;}}
+  ul.chk li{font-size:14px;display:flex;align-items:flex-start;gap:9px;cursor:pointer;padding:4px 0;}
+  ul.chk li input{margin-top:4px;accent-color:var(--forest2);width:16px;height:16px;flex:0 0 auto;}
+  ul.chk li.done span{text-decoration:line-through;color:#9aa8a2;}
+
+  .tip{font-size:14px;padding:8px 0;border-bottom:1px dashed var(--line);}
+  .tip:last-child{border-bottom:none;}
+  .tip b{color:var(--forest2);}
+
+  .note{font-size:13px;color:var(--muted);background:#f0f5f2;border-radius:10px;padding:10px 14px;margin-top:10px;}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:34px;}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="hero-inner">
+  <div class="langsw">
+    <button data-lang="zh">中文</button>
+    <button data-lang="en">English</button>
+    <button data-lang="vi">Tiếng Việt</button>
+  </div>
+  <div id="hero-body"></div>
+</div></header>
+
+<div class="wrap" id="app"></div>
+
+<script>
+/* ===================== CONTENT (3 languages) ===================== */
+var T = {
+  en: {
+    docTitle: `Oregon Cascades · 8-Stop Loop Road Trip`, htmlLang:`en`,
+    hero:{ eyebrow:`Oregon Cascades · Road Trip`,
+      h1:`Oregon Cascades — 8-Stop Loop Road Trip`,
+      sub:`Portland → Mt. Hood → McKenzie River Falls → Crater Lake → back to Portland`,
+      stats:[{b:`8`,l:`must-see stops`},{b:`3`,l:`days · 2 nights`},{b:`~500 mi`,l:`total distance`},{b:`~14 hr`,l:`total driving`},{b:`Loop`,l:`back to PDX`}]},
+    bestTitle:`🗓️ Best Time to Visit`,
+    months:[`Jan`,`Feb`,`Mar`,`Apr`,`May`,`Jun`,`Jul`,`Aug`,`Sep`,`Oct`,`Nov`,`Dec`],
+    legend:[`Closed / not feasible`,`Open (weather permitting)`,`Great`,`Peak`],
+    bestCol1:`🏆 <b>Best: mid-July – late Sept.</b> All roads and trails open, daytime 65–80°F, perfect for hiking and boating. <b>After Labor Day (early Sept)</b> has the fewest crowds with still-warm weather — the best-value window.`,
+    bestCol2:`🌊 <b>Right now (late June) is great too:</b> just opened for the season, waterfalls roaring with snowmelt, wildflowers blooming, fewer people. One caveat: Crater Lake's rim trails may still have lingering snow.`,
+    bestNote:`⛔ <b>Avoid Nov–May:</b> heavy snow closes McKenzie Pass (Hwy 242 → Dee Wright) and Crater Lake's Rim Drive, so most of this route is impassable. Hwy 242 just opened June 15, 2026 and usually stays open through early November.`,
+    alertTitle:`⚠️ Important 2026 Alerts`,
+    alerts:[
+      `<b>Crater Lake major construction (2026–2028):</b> the Cleetwood Cove Trail (the only path down to the water) and all boat tours are closed — no swimming or boating this year. East Rim Drive is partially closed. Good news: West Rim Drive and the main overlooks stay open, and the view of one of the bluest lakes on Earth from the rim is still stunning.`,
+      `<b>Blue Pool — no jumping or swimming:</b> the water stays around 38°F (4°C) year-round, and there have been paralysis and fatal accidents from jumping. View from the shore only.`,
+      `<b>McKenzie Pass (Hwy 242):</b> narrow with tight switchbacks, no RVs or trailers, drive slow. Cell signal is poor — download offline maps before you go.`],
+    routeTitle:`🧭 Route Overview (North → South)`,
+    legs:[
+      {pin:`START`,nm:`Portland`,drv:`↓ ~1 hr 15 min · 60 mi`},
+      {pin:`1`,nm:`Trillium Lake`,sub:`Mt. Hood`,drv:`↓ ~30 min`},
+      {pin:`2`,nm:`Little Crater Lake`,drv:`↓ ~2.5 hr → overnight in Sisters`},
+      {pin:`3`,nm:`Dee Wright Observatory`,sub:`Hwy 242`,drv:`↓ ~45 min (down to Hwy 126)`},
+      {pin:`4`,nm:`Tamolitch Blue Pool`,drv:`↓ ~10 min`},
+      {pin:`5`,nm:`Sahalie Falls`,drv:`↓ ~10 min`},
+      {pin:`6`,nm:`Clear Lake Resort`,drv:`↓ ~3 hr → overnight near Crater Lake`},
+      {pin:`7`,nm:`Jackson F. Kimball SRS`,sub:`Wood River headwaters`,drv:`↓ ~40 min`},
+      {pin:`8`,nm:`Crater Lake`,drv:`↓ ~4.5–5 hr (Hwy 138 + I-5)`},
+      {pin:`END`,nm:`Back to Portland`,drv:``}],
+    routeNote:`📍 The 8 stops line up neatly north-to-south, so this is a "drive south, then loop back to Portland" route. Day 3's drive home is long, but Hwy 138 (North Umpqua) is a celebrated scenic byway in its own right.`,
+    dailyTitle:`📅 Day-by-Day Itinerary`,
+    tabs:[{d:`Day 1`,t:`Mt. Hood Lakes`},{d:`Day 2`,t:`McKenzie Falls Loop`},{d:`Day 3`,t:`Crater Lake + Return`}],
+    days:[
+      {stops:[
+        {time:`8:00`,ico:`🚗`,h4:`Depart Portland`,sub:`US-26 E`,p:`Leave early and head southeast up Mt. Hood on Hwy 26. Government Camp has gas and supplies along the way.`},
+        {time:`9:15`,ico:`🏔️`,h4:`Trillium Lake`,p:`Mt. Hood's classic reflection-postcard lake. The ~2-mile flat loop trail around the shore mirrors the snowy peak — the top photo spot of the trip.`,tags:[{t:`Stay ~1.5h`},{t:`2 mi flat loop`},{t:`$5 parking day pass`}]},
+        {time:`11:15`,ico:`💧`,h4:`Little Crater Lake`,p:`Just a ~0.4-mile walk from the lot. A small but 45-ft-deep spring-fed pool, impossibly blue and crystal clear — a wildly underrated gem.`,tags:[{t:`Stay ~1h`},{t:`0.4 mi short walk`},{t:`Few crowds`}]},
+        {time:`12:30`,ico:`🍔`,h4:`Lunch + transfer to Sisters`,sub:`→ Sisters, OR`,p:`Eat in Government Camp or pack a picnic. Afternoon drive via Hwy 26 → 97 → 20/126 to the town of Sisters, about 2.5 hours of high-desert pine scenery.`,tags:[{t:`🚗 ~2.5h · 130 mi`,c:`drive`}]},
+        {time:`Evening`,ico:`🏨`,h4:`Overnight in Sisters`,p:`Sisters is a charming Western-themed town with restaurants and gas — the ideal base for exploring the McKenzie area.`}],
+       hotel:{title:`🛏️ Night 1 lodging (Sisters / Santiam area)`,lines:[
+        `<b>FivePine Lodge & Spa</b> (Sisters) — standalone cabins, pool + spa, top-notch`,
+        `<b>Best Western Ponderosa Lodge</b> (Sisters) — good value, easy to book`,
+        `<b>The Suttle Lodge</b> (lakeside) — closer to Clear Lake, scenic and arty`,
+        `<b>Belknap Hot Springs</b> (McKenzie Bridge) — hot-spring gardens, great for a soak`]}},
+      {lead:`⏱️ <b>Busiest day.</b> Morning is the McKenzie falls loop; afternoon is a 3-hour drive to Crater Lake. Leave by 7:30. If it feels rushed, skip the Clear Lake boat or shorten the Blue Pool hike.`,
+       stops:[
+        {time:`8:00`,ico:`🌋`,h4:`Dee Wright Observatory`,sub:`Hwy 242 · McKenzie Pass`,p:`From Sisters, take Hwy 242 over McKenzie Pass. An observatory built entirely of lava rock with 360° views of 11 volcanic peaks, surrounded by a black lava field — it feels like the moon.`,tags:[{t:`Stay ~45min`},{t:`⚠️ Narrow, no RVs`,c:`warn`},{t:`🚗 40min`,c:`drive`}]},
+        {time:`9:30`,ico:`💙`,h4:`Tamolitch Blue Pool`,p:`The McKenzie River runs underground through lava, then resurfaces here as a glowing, gem-blue pool. ~4.1 mi round trip with little elevation gain along a gorgeous riverside trail.`,tags:[{t:`Hike ~2h`},{t:`4.1 mi round trip`},{t:`⚠️ No jumping/swimming`,c:`warn`}]},
+        {time:`12:00`,ico:`🌊`,h4:`Sahalie & Koosah Falls`,p:`Right off Hwy 126, two adjacent thundering waterfalls. A short loop trail links both. Flow is biggest during June snowmelt — loud and dramatic.`,tags:[{t:`Stay ~45min`},{t:`Short loop`},{t:`Easy parking`}]},
+        {time:`13:00`,ico:`🛶`,h4:`Clear Lake Resort`,p:`The McKenzie River's source lake — so clear you can see a 3,000-year-old underwater forest on the bottom. Rent a rowboat at the resort (no motors allowed) and grab lunch at the lakeside café.`,tags:[{t:`Stay ~1.5h`},{t:`Boat rentals`},{t:`Lakeside lunch`}]},
+        {time:`15:00`,ico:`🚗`,h4:`Drive to the Crater Lake area`,p:`About 3 hours south to the Crater Lake south-entrance area for the night. Gas up and grab tomorrow's food in Bend or Klamath Falls.`,tags:[{t:`🚗 ~3h · 150 mi`,c:`drive`}]}],
+       hotel:{title:`🛏️ Night 2 lodging (near Crater Lake)`,lines:[
+        `<b>The Cabins at Mazama Village</b> (in-park, south entrance, ~$200/night) — closest to the park, very popular, book early`,
+        `<b>Crater Lake Lodge</b> (historic rim lodge with lake views, open 5/15–10/13) — best experience but very hard to book`,
+        `<b>Crater Lake Resort / Aspen Inn</b> (Fort Klamath) — closest to Jackson Kimball, affordable`,
+        `<b>Prospect Historic Hotel</b> (Prospect) / <b>Diamond Lake Resort</b> (north entrance) — backups`],
+        note:`Recommended: stay at <b>Fort Klamath / Mazama Village</b>. On Day 3 you hit Jackson Kimball (south) first thing, then drive up to the rim — no backtracking.`}},
+      {stops:[
+        {time:`8:30`,ico:`🪶`,h4:`Jackson F. Kimball State Rec Site`,sub:`Wood River headwaters`,p:`A quiet little park 3 miles north of Fort Klamath where the Wood River bubbles up from underground springs — extremely clear, a pale blue-green. A short trail leads to the source; usually empty in the morning and very peaceful.`,tags:[{t:`Stay ~45min`},{t:`Short trail to spring`},{t:`Open May–Nov`}]},
+        {time:`10:00`,ico:`🌅`,h4:`Crater Lake (south entrance)`,sub:`Rim Village & West Rim`,p:`The deepest lake in the US and one of the bluest on Earth. Get your first overlook at Rim Village, then stop along West Rim Drive: Sinnott Memorial, Discovery Point, and Watchman Overlook. The rim views are still unbeatable (no going down to the water this year).`,tags:[{t:`Stay ~2.5–3h`},{t:`Entry ~$30/vehicle (7 days)`},{t:`⚠️ East rim & boats closed`,c:`warn`}]},
+        {time:`13:00`,ico:`🚗`,h4:`Exit north → return to Portland`,sub:`North Entrance → OR-138 → I-5 N`,p:`Take Hwy 138 (the North Umpqua scenic byway) down the mountain and stop at Watson Falls, one of Oregon's tallest, on the way. Then I-5 north to Portland, about 4.5–5 hours. Plan a dinner break in Roseburg or Eugene.`,tags:[{t:`🚗 ~4.5–5h · 245 mi`,c:`drive`},{t:`Waterfalls en route`}]}],
+       end:`🌙 Day 3's drive home is long. To make it easier, split it over two days (add a night in Roseburg or Eugene) and turn the whole trip into a more relaxed 4 days.`}],
+    packTitle:`🎒 Packing Checklist (tap to check off)`,
+    pack:[`Layered / warm clothing (big day-night temp swings; nights can hit ~40°F)`,`Hiking shoes (Blue Pool trail has gravel sections)`,`Sunscreen + hat + sunglasses`,`Plenty of water + snacks (few supplies en route)`,`Offline maps (often no cell signal in the mountains)`,`Fill up on gas early (stations are sparse down south)`,`Cash for park entry / America the Beautiful annual pass`,`Camera / swimsuit (Clear Lake boating)`,`Bug spray + basic first-aid kit`,`Some cash (small resorts may not take cards)`,`Insulated bottle / rain jacket (mountain weather changes fast)`,`Lodging confirmations + a screenshot of this page`],
+    packMsg:`Checkboxes save automatically (stored in this browser).`,
+    tipTitle:`💡 Practical Tips`,
+    tips:[`<b>Entry fee:</b> Crater Lake is about $30/vehicle, valid 7 days. If you visit parks often, the $80 annual pass pays for itself.`,`<b>Gas stops:</b> main supplies are in Government Camp, Sisters, Bend, and Klamath Falls. Fill up before heading into the mountains.`,`<b>Driving safety:</b> Hwy 242 (Dee Wright) and Rim Drive have tight curves and steep grades — go slow and use low gears; watch for deer at dawn.`,`<b>Lodging:</b> Crater Lake fills up fast in summer. Book Mazama Village cabins and Crater Lake Lodge as early as possible.`,`<b>Safety lines:</b> never jump at Blue Pool, and don't cross the railings at Crater Lake — the rim rock is loose and dangerous.`,`<b>Want it easier?</b> Three days for 8 stops is tight (~14 hrs of driving total). One extra day means less driving and more time soaking in each spot.`],
+    footer:[`Custom-built for you · Oregon Cascades 8-stop loop · Info based on public sources as of June 2026 — re-check road and weather conditions before you go.`,`Happy travels! 🌲💧🏔️`]
+  },
+
+  zh: {
+    docTitle:`俄勒冈喀斯喀特 · 8 站环线自驾`, htmlLang:`zh`,
+    hero:{ eyebrow:`Oregon Cascades · Road Trip`,
+      h1:`俄勒冈喀斯喀特山脉 · 8 站环线自驾`,
+      sub:`从波特兰出发 → 胡德山 → McKenzie 河瀑布 → 火山口湖 → 返回波特兰`,
+      stats:[{b:`8`,l:`经典景点`},{b:`3`,l:`天 · 2 晚`},{b:`~500 mi`,l:`总里程`},{b:`~14 hr`,l:`总驾驶`},{b:`环线`,l:`回到 PDX`}]},
+    bestTitle:`🗓️ 最佳出行时间`,
+    months:[`1月`,`2月`,`3月`,`4月`,`5月`,`6月`,`7月`,`8月`,`9月`,`10月`,`11月`,`12月`],
+    legend:[`封路/不可行`,`可去(看天)`,`很棒`,`黄金期`],
+    bestCol1:`🏆 <b>最推荐:7月中–9月底。</b>所有道路和步道全开,白天 18–27°C,适合徒步和划船。<b>劳动节(9月初)之后</b>人最少、天气仍好,是性价比最高的窗口。`,
+    bestCol2:`🌊 <b>现在(6月下旬)也很好:</b>刚开山,瀑布因融雪水量最大、最壮观,野花盛开,人也较少。唯一要注意:火山口湖崖顶步道可能仍有残雪。`,
+    bestNote:`⛔ <b>避开 11月–5月:</b>大雪封路,McKenzie Pass(242 号 → Dee Wright)和火山口湖环湖路都会关闭,这条线大部分走不通。242 号公路 2026 年 6月15日 刚开放,通常开到 11月初。`,
+    alertTitle:`⚠️ 2026 年重要提醒`,
+    alerts:[
+      `<b>火山口湖大型施工(2026–2028):</b> Cleetwood Cove 步道(唯一能下到湖边的路)和所有游船全部关闭,今年不能游泳、不能坐船。East Rim Drive(东环湖路)部分封闭。好消息:西环湖路和主要崖顶观景点照常开放,从崖顶俯瞰那片世界最蓝的湖依旧震撼。`,
+      `<b>Blue Pool 蓝池严禁跳水/游泳:</b> 水温常年约 4°C(38°F),已多次发生跳水致瘫、致死事故。只可在岸边观赏拍照。`,
+      `<b>McKenzie Pass(242 号公路):</b> 狭窄多急弯,禁止房车/拖挂车通行,开慢一点。手机信号差,出发前下载离线地图。`],
+    routeTitle:`🧭 路线总览(由北向南)`,
+    legs:[
+      {pin:`起`,nm:`波特兰 Portland`,drv:`↓ 约 1 小时 15 分 · 60 mi`},
+      {pin:`1`,nm:`三叶草湖 Trillium Lake`,sub:`胡德山`,drv:`↓ 约 30 分`},
+      {pin:`2`,nm:`小火山口湖 Little Crater Lake`,drv:`↓ 约 2.5 小时 → Sisters 过夜`},
+      {pin:`3`,nm:`Dee Wright 熔岩观景塔`,sub:`Hwy 242`,drv:`↓ 约 45 分(下到 126 号路)`},
+      {pin:`4`,nm:`蓝池 Tamolitch Blue Pool`,drv:`↓ 约 10 分`},
+      {pin:`5`,nm:`萨哈利瀑布 Sahalie Falls`,drv:`↓ 约 10 分`},
+      {pin:`6`,nm:`清湖度假村 Clear Lake Resort`,drv:`↓ 约 3 小时 → 火山口湖区过夜`},
+      {pin:`7`,nm:`Jackson F. Kimball 游憩地`,sub:`Wood River 源头`,drv:`↓ 约 40 分`},
+      {pin:`8`,nm:`火山口湖 Crater Lake`,drv:`↓ 约 4.5–5 小时(138 号 + I-5)`},
+      {pin:`终`,nm:`回到波特兰 Portland`,drv:``}],
+    routeNote:`📍 8 个景点正好由北向南排成一条线,所以这是一条顺路的「往南玩、再开回波特兰」的环线。第 3 天回程较长,但 138 号公路(North Umpqua)本身就是著名风景线。`,
+    dailyTitle:`📅 每日详细行程`,
+    tabs:[{d:`Day 1`,t:`胡德山双湖`},{d:`Day 2`,t:`McKenzie 瀑布环线`},{d:`Day 3`,t:`火山口湖 + 回程`}],
+    days:[
+      {stops:[
+        {time:`8:00`,ico:`🚗`,h4:`波特兰出发`,sub:`US-26 E`,p:`建议早出发,沿 26 号公路向东南上胡德山。途经 Government Camp 可补给/加油。`},
+        {time:`9:15`,ico:`🏔️`,h4:`三叶草湖 Trillium Lake`,p:`胡德山最经典的「倒影名片」湖。绕湖步道约 2 英里、平坦好走,湖面倒映雪山,是拍照打卡首选。`,tags:[{t:`停留 ~1.5h`},{t:`2 mi 环湖平路`},{t:`$5 停车日票`}]},
+        {time:`11:15`,ico:`💧`,h4:`小火山口湖 Little Crater Lake`,p:`从停车场只需走约 0.4 英里。一个不大却深达 45 英尺的喷泉湖,水蓝得不真实、清澈见底——是被严重低估的宝藏小景点。`,tags:[{t:`停留 ~1h`},{t:`0.4 mi 短走`},{t:`人少`}]},
+        {time:`12:30`,ico:`🍔`,h4:`午餐 + 转场到 Sisters`,sub:`→ Sisters, OR`,p:`在 Government Camp 吃午餐或带野餐。下午走 26 号 → 97 号 → 20/126 号到 Sisters 小镇,约 2.5 小时,一路高原松林风光。`,tags:[{t:`🚗 ~2.5h · 130 mi`,c:`drive`}]},
+        {time:`傍晚`,ico:`🏨`,h4:`入住 Sisters 过夜`,p:`Sisters 是个可爱的西部主题小镇,餐厅、加油站齐全,是探索 McKenzie 区域的理想基地。`}],
+       hotel:{title:`🛏️ 第 1 晚住宿建议(Sisters / Santiam 一带)`,lines:[
+        `<b>FivePine Lodge & Spa</b>(Sisters)— 独栋木屋、泳池+spa,环境一流`,
+        `<b>Best Western Ponderosa Lodge</b>(Sisters)— 性价比好、好订`,
+        `<b>The Suttle Lodge</b>(湖边)— 更靠近 Clear Lake,文艺湖景`,
+        `<b>Belknap Hot Springs</b>(McKenzie Bridge)— 温泉花园,适合泡汤`]}},
+      {lead:`⏱️ <b>今天最满:</b>上午是 McKenzie 瀑布环线,下午要开 3 小时去火山口湖。建议 7:30 出发。若觉得赶,可砍掉 Clear Lake 划船或缩短蓝池徒步。`,
+       stops:[
+        {time:`8:00`,ico:`🌋`,h4:`Dee Wright 熔岩观景塔`,sub:`Hwy 242 · McKenzie Pass`,p:`从 Sisters 走 242 号翻 McKenzie Pass。一座完全用熔岩石砌成的观景塔,360° 可看到 11 座火山尖峰,脚下是大片黑色熔岩荒原,像在月球。`,tags:[{t:`停留 ~45min`},{t:`⚠️ 窄弯路·禁房车`,c:`warn`},{t:`🚗 40min`,c:`drive`}]},
+        {time:`9:30`,ico:`💙`,h4:`蓝池 Tamolitch Blue Pool`,p:`McKenzie 河在地下熔岩中潜流后,从这里重新冒出,形成一池荧光般的宝石蓝。往返约 4.1 英里、爬升不大,沿河景色极美。`,tags:[{t:`徒步 ~2h`},{t:`4.1 mi 往返`},{t:`⚠️ 禁止跳水/游泳`,c:`warn`}]},
+        {time:`12:00`,ico:`🌊`,h4:`萨哈利 & 库萨瀑布`,p:`就在 126 号路边,两道相邻的壮观瀑布。可走一小段环线把两个瀑布一起看。6 月融雪季水量最大、最震撼。`,tags:[{t:`停留 ~45min`},{t:`短环线`},{t:`停车方便`}]},
+        {time:`13:00`,ico:`🛶`,h4:`清湖度假村 Clear Lake Resort`,p:`McKenzie 河的源头湖,清澈到能看见湖底沉了三千年的水下森林。可在度假村租木船(湖里禁马达),湖边小餐馆吃午餐。`,tags:[{t:`停留 ~1.5h`},{t:`可租船`},{t:`湖边午餐`}]},
+        {time:`15:00`,ico:`🚗`,h4:`开往火山口湖区`,p:`下午南下约 3 小时到火山口湖南门一带过夜。建议在 Bend 或 Klamath Falls 加满油、买好次日干粮。`,tags:[{t:`🚗 ~3h · 150 mi`,c:`drive`}]}],
+       hotel:{title:`🛏️ 第 2 晚住宿建议(火山口湖附近)`,lines:[
+        `<b>The Cabins at Mazama Village</b>(园内南门,~$200/晚)— 离公园最近,极抢手,务必早订`,
+        `<b>Crater Lake Lodge</b>(崖顶历史旅馆,可看湖,5/15–10/13 开)— 体验最佳但极难订`,
+        `<b>Crater Lake Resort / Aspen Inn</b>(Fort Klamath)— 离 Jackson Kimball 最近,实惠`,
+        `<b>Prospect Historic Hotel</b>(Prospect)/ <b>Diamond Lake Resort</b>(北门)— 备选`],
+        note:`推荐住 <b>Fort Klamath / Mazama Village</b>,因为第 3 天一早先去南边的 Jackson Kimball,再上山看湖,顺路不走回头路。`}},
+      {stops:[
+        {time:`8:30`,ico:`🪶`,h4:`Jackson F. Kimball 州立游憩地`,sub:`Wood River 源头`,p:`Fort Klamath 北边 3 英里的安静小公园,Wood River 在此从地下泉涌出,水极清、呈淡蓝绿色。一条短 trail 走到源头,清晨常无人,非常治愈。`,tags:[{t:`停留 ~45min`},{t:`短trail/源头泉`},{t:`5–11月开放`}]},
+        {time:`10:00`,ico:`🌅`,h4:`火山口湖(南门进)`,sub:`Rim Village & 西环湖路`,p:`美国最深的湖、世界最蓝的湖之一。先到 Rim Village 第一眼俯瞰,再沿西环湖路停几个观景点:Sinnott Memorial、Discovery Point、Watchman Overlook。崖顶视角依旧无敌(今年不能下水)。`,tags:[{t:`停留 ~2.5–3h`},{t:`门票 ~$30/车(7天)`},{t:`⚠️ 东环线/游船关闭`,c:`warn`}]},
+        {time:`13:00`,ico:`🚗`,h4:`北门出 → 返回波特兰`,sub:`North Entrance → OR-138 → I-5 N`,p:`从北门走 138 号公路(North Umpqua 风景线)下山,可顺路看 Watson Falls(俄勒冈最高瀑布之一)。之后转 I-5 北上回波特兰,约 4.5–5 小时。建议中途在 Roseburg/Eugene 吃晚饭休息。`,tags:[{t:`🚗 ~4.5–5h · 245 mi`,c:`drive`},{t:`沿途瀑布加分`}]}],
+       end:`🌙 第 3 天回程较长。若想轻松,可把这天拆成两天(在 Roseburg 或 Eugene 加住一晚),整趟变成 4 天更从容。`}],
+    packTitle:`🎒 打包清单(可勾选)`,
+    pack:[`分层保暖衣物(山区昼夜温差大,夜里可低至 4°C)`,`徒步鞋(蓝池步道有碎石路面)`,`防晒霜 + 帽子 + 墨镜`,`充足饮用水 + 零食(多处无补给)`,`离线地图(山区手机常无信号)`,`提前加满油(南部加油站稀少)`,`国家公园门票现金 / America the Beautiful 年票`,`相机 / 泳衣(Clear Lake 划船)`,`防蚊液 + 基础急救包`,`少量现金(小度假村可能不收卡)`,`保温杯 / 雨衣(山区天气多变)`,`住宿确认单 + 行程这页截图`],
+    packMsg:`勾选会自动记住(保存在本机浏览器)。`,
+    tipTitle:`💡 实用贴士`,
+    tips:[`<b>门票:</b>火山口湖约 $30/车,7 天有效。常去国家公园的话,$80 的年票更划算。`,`<b>加油点:</b>主要补给在 Government Camp、Sisters、Bend、Klamath Falls。进山前一定加满。`,`<b>开车安全:</b>242 号(Dee Wright)和环湖路弯多坡陡,开慢、多用低挡;清晨可能有鹿上路。`,`<b>住宿:</b>火山口湖一带夏天极抢手,Mazama Village 小屋和 Crater Lake Lodge 建议尽早预订。`,`<b>安全红线:</b>Blue Pool 绝对不要跳水;火山口湖崖边别越护栏,崖壁松散危险。`,`<b>想更轻松?</b>这条线塞进 3 天偏紧(总驾驶约 14 小时)。多加 1 天 = 每天少开车、多泡在景里。`],
+    footer:[`为你定制 · 俄勒冈喀斯喀特 8 站环线 · 行程信息基于 2026 年 6 月公开资料,出发前请再核对道路与天气状况。`,`祝旅途愉快!🌲💧🏔️`]
+  },
+
+  vi: {
+    docTitle:`Cascades Oregon · Cung Vòng 8 Điểm`, htmlLang:`vi`,
+    hero:{ eyebrow:`Oregon Cascades · Road Trip`,
+      h1:`Cascades Oregon — Cung Đường Vòng 8 Điểm`,
+      sub:`Portland → Núi Hood → Thác sông McKenzie → Hồ Crater → quay về Portland`,
+      stats:[{b:`8`,l:`điểm phải đến`},{b:`3`,l:`ngày · 2 đêm`},{b:`~500 mi`,l:`tổng quãng đường`},{b:`~14 giờ`,l:`tổng thời gian lái`},{b:`Vòng`,l:`về PDX`}]},
+    bestTitle:`🗓️ Thời Điểm Lý Tưởng`,
+    months:[`Th1`,`Th2`,`Th3`,`Th4`,`Th5`,`Th6`,`Th7`,`Th8`,`Th9`,`Th10`,`Th11`,`Th12`],
+    legend:[`Đóng / không khả thi`,`Mở (tùy thời tiết)`,`Tuyệt`,`Cao điểm`],
+    bestCol1:`🏆 <b>Tốt nhất: giữa tháng 7 – cuối tháng 9.</b> Mọi đường và lối mòn đều mở, ban ngày 18–27°C, lý tưởng để đi bộ và chèo thuyền. <b>Sau Labor Day (đầu tháng 9)</b> ít người nhất mà trời vẫn ấm — khung thời gian đáng giá nhất.`,
+    bestCol2:`🌊 <b>Ngay bây giờ (cuối tháng 6) cũng rất tốt:</b> vừa mở mùa, thác chảy mạnh nhất nhờ tuyết tan, hoa dại nở rộ, ít người hơn. Lưu ý: lối mòn ven miệng hồ Crater có thể vẫn còn sót tuyết.`,
+    bestNote:`⛔ <b>Tránh tháng 11–5:</b> tuyết dày đóng McKenzie Pass (Hwy 242 → Dee Wright) và đường Rim Drive của hồ Crater, nên phần lớn cung đường không đi được. Hwy 242 vừa mở ngày 15/6/2026 và thường mở đến đầu tháng 11.`,
+    alertTitle:`⚠️ Lưu Ý Quan Trọng 2026`,
+    alerts:[
+      `<b>Hồ Crater thi công lớn (2026–2028):</b> đường mòn Cleetwood Cove (lối duy nhất xuống mặt nước) và toàn bộ tour thuyền đều đóng — năm nay không bơi, không đi thuyền. East Rim Drive đóng một phần. Tin tốt: West Rim Drive và các điểm ngắm chính vẫn mở, và cảnh nhìn một trong những hồ xanh nhất Trái Đất từ vành miệng núi lửa vẫn cực kỳ ngoạn mục.`,
+      `<b>Blue Pool — cấm nhảy hoặc bơi:</b> nước quanh năm khoảng 4°C (38°F), đã có tai nạn liệt người và tử vong do nhảy xuống. Chỉ ngắm từ bờ.`,
+      `<b>McKenzie Pass (Hwy 242):</b> hẹp và nhiều khúc cua gắt, cấm xe RV/rơ-moóc, lái chậm. Sóng điện thoại yếu — tải bản đồ ngoại tuyến trước khi đi.`],
+    routeTitle:`🧭 Tổng Quan Lộ Trình (Bắc → Nam)`,
+    legs:[
+      {pin:`ĐẦU`,nm:`Portland`,drv:`↓ ~1 giờ 15 phút · 60 mi`},
+      {pin:`1`,nm:`Trillium Lake`,sub:`Núi Hood`,drv:`↓ ~30 phút`},
+      {pin:`2`,nm:`Little Crater Lake`,drv:`↓ ~2,5 giờ → nghỉ đêm ở Sisters`},
+      {pin:`3`,nm:`Dee Wright Observatory`,sub:`Hwy 242`,drv:`↓ ~45 phút (xuống Hwy 126)`},
+      {pin:`4`,nm:`Tamolitch Blue Pool`,drv:`↓ ~10 phút`},
+      {pin:`5`,nm:`Sahalie Falls`,drv:`↓ ~10 phút`},
+      {pin:`6`,nm:`Clear Lake Resort`,drv:`↓ ~3 giờ → nghỉ đêm gần hồ Crater`},
+      {pin:`7`,nm:`Jackson F. Kimball SRS`,sub:`Đầu nguồn sông Wood`,drv:`↓ ~40 phút`},
+      {pin:`8`,nm:`Crater Lake`,drv:`↓ ~4,5–5 giờ (Hwy 138 + I-5)`},
+      {pin:`CUỐI`,nm:`Quay về Portland`,drv:``}],
+    routeNote:`📍 8 điểm xếp gọn theo hướng bắc-nam, nên đây là cung "đi xuống phía nam rồi vòng về Portland". Chặng về ngày 3 khá dài, nhưng Hwy 138 (North Umpqua) tự nó đã là một con đường ngắm cảnh nổi tiếng.`,
+    dailyTitle:`📅 Lịch Trình Từng Ngày`,
+    tabs:[{d:`Ngày 1`,t:`Hồ Núi Hood`},{d:`Ngày 2`,t:`Vòng Thác McKenzie`},{d:`Ngày 3`,t:`Hồ Crater + Về`}],
+    days:[
+      {stops:[
+        {time:`8:00`,ico:`🚗`,h4:`Khởi hành từ Portland`,sub:`US-26 E`,p:`Khởi hành sớm, theo Hwy 26 đi đông nam lên Núi Hood. Dọc đường có Government Camp để đổ xăng/mua đồ.`},
+        {time:`9:15`,ico:`🏔️`,h4:`Trillium Lake`,p:`Hồ "tấm bưu thiếp phản chiếu" kinh điển của Núi Hood. Đường mòn vòng hồ ~2 dặm bằng phẳng, mặt hồ soi bóng đỉnh núi tuyết — điểm chụp ảnh đẹp nhất chuyến đi.`,tags:[{t:`Ở lại ~1,5h`},{t:`Vòng phẳng 2 mi`},{t:`Vé đỗ xe $5/ngày`}]},
+        {time:`11:15`,ico:`💧`,h4:`Little Crater Lake`,p:`Chỉ đi bộ ~0,4 dặm từ bãi xe. Một hồ nước ngầm nhỏ nhưng sâu 45 ft, xanh đến khó tin và trong vắt — viên ngọc bị đánh giá thấp.`,tags:[{t:`Ở lại ~1h`},{t:`Đi bộ 0,4 mi`},{t:`Ít người`}]},
+        {time:`12:30`,ico:`🍔`,h4:`Ăn trưa + di chuyển đến Sisters`,sub:`→ Sisters, OR`,p:`Ăn trưa ở Government Camp hoặc mang theo đồ picnic. Chiều lái theo Hwy 26 → 97 → 20/126 đến thị trấn Sisters, khoảng 2,5 giờ qua cảnh rừng thông cao nguyên.`,tags:[{t:`🚗 ~2,5h · 130 mi`,c:`drive`}]},
+        {time:`Chiều tối`,ico:`🏨`,h4:`Nghỉ đêm ở Sisters`,p:`Sisters là thị trấn chủ đề miền Tây dễ thương, đủ nhà hàng và trạm xăng — căn cứ lý tưởng để khám phá khu McKenzie.`}],
+       hotel:{title:`🛏️ Chỗ nghỉ đêm 1 (khu Sisters / Santiam)`,lines:[
+        `<b>FivePine Lodge & Spa</b> (Sisters) — cabin riêng, hồ bơi + spa, hạng nhất`,
+        `<b>Best Western Ponderosa Lodge</b> (Sisters) — đáng giá, dễ đặt`,
+        `<b>The Suttle Lodge</b> (ven hồ) — gần Clear Lake hơn, view đẹp nghệ`,
+        `<b>Belknap Hot Springs</b> (McKenzie Bridge) — vườn suối nước nóng, hợp để ngâm mình`]}},
+      {lead:`⏱️ <b>Ngày bận nhất.</b> Sáng đi vòng thác McKenzie; chiều lái 3 giờ đến hồ Crater. Nên khởi hành trước 7:30. Nếu thấy gấp, bỏ chèo thuyền Clear Lake hoặc rút ngắn chặng đi bộ Blue Pool.`,
+       stops:[
+        {time:`8:00`,ico:`🌋`,h4:`Dee Wright Observatory`,sub:`Hwy 242 · Đèo McKenzie`,p:`Từ Sisters đi Hwy 242 vượt đèo McKenzie. Một đài quan sát xây hoàn toàn bằng đá dung nham, view 360° thấy 11 đỉnh núi lửa, xung quanh là cánh đồng dung nham đen — cảm giác như trên Mặt Trăng.`,tags:[{t:`Ở lại ~45min`},{t:`⚠️ Hẹp, cấm RV`,c:`warn`},{t:`🚗 40min`,c:`drive`}]},
+        {time:`9:30`,ico:`💙`,h4:`Tamolitch Blue Pool`,p:`Sông McKenzie chảy ngầm qua dung nham rồi trồi lên đây thành hồ xanh ngọc phát sáng. Đi-về ~4,1 dặm, ít dốc, dọc lối mòn ven sông tuyệt đẹp.`,tags:[{t:`Đi bộ ~2h`},{t:`4,1 mi khứ hồi`},{t:`⚠️ Cấm nhảy/bơi`,c:`warn`}]},
+        {time:`12:00`,ico:`🌊`,h4:`Sahalie & Koosah Falls`,p:`Ngay cạnh Hwy 126, hai thác nước ầm ầm liền kề. Một lối mòn vòng ngắn nối cả hai. Nước mạnh nhất vào mùa tuyết tan tháng 6 — ồn ào và hùng vĩ.`,tags:[{t:`Ở lại ~45min`},{t:`Vòng ngắn`},{t:`Dễ đỗ xe`}]},
+        {time:`13:00`,ico:`🛶`,h4:`Clear Lake Resort`,p:`Hồ đầu nguồn sông McKenzie — trong đến mức thấy cả khu rừng chìm 3.000 năm tuổi dưới đáy. Thuê thuyền chèo tại resort (cấm động cơ) và ăn trưa ở quán ven hồ.`,tags:[{t:`Ở lại ~1,5h`},{t:`Thuê thuyền`},{t:`Ăn trưa ven hồ`}]},
+        {time:`15:00`,ico:`🚗`,h4:`Lái đến khu hồ Crater`,p:`Khoảng 3 giờ về phía nam đến khu cổng nam hồ Crater để nghỉ đêm. Đổ đầy xăng và mua đồ ăn cho ngày mai ở Bend hoặc Klamath Falls.`,tags:[{t:`🚗 ~3h · 150 mi`,c:`drive`}]}],
+       hotel:{title:`🛏️ Chỗ nghỉ đêm 2 (gần hồ Crater)`,lines:[
+        `<b>The Cabins at Mazama Village</b> (trong công viên, cổng nam, ~$200/đêm) — gần công viên nhất, rất hot, đặt sớm`,
+        `<b>Crater Lake Lodge</b> (lodge lịch sử ven miệng hồ, có view hồ, mở 15/5–13/10) — trải nghiệm tốt nhất nhưng rất khó đặt`,
+        `<b>Crater Lake Resort / Aspen Inn</b> (Fort Klamath) — gần Jackson Kimball nhất, giá mềm`,
+        `<b>Prospect Historic Hotel</b> (Prospect) / <b>Diamond Lake Resort</b> (cổng bắc) — phương án dự phòng`],
+        note:`Khuyến nghị: nghỉ ở <b>Fort Klamath / Mazama Village</b>. Ngày 3 bạn ghé Jackson Kimball (phía nam) đầu tiên, rồi lái lên miệng hồ — không phải đi đường vòng lại.`}},
+      {stops:[
+        {time:`8:30`,ico:`🪶`,h4:`Jackson F. Kimball State Rec Site`,sub:`Đầu nguồn sông Wood`,p:`Công viên nhỏ yên tĩnh cách Fort Klamath 3 dặm về phía bắc, nơi sông Wood trào lên từ mạch ngầm — cực trong, màu xanh lục nhạt. Một lối mòn ngắn dẫn đến đầu nguồn; buổi sáng thường vắng và rất thư thái.`,tags:[{t:`Ở lại ~45min`},{t:`Lối ngắn đến mạch nước`},{t:`Mở Th5–Th11`}]},
+        {time:`10:00`,ico:`🌅`,h4:`Hồ Crater (cổng nam)`,sub:`Rim Village & West Rim`,p:`Hồ sâu nhất nước Mỹ và một trong những hồ xanh nhất Trái Đất. Ngắm lần đầu ở Rim Village, rồi dừng dọc West Rim Drive: Sinnott Memorial, Discovery Point và Watchman Overlook. View từ vành hồ vẫn vô địch (năm nay không xuống mặt nước được).`,tags:[{t:`Ở lại ~2,5–3h`},{t:`Vé ~$30/xe (7 ngày)`},{t:`⚠️ East rim & thuyền đóng`,c:`warn`}]},
+        {time:`13:00`,ico:`🚗`,h4:`Ra cổng bắc → quay về Portland`,sub:`North Entrance → OR-138 → I-5 N`,p:`Đi Hwy 138 (đường ngắm cảnh North Umpqua) xuống núi và ghé Watson Falls, một trong những thác cao nhất Oregon, trên đường. Rồi theo I-5 lên bắc về Portland, khoảng 4,5–5 giờ. Nên nghỉ ăn tối ở Roseburg hoặc Eugene.`,tags:[{t:`🚗 ~4,5–5h · 245 mi`,c:`drive`},{t:`Có thác dọc đường`}]}],
+       end:`🌙 Chặng về ngày 3 khá dài. Cho nhẹ nhàng, hãy chia thành hai ngày (thêm một đêm ở Roseburg hoặc Eugene) và biến cả chuyến thành 4 ngày thong thả hơn.`}],
+    packTitle:`🎒 Danh Sách Hành Lý (chạm để đánh dấu)`,
+    pack:[`Quần áo nhiều lớp/giữ ấm (chênh lệch nhiệt ngày-đêm lớn; đêm có thể ~4°C)`,`Giày đi bộ (lối Blue Pool có đoạn sỏi đá)`,`Kem chống nắng + mũ + kính râm`,`Nhiều nước + đồ ăn nhẹ (ít chỗ mua dọc đường)`,`Bản đồ ngoại tuyến (núi thường không có sóng)`,`Đổ đầy xăng sớm (trạm xăng thưa thớt ở phía nam)`,`Tiền mặt vé công viên / thẻ năm America the Beautiful`,`Máy ảnh / đồ bơi (chèo thuyền Clear Lake)`,`Thuốc chống côn trùng + bộ sơ cứu cơ bản`,`Ít tiền mặt (resort nhỏ có thể không nhận thẻ)`,`Bình giữ nhiệt / áo mưa (thời tiết núi thay đổi nhanh)`,`Xác nhận đặt phòng + chụp màn hình trang này`],
+    packMsg:`Các ô đánh dấu tự lưu (trong trình duyệt này).`,
+    tipTitle:`💡 Mẹo Thực Tế`,
+    tips:[`<b>Vé vào:</b> Hồ Crater khoảng $30/xe, có giá trị 7 ngày. Nếu hay đi công viên, thẻ năm $80 sẽ hời hơn.`,`<b>Trạm xăng:</b> tiếp tế chính ở Government Camp, Sisters, Bend và Klamath Falls. Đổ đầy trước khi vào núi.`,`<b>An toàn lái xe:</b> Hwy 242 (Dee Wright) và Rim Drive nhiều cua gắt, dốc đứng — đi chậm, về số thấp; coi chừng hươu lúc rạng sáng.`,`<b>Chỗ nghỉ:</b> hồ Crater kín phòng nhanh vào mùa hè. Đặt cabin Mazama Village và Crater Lake Lodge càng sớm càng tốt.`,`<b>Lằn ranh an toàn:</b> tuyệt đối không nhảy ở Blue Pool, và đừng vượt lan can ở hồ Crater — đá vành hồ rời rạc, nguy hiểm.`,`<b>Muốn nhẹ nhàng hơn?</b> Ba ngày cho 8 điểm là hơi gấp (~14 giờ lái tổng cộng). Thêm một ngày nghĩa là lái ít hơn và đắm mình lâu hơn ở mỗi điểm.`],
+    footer:[`Thiết kế riêng cho bạn · Cung vòng 8 điểm Cascades Oregon · Thông tin dựa trên nguồn công khai tính đến tháng 6/2026 — kiểm tra lại đường và thời tiết trước khi đi.`,`Chúc thượng lộ bình an! 🌲💧🏔️`]
+  }
+};
+
+/* ===================== RENDER ===================== */
+var MCLS=['no','no','no','no','ok','best','peak','peak','peak','ok','no','no'];
+var LEGC=['#c2cbc6','#8bbf9f','#2e6b50','#d9a441'];
+var state={lang:'en',day:0};
+var packKey='or_loop_pack_v2', packSaved={};
+try{packSaved=JSON.parse(localStorage.getItem(packKey)||'{}');}catch(e){}
+
+function esc(){return '';}
+function tagsHtml(tags){return (tags||[]).map(function(x){return '<span class="tag '+(x.c||'')+'">'+x.t+'</span>';}).join('');}
+function stopHtml(s){
+  return '<div class="stop"><div class="time">'+s.time+'</div><div class="ico">'+s.ico+'</div>'+
+    '<div class="info"><h4>'+s.h4+(s.sub?' <span class="en">'+s.sub+'</span>':'')+'</h4>'+
+    '<p>'+s.p+'</p>'+((s.tags&&s.tags.length)?'<div class="tagrow">'+tagsHtml(s.tags)+'</div>':'')+'</div></div>';
+}
+function legHtml(l){
+  return '<div class="leg"><div class="rail"><div class="pin">'+l.pin+'</div></div><div class="body">'+
+    '<div class="nm">'+l.nm+(l.sub?' <span class="en">'+l.sub+'</span>':'')+'</div>'+
+    (l.drv?'<div class="drv">'+l.drv+'</div>':'')+'</div></div>';
+}
+function dayHtml(day){
+  var h='<div class="card">';
+  if(day.lead) h+='<div class="note" style="margin-top:0;margin-bottom:8px">'+day.lead+'</div>';
+  day.stops.forEach(function(s){h+=stopHtml(s);});
+  if(day.hotel){
+    h+='<div class="hotelbox"><h4>'+day.hotel.title+'</h4>';
+    day.hotel.lines.forEach(function(l){h+='<div class="h">'+l+'</div>';});
+    if(day.hotel.note) h+='<div class="note" style="margin-top:8px">'+day.hotel.note+'</div>';
+    h+='</div>';
+  }
+  if(day.end) h+='<div class="note" style="margin-top:6px">'+day.end+'</div>';
+  h+='</div>';
+  return h;
+}
+
+function render(lang){
+  var d=T[lang]; state.lang=lang;
+  document.documentElement.lang=d.htmlLang;
+  document.title=d.docTitle;
+
+  /* hero */
+  var hs=d.hero.stats.map(function(s){return '<div class="stat"><b>'+s.b+'</b>'+s.l+'</div>';}).join('');
+  document.getElementById('hero-body').innerHTML=
+    '<div class="eyebrow">'+d.hero.eyebrow+'</div><h1>'+d.hero.h1+'</h1>'+
+    '<div class="sub">'+d.hero.sub+'</div><div class="stats">'+hs+'</div>';
+
+  /* best time */
+  var months=d.months.map(function(m,i){return '<div class="m '+MCLS[i]+'">'+m+'</div>';}).join('');
+  var legend=d.legend.map(function(l,i){return '<span><i class="dot" style="background:'+LEGC[i]+'"></i>'+l+'</span>';}).join('');
+  var best='<section><h2>'+d.bestTitle+'</h2><div class="card">'+
+    '<div class="months">'+months+'</div><div class="legend">'+legend+'</div>'+
+    '<div class="grid2" style="margin-top:14px"><div><p style="font-size:14px">'+d.bestCol1+'</p></div>'+
+    '<div><p style="font-size:14px">'+d.bestCol2+'</p></div></div>'+
+    '<div class="note">'+d.bestNote+'</div></div></section>';
+
+  /* alerts */
+  var alerts='<section><h2>'+d.alertTitle+'</h2>'+
+    d.alerts.map(function(a){return '<div class="alert">'+a+'</div>';}).join('')+'</section>';
+
+  /* route */
+  var route='<section><h2>'+d.routeTitle+'</h2><div class="card"><div class="route">'+
+    d.legs.map(legHtml).join('')+'</div><div class="note">'+d.routeNote+'</div></div></section>';
+
+  /* daily */
+  var tabs=d.tabs.map(function(tb,i){
+    return '<div class="tab'+(i===state.day?' active':'')+'" data-day="'+i+'"><div class="d">'+tb.d+'</div><div class="t">'+tb.t+'</div></div>';
+  }).join('');
+  var days=d.days.map(function(day,i){
+    return '<div class="day'+(i===state.day?' show':'')+'" data-dayp="'+i+'">'+dayHtml(day)+'</div>';
+  }).join('');
+  var daily='<section><h2>'+d.dailyTitle+'</h2><div class="tabs">'+tabs+'</div>'+days+'</section>';
+
+  /* packing */
+  var items=d.pack.map(function(p,i){
+    return '<li data-i="'+i+'"><input type="checkbox"><span>'+p+'</span></li>';
+  }).join('');
+  var pack='<section><h2>'+d.packTitle+'</h2><div class="card"><ul class="chk" id="chk">'+items+
+    '</ul><div class="note">'+d.packMsg+'</div></div></section>';
+
+  /* tips */
+  var tips='<section><h2>'+d.tipTitle+'</h2><div class="card">'+
+    d.tips.map(function(t){return '<div class="tip">'+t+'</div>';}).join('')+'</div></section>';
+
+  /* footer */
+  var foot='<footer>'+d.footer[0]+'<br>'+d.footer[1]+'</footer>';
+
+  document.getElementById('app').innerHTML=best+alerts+route+daily+pack+tips+foot;
+
+  /* lang buttons */
+  document.querySelectorAll('.langsw button').forEach(function(b){
+    b.classList.toggle('on', b.dataset.lang===lang);
+  });
+
+  wireTabs(); wireChecklist();
+  try{localStorage.setItem('or_loop_lang',lang);}catch(e){}
+}
+
+function wireTabs(){
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click',function(){
+      state.day=parseInt(t.dataset.day,10);
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+      document.querySelectorAll('.day').forEach(function(x){x.classList.remove('show');});
+      t.classList.add('active');
+      document.querySelector('.day[data-dayp="'+state.day+'"]').classList.add('show');
+    });
+  });
+}
+function wireChecklist(){
+  document.querySelectorAll('#chk li').forEach(function(li){
+    var i=li.dataset.i, box=li.querySelector('input');
+    if(packSaved[i]){box.checked=true; li.classList.add('done');}
+    function sync(){
+      if(box.checked){li.classList.add('done'); packSaved[i]=1;}
+      else{li.classList.remove('done'); delete packSaved[i];}
+      try{localStorage.setItem(packKey,JSON.stringify(packSaved));}catch(e){}
+    }
+    li.addEventListener('click',function(e){ if(e.target!==box){box.checked=!box.checked;} sync(); });
+  });
+}
+
+/* lang switch buttons */
+document.querySelectorAll('.langsw button').forEach(function(b){
+  b.addEventListener('click',function(){ state.day=0; render(b.dataset.lang); });
+});
+
+/* init */
+var startLang='en';
+try{var sv=localStorage.getItem('or_loop_lang'); if(sv&&T[sv]) startLang=sv;}catch(e){}
+render(startLang);
+</script>
+</body>
+</html>
