@@ -116,7 +116,7 @@
       <span class="cd" id="cd">⏳ … 天后</span>
     </div>
     <div class="chipnav">
-      <a href="#todo" class="on">📋 现在订</a><a href="#days">📅 行程</a><a href="#food">🍜 美食</a><a href="#pack">🎒 打包</a><a href="#budget">💰 预算</a>
+      <a href="#info" class="on">📌 速查</a><a href="#todo">📋 现在订</a><a href="#days">📅 行程</a><a href="#food">🍜 美食</a><a href="#pack">🎒 打包</a><a href="#budget">💰 预算</a>
     </div>
   </div>
 
@@ -130,6 +130,17 @@
       <div class="st"><div class="v">2</div><div class="l">人数</div></div>
       <div class="st"><div class="v">6</div><div class="l">晚</div></div>
       <div class="st"><div class="v">~$5k</div><div class="l">2 人</div></div>
+    </div>
+  </div>
+
+  <div id="info" style="scroll-margin-top:120px">
+    <div class="sech"><span class="h2">📌 出行速查</span></div>
+    <div class="card" style="margin:0 16px;padding:8px 15px">
+      <div style="display:flex;gap:11px;padding:11px 2px;border-bottom:1px solid #FBEEF2"><span style="flex:none;width:54px;font:700 12px 'Noto Sans SC';color:var(--ac)">✈️ 你</span><span style="flex:1;font:500 12.5px 'Noto Sans SC';line-height:1.5">DSM ↔ MCO · 12/22 到 8:27pm · 12/28 走 9:15am</span></div>
+      <div style="display:flex;gap:11px;padding:11px 2px;border-bottom:1px solid #FBEEF2"><span style="flex:none;width:54px;font:700 12px 'Noto Sans SC';color:var(--ac)">✈️ 朋友</span><span style="flex:1;font:500 12.5px 'Noto Sans SC';line-height:1.5">LAX ↔ MCO · 12/23 到 6:29am · 12/27 走 10:50pm</span></div>
+      <div style="display:flex;gap:11px;padding:11px 2px;border-bottom:1px solid #FBEEF2"><span style="flex:none;width:54px;font:700 12px 'Noto Sans SC';color:var(--ac)">🚗 车</span><span style="flex:1;font:500 12.5px 'Noto Sans SC';line-height:1.5">Turo Kia K4（你开）· 12/22 8:30pm 取 → 12/28 8:30am 还 · MCO</span></div>
+      <div style="display:flex;gap:11px;padding:11px 2px;border-bottom:1px solid #FBEEF2"><span style="flex:none;width:54px;font:700 12px 'Noto Sans SC';color:var(--ac)">🏨 酒店</span><span style="flex:1;font:500 12.5px 'Noto Sans SC';line-height:1.5">Sheraton Vistana · 12/22–28 · 确认 #2489106561</span></div>
+      <div style="display:flex;gap:11px;padding:11px 2px"><span style="flex:none;width:54px;font:700 12px 'Noto Sans SC';color:var(--ac)">🦭 海牛</span><span style="flex:1;font:500 12.5px 'Noto Sans SC';line-height:1.5">Gray Line · 12/26 6:45am 酒店接 · 确认 #59521796 · ☎️ 407-522-5911</span></div>
     </div>
   </div>
 
@@ -196,7 +207,7 @@ const DAYS=[
   {wd:'周日',date:'12/27',kind:'disney',title:'🐘 迪士尼 Animal Kingdom',summary:'玩完回酒店睡；12/28 早 9:15 飞',bullets:['开门冲 Kilimanjaro Safaris（动物清晨最活跃）→ Expedition Everest → Flight of Passage（用单买 Single Pass）','Festival of the Lion King 秀 · Maharajah Jungle Trek；闭园前再刷一次 Safaris','AK 约 5–6 点关——玩完吃晚饭回酒店，今晚住 Vistana 收好行李','12/27 晚：你开车送朋友去 MCO 赶她 10:50PM 红眼（回 LAX），再开回 Vistana 住最后一晚；12/28 还车 8:30am → 9:15am 飞回 DSM'],meal:'晚饭：回程顺路 Jollibee（近 Florida Mall）/ Disney Springs / Mills 50。',tip:'12/28 是早班机（9:15am 回 DSM），今晚别熬太晚；先收行李，明早 7 点前到 MCO 还车 + 安检。'},
 ];
 
-const TODO=[['现在','买环球多日票（含 Epic, Park-to-Park）+ Epic Express'],['现在','买迪士尼 2 天票（AK + EPCOT）；给 Flight of Passage / Cosmic Rewind 单买 Single Pass'],['已订✅','机票 + Sheraton Vistana 6 晚 + Gray Line 海牛（12/26 6:45am）'],['已订✅','Turo Kia K4（你租 · 12/22 8:30pm 取 → 12/28 8:30am 还 · MCO · $588.81）'],['出发前 2 周','用 Google Maps 把 10 家餐厅查清营业时间（圣诞很多关门）'],['出发前 1 周','看天气；下载 Universal + My Disney Experience + Uber App，绑好票']];
+const TODO=[['现在','买环球多日票（含 Epic, Park-to-Park）+ Epic Express'],['现在','买迪士尼 2 天票（AK + EPCOT）⚠️ 12 月日期还没开售，常去官网查'],['临近','Flight of Passage / Cosmic Rewind 单买 Lightning Lane Single Pass（出发前几天）'],['出发前 2 周','用 Google Maps 把 10 家餐厅查清营业时间（圣诞很多关门）'],['出发前 1 周','看天气；下载 Universal + My Disney Experience App，绑好两人的票']];
 
 const FOOD=[
   {icon:'🎢',area:'环球 / 西区',when:'玩环球那两天',items:[['Pocha 93','韩式宵夜（你已标地图，最近）','Pocha+93+Orlando'],['Walala Hand-Pulled Noodle','手拉面','Walala+Hand+Pulled+Noodle+Orlando'],['Gaga Yummy','近南区','Gaga+Yummy+Orlando']]},
@@ -206,7 +217,7 @@ const FOOD=[
 
 const PACK=['分层穿搭 + 薄羽绒（早晚 40–50°F、中午 70°F）','偏光太阳镜（看海牛必备）','磨合过的舒服走路鞋','海牛日：泳衣穿里面 + 毛巾 + 换洗衣','可重复灌水杯 + 充电宝 + 薄雨衣','驾照（Turo 取车用）+ 信用卡','到超市囤水 / 早餐（Vistana 有厨房，省钱）'];
 
-const BUDGET=[['酒店 Sheraton Vistana 6 晚 ✅','$1,210','已订（含税）；园区停车另算'],['Turo 租车 Kia K4 ✅','$589','你租 12/22–28（含税 · Standard + 路边救援）'],['环球门票（2 人，含 Epic P2P）','$700–950','多日 Park-to-Park'],['Epic Express（2 人 ×1 天）','$300–500','住外面无免费快通'],['迪士尼 2 天票（2 人，AK+EPCOT）','$600–760','+ FoP / Cosmic Rewind Single Pass'],['海牛 Gray Line（2 人）✅','$368','已订（$169/人 + $15 潜水服）'],['吃饭（清单 + 日常）','$700–1k','有厨房可省早餐']];
+const BUDGET=[['🏨 酒店 6 晚 ✅','$1,210','已订（含税）'],['🚗 Turo Kia K4 ✅','$589','已订（含税）'],['🦭 海牛 Gray Line ✅','$368','已订（2 人）'],['🎢 环球票（含 Epic P2P）','$700–950','待买'],['⚡ Epic Express','$300–500','待买'],['🏰 迪士尼 2 天票（AK+EPCOT）','$600–760','待买'],['🍜 吃饭（清单 + 日常）','$700–1k','现场']];
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 (function(){var d=Math.max(0,Math.ceil((START-new Date())/86400000));document.getElementById('cd').textContent=d>0?('⏳ '+d+' 天后'):'🎉 出发啦';})();
@@ -245,7 +256,7 @@ function togPack(i){const id='p'+i;checked[id]=!checked[id];try{localStorage.set
 renderPack();
 
 // budget
-document.getElementById('budgetbox').innerHTML=BUDGET.map(r=>'<div class="brow"><div class="bl"><span class="bi">'+esc(r[0])+'</span><span class="bt">'+esc(r[1])+'</span></div>'+(r[2]?'<div class="bn">'+esc(r[2])+'</div>':'')+'</div>').join('')+'<div class="btot"><span class="l">全程估</span><span class="v">$4.4k–5.6k</span></div><div style="font-size:11px;font-weight:500;color:#A98A96;line-height:1.5">不含机票 · 你全程自驾（含车 + 停车）· 价格会变，出发前复核 🍜</div>';
+document.getElementById('budgetbox').innerHTML=BUDGET.map(r=>'<div class="brow"><div class="bl"><span class="bi">'+esc(r[0])+'</span><span class="bt">'+esc(r[1])+'</span></div>'+(r[2]?'<div class="bn">'+esc(r[2])+'</div>':'')+'</div>').join('')+'<div class="btot"><span class="l">总估（已订 + 待买）</span><span class="v">$4.5k–5.4k</span></div><div style="font-size:11px;font-weight:500;color:#A98A96;line-height:1.5">已订 ~$2,167（酒 + 车 + 海牛）· 待买门票 + 吃饭 ~$2.3–3.4k · 不含机票 🍜</div>';
 </script>
 </body>
 </html>
