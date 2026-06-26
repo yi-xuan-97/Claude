@@ -112,8 +112,7 @@
 
   <div class="appbar">
     <div class="row">
-      <a class="back" href="index.html">←</a>
-      <div class="apptt"><span class="t">🎄 奥兰多圣诞</span><span class="s">12/23 – 27 · 2 人</span></div>
+      <div class="apptt"><span class="t">🎄 奥兰多圣诞</span><span class="s">12/22 – 28 · 2 人</span></div>
       <span class="cd" id="cd">⏳ … 天后</span>
     </div>
     <div class="chipnav">
@@ -127,10 +126,10 @@
     <div class="sub">Sheraton Vistana + Turo 自驾 · 环球(含 Epic) + 海牛浮潜</div>
     <div class="hchips"><span>🌌 Epic</span><span>🎢 环球两园</span><span>🦭 海牛</span><span>🏰 迪士尼</span></div>
     <div class="stats">
-      <div class="st"><div class="v">12/23–27</div><div class="l">出行</div></div>
+      <div class="st"><div class="v">12/22–28</div><div class="l">出行</div></div>
       <div class="st"><div class="v">2</div><div class="l">人数</div></div>
-      <div class="st"><div class="v">4</div><div class="l">晚</div></div>
-      <div class="st"><div class="v">~$4k</div><div class="l">2 人</div></div>
+      <div class="st"><div class="v">6</div><div class="l">晚</div></div>
+      <div class="st"><div class="v">~$5k</div><div class="l">2 人</div></div>
     </div>
   </div>
 
@@ -185,18 +184,19 @@
 
 <script>
 const M='https://www.google.com/maps/search/?api=1&query=';
-const START=new Date('2026-12-23T00:00:00');
-const LABEL={arrive:['抵达','background:#EFE9EC;color:#6E5C66'],uniEve:['平安夜·环球','background:#FBE4EC;color:#C0395E'],uniXmas:['圣诞·环球','background:#FBE4EC;color:#C0395E'],manatee:['海牛·休整','background:#DCF0EF;color:#1F8A8A'],leave:['离开','background:#FCEFD6;color:#B07A1E']};
+const START=new Date('2026-12-22T00:00:00');
+const LABEL={arrive:['抵达','background:#EFE9EC;color:#6E5C66'],uni:['环球','background:#FBE4EC;color:#C0395E'],disney:['迪士尼','background:#E7F0F4;color:#2C6E8A'],manatee:['海牛·休整','background:#DCF0EF;color:#1F8A8A']};
 
 const DAYS=[
-  {wd:'周三',date:'12/23',kind:'arrive',title:'抵达 + 安顿 + Disney Springs',summary:'取车、入住、轻松开吃，不进园',bullets:['落地 MCO → Turo 现场取车（Kia K4 / Camry Hybrid）','入住 Sheraton Vistana（有厨房，可去超市囤水 + 早餐省钱）','傍晚 Disney Springs（免费逛、餐厅多、圣诞气氛），就在酒店旁'],meal:'第一顿（近酒店 / 南区）：Jollibee 菲律宾炸鸡（近 Florida Mall）或 Gaga Yummy。注意查营业时间——平安夜 / 圣诞当天很多店提早关或不开。',tip:'12/23 园区已经很挤，当抵达 + 缓冲日最舒服，不浪费门票。'},
-  {wd:'周四',date:'12/24',kind:'uniEve',title:'🌌 Epic Universe',summary:'全新园，买 Epic Express；平安夜傍晚人变少',bullets:['开门即冲 Harry Potter and the Battle at the Ministry（排队最长）','Stardust Racers 双轨竞速 · Mario Kart · Mine-Cart Madness · Hiccups · Monsters Unchained','两人多用 single rider + 已买 Epic Express = 不累','晚上看新夜秀 Universal Celestial Goodnight'],meal:'晚饭（西区 / 近环球）：Pocha 93 韩式宵夜（离环球很近，你已标地图）。',tip:'平安夜傍晚园内人流明显回落，是全周难得的软窗口，留到晚上玩。'},
-  {wd:'周五',date:'12/25',kind:'uniXmas',title:'🎢 IOA + Universal Studios',summary:'买 Park-to-Park，坐 Hogwarts Express 穿两园',bullets:['圣诞当天很挤——一定开门前到，先冲 Hagrids 和 VelociCoaster','IOA：Forbidden Journey · Spider-Man · Hulk；USF：Gringotts · Mummy · Transformers','坐 Hogwarts Express 往返霍格莫德 ↔ 对角巷；两园多用 single rider','圣诞特色（含门票）：Grinchmas、哈利波特圣诞城堡灯光秀、USF Macys 圣诞游行'],meal:'晚饭（Dr. Phillips 或 Mills 50）：Walala 手拉面 / SUSURU 拉面 / Zaru 乌冬（米其林）。⚠️ 圣诞当天部分中餐馆关门，出发前 Google Maps 确认！',tip:'坐 Hogwarts Express 需要 Park-to-Park 票；趁中午前坐，等待通常 ≤30 分钟。'},
-  {wd:'周六',date:'12/26',kind:'manatee',title:'🦭 Crystal River 海牛浮潜',summary:'躲开全年最挤的园，去和海牛同游',bullets:['Gray Line 浮潜团：全天约 10.5h，含接送、船、浮潜装备、午餐、Homosassa 野生动物园；另付 $15 潜水服','泳衣穿在里面，带毛巾 + 换洗衣；早上冷（海牛最多的时候正是最冷的早上）','不想自驾？Gray Line 是接送团。想省钱自驾？当地潜店 ~$65–85/人，或先看 Blue Spring 栈道（$6/车、圣诞也开）'],meal:'回程顺路（Mills 50 亚洲美食区）：Tieling 烧烤 / 好味坊 / YH Seafood / Caravan 新疆菜。',tip:'放在 12/26 很聪明——这天是全年园区最挤的开始，正好出城躲开。'},
-  {wd:'周日',date:'12/27',kind:'leave',title:'迪士尼半天 或 泉水点 → 还车飞',summary:'看航班时间二选一',bullets:['航班晚 → 迪士尼 Magic Kingdom 半天（七矮人 / TRON / Space Mountain，只单买 1–2 个 Lightning Lane）','想要自然 → Kings Landing 皮划艇 或 Kelly Park-Rock Springs（北边 ~35 分钟）。⚠️ 12 月泉水漂流偏冷，坐皮划艇还行','航班早 → 睡到自然醒 + 最后一顿，还车走'],meal:'最后一顿：清单里还没吃的随便补（机场方向顺路那家）。',tip:'留足 还 Turo 车 + 到 MCO 的时间（机场取还都在现场，方便）。'},
+  {wd:'周二',date:'12/22',kind:'arrive',title:'夜里抵达 + 入住',summary:'你 8:27pm 落地 → 取车自己开去酒店，当晚不进园',bullets:['你晚 8:27 落地 MCO（DSM 飞来）→ 8:30pm 取 Turo 车（Kia K4，机场现场取）→ 自己开去酒店（朋友 LAX 红眼，明早才到）','入住 Sheraton Vistana（有厨房，顺路超市囤水 + 早餐省钱）','早点睡，第二天满血开玩'],meal:'到得晚就来顿宵夜：Pocha 93 韩式（离环球 / 酒店方向顺路）。',tip:'12/22 是圣诞前高峰日，当晚到、不进园正好躲过。朋友 12/23 早 6:29 才到。'},
+  {wd:'周三',date:'12/23',kind:'uni',title:'🌌 Epic Universe',summary:'环球①：全新园，买 Epic Express，一整天玩透',bullets:['朋友早 6:29 落地（LAX 红眼）→ 你开车去 MCO 接她 / 或她 Uber 到酒店会合（她坐红眼会累，Epic 可晚点进、靠 Express + single rider）','开门即冲 Harry Potter and the Battle at the Ministry（排队最长，⚠️ 它没有 Express）','Stardust Racers 双轨竞速 · Mario Kart · Mine-Cart · Hiccups · Monsters Unchained','两人多用 single rider；晚上看夜秀 Celestial Goodnight'],meal:'晚饭（西区 / 近环球）：Pocha 93 / Walala 手拉面 / Gaga Yummy。',tip:'Epic 项目精，值一整天，别和别的园挤。'},
+  {wd:'周四',date:'12/24',kind:'uni',title:'🏰 IOA + Universal Studios',summary:'环球②：平安夜 · 一天扫两园 = 3 园 2 天搞定',bullets:['一开门在 IOA 冲 Hagrids → VelociCoaster → Forbidden Journey → Hulk / Spider-Man','中午前坐 Hogwarts Express 去 USF（需 Park-to-Park 票）','USF：Gringotts · Mummy · Transformers · Men in Black，狂用 single rider','圣诞：Grinchmas、城堡灯光秀、Macys 游行；对角巷晚上火龙喷火'],meal:'晚饭（Mills 50）：SUSURU 拉面 / Zaru 米其林乌冬。⚠️ 平安夜部分店早关，先查。',tip:'平安夜傍晚人流回落，是全周最舒服的夜晚，留到晚上玩。'},
+  {wd:'周五',date:'12/25',kind:'disney',title:'🌐 迪士尼 EPCOT',summary:'圣诞当天：氛围最足，美食节 + 烛光颂',bullets:['开门冲 Guardians: Cosmic Rewind（抢虚拟排队 / 单买 Single Pass）· Test Track · Frozen','圣诞限定：Festival of the Holidays 各国美食 + Candlelight Processional 烛光颂（想座位订餐饮套票）','傍晚逛 World Showcase 边吃边喝，晚上看 Luminous 烟花','详细见「各园逐时动线」EPCOT 那页'],meal:'晚饭：直接吃遍 EPCOT World Showcase 圣诞美食摊；或回程 Mills 50（先查营业）。',tip:'EPCOT 头牌不多，只买 Cosmic Rewind 一个 Single Pass 就够。'},
+  {wd:'周六',date:'12/26',kind:'manatee',title:'🦭 Crystal River 海牛浮潜',summary:'✅ 已订 Gray Line · 躲开全年最挤的园',bullets:['✅ 已订 Gray Line（12/26 6:45am 在 Sheraton Vistana 大堂接 → 这天不用开车）：全天约 10.5h，含接送、船、装备、午餐、Homosassa 野生动物园；另付 $15 潜水服','泳衣穿在里面，带毛巾 + 换洗衣 + 偏光镜；6:30 到大堂等','早上越冷海牛越多，winter 季 Crystal River 一般都有'],meal:'回程（Mills 50 亚洲美食区）：Tieling 烧烤 / 好味坊 / YH Seafood / Caravan 新疆菜。',tip:'放 12/26 很聪明——这天是全年园区最挤的开始，正好出城躲开。'},
+  {wd:'周日',date:'12/27',kind:'disney',title:'🐘 迪士尼 Animal Kingdom',summary:'玩完回酒店睡；12/28 早 9:15 飞',bullets:['开门冲 Kilimanjaro Safaris（动物清晨最活跃）→ Expedition Everest → Flight of Passage（用单买 Single Pass）','Festival of the Lion King 秀 · Maharajah Jungle Trek；闭园前再刷一次 Safaris','AK 约 5–6 点关——玩完吃晚饭回酒店，今晚住 Vistana 收好行李','12/27 晚：你开车送朋友去 MCO 赶她 10:50PM 红眼（回 LAX），再开回 Vistana 住最后一晚；12/28 还车 8:30am → 9:15am 飞回 DSM'],meal:'晚饭：回程顺路 Jollibee（近 Florida Mall）/ Disney Springs / Mills 50。',tip:'12/28 是早班机（9:15am 回 DSM），今晚别熬太晚；先收行李，明早 7 点前到 MCO 还车 + 安检。'},
 ];
 
-const TODO=[['现在','订环球多日票（含 Epic, Park-to-Park）+ Epic Express'],['现在','订 Sheraton Vistana + Turo 车（确认司机年龄 / 保险方案）'],['现在','订 Gray Line 海牛团（选 12/26，确认那天发车）'],['出发前 2 周','用 Google Maps 把 10 家餐厅查清营业时间（圣诞很多关门），标记到地图'],['出发前 1 周','看天气；若想去 Kings Landing / Silver Springs，挑暖和的那天']];
+const TODO=[['现在','买环球多日票（含 Epic, Park-to-Park）+ Epic Express'],['现在','买迪士尼 2 天票（AK + EPCOT）；给 Flight of Passage / Cosmic Rewind 单买 Single Pass'],['已订✅','机票 + Sheraton Vistana 6 晚 + Gray Line 海牛（12/26 6:45am）'],['已订✅','Turo Kia K4（你租 · 12/22 8:30pm 取 → 12/28 8:30am 还 · MCO · $588.81）'],['出发前 2 周','用 Google Maps 把 10 家餐厅查清营业时间（圣诞很多关门）'],['出发前 1 周','看天气；下载 Universal + My Disney Experience + Uber App，绑好票']];
 
 const FOOD=[
   {icon:'🎢',area:'环球 / 西区',when:'玩环球那两天',items:[['Pocha 93','韩式宵夜（你已标地图，最近）','Pocha+93+Orlando'],['Walala Hand-Pulled Noodle','手拉面','Walala+Hand+Pulled+Noodle+Orlando'],['Gaga Yummy','近南区','Gaga+Yummy+Orlando']]},
@@ -206,7 +206,7 @@ const FOOD=[
 
 const PACK=['分层穿搭 + 薄羽绒（早晚 40–50°F、中午 70°F）','偏光太阳镜（看海牛必备）','磨合过的舒服走路鞋','海牛日：泳衣穿里面 + 毛巾 + 换洗衣','可重复灌水杯 + 充电宝 + 薄雨衣','驾照（Turo 取车用）+ 信用卡','到超市囤水 / 早餐（Vistana 有厨房，省钱）'];
 
-const BUDGET=[['酒店 Sheraton Vistana 4 晚','$806','1 卧 villa；停车另 +$128'],['Turo 租车 4 天','$250–340','+ 园区停车 ~$105'],['环球门票（2 人，含 Epic P2P）','$750–1k','按 2–3 天'],['Epic Express（2 人 ×1 天）','$300–500','住外面无免费快通'],['迪士尼 1 天票（2 人）','$300–360','+ 1–2 个 Single Pass'],['海牛 Gray Line（2 人）','$368','$169/人 + $15 潜水服'],['吃饭（清单 + 日常）','$600–900','有厨房可省早餐']];
+const BUDGET=[['酒店 Sheraton Vistana 6 晚 ✅','$1,210','已订（含税）；园区停车另算'],['Turo 租车 Kia K4 ✅','$589','你租 12/22–28（含税 · Standard + 路边救援）'],['环球门票（2 人，含 Epic P2P）','$700–950','多日 Park-to-Park'],['Epic Express（2 人 ×1 天）','$300–500','住外面无免费快通'],['迪士尼 2 天票（2 人，AK+EPCOT）','$600–760','+ FoP / Cosmic Rewind Single Pass'],['海牛 Gray Line（2 人）✅','$368','已订（$169/人 + $15 潜水服）'],['吃饭（清单 + 日常）','$700–1k','有厨房可省早餐']];
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 (function(){var d=Math.max(0,Math.ceil((START-new Date())/86400000));document.getElementById('cd').textContent=d>0?('⏳ '+d+' 天后'):'🎉 出发啦';})();
@@ -221,7 +221,7 @@ function togTodo(i){const id='a'+i;todo[id]=!todo[id];try{localStorage.setItem('
 renderTodo();
 
 // days
-let sel=(function(){var i=Math.floor((new Date()-START)/86400000);return i>=0&&i<=4?i:0;})();
+let sel=(function(){var i=Math.floor((new Date()-START)/86400000);return i>=0&&i<=5?i:0;})();
 function renderTabs(){document.getElementById('daytabs').innerHTML=DAYS.map((d,i)=>'<button class="daytab'+(i===sel?' on':'')+'" onclick="pick('+i+')"><span class="d">'+d.date+'</span><span class="dt">'+d.wd+'</span></button>').join('');}
 function renderDay(){
   const d=DAYS[sel],lab=LABEL[d.kind]||LABEL.arrive;
@@ -245,7 +245,7 @@ function togPack(i){const id='p'+i;checked[id]=!checked[id];try{localStorage.set
 renderPack();
 
 // budget
-document.getElementById('budgetbox').innerHTML=BUDGET.map(r=>'<div class="brow"><div class="bl"><span class="bi">'+esc(r[0])+'</span><span class="bt">'+esc(r[1])+'</span></div>'+(r[2]?'<div class="bn">'+esc(r[2])+'</div>':'')+'</div>').join('')+'<div class="btot"><span class="l">全程估</span><span class="v">$3.6k–4.4k</span></div><div style="font-size:11px;font-weight:500;color:#A98A96;line-height:1.5">比住 Signature 省了房费，够买 Epic 快通 + 多吃几顿 🍜</div>';
+document.getElementById('budgetbox').innerHTML=BUDGET.map(r=>'<div class="brow"><div class="bl"><span class="bi">'+esc(r[0])+'</span><span class="bt">'+esc(r[1])+'</span></div>'+(r[2]?'<div class="bn">'+esc(r[2])+'</div>':'')+'</div>').join('')+'<div class="btot"><span class="l">全程估</span><span class="v">$4.4k–5.6k</span></div><div style="font-size:11px;font-weight:500;color:#A98A96;line-height:1.5">不含机票 · 你全程自驾（含车 + 停车）· 价格会变，出发前复核 🍜</div>';
 </script>
 </body>
 </html>
