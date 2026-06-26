@@ -3,562 +3,316 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>德州自驾 6 天 5 晚 · Yixuan's Index</title>
-<meta name="description" content="2026/7/1–7/6 · 圣安东尼奥 + Hill Country + 奥斯汀 + 休斯顿 NASA。" />
+<title>🤠 德州自驾 6 天 5 晚 · Yixuan</title>
+<meta name="description" content="2026/7/1–7/6 圣安东尼奥 + Hill Country + 奥斯汀 + 休斯顿 NASA。每日行程、美食、打包清单。" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
 <style>
+  *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
   :root{
-    --cream:#FAF6F0; --cream-2:#F2EBDC;
-    --ink:#1A1814; --ink-soft:#3A352E; --muted:#857F73;
-    --line:#E5DCC9; --line-soft:#EFE7D5;
-    --accent:#C44536; --accent-soft:#E07A56;
-    --sage:#7A8471; --gold:#B8923E; --plum:#5A4A7A; --ocean:#3B6B7A;
+    --ac:#BC4B2B; --hero1:#C5532E; --hero2:#A83E22;
+    --screen:#E8DBCC; --frame:#F6EEE6; --ink:#2A2520; --sub:#8A7B6B;
+    --soft:#F7E7DE; --line:#E7DACB; --cline:#EFE0D2;
   }
-  *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.6;font-size:15.5px;overflow-x:hidden}
-  a{color:var(--accent);text-decoration:none}
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-    background-image:
-      radial-gradient(circle at 20% 10%, rgba(196,69,54,.04), transparent 40%),
-      radial-gradient(circle at 80% 80%, rgba(122,132,113,.06), transparent 40%),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .1 0 0 0 0 .08 0 0 0 0 .05 0 0 0 .2 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.5'/></svg>");
-    opacity:.4;
+  body{background:var(--screen);font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  button{font-family:inherit}
+  ::-webkit-scrollbar{height:5px;width:5px}
+  ::-webkit-scrollbar-thumb{background:rgba(188,75,43,.3);border-radius:9px}
+  .baloo{font-family:'Baloo 2','Noto Sans SC',sans-serif}
+  .gk{font-family:'Space Grotesk',sans-serif}
+
+  .screen{min-height:100vh;display:flex;justify-content:center}
+  .frame{width:100%;max-width:480px;background:var(--frame);min-height:100vh;position:relative;box-shadow:0 0 60px rgba(0,0,0,.08)}
+
+  .appbar{position:sticky;top:0;z-index:30;background:rgba(246,238,230,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .appbar .row{display:flex;align-items:center;gap:10px;padding:9px 12px}
+  .back{flex:none;width:36px;height:36px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ac)}
+  .apptt{flex:1;min-width:0;display:flex;flex-direction:column}
+  .apptt .t{font:800 15px 'Baloo 2','Noto Sans SC';line-height:1.1}
+  .apptt .s{font:600 10.5px 'Space Grotesk';color:#A8917F}
+  .cd{flex:none;font:700 11px 'Space Grotesk';color:#fff;background:var(--ac);padding:6px 11px;border-radius:999px;white-space:nowrap}
+  .chipnav{display:flex;gap:7px;padding:0 12px 9px;overflow-x:auto}
+  .chipnav a{flex:none;font:700 12px 'Noto Sans SC';color:var(--ink);background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+  .chipnav a.on{color:var(--ac);background:var(--soft);border-color:transparent}
+
+  .hero{background:linear-gradient(160deg,var(--hero1) 0%,var(--hero2) 100%);color:#fff;padding:22px 20px 24px;position:relative;overflow:hidden}
+  .hero .wm{position:absolute;right:-18px;top:-24px;font-size:130px;opacity:.13;pointer-events:none}
+  .hero h1{font:800 26px 'Baloo 2','Noto Sans SC';line-height:1.12;position:relative}
+  .hero .sub{font:500 12.5px 'Noto Sans SC';color:rgba(255,255,255,.88);margin-top:6px;position:relative}
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;position:relative}
+  .hchips span{font:600 11px 'Noto Sans SC';background:rgba(255,255,255,.16);padding:5px 10px;border-radius:999px}
+  .stats{display:flex;gap:8px;margin-top:16px;position:relative}
+  .stats .st{flex:1;background:rgba(255,255,255,.13);border-radius:13px;padding:10px 8px;text-align:center}
+  .stats .st .v{font:800 16px 'Space Grotesk'}
+  .stats .st .l{font:600 10px 'Noto Sans SC';color:rgba(255,255,255,.8);margin-top:2px}
+
+  .h2{font:800 19px 'Baloo 2','Noto Sans SC';color:var(--ink)}
+  .card{background:#fff;border:1px solid var(--cline);border-radius:18px}
+
+  .booked{margin:16px 16px 0;padding:15px}
+  .booked .bchips{display:flex;flex-wrap:wrap;gap:7px}
+  .booked .bchips span{font:600 11.5px 'Noto Sans SC';color:#2E7D5B;background:#E6F1EB;padding:5px 11px;border-radius:999px}
+  .booked .note{font:500 11.5px 'Noto Sans SC';color:#A8917F;margin-top:11px;line-height:1.55}
+
+  .sech{display:flex;align-items:center;gap:8px;padding:24px 18px 12px}
+  .alerts-list{display:flex;flex-direction:column;gap:10px;padding:0 16px}
+  .alert{display:flex;gap:12px;padding:14px;background:#fff;border:1px solid var(--cline);border-radius:16px}
+  .alert .ic{flex:none;width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px}
+  .alert .at{font:800 14.5px 'Noto Sans SC';line-height:1.4}
+  .alert .ab{font:500 12.5px 'Noto Sans SC';color:var(--sub);margin-top:4px;line-height:1.6}
+
+  .daytabs{position:sticky;top:99px;z-index:20;background:rgba(246,238,230,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 14px 9px;border-bottom:1px solid var(--cline);display:flex;gap:7px;overflow-x:auto}
+  .daytab{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;min-width:50px;padding:8px;border-radius:13px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .daytab.on{border-color:var(--ac);background:var(--ac);color:#fff}
+  .daytab .d{font:800 15px 'Baloo 2';line-height:1}
+  .daytab .dt{font:600 9px 'Noto Sans SC';opacity:.85}
+  .daypanel{padding:14px 16px 4px}
+  .dayhd{display:flex;align-items:baseline;gap:9px;margin-bottom:4px}
+  .dayhd .wd{font:800 20px 'Baloo 2','Noto Sans SC';color:var(--ac)}
+  .dayhd .city{font:600 13px 'Noto Sans SC';color:var(--sub)}
+  .callout{display:flex;align-items:center;gap:9px;margin:10px 0;padding:11px 13px;border-radius:14px;font:600 12.5px 'Noto Sans SC';line-height:1.4}
+  .callout.hotel{background:#F4E7DC;border:1px solid #EAD6C9;color:#5C4A3A}
+  .callout.drive{background:#E4ECF8;border:1px solid #D3E0F2;color:#34568C}
+  .block{display:flex;gap:11px}
+  .block .time{flex:none;width:48px;text-align:right;font:700 13px 'Space Grotesk';color:var(--ac);padding-top:13px}
+  .block .ln{flex:1;min-width:0;border-left:2px solid #EAD6C9;padding:13px 0 16px 16px;position:relative}
+  .block .dot{position:absolute;left:-7px;top:17px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--ac)}
+  .block .bt{font:700 15px 'Noto Sans SC';line-height:1.4}
+  .block .note{font:500 12.5px 'Noto Sans SC';color:var(--sub);margin-top:7px;line-height:1.6}
+  .badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+  .bdg{font:700 10.5px 'Noto Sans SC';padding:3px 9px;border-radius:999px;white-space:nowrap}
+  .b-booked{background:#F7E7DE;color:#BC4B2B}.b-warn{background:#FBE3E0;color:#C0392B}.b-temp{background:#E4ECF8;color:#3E6FB0}
+  .b-free{background:#E6F1EB;color:#2E7D5B}.b-must{background:#FBEFD6;color:#B07A1E}.b-star{background:#F0EBE3;color:#8A7560}
+  .mapbtn{margin-top:10px;display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:11px;background:#fff;border:1.5px solid var(--ac);color:var(--ac);font:700 12px 'Noto Sans SC'}
+
+  .food-list{display:flex;flex-direction:column;gap:18px;padding:0 16px}
+  .fgroup .fhd{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .fgroup .fcity{font:800 15px 'Noto Sans SC'}
+  .fgroup .fwhen{font:600 10.5px 'Noto Sans SC';color:#A8917F;background:#F4E7DC;padding:3px 9px;border-radius:999px}
+  .fitems{display:flex;flex-direction:column;gap:8px}
+  .fitem{display:flex;align-items:center;gap:11px;padding:12px 13px;background:#fff;border:1px solid var(--cline);border-radius:15px}
+  .fitem .ic{flex:none;width:38px;height:38px;border-radius:11px;background:#FBF3EC;display:flex;align-items:center;justify-content:center;font-size:19px}
+  .fitem .fn{font:700 13.5px 'Noto Sans SC'}
+  .fitem .fd{font:500 11.5px 'Noto Sans SC';color:var(--sub);line-height:1.45}
+  .fitem .fm{flex:none;font:700 11px 'Noto Sans SC';color:var(--ac)}
+
+  .packbox{margin:0 16px;padding:6px 16px}
+  .packrow{display:flex;align-items:center;gap:12px;padding:12px 2px;background:none;border:none;border-bottom:1px solid #F3EADF;width:100%;cursor:pointer;text-align:left}
+  .packrow:last-child{border-bottom:none}
+  .cbox{flex:none;width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;font:800 14px 'Noto Sans SC';border:1.5px solid #CFC0AE;background:#fff;color:#fff}
+  .cbox.on{border-color:var(--ac);background:var(--ac)}
+  .plabel{flex:1;font:600 13.5px 'Noto Sans SC';line-height:1.4}
+  .plabel.on{color:#B7AC9C;text-decoration:line-through}
+
+  .footer{text-align:center;padding:26px 24px 36px}
+  .footer .a{font:700 12.5px 'Noto Sans SC';color:#5C4A3A}
+  .footer .b{font:500 11px 'Noto Sans SC';color:#A8917F;margin-top:6px;line-height:1.6}
+
+  @media(min-width:880px){
+    .frame{max-width:1040px}
+    .tx-body{display:grid;grid-template-columns:minmax(0,1fr) 332px;grid-template-areas:"over over" "alerts pack" "days pack" "food pack";column-gap:24px;padding:0 22px 12px;align-items:start}
+    .a-over{grid-area:over}.a-alerts{grid-area:alerts}.a-days{grid-area:days}.a-food{grid-area:food}
+    .a-pack{grid-area:pack;position:sticky;top:108px;align-self:start}
+    .fitems.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   }
-  .wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:28px 22px 80px}
-  @media (max-width:640px){.wrap{padding:20px 16px 64px}}
-
-  /* topbar */
-  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
-  .topbar a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s, border-color .2s}
-  .topbar a:hover{color:var(--accent);border-color:var(--accent)}
-  .topbar .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:middle;animation:pulse 2s ease-in-out infinite}
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
-
-  /* hero */
-  .hero{position:relative;background:linear-gradient(135deg,#1A1814 0%, #2a2520 100%);color:#FAF6F0;border-radius:18px;padding:36px 36px 32px;overflow:hidden;margin-bottom:28px}
-  .hero::after{content:"";position:absolute;right:-100px;bottom:-100px;width:400px;height:400px;background:radial-gradient(circle, rgba(196,69,54,.35), transparent 65%);pointer-events:none}
-  .hero .paw{position:absolute;top:24px;right:30px;width:54px;height:54px;opacity:.18;color:#FAF6F0}
-  .hero .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-soft);margin-bottom:14px;position:relative;z-index:1}
-  .hero h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(32px,5vw,46px);line-height:1.05;letter-spacing:-.025em;margin:0 0 14px;font-variation-settings:"opsz" 144;position:relative;z-index:1}
-  .hero h1 em{font-style:italic;color:var(--accent-soft);font-weight:400}
-  .hero .lede{font-family:'Fraunces',serif;font-size:17px;line-height:1.5;color:rgba(250,246,240,.82);max-width:600px;margin:0 0 22px;position:relative;z-index:1;font-variation-settings:"opsz" 14}
-  .hero .route{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:22px;position:relative;z-index:1}
-  .hero .route .node{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;background:rgba(250,246,240,.1);border:1px solid rgba(250,246,240,.15);color:#FAF6F0;padding:5px 11px;border-radius:99px}
-  .hero .route .arw{color:rgba(250,246,240,.4);font-size:11px}
-  .hero .facts{display:flex;flex-wrap:wrap;gap:10px;position:relative;z-index:1}
-  .hero .fact{background:rgba(250,246,240,.08);border:1px solid rgba(250,246,240,.12);border-radius:10px;padding:9px 14px;min-width:100px}
-  .hero .fact .lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-soft);display:block;margin-bottom:3px}
-  .hero .fact .val{font-family:'Fraunces',serif;font-weight:500;font-size:15px;color:#FAF6F0;font-variation-settings:"opsz" 14}
-
-  /* sticky jump nav */
-  nav.jump{position:sticky;top:0;z-index:50;background:rgba(250,246,240,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin:0 -22px 0;padding:10px 22px;display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch}
-  @media (max-width:640px){nav.jump{margin:0 -16px 0;padding:10px 16px}}
-  nav.jump a{flex:0 0 auto;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--ink-soft);background:#FFFCF6;border:1px solid var(--line);padding:7px 13px;border-radius:99px;transition:all .2s}
-  nav.jump a:hover{border-color:var(--accent);color:var(--accent)}
-
-  /* section head */
-  h2.sec{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(24px,3.2vw,32px);letter-spacing:-.02em;margin:48px 0 4px;color:var(--ink);font-variation-settings:"opsz" 144;display:flex;align-items:baseline;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
-  h2.sec em{font-style:italic;color:var(--accent);font-weight:400}
-  h2.sec .num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--muted);margin-left:auto;font-style:normal;font-weight:400;text-transform:uppercase}
-
-  /* booked / alerts boxes */
-  .booked, .alerts{border-radius:14px;padding:18px 20px;margin-top:18px;position:relative;border:1px solid var(--line)}
-  .booked{background:#F4F7F1;border-color:#D7E0CC}
-  .booked .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:6px}
-  .booked b{color:#3A5A3A}
-  .booked .note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:8px;display:block;letter-spacing:.02em}
-
-  .alerts{background:#FCF6E3;border-color:#E8D49A}
-  .alerts .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#9A6500;font-weight:500;margin-bottom:10px}
-  .alerts .a{display:flex;gap:14px;padding:10px 0;border-bottom:1px dashed rgba(154,101,0,.25);font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
-  .alerts .a:last-child{border-bottom:none;padding-bottom:0}
-  .alerts .a:first-of-type{padding-top:0}
-  .alerts .a .ic{font-size:20px;flex:0 0 26px;text-align:center;line-height:1.3}
-  .alerts .a b{color:var(--accent)}
-
-  /* day cards */
-  .day{position:relative;background:#FFFCF6;border:1px solid var(--line);border-radius:14px;margin-top:18px;overflow:hidden;transition:box-shadow .2s, border-color .2s}
-  .day:hover{box-shadow:0 14px 30px -16px rgba(26,24,20,.15)}
-  .day::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--day-color,var(--accent))}
-  .day .dh{padding:18px 22px 14px;border-bottom:1px solid var(--line-soft);display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
-  .day .dh .left{flex:1;min-width:0}
-  .day .dh .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--day-color,var(--accent));font-weight:500;margin-bottom:6px}
-  .day .dh .dt{font-family:'Fraunces',serif;font-weight:500;font-size:22px;line-height:1.2;letter-spacing:-.015em;color:var(--ink);font-variation-settings:"opsz" 144}
-  .day .dh .dd{font-family:'JetBrains Mono',monospace;font-size:11px;text-align:right;line-height:1.5;color:var(--muted);letter-spacing:.04em;flex:0 0 auto}
-  .day .db{padding:8px 22px 18px}
-  .day.sage{--day-color:var(--sage)}
-  .day.plum{--day-color:var(--plum)}
-  .day.gold{--day-color:var(--gold)}
-  .day.ocean{--day-color:var(--ocean)}
-  .day.accent{--day-color:var(--accent)}
-
-  .hotel{font-family:'Inter',sans-serif;font-size:12.5px;color:var(--sage);background:#F4F7F1;border:1px solid #D7E0CC;border-radius:8px;padding:8px 12px;margin:12px 0 6px;display:inline-flex;align-items:center;gap:6px}
-  .hotel::before{content:"🏨";font-size:14px}
-
-  .step{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-soft)}
-  .step:last-child{border-bottom:none;padding-bottom:0}
-  .step .tm{flex:0 0 60px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--day-color,var(--accent));padding-top:3px;letter-spacing:.02em}
-  .step .ct{flex:1;min-width:0}
-  .step .ct .ti{font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:var(--ink);line-height:1.4;margin-bottom:5px}
-  .step .ct .ds{font-size:14px;color:var(--ink-soft);line-height:1.55}
-  .step .ct .ds b{color:var(--ink);font-weight:600}
-
-  /* tags / pills */
-  .tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;padding:3px 8px;border-radius:99px;margin-left:6px;vertical-align:1px;letter-spacing:.06em;text-transform:uppercase;border:1px solid}
-  .tag.cost{background:#F0F7EC;color:#3a7a3a;border-color:#c4dfc4}
-  .tag.time{background:#FDEEDE;color:#B5601F;border-color:#F3CDA3}
-  .tag.hot{background:#FCEAE6;color:var(--accent);border-color:#F0C3BA}
-  .tag.cool{background:#E8F1F4;color:var(--ocean);border-color:#BFD4DC}
-  .tag.book{background:#F0F7EC;color:#3a7a3a;border-color:#c4dfc4}
-  .tag.eat{background:#F3E9F2;color:var(--plum);border-color:#D9C7D7}
-
-  .maplink{display:inline-flex;align-items:center;gap:4px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--accent);margin-top:8px;transition:gap .2s}
-  .maplink:hover{gap:7px}
-  .maplink::before{content:"📍";font-size:13px}
-  .maplink a{color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s}
-  .maplink a:hover{border-color:var(--accent)}
-
-  .drive{background:#F4F1E8;border:1px solid #E5DCC9;border-radius:10px;padding:10px 14px;margin:12px 0;font-size:13.5px;color:var(--ink-soft);display:flex;gap:10px;align-items:flex-start;line-height:1.5}
-  .drive::before{content:"🚗";font-size:18px;flex:0 0 22px}
-
-  /* generic card */
-  .card{background:#FFFCF6;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px;position:relative;overflow:hidden}
-  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--card-color,var(--accent))}
-  .card h3{font-family:'Fraunces',serif;font-weight:500;font-size:19px;letter-spacing:-.015em;margin:0 0 6px;color:var(--ink);font-variation-settings:"opsz" 144}
-  .card .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--card-color,var(--accent));font-weight:500;margin-bottom:10px}
-  .card.sage{--card-color:var(--sage)}
-  .card.plum{--card-color:var(--plum)}
-  .card.gold{--card-color:var(--gold)}
-
-  .food{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line-soft);font-size:14px;line-height:1.55;color:var(--ink-soft)}
-  .food:last-child{border-bottom:none;padding-bottom:0}
-  .food:first-of-type{padding-top:6px}
-  .food .em{font-size:22px;flex:0 0 30px;line-height:1.3}
-  .food b{display:block;color:var(--ink);font-weight:600;margin-bottom:2px}
-
-  /* checks */
-  .checks{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin-top:6px}
-  @media (max-width:560px){.checks{grid-template-columns:1fr}}
-  .checks label{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;padding:6px 0;cursor:pointer;line-height:1.45}
-  .checks input{margin-top:3px;width:17px;height:17px;accent-color:var(--accent);flex:0 0 auto;cursor:pointer}
-  .checks label.done span{text-decoration:line-through;color:var(--muted)}
-  .note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:14px;letter-spacing:.02em}
-
-  /* footer */
-  .footer{margin-top:64px;padding-top:28px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.05em}
-  .footer a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line)}
-  .footer a:hover{color:var(--accent);border-color:var(--accent)}
-  .footer .luba{display:inline-flex;align-items:center;gap:8px}
-  ::selection{background:var(--accent);color:#FAF6F0}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="screen"><div class="frame">
 
-  <div class="topbar">
-    <div><span class="dot"></span>Trip · 已订 · 7/1 → 7/6</div>
-    <div><a href="index.html">← back to index</a></div>
-  </div>
-
-  <header class="hero">
-    <svg class="paw" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor">
-      <ellipse cx="50" cy="65" rx="20" ry="22"/>
-      <ellipse cx="22" cy="40" rx="10" ry="13"/>
-      <ellipse cx="42" cy="22" rx="9" ry="12"/>
-      <ellipse cx="62" cy="22" rx="9" ry="12"/>
-      <ellipse cx="78" cy="40" rx="10" ry="13"/>
-    </svg>
-    <div class="kicker">Trip · 德州 · 7 月</div>
-    <h1>德州自驾 <em>6 天 5 晚</em></h1>
-    <p class="lede">圣安东尼奥 · Hill Country · 奥斯汀 · 休斯顿 NASA。2 人 · 全部已订。</p>
-    <div class="route">
-      <span class="node">✈️ Des Moines</span><span class="arw">→</span>
-      <span class="node">🌵 San Antonio</span><span class="arw">→</span>
-      <span class="node">🏞️ Hill Country</span><span class="arw">→</span>
-      <span class="node">🎸 Austin</span><span class="arw">→</span>
-      <span class="node">🚀 Houston NASA</span><span class="arw">→</span>
-      <span class="node">🌮 San Antonio</span><span class="arw">→</span>
-      <span class="node">✈️</span>
+  <div class="appbar">
+    <div class="row">
+      <a class="back" href="index.html">←</a>
+      <div class="apptt"><span class="t">🤠 德州自驾</span><span class="s">7/1 – 7/6 · 2 人</span></div>
+      <span class="cd" id="cd">⏳ … 天后</span>
     </div>
-    <div class="facts">
-      <div class="fact"><span class="lbl">出行</span><span class="val">7/1 – 7/6</span></div>
-      <div class="fact"><span class="lbl">人数</span><span class="val">2 人</span></div>
-      <div class="fact"><span class="lbl">总车程</span><span class="val">~ 750 mi</span></div>
-      <div class="fact"><span class="lbl">状态</span><span class="val">全部已订 ✅</span></div>
-    </div>
-  </header>
-
-  <nav class="jump">
-    <a href="#alerts">⚠️ 必读</a>
-    <a href="#days">📅 每日行程</a>
-    <a href="#food">🍴 美食</a>
-    <a href="#pack">🎒 打包</a>
-  </nav>
-
-  <div class="booked">
-    <div class="kicker">All booked · 全部已订</div>
-    ✅ <b>机票 · 4 段住宿 · Enchanted Rock · Longhorn Cavern · Exotic Resort Zoo · NASA</b>
-    <span class="note">确认号在你电脑的「德州行程-更新版.md」+ 确认邮件里——不在这个公开网页上。</span>
-  </div>
-
-  <h2 class="sec" id="alerts"><em>Alerts</em> · 出发前必读 <span class="num">4 ITEMS</span></h2>
-  <div class="alerts">
-    <div class="kicker">Don't forget</div>
-    <div class="a"><div class="ic">⏰</div><div><b>周四 6:15 就要从 SA 出发！</b>巨石是 6:30–8:30 入园窗口，<b>必须 8:30 前到门口</b>，别睡过头。</div></div>
-    <div class="a"><div class="ic">🚀</div><div><b>NASA 电车 12:40 定时、别迟到</b>（Apollo Mission Control）；想看<b>土星五号火箭</b>要另搭 <b>Rocket Park 电车</b>。</div></div>
-    <div class="a"><div class="ic">🎆</div><div><b>7/4 奥斯汀独立日。</b>Vic Mathias Shores 8:30 音乐会+烟花；市区封路、早去、用 Uber。周六晚饭在 Round Rock（城北），<b>早点吃、~6:45 前出发</b>。</div></div>
-    <div class="a"><div class="ic">🪪</div><div><b>巨石门票车牌要对上</b>——开租车的话改成租车车牌，或入园出示预约。</div></div>
-  </div>
-
-  <h2 class="sec" id="days"><em>Days</em> · 每日行程 <span class="num">6 DAYS</span></h2>
-
-  <!-- DAY 0 -->
-  <div class="day accent">
-    <div class="dh">
-      <div class="left">
-        <div class="kicker">Day 0 · 抵达</div>
-        <div class="dt">San Antonio 落地</div>
-      </div>
-      <div class="dd">周三 7/1<br>🛬 21:06</div>
-    </div>
-    <div class="db">
-      <div class="hotel">今晚 Wyndham Garden SA Airport（机场旁）</div>
-      <div class="step">
-        <div class="tm">21:06</div>
-        <div class="ct">
-          <div class="ti">落地 SAT → 取租车 → 入住</div>
-          <div class="ds"><b>买水 + 驱蚊液：</b>酒店隔壁 <b>Walmart（8500 Jones Maltsberger，开到 23:00）</b>买一箱水、电解质、<b>驱蚊液</b>、零食（10 点到还有 1 小时；过 11 点去 Austin Hwy 的 24h Walmart）。确认明天巨石、溶洞预约。<b>早睡——明早 6:15 出发。</b></div>
-        </div>
-      </div>
+    <div class="chipnav">
+      <a href="#alerts" class="on">⚠️ 必读</a>
+      <a href="#days">📅 行程</a>
+      <a href="#food">🍴 美食</a>
+      <a href="#pack">🎒 打包</a>
     </div>
   </div>
 
-  <!-- DAY 1 -->
-  <div class="day plum">
-    <div class="dh">
-      <div class="left">
-        <div class="kicker">Day 1 · Hill Country</div>
-        <div class="dt">巨石 + 德式午餐 + 溶洞</div>
-      </div>
-      <div class="dd">周四 7/2<br>SA → 山乡</div>
-    </div>
-    <div class="db">
-      <div class="hotel">今晚 The Retreat on the Hill（Horseshoe Bay）· 入住 16:00 后</div>
-      <div class="step">
-        <div class="tm">06:15</div>
-        <div class="ct">
-          <div class="ti">出发 → Enchanted Rock 爬巨石 <span class="tag book">已订 · 6:30–8:30</span> <span class="tag hot">8:30 前必到</span></div>
-          <div class="ds">车程约 1.5h（~7:45 到）。趁清晨爬 Summit Trail（往返约 1.3 英里花岗岩穹顶），~10 点下山。带足水 + 防晒 + 抓地鞋。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Enchanted+Rock+State+Natural+Area" target="_blank">Enchanted Rock</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">11:00</div>
-        <div class="ct">
-          <div class="ti">Fredericksburg 德式午餐 🍑 + 品酒</div>
-          <div class="ds">猪排 / 香肠 / 德啤 + 7 月蜜桃；Main Street 可步行品酒室，或 290 上 <b>Becker / Grape Creek</b>。指定司机。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Main+Street+Fredericksburg+TX" target="_blank">Fredericksburg</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">15:30</div>
-        <div class="ct">
-          <div class="ti">🦇 Longhorn Cavern 溶洞 <span class="tag book">已订 · 4:00 PM</span> <span class="tag cool">洞里 ~20°C</span></div>
-          <div class="ds"><b>提前 30 分钟（3:30）到游客中心</b>报到、参加<b>强制安全讲解</b>——错过任一段就得等下一场（可能几小时）。带<b>预约码</b>、先在游客中心上厕所（洞内没厕所）。穿<b>防滑闭趾鞋</b>；<b>下 52 级石阶</b>、两处需低头、全程约 <b>90 分钟</b>走站；<b>洞内只许带无味水</b>。亮点：导游讲解、全灭灯全黑体验、水晶、小蝙蝠！</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Longhorn+Cavern+State+Park" target="_blank">Longhorn Cavern</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">18:00</div>
-        <div class="ct">
-          <div class="ti">入住 The Retreat on the Hill + 晚饭</div>
-          <div class="ds">溶洞 ~5:30 结束 → 约 25 分钟到 Horseshoe Bay 入住；Marble Falls 一带吃晚饭。</div>
-        </div>
-      </div>
+  <div class="hero">
+    <span class="wm">🤠</span>
+    <h1>德州自驾 6 天 5 晚</h1>
+    <div class="sub">圣安东尼奥 · Hill Country · 奥斯汀 · 休斯顿 NASA</div>
+    <div class="hchips"><span>✈️ Des Moines</span><span>🌵 SA</span><span>🏞️ Hill Country</span><span>🎸 Austin</span><span>🚀 Houston</span></div>
+    <div class="stats">
+      <div class="st"><div class="v">7/1–6</div><div class="l">出行</div></div>
+      <div class="st"><div class="v">2</div><div class="l">人数</div></div>
+      <div class="st"><div class="v">750</div><div class="l">英里</div></div>
+      <div class="st"><div class="v">✅</div><div class="l">全已订</div></div>
     </div>
   </div>
 
-  <!-- DAY 2 -->
-  <div class="day sage">
-    <div class="dh">
-      <div class="left">
-        <div class="kicker">Day 2 · 动物园 → 奥斯汀</div>
-        <div class="dt">喂动物 + 州议会 + 湘菜 + 日落</div>
-      </div>
-      <div class="dd">周五 7/3<br>Hill → Austin</div>
+  <div class="tx-body">
+    <div class="a-over card booked">
+      <div style="font:800 14px 'Noto Sans SC';margin-bottom:10px">✅ 全部已预订</div>
+      <div class="bchips" id="bchips"></div>
+      <div class="note">🔒 确认号在你电脑「德州行程-更新版.md」私人文档 + 确认邮件里——不在这个公开网页上。</div>
     </div>
-    <div class="db">
-      <div class="hotel">今晚 + 明晚 Aloft by Marriott Austin Downtown</div>
-      <div class="step">
-        <div class="tm">08:15</div>
-        <div class="ct">
-          <div class="ti">🦓 Exotic Resort Zoo（Johnson City）<span class="tag book">已订 · 导览拖拉机</span></div>
-          <div class="ds">从 Horseshoe Bay 约 40 分钟。<b>9 点一开门就到</b>，坐导览拖拉机、大桶 feed 喂动物，约 1–1.5h。带条小毛巾。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=The+Exotic+Resort+Zoo+Johnson+City" target="_blank">Exotic Resort Zoo</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">12:00</div>
-        <div class="ct">
-          <div class="ti">开往奥斯汀 → 入住 + 午饭 <span class="tag eat">🍖 BBQ</span></div>
-          <div class="ds">约 1h 到 Austin。午饭可顺路 <b>Salt Lick BBQ</b>（Driftwood，家庭式大份、BYOB / 带现金）或市区简餐。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Salt+Lick+BBQ+Driftwood" target="_blank">Salt Lick</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">14:00</div>
-        <div class="ct">
-          <div class="ti">Texas State Capitol + 🧋 吃茶三千 <span class="tag cost">免费</span></div>
-          <div class="ds">逛粉色花岗岩圆顶州议会大厦（凉快）；下午茶来杯 <b>吃茶三千 Chicha San Chen</b>（6501 Airport Blvd，鲜茶拿铁）。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Chicha+San+Chen+Austin+Airport+Blvd" target="_blank">吃茶三千</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">18:00</div>
-        <div class="ct">
-          <div class="ti">🇨🇳 晚餐 · 湘里人家 Hunan Bistro <span class="tag eat">4.7★</span></div>
-          <div class="ds">10700 Anderson Mill Rd（西北区）。必点 <b>辣椒皮蛋茄子 · 辣椒炒牛柳 · 酸菜鸭血 · 担担面</b>。离 Mount Bonnell 约 15 分钟、顺路。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Hunan+Bistro+Anderson+Mill+Austin" target="_blank">湘里人家</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">19:45</div>
-        <div class="ct">
-          <div class="ti">Mount Bonnell 看日落 <span class="tag cost">免费</span></div>
-          <div class="ds">奥斯汀最高点，俯瞰 Lake Austin，日落超出片。<b>停车少、有砸车——贵重物随身。</b></div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Mount+Bonnell+Covert+Park+Austin" target="_blank">Mount Bonnell</a></div>
-        </div>
-      </div>
+
+    <div id="alerts" class="a-alerts" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">⚠️ 出发前必读</span></div>
+      <div class="alerts-list" id="alerts-list"></div>
+    </div>
+
+    <div id="days" class="a-days" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">📅 每日行程</span></div>
+      <div class="daytabs" id="daytabs"></div>
+      <div class="daypanel" id="daypanel"></div>
+    </div>
+
+    <div id="food" class="a-food" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">🍴 美食候选</span></div>
+      <div style="font:500 12px 'Noto Sans SC';color:#A8917F;padding:0 18px 12px">按城市 · 自己挑</div>
+      <div class="food-list" id="food-list"></div>
+    </div>
+
+    <div id="pack" class="a-pack" style="scroll-margin-top:120px">
+      <div class="sech" style="justify-content:space-between"><span class="h2">🎒 打包清单</span><span class="gk" id="packcount" style="font-weight:700;font-size:12px;color:var(--ac)"></span></div>
+      <div style="font:500 12px 'Noto Sans SC';color:#A8917F;padding:0 18px 12px">勾选自动存本机，下次打开还在</div>
+      <div class="card packbox" id="packbox"></div>
     </div>
   </div>
 
-  <!-- DAY 3 -->
-  <div class="day accent">
-    <div class="dh">
-      <div class="left">
-        <div class="kicker">Day 3 · 奥斯汀 · 独立日</div>
-        <div class="dt">SoCo 逛吃 + 韩餐 + 烟花 🎆</div>
-      </div>
-      <div class="dd">周六 7/4<br>Austin</div>
-    </div>
-    <div class="db">
-      <div class="hotel">今晚 Aloft Austin Downtown</div>
-      <div class="step">
-        <div class="tm">12:30</div>
-        <div class="ct">
-          <div class="ti">🦆 午餐 · Bamboo House 北京烤鸭 <span class="tag eat">4.3★</span></div>
-          <div class="ds">7010 Easy Wind Dr · 经典北京烤鸭。<b>＊周六两顿不想太满，午饭也可改 SoCo 轻食。</b>（德州 BBQ 已选周五的 Salt Lick。）</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Bamboo+House+Austin+Easy+Wind" target="_blank">Bamboo House</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">13:00</div>
-        <div class="ct">
-          <div class="ti">South Congress（SoCo）逛吃 ⭐ 必去</div>
-          <div class="ds"><b>Allens Boots</b>、<b>Jo's Coffee 绿墙</b>、<b>Two Hands</b> brunch、<b>Manana</b> 咖啡；逛 alo / Hermès / Reformation / lululemon / Madewell。太热进 Bullock 博物馆。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=South+Congress+Avenue+Austin" target="_blank">South Congress</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">17:00</div>
-        <div class="ct">
-          <div class="ti">🇰🇷 早晚餐 · Ghama Zone 韩餐 <span class="tag eat">4.6★</span></div>
-          <div class="ds">118 E Main St, <b>Round Rock</b>（城北，离市区约 30 分钟）。必点 <b>部队锅（army stew）加面 · 海鲜煎饼 · 酱蟹</b>。⚠️ <b>早点吃、~6:45 前出发</b>回市区看烟花，避开独立日封路。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Ghama+Zone+Korean+Food+Round+Rock" target="_blank">Ghama Zone</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">20:00</div>
-        <div class="ct">
-          <div class="ti">🦇 Congress 大桥蝙蝠</div>
-          <div class="ds">约 150 万只日落出洞。<b>付费停车场 227½ S Congress Ave</b>，走 1 分钟到桥底。<b>🦟 湖边黄昏蚊子多，喷驱蚊液</b>（今晚蝙蝠+烟花都在湖边）。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Congress+Avenue+Bat+Bridge+Austin" target="_blank">Bat Bridge</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">20:30</div>
-        <div class="ct">
-          <div class="ti">🎆 独立日烟花 @ Vic Mathias Shores <span class="tag cost">免费</span></div>
-          <div class="ds">蝙蝠桥旁的湖边：Austin Symphony 8:30 + 烟花，庆美国 250 周年。<b>早占位、用 Uber</b>。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Vic+Mathias+Shores+Austin" target="_blank">Vic Mathias Shores</a></div>
-        </div>
-      </div>
-    </div>
+  <div class="footer">
+    <div class="a">为你定制 · 2026 年 7 月德州自驾 · 2 人 🤠</div>
+    <div class="b">时间 / 票务以官方确认为准，出行前再核对 · 监修 Luba 本猫 🐾</div>
   </div>
 
-  <!-- DAY 4 -->
-  <div class="day ocean">
-    <div class="dh">
-      <div class="left">
-        <div class="kicker">Day 4 · 休斯顿当天往返 NASA</div>
-        <div class="dt">登月控制室 + Bellaire 海鲜</div>
-      </div>
-      <div class="dd">周日 7/5<br>Austin → Houston → SA</div>
-    </div>
-    <div class="db">
-      <div class="hotel">今晚 Canopy by Hilton SA Riverwalk（河滨步道）</div>
-      <div class="drive">奥斯汀 → 休斯顿 约 3 小时；晚上 休斯顿 → 圣安东尼奥 约 3.5 小时。两人轮流开。</div>
-      <div class="step">
-        <div class="tm">08:00</div>
-        <div class="ct">
-          <div class="ti">从 Aloft 退房出发去休斯顿</div>
-          <div class="ds">约 3h、11 点左右到，留缓冲（入园定时 12:00）。</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">12:00</div>
-        <div class="ct">
-          <div class="ti">Space Center Houston 🚀 <span class="tag book">已订 · 12:00 入园</span></div>
-          <div class="ds"><b>12:40 Apollo Mission Control 电车</b>（登月真实控制室，定时别迟到）。之后<b>再搭 Rocket Park 电车看土星五号巨型火箭</b>。逛展厅到 ~16:00。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Space+Center+Houston" target="_blank">Space Center Houston</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">16:30</div>
-        <div class="ct">
-          <div class="ti">🦞 晚饭 · Arco Seafood 东海酒家</div>
-          <div class="ds">9896 Bellaire · 粤式海鲜 + 全天点心 · 回 SA 顺路。<br>🧋 <b>茉莉奶白 Molly Tea</b>（9889 Bellaire，3.2★，想稳选同栋 <b>喜茶</b>）+ 🍞 <b>Le Kream 爆浆吐司</b>（9393 Bellaire，网红、可能排队）打包路上吃。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Arco+Seafood+Restaurant+Bellaire+Houston" target="_blank">Arco Seafood</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">18:00</div>
-        <div class="ct">
-          <div class="ti">夜里开回圣安东尼奥</div>
-          <div class="ds">上 I-10 西，约 3.5h、~21:30 到，入住 Canopy（河滨步道）。轮流开、备咖啡。</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 5 -->
-  <div class="day gold">
-    <div class="dh">
-      <div class="left">
-        <div class="kicker">Day 5 · 圣安东尼奥 + 返程</div>
-        <div class="dt">Alamo · River Walk · Mission</div>
-      </div>
-      <div class="dd">周一 7/6 ✈️<br>San Antonio</div>
-    </div>
-    <div class="db">
-      <div class="step">
-        <div class="tm">09:00</div>
-        <div class="ct">
-          <div class="ti">SA 核心打卡（酒店就在河滨步道）</div>
-          <div class="ds">The Alamo（免费）→ River Walk 坐船（约 $15）→ Pearl 珍珠区早午餐。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=The+Alamo+San+Antonio" target="_blank">The Alamo</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">11:00</div>
-        <div class="ct">
-          <div class="ti">退房 → Mission San José + 午餐 Mi Tierra</div>
-          <div class="ds">联合国教科文遗产传教站（免费）；百年 Tex-Mex Mi Tierra。行李放车上。</div>
-          <div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Mission+San+Jose+San+Antonio" target="_blank">Mission San José</a></div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="tm">16:30</div>
-        <div class="ct">
-          <div class="ti">还车回 SAT <span class="tag time">航班前 2 小时</span></div>
-          <div class="ds">19:08 起飞回 Des Moines，23:58 到家。🎉</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOD -->
-  <h2 class="sec" id="food"><em>Food</em> · 美食候选 <span class="num">3 CITIES</span></h2>
-
-  <div class="card ocean" style="--card-color:var(--ocean)">
-    <div class="kicker">Houston · 周日晚 · Bellaire 中国城</div>
-    <h3>🚀 休斯顿（回 SA 顺路）</h3>
-    <div class="food"><div class="em">🦐</div><div><b>Arco Seafood 东海酒家</b>广式海鲜 + 早茶一绝。<div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Arco+Seafood+Restaurant+Houston" target="_blank">地图</a></div></div></div>
-    <div class="food"><div class="em">🍜</div><div><b>金大碗 House of Bowls</b>经典港式：干炒牛河香、甜品花生酱多士。<div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=House+of+Bowls+Houston" target="_blank">地图</a></div></div></div>
-    <div class="food"><div class="em">🥟</div><div><b>Lucky Bento V.I.P.</b>东北菜：酸菜猪肉（不太酸）、溜肥肠、地三鲜，地道实惠（9262 Bellaire）。<div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Lucky+Bento+VIP+9262+Bellaire+Houston" target="_blank">地图</a></div></div></div>
-    <div class="food"><div class="em">🌶️</div><div><b>湘知湘味</b>不踩雷的湘菜（9889 Bellaire）。<div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Hunan+Bistro+9889+Bellaire+Houston" target="_blank">地图</a></div></div></div>
-    <div class="food"><div class="em">🧋</div><div><b>茉莉奶白 Molly Tea</b>奶茶（评分一般，也可喜茶）+ 🍞 <b>Le Kream</b> 爆浆吐司（甜品）。<div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Molly+Tea+Bellaire+Houston" target="_blank">地图</a></div></div></div>
-  </div>
-
-  <div class="card plum">
-    <div class="kicker">Austin · 周五 – 周六</div>
-    <h3>🎸 奥斯汀</h3>
-    <div class="food"><div class="em">🦆</div><div><b>Bamboo House</b>经典北京烤鸭 / 川菜（市区）。<div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Bamboo+House+Austin" target="_blank">地图</a></div></div></div>
-    <div class="food"><div class="em">🌶️</div><div><b>湘里人家</b>湘菜（4.7★，北 Austin · Anderson Mill Rd）｜推荐：辣椒皮蛋茄子、辣椒炒牛柳、酸菜鸭血、担担面。<div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Hunan+Bistro+Anderson+Mill+Austin" target="_blank">地图</a></div></div></div>
-    <div class="food"><div class="em">🦆</div><div><b>Shanghai Chinese Restaurant</b>粤菜：干炒牛河、牛腩煲、菠萝叉烧、粤式烤鸭。<div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Shanghai+Chinese+Restaurant+Austin" target="_blank">地图</a></div></div></div>
-    <div class="food"><div class="em">🇰🇷</div><div><b>Ghama Zone</b>韩餐（4.6★，Round Rock 北 Austin）：部队锅、海鲜煎饼、酱蟹。<div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Ghama+Zone+Korean+Round+Rock" target="_blank">地图</a></div></div></div>
-    <div class="food"><div class="em">🍖</div><div><b>Texas BBQ</b>Salt Lick（Driftwood，经典农家乐）/ Franklin（网红，排队长）。<div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Salt+Lick+BBQ+Driftwood" target="_blank">地图</a></div></div></div>
-    <div class="food"><div class="em">🧋</div><div><b>吃茶三千 Chicha San Chen</b>奶茶（6501 Airport Blvd）。<div class="maplink"><a href="https://www.google.com/maps/search/?api=1&query=Chicha+San+Chen+Austin" target="_blank">地图</a></div></div></div>
-  </div>
-
-  <div class="card gold">
-    <div class="kicker">San Antonio · 周一 + 路上</div>
-    <h3>🌵 圣安东尼奥</h3>
-    <div class="food"><div class="em">🌮</div><div><b>圣安东尼奥</b>Mi Tierra（百年 Tex-Mex）、Sichuan House 川味轩、Kung Fu Noodle 功夫面馆。</div></div>
-    <div class="food"><div class="em">🍔</div><div><b>路上</b>In-N-Out（三城都有）、Fredericksburg 德餐 + 7 月蜜桃。</div></div>
-  </div>
-
-  <!-- PACK -->
-  <h2 class="sec" id="pack"><em>Pack</em> · 打包清单 <span class="num">15 ITEMS</span></h2>
-  <div class="card sage">
-    <div class="kicker">Pack list · 可勾选</div>
-    <h3>🎒 出发前过一遍</h3>
-    <div class="checks" id="checklist">
-      <label><input type="checkbox"><span>水壶 + 大瓶水（每人每天 1 加仑）</span></label>
-      <label><input type="checkbox"><span>电解质 / 盐丸</span></label>
-      <label><input type="checkbox"><span>防晒霜 SPF50 + 宽檐帽 + 墨镜</span></label>
-      <label><input type="checkbox"><span>抓地徒步鞋（爬巨石）</span></label>
-      <label><input type="checkbox"><span>溶洞穿的薄外套（洞里约 20°C）</span></label>
-      <label><input type="checkbox"><span>小毛巾（动物园喂动物）</span></label>
-      <label><input type="checkbox"><span>驱蚊液（黄昏看蝙蝠 / 湖边 / 山乡）</span></label>
-      <label><input type="checkbox"><span>充电宝 + 车载充电器</span></label>
-      <label><input type="checkbox"><span>离线地图已下载</span></label>
-      <label><input type="checkbox"><span>独立日：折叠椅 / 毯子</span></label>
-      <label><input type="checkbox"><span>所有确认邮件 / 票（手机存好）</span></label>
-      <label><input type="checkbox"><span>现金（Salt Lick / 部分小店）</span></label>
-      <label><input type="checkbox"><span>信用卡 + 驾照</span></label>
-      <label><input type="checkbox"><span>下载好 Uber（7/4 市区封路用）</span></label>
-      <label><input type="checkbox"><span>租车后更新巨石门票车牌</span></label>
-    </div>
-    <p class="note">勾选状态自动保存在本机浏览器，下次打开还在。</p>
-  </div>
-
-  <footer class="footer">
-    <div class="luba">
-      <svg width="16" height="16" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true" style="color:var(--accent)">
-        <ellipse cx="50" cy="65" rx="20" ry="22"/>
-        <ellipse cx="22" cy="40" rx="10" ry="13"/>
-        <ellipse cx="42" cy="22" rx="9" ry="12"/>
-        <ellipse cx="62" cy="22" rx="9" ry="12"/>
-        <ellipse cx="78" cy="40" rx="10" ry="13"/>
-      </svg>
-      为你定制 · 2026 年 7 月德州自驾 · 2 人
-    </div>
-    <div><a href="index.html">← back to index</a></div>
-  </footer>
-
-</div>
+</div></div>
 
 <script>
-(function(){
-  try{
-    var KEY='tx_pack_final2';
-    var saved=JSON.parse(localStorage.getItem(KEY)||'[]');
-    var boxes=document.querySelectorAll('#checklist input');
-    boxes.forEach(function(b,i){
-      if(saved[i]){b.checked=true;b.closest('label').classList.add('done');}
-      b.addEventListener('change',function(){
-        b.closest('label').classList.toggle('done',b.checked);
-        var arr=[];boxes.forEach(function(x){arr.push(x.checked?1:0);});
-        try{localStorage.setItem(KEY,JSON.stringify(arr));}catch(e){}
-      });
-    });
-  }catch(e){}
-})();
+const M='https://www.google.com/maps/search/?api=1&query=';
+const START=new Date('2026-07-01T00:00:00');
+
+const BOOKED=['机票','4 段住宿','Enchanted Rock','Longhorn Cavern','Exotic Resort Zoo','NASA'];
+
+const ALERTS=[
+  {icon:'⏰',bar:'#BC4B2B',soft:'#F7E7DE',title:'周四 6:15 就要从 SA 出发！',body:'巨石是 6:30–8:30 入园窗口，必须 8:30 前到门口，别睡过头。'},
+  {icon:'🚀',bar:'#3E6FB0',soft:'#E4ECF8',title:'NASA 电车 12:40 定时、别迟到',body:'Apollo Mission Control 登月控制室；想看土星五号火箭要另搭 Rocket Park 电车。'},
+  {icon:'🎆',bar:'#C0392B',soft:'#FBE3E0',title:'7/4 奥斯汀独立日',body:'Vic Mathias Shores 8:30 音乐会 + 烟花；市区封路、早去、用 Uber。周六晚饭在 Round Rock（城北），早点吃、~6:45 前出发。'},
+  {icon:'🪪',bar:'#B07A1E',soft:'#FBEFD6',title:'巨石门票车牌要对上',body:'开租车的话改成租车车牌，或入园出示预约。'},
+];
+
+const DAYS=[
+  {n:'0',weekday:'周三',date:'7/1',city:'圣安东尼奥',hotel:'Wyndham Garden SA Airport（机场旁）',drive:'',blocks:[
+    {time:'21:06',title:'落地 SAT → 取租车 → 入住',badges:[],note:'隔壁 Walmart（8500 Jones Maltsberger，开到 23:00）买一箱水、电解质、驱蚊液、零食。确认明天巨石/溶洞预约。早睡——明早 6:15 出发。',map:''},
+  ]},
+  {n:'1',weekday:'周四',date:'7/2',city:'SA → 山乡',hotel:'The Retreat on the Hill（Horseshoe Bay）· 16:00 后入住',drive:'',blocks:[
+    {time:'06:15',title:'Enchanted Rock 爬巨石',badges:[['已订 · 6:30–8:30','booked'],['8:30 前必到','warn']],note:'车程约 1.5h（~7:45 到）。清晨爬 Summit Trail（往返约 1.3 英里花岗岩穹顶），~10 点下山。带足水 + 防晒 + 抓地鞋。',map:M+'Enchanted+Rock+State+Natural+Area'},
+    {time:'11:00',title:'Fredericksburg 德式午餐 🍑 + 品酒',badges:[],note:'猪排 / 香肠 / 德啤 + 7 月蜜桃；Main Street 步行品酒室，或 290 上 Becker / Grape Creek。指定司机。',map:M+'Main+Street+Fredericksburg+TX'},
+    {time:'15:30',title:'🦇 Longhorn Cavern 溶洞',badges:[['已订 · 4:00PM 团','booked'],['洞里约 20°C','temp']],note:'提前 30 分钟（3:30）到游客中心报到、强制安全讲解——错过就等下一场。带预约码、先上厕所（洞内没厕所）。防滑闭趾鞋；下 52 级石阶、约 90 分钟；洞内只许无味水。亮点：全黑体验、水晶、小蝙蝠！',map:M+'Longhorn+Cavern+State+Park'},
+    {time:'18:00',title:'入住 The Retreat on the Hill + 晚饭',badges:[],note:'溶洞 ~5:30 结束 → 约 25 分钟到 Horseshoe Bay 入住；Marble Falls 一带吃晚饭。',map:''},
+  ]},
+  {n:'2',weekday:'周五',date:'7/3',city:'Hill Country → Austin',hotel:'Aloft by Marriott Austin Downtown（今晚 + 明晚）',drive:'',blocks:[
+    {time:'08:15',title:'🦓 Exotic Resort Zoo（Johnson City）',badges:[['已订 · 导览拖拉机','booked']],note:'从 Horseshoe Bay 约 40 分钟。9 点开门就到，坐导览拖拉机、大桶 feed 喂动物，约 1–1.5h。带条小毛巾。',map:M+'The+Exotic+Resort+Zoo+Johnson+City'},
+    {time:'12:00',title:'开往奥斯汀 → 入住 + 午饭 🍖 BBQ',badges:[],note:'约 1h 到 Austin。午饭顺路 Salt Lick BBQ（Driftwood，家庭式大份、BYOB / 带现金）或市区简餐。',map:M+'Salt+Lick+BBQ+Driftwood'},
+    {time:'14:00',title:'Texas State Capitol + 🧋 吃茶三千',badges:[['免费','free']],note:'逛粉色花岗岩圆顶州议会大厦（凉快）；吃茶三千 Chicha San Chen（6501 Airport Blvd，鲜茶拿铁）。',map:M+'Chicha+San+Chen+Austin+Airport+Blvd'},
+    {time:'18:00',title:'🇨🇳 晚餐 · 湘里人家 Hunan Bistro',badges:[['4.7★','star']],note:'10700 Anderson Mill Rd（西北区）。必点 辣椒皮蛋茄子 · 辣椒炒牛柳 · 酸菜鸭血 · 担担面。离 Mount Bonnell 约 15 分钟。',map:M+'Hunan+Bistro+Anderson+Mill+Austin'},
+    {time:'19:45',title:'Mount Bonnell 看日落',badges:[['免费','free']],note:'奥斯汀最高点，俯瞰 Lake Austin，日落出片。停车少、有砸车——贵重物随身。',map:M+'Mount+Bonnell+Covert+Park+Austin'},
+  ]},
+  {n:'3',weekday:'周六',date:'7/4',city:'SoCo + 韩餐 + 烟花',hotel:'Aloft Austin Downtown',drive:'',blocks:[
+    {time:'12:30',title:'🦆 午餐 · Bamboo House 北京烤鸭',badges:[['4.3★','star']],note:'7010 Easy Wind Dr · 经典北京烤鸭。＊周六两顿不想太满，午饭也可改 SoCo 轻食。',map:M+'Bamboo+House+Austin+Easy+Wind'},
+    {time:'13:00',title:'South Congress（SoCo）逛吃',badges:[['⭐ 必去','must']],note:'Allens Boots、Jos Coffee 绿墙、Two Hands brunch、Manana 咖啡；逛 alo / Hermès / Reformation / lululemon / Madewell。太热进 Bullock 博物馆。',map:M+'South+Congress+Avenue+Austin'},
+    {time:'17:00',title:'🇰🇷 早晚餐 · Ghama Zone 韩餐',badges:[['4.6★','star'],['~6:45 前出发','warn']],note:'118 E Main St, Round Rock（城北，约 30 分钟）。必点 部队锅加面 · 海鲜煎饼 · 酱蟹。早点吃回市区看烟花，避开封路。',map:M+'Ghama+Zone+Korean+Food+Round+Rock'},
+    {time:'20:00',title:'🦇 Congress 大桥蝙蝠',badges:[],note:'约 150 万只日落出洞。付费停车场 227½ S Congress Ave，走 1 分钟到桥底。🦟 湖边黄昏蚊子多，喷驱蚊液。',map:M+'Congress+Avenue+Bat+Bridge+Austin'},
+    {time:'20:30',title:'🎆 独立日烟花 @ Vic Mathias Shores',badges:[['免费','free']],note:'蝙蝠桥旁湖边：Austin Symphony 8:30 + 烟花，庆 250 周年。早占位、用 Uber。',map:M+'Vic+Mathias+Shores+Austin'},
+  ]},
+  {n:'4',weekday:'周日',date:'7/5',city:'Austin → Houston → SA',hotel:'Canopy by Hilton SA Riverwalk（河滨步道）',drive:'奥斯汀→休斯顿 ~3h；休斯顿→SA ~3.5h，两人轮流开。',blocks:[
+    {time:'08:00',title:'从 Aloft 退房出发去休斯顿',badges:[],note:'约 3h、11 点左右到，留缓冲（入园定时 12:00）。',map:''},
+    {time:'12:00',title:'Space Center Houston 🚀',badges:[['已订 · 12:00 入园','booked']],note:'12:40 Apollo Mission Control 电车（登月真实控制室，定时别迟到）。之后再搭 Rocket Park 电车看土星五号巨型火箭。逛展厅到 ~16:00。',map:M+'Space+Center+Houston'},
+    {time:'16:30',title:'🦞 晚饭 · Arco Seafood 东海酒家',badges:[],note:'9896 Bellaire · 粤式海鲜 + 全天点心 · 回 SA 顺路。🧋 Molly Tea（9889 Bellaire）+ 🍞 Le Kream 爆浆吐司（9393 Bellaire）打包路上吃。',map:M+'Arco+Seafood+Restaurant+Bellaire+Houston'},
+    {time:'18:00',title:'夜里开回圣安东尼奥',badges:[],note:'上 I-10 西，约 3.5h、~21:30 到，入住 Canopy（河滨步道）。轮流开、备咖啡。',map:''},
+  ]},
+  {n:'5',weekday:'周一',date:'7/6',city:'San Antonio',hotel:'',drive:'',blocks:[
+    {time:'09:00',title:'SA 核心打卡（酒店就在河滨步道）',badges:[],note:'The Alamo（免费）→ River Walk 坐船（约 $15）→ Pearl 珍珠区早午餐。',map:M+'The+Alamo+San+Antonio'},
+    {time:'11:00',title:'退房 → Mission San José + 午餐 Mi Tierra',badges:[],note:'UNESCO 遗产传教站（免费）；百年 Tex-Mex Mi Tierra。行李放车上。',map:M+'Mission+San+Jose+San+Antonio'},
+    {time:'16:30',title:'还车回 SAT，航班前 2 小时',badges:[],note:'19:08 起飞回 Des Moines，23:58 到家。🎉',map:''},
+  ]},
+];
+
+const FOOD=[
+  {icon:'🚀',city:'休斯顿',when:'周日晚 · Bellaire 中国城',items:[
+    {icon:'🦐',name:'Arco Seafood 东海酒家',desc:'广式海鲜 + 早茶一绝',map:M+'Arco+Seafood+Restaurant+Houston'},
+    {icon:'🍜',name:'金大碗 House of Bowls',desc:'港式：干炒牛河、花生酱多士',map:M+'House+of+Bowls+Houston'},
+    {icon:'🥟',name:'Lucky Bento V.I.P.',desc:'东北菜：酸菜猪肉、溜肥肠、地三鲜（9262 Bellaire）',map:M+'Lucky+Bento+VIP+9262+Bellaire+Houston'},
+    {icon:'🌶️',name:'湘知湘味',desc:'不踩雷的湘菜（9889 Bellaire）',map:M+'Hunan+Bistro+9889+Bellaire+Houston'},
+    {icon:'🧋',name:'Molly Tea + Le Kream',desc:'奶茶（也可喜茶）+ 爆浆吐司',map:M+'Molly+Tea+Bellaire+Houston'},
+  ]},
+  {icon:'🎸',city:'奥斯汀',when:'周五–六',items:[
+    {icon:'🦆',name:'Bamboo House',desc:'经典北京烤鸭 / 川菜（市区）',map:M+'Bamboo+House+Austin'},
+    {icon:'🌶️',name:'湘里人家',desc:'湘菜 4.7★（北 Austin · Anderson Mill）',map:M+'Hunan+Bistro+Anderson+Mill+Austin'},
+    {icon:'🦆',name:'Shanghai Chinese',desc:'粤菜：干炒牛河、牛腩煲、菠萝叉烧',map:M+'Shanghai+Chinese+Restaurant+Austin'},
+    {icon:'🇰🇷',name:'Ghama Zone',desc:'韩餐 4.6★（Round Rock）：部队锅、海鲜煎饼、酱蟹',map:M+'Ghama+Zone+Korean+Round+Rock'},
+    {icon:'🍖',name:'Texas BBQ',desc:'Salt Lick（农家乐）/ Franklin（排队长）',map:M+'Salt+Lick+BBQ+Driftwood'},
+    {icon:'🧋',name:'吃茶三千 Chicha San Chen',desc:'奶茶（6501 Airport Blvd）',map:M+'Chicha+San+Chen+Austin'},
+  ]},
+  {icon:'🌵',city:'圣安东尼奥 + 路上',when:'周一',items:[
+    {icon:'🌮',name:'Mi Tierra / 川味轩 / 功夫面馆',desc:'百年 Tex-Mex、Sichuan House、Kung Fu Noodle',map:M+'Mi+Tierra+San+Antonio'},
+    {icon:'🍔',name:'In-N-Out + Fredericksburg',desc:'三城都有 In-N-Out；Fredericksburg 德餐 + 7 月蜜桃',map:M+'In-N-Out+San+Antonio'},
+  ]},
+];
+
+const PACK=['水壶 + 大瓶水（每人每天 1 加仑）','电解质 / 盐丸','防晒霜 SPF50 + 宽檐帽 + 墨镜','抓地徒步鞋（爬巨石）','溶洞穿的薄外套（洞里约 20°C）','小毛巾（动物园喂动物）','驱蚊液（黄昏看蝙蝠 / 湖边 / 山乡）','充电宝 + 车载充电器','离线地图已下载','独立日：折叠椅 / 毯子','所有确认邮件 / 票（手机存好）','现金（Salt Lick / 部分小店）','信用卡 + 驾照','下载好 Uber（7/4 市区封路用）','租车后更新巨石门票车牌'];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+// countdown
+(function(){var d=Math.max(0,Math.ceil((START-new Date())/86400000));document.getElementById('cd').textContent=d>0?('⏳ '+d+' 天后'):'🎉 出发啦';})();
+
+// booked
+document.getElementById('bchips').innerHTML=BOOKED.map(b=>'<span>'+esc(b)+'</span>').join('');
+
+// alerts
+document.getElementById('alerts-list').innerHTML=ALERTS.map(a=>
+  '<div class="alert" style="box-shadow:inset 4px 0 0 '+a.bar+'"><span class="ic" style="background:'+a.soft+'">'+a.icon+'</span><div style="flex:1;min-width:0"><div class="at">'+esc(a.title)+'</div><div class="ab">'+esc(a.body)+'</div></div></div>').join('');
+
+// food
+document.getElementById('food-list').innerHTML=FOOD.map(g=>
+  '<div class="fgroup"><div class="fhd"><span style="font-size:16px">'+g.icon+'</span><span class="fcity">'+esc(g.city)+'</span><span class="fwhen">'+esc(g.when)+'</span></div><div class="fitems two">'+
+  g.items.map(it=>'<a class="fitem" href="'+it.map+'" target="_blank" rel="noopener"><span class="ic">'+it.icon+'</span><span style="flex:1;min-width:0"><div class="fn">'+esc(it.name)+'</div><div class="fd">'+esc(it.desc)+'</div></span><span class="fm">地图 ›</span></a>').join('')+
+  '</div></div>').join('');
+
+// days
+let sel=(function(){var i=Math.floor((new Date()-START)/86400000);return i>=0&&i<=5?i:0;})();
+function renderTabs(){
+  document.getElementById('daytabs').innerHTML=DAYS.map((d,i)=>
+    '<button class="daytab'+(i===sel?' on':'')+'" onclick="pick('+i+')"><span class="d">D'+d.n+'</span><span class="dt">'+d.date+'</span></button>').join('');
+}
+function renderDay(){
+  const d=DAYS[sel];
+  let h='<div class="dayhd"><span class="wd">'+d.weekday+' '+d.date+'</span><span class="city">'+esc(d.city)+'</span></div>';
+  if(d.hotel)h+='<div class="callout hotel"><span>🛏️</span><span>今晚住 · '+esc(d.hotel)+'</span></div>';
+  if(d.drive)h+='<div class="callout drive"><span>🚗</span><span>'+esc(d.drive)+'</span></div>';
+  h+='<div style="margin-top:8px">'+d.blocks.map(b=>{
+    let bd=(b.badges&&b.badges.length)?'<div class="badges">'+b.badges.map(x=>'<span class="bdg b-'+x[1]+'">'+esc(x[0])+'</span>').join('')+'</div>':'';
+    let mp=b.map?'<a class="mapbtn" href="'+b.map+'" target="_blank" rel="noopener">🧭 导航</a>':'';
+    return '<div class="block"><div class="time">'+b.time+'</div><div class="ln"><span class="dot"></span><div class="bt">'+esc(b.title)+'</div>'+bd+'<div class="note">'+esc(b.note)+'</div>'+mp+'</div></div>';
+  }).join('')+'</div>';
+  document.getElementById('daypanel').innerHTML=h;
+}
+function pick(i){sel=i;renderTabs();renderDay();}
+renderTabs();renderDay();
+
+// packing
+let checked=(function(){try{return JSON.parse(localStorage.getItem('texas-pack-v1')||'{}')}catch(e){return {}}})();
+function renderPack(){
+  document.getElementById('packbox').innerHTML=PACK.map((label,i)=>{
+    const id='p'+i,on=!!checked[id];
+    return '<button class="packrow" onclick="togglePack('+i+')"><span class="cbox'+(on?' on':'')+'">'+(on?'✓':'')+'</span><span class="plabel'+(on?' on':'')+'">'+esc(label)+'</span></button>';
+  }).join('');
+  const done=PACK.filter((_,i)=>!!checked['p'+i]).length;
+  document.getElementById('packcount').textContent=done+' / '+PACK.length;
+}
+function togglePack(i){const id='p'+i;checked[id]=!checked[id];try{localStorage.setItem('texas-pack-v1',JSON.stringify(checked))}catch(e){}renderPack();}
+renderPack();
 </script>
 </body>
 </html>

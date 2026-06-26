@@ -3,670 +3,169 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>奥兰多各园 · 逐时详细动线 · Yixuan's Index</title>
-<meta name="description" content="2026/12/23–27 · 2 环球(3 园 2 天)+ 2 迪士尼(AK + EPCOT)。每个园逐时战术动线。" />
+<title>🗺️ 奥兰多各园逐时动线 · Yixuan</title>
+<meta name="description" content="奥兰多各园开门到闭园战术：Epic / IOA+USF / EPCOT / AK 逐时动线、单人通道、买插队、圣诞限定。" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --cream:#FAF6F0; --cream-2:#F2EBDC;
-    --ink:#1A1814; --ink-soft:#3A352E; --muted:#857F73;
-    --line:#E5DCC9; --line-soft:#EFE7D5;
-    --accent:#C44536; --accent-soft:#E07A56;
-    --sage:#7A8471; --gold:#B8923E; --plum:#5A4A7A; --ocean:#3B6B7A;
-  }
-  *{box-sizing:border-box}
+  *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+  :root{--ac:#1F8A8A;--screen:#CFE6E4;--frame:#EAF5F4;--ink:#163B3B;--sub:#5C7F7C;--soft:#D7EDEB;--line:#D2E7E5;--cline:#DDEDEC}
   html{scroll-behavior:smooth}
-  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.6;font-size:15.5px;overflow-x:hidden}
-  a{color:var(--accent);text-decoration:none}
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-    background-image:
-      radial-gradient(circle at 20% 10%, rgba(196,69,54,.04), transparent 40%),
-      radial-gradient(circle at 80% 80%, rgba(122,132,113,.06), transparent 40%),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .1 0 0 0 0 .08 0 0 0 0 .05 0 0 0 .2 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.5'/></svg>");
-    opacity:.4;
+  body{background:var(--screen);font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}button{font-family:inherit}
+  ::-webkit-scrollbar{height:5px;width:5px}::-webkit-scrollbar-thumb{background:rgba(31,138,138,.32);border-radius:9px}
+  .screen{min-height:100vh;display:flex;justify-content:center}
+  .frame{width:100%;max-width:480px;background:var(--frame);min-height:100vh;position:relative;box-shadow:0 0 60px rgba(10,50,50,.10)}
+  .appbar{position:sticky;top:0;z-index:30;background:rgba(234,245,244,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .appbar .row{display:flex;align-items:center;gap:10px;padding:9px 12px}
+  .back{flex:none;width:36px;height:36px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ac)}
+  .apptt{flex:1;min-width:0;display:flex;flex-direction:column}
+  .apptt .t{font:800 15px 'Baloo 2','Noto Sans SC';line-height:1.1}
+  .apptt .s{font:600 10.5px 'Space Grotesk';color:#6E928F}
+  .totop{flex:none;font:700 11px 'Noto Sans SC';color:var(--ac);background:var(--soft);padding:6px 11px;border-radius:999px}
+  .hero{background:linear-gradient(160deg,#249a9a 0%,#147070 100%);color:#fff;padding:22px 20px 24px;position:relative;overflow:hidden}
+  .hero .wm{position:absolute;right:-14px;top:-22px;font-size:120px;opacity:.15;pointer-events:none}
+  .hero h1{font:800 25px 'Baloo 2','Noto Sans SC';line-height:1.12;position:relative}
+  .hero .sub{font:500 12.5px 'Noto Sans SC';color:rgba(255,255,255,.88);margin-top:6px;position:relative}
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;position:relative}
+  .hchips span{font:600 11px 'Noto Sans SC';background:rgba(255,255,255,.16);padding:5px 10px;border-radius:999px}
+  .sech{padding:20px 18px 6px}
+  .sech .h2{font:800 18px 'Baloo 2','Noto Sans SC';color:var(--ink)}
+  .tactics{display:flex;flex-direction:column;gap:9px;padding:0 16px}
+  .tactic{padding:14px;background:#fff;border:1px solid var(--cline);border-radius:16px;box-shadow:inset 4px 0 0 var(--ac)}
+  .tactic .t{font:800 13.5px 'Noto Sans SC'}
+  .tactic .b{font:500 12px 'Noto Sans SC';color:var(--sub);margin-top:5px;line-height:1.6}
+  .legend{display:flex;flex-wrap:wrap;gap:7px;padding:14px 16px 4px}
+  .lg{font:700 10.5px 'Noto Sans SC';padding:3px 9px;border-radius:999px}
+  .t-head{background:#FDE7E3;color:#C0392B}.t-sr{background:#DCF0EF;color:#1F8A8A}.t-buy{background:#E4ECF8;color:#3E6FB0}.t-show{background:#EDE7F6;color:#6A57B0}.t-eat{background:#E6F1EB;color:#2E7D5B}.t-xmas{background:#FBE4EC;color:#C0395E}
+  .ptabs{position:sticky;top:53px;z-index:20;background:rgba(234,245,244,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:10px 14px;border-top:1px solid var(--cline);border-bottom:1px solid var(--cline);display:flex;gap:7px;overflow-x:auto;margin-top:14px}
+  .ptab{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;padding:8px 12px;border-radius:13px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .ptab.on{border-color:var(--ac);background:var(--ac);color:#fff}
+  .ptab .n{font:800 13px 'Baloo 2','Noto Sans SC';line-height:1}.ptab .d{font:600 9px 'Noto Sans SC';opacity:.85}
+  .ppanel{padding:16px 16px 4px}
+  .pfull{font:800 20px 'Baloo 2','Noto Sans SC';color:#147070}
+  .strat{display:flex;align-items:center;gap:8px;margin-top:6px;padding:11px 13px;background:#DCEEEC;border:1px solid #C9E4E1;border-radius:14px;font:600 12px 'Noto Sans SC';color:#1F5E5C;line-height:1.5}
+  .palert{margin-top:9px;padding:11px 13px;background:#FBE4EC;border:1px solid #F2CCD8;border-radius:14px;font:600 11.5px 'Noto Sans SC';color:#A82C50;line-height:1.6}
+  .block{display:flex;gap:11px}
+  .block .time{flex:none;width:52px;text-align:right;font:700 12px 'Space Grotesk';color:var(--ac);padding-top:13px;line-height:1.25}
+  .block .ln{flex:1;min-width:0;border-left:2px solid var(--line);padding:13px 0 16px 16px;position:relative}
+  .block .dot{position:absolute;left:-7px;top:17px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--ac)}
+  .block .bt{font:700 14.5px 'Noto Sans SC';line-height:1.4}
+  .block .note{font:500 12.5px 'Noto Sans SC';color:var(--sub);margin-top:7px;line-height:1.65}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+  .tag{font:700 10px 'Noto Sans SC';padding:3px 8px;border-radius:999px;white-space:nowrap}
+  .footer{text-align:center;padding:22px 24px 36px}
+  .footer .a{font:600 11.5px 'Noto Sans SC';color:var(--sub);line-height:1.7}
+  .footer .b{font:500 11px 'Noto Sans SC';color:#8AA8A5;margin-top:8px}
+  @media(min-width:880px){
+    .frame{max-width:880px}
+    .pk-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+    .pk-main{max-width:660px;margin:0 auto}
   }
-  .wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:28px 22px 80px}
-  @media (max-width:640px){.wrap{padding:20px 16px 64px}}
-
-  /* topbar */
-  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
-  .topbar a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s, border-color .2s}
-  .topbar a:hover{color:var(--accent);border-color:var(--accent)}
-  .topbar .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:middle;animation:pulse 2s ease-in-out infinite}
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
-
-  /* hero */
-  .hero{position:relative;background:linear-gradient(135deg,#1A1814 0%, #2a2520 100%);color:#FAF6F0;border-radius:18px;padding:36px 36px 32px;overflow:hidden;margin-bottom:28px}
-  .hero::after{content:"";position:absolute;right:-100px;bottom:-100px;width:400px;height:400px;background:radial-gradient(circle, rgba(196,69,54,.35), transparent 65%);pointer-events:none}
-  .hero .paw{position:absolute;top:24px;right:30px;width:54px;height:54px;opacity:.18;color:#FAF6F0}
-  .hero .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-soft);margin-bottom:14px;position:relative;z-index:1}
-  .hero h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(32px,5vw,46px);line-height:1.05;letter-spacing:-.025em;margin:0 0 14px;font-variation-settings:"opsz" 144;position:relative;z-index:1}
-  .hero h1 em{font-style:italic;color:var(--accent-soft);font-weight:400}
-  .hero .lede{font-family:'Fraunces',serif;font-size:17px;line-height:1.5;color:rgba(250,246,240,.82);max-width:600px;margin:0 0 22px;position:relative;z-index:1;font-variation-settings:"opsz" 14}
-  .hero .route{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:22px;position:relative;z-index:1}
-  .hero .route .node{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;background:rgba(250,246,240,.1);border:1px solid rgba(250,246,240,.15);color:#FAF6F0;padding:5px 11px;border-radius:99px}
-  .hero .route .arw{color:rgba(250,246,240,.4);font-size:11px}
-  .hero .facts{display:flex;flex-wrap:wrap;gap:10px;position:relative;z-index:1}
-  .hero .fact{background:rgba(250,246,240,.08);border:1px solid rgba(250,246,240,.12);border-radius:10px;padding:9px 14px;min-width:100px}
-  .hero .fact .lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-soft);display:block;margin-bottom:3px}
-  .hero .fact .val{font-family:'Fraunces',serif;font-weight:500;font-size:15px;color:#FAF6F0;font-variation-settings:"opsz" 14}
-
-  /* sticky jump nav */
-  nav.jump{position:sticky;top:0;z-index:50;background:rgba(250,246,240,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin:0 -22px 0;padding:10px 22px;display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch}
-  @media (max-width:640px){nav.jump{margin:0 -16px 0;padding:10px 16px}}
-  nav.jump a{flex:0 0 auto;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--ink-soft);background:#FFFCF6;border:1px solid var(--line);padding:7px 13px;border-radius:99px;transition:all .2s}
-  nav.jump a:hover{border-color:var(--accent);color:var(--accent)}
-
-  /* section head */
-  h2.sec{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(24px,3.2vw,32px);letter-spacing:-.02em;margin:48px 0 4px;color:var(--ink);font-variation-settings:"opsz" 144;display:flex;align-items:baseline;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
-  h2.sec em{font-style:italic;color:var(--accent);font-weight:400}
-  h2.sec .num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--muted);margin-left:auto;font-style:normal;font-weight:400;text-transform:uppercase}
-
-  /* booked / alerts boxes */
-  .booked, .alerts{border-radius:14px;padding:18px 20px;margin-top:18px;position:relative;border:1px solid var(--line)}
-  .booked{background:#F4F7F1;border-color:#D7E0CC}
-  .booked .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:6px}
-  .booked b{color:#3A5A3A}
-  .booked .note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:8px;display:block;letter-spacing:.02em}
-
-  .alerts{background:#FCF6E3;border-color:#E8D49A}
-  .alerts .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#9A6500;font-weight:500;margin-bottom:10px}
-  .alerts .a{display:flex;gap:14px;padding:10px 0;border-bottom:1px dashed rgba(154,101,0,.25);font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
-  .alerts .a:last-child{border-bottom:none;padding-bottom:0}
-  .alerts .a:first-of-type{padding-top:0}
-  .alerts .a .ic{font-size:20px;flex:0 0 26px;text-align:center;line-height:1.3}
-  .alerts .a b{color:var(--accent)}
-
-  /* day cards */
-  .day{position:relative;background:#FFFCF6;border:1px solid var(--line);border-radius:14px;margin-top:18px;overflow:hidden;transition:box-shadow .2s, border-color .2s}
-  .day:hover{box-shadow:0 14px 30px -16px rgba(26,24,20,.15)}
-  .day::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--day-color,var(--accent))}
-  .day .dh{padding:18px 22px 14px;border-bottom:1px solid var(--line-soft);display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
-  .day .dh .left{flex:1;min-width:0}
-  .day .dh .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--day-color,var(--accent));font-weight:500;margin-bottom:6px}
-  .day .dh .dt{font-family:'Fraunces',serif;font-weight:500;font-size:22px;line-height:1.2;letter-spacing:-.015em;color:var(--ink);font-variation-settings:"opsz" 144}
-  .day .dh .dd{font-family:'JetBrains Mono',monospace;font-size:11px;text-align:right;line-height:1.5;color:var(--muted);letter-spacing:.04em;flex:0 0 auto}
-  .day .db{padding:8px 22px 18px}
-  .day.sage{--day-color:var(--sage)}
-  .day.plum{--day-color:var(--plum)}
-  .day.gold{--day-color:var(--gold)}
-  .day.ocean{--day-color:var(--ocean)}
-  .day.accent{--day-color:var(--accent)}
-
-  .hotel{font-family:'Inter',sans-serif;font-size:12.5px;color:var(--sage);background:#F4F7F1;border:1px solid #D7E0CC;border-radius:8px;padding:8px 12px;margin:12px 0 6px;display:inline-flex;align-items:center;gap:6px}
-  .hotel::before{content:"🏨";font-size:14px}
-
-  .step{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-soft)}
-  .step:last-child{border-bottom:none;padding-bottom:0}
-  .step .tm{flex:0 0 60px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--day-color,var(--accent));padding-top:3px;letter-spacing:.02em}
-  .step .ct{flex:1;min-width:0}
-  .step .ct .ti{font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:var(--ink);line-height:1.4;margin-bottom:5px}
-  .step .ct .ds{font-size:14px;color:var(--ink-soft);line-height:1.55}
-  .step .ct .ds b{color:var(--ink);font-weight:600}
-  .step .ct .ds ul{margin:6px 0 0;padding-left:18px}
-  .step .ct .ds li{margin-bottom:4px}
-
-  /* tags / pills */
-  .tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;padding:3px 8px;border-radius:99px;margin-left:6px;vertical-align:1px;letter-spacing:.06em;text-transform:uppercase;border:1px solid}
-  .tag.cost{background:#F0F7EC;color:#3a7a3a;border-color:#c4dfc4}
-  .tag.time{background:#FDEEDE;color:#B5601F;border-color:#F3CDA3}
-  .tag.hot{background:#FCEAE6;color:var(--accent);border-color:#F0C3BA}
-  .tag.cool{background:#E8F1F4;color:var(--ocean);border-color:#BFD4DC}
-  .tag.book{background:#F0F7EC;color:#3a7a3a;border-color:#c4dfc4}
-  .tag.eat{background:#F3E9F2;color:var(--plum);border-color:#D9C7D7}
-
-  .maplink{display:inline-flex;align-items:center;gap:4px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--accent);margin-top:8px;transition:gap .2s}
-  .maplink:hover{gap:7px}
-  .maplink::before{content:"📍";font-size:13px}
-  .maplink a{color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s}
-  .maplink a:hover{border-color:var(--accent)}
-
-  .drive{background:#F4F1E8;border:1px solid #E5DCC9;border-radius:10px;padding:10px 14px;margin:12px 0;font-size:13.5px;color:var(--ink-soft);display:flex;gap:10px;align-items:flex-start;line-height:1.5}
-  .drive::before{content:"🚗";font-size:18px;flex:0 0 22px}
-
-  /* tip / eat boxes inside steps */
-  .tipbox{background:#FCF6E3;border-left:3px solid var(--gold);border-radius:0 7px 7px 0;padding:8px 12px;margin-top:8px;font-size:13px;line-height:1.55;color:var(--ink-soft)}
-  .tipbox b{color:#9A6500}
-  .eatbox{background:#F3E9F2;border-left:3px solid var(--plum);border-radius:0 7px 7px 0;padding:8px 12px;margin-top:8px;font-size:13px;line-height:1.55;color:var(--ink-soft)}
-  .eatbox b{color:var(--plum)}
-  .warnbox{background:#FCEAE6;border:1px solid #F0C3BA;border-radius:10px;padding:11px 14px;margin-top:14px;font-size:13.5px;color:var(--ink-soft);line-height:1.55}
-  .warnbox b{color:var(--accent)}
-
-  /* generic card */
-  .card{background:#FFFCF6;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px;position:relative;overflow:hidden}
-  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--card-color,var(--accent))}
-  .card h3{font-family:'Fraunces',serif;font-weight:500;font-size:19px;letter-spacing:-.015em;margin:0 0 6px;color:var(--ink);font-variation-settings:"opsz" 144}
-  .card .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--card-color,var(--accent));font-weight:500;margin-bottom:10px}
-  .card.sage{--card-color:var(--sage)}
-  .card.plum{--card-color:var(--plum)}
-  .card.gold{--card-color:var(--gold)}
-  .card.ocean{--card-color:var(--ocean)}
-  .card ul{margin:6px 0 0;padding-left:19px;font-size:14px;line-height:1.7}
-  .card li{margin-bottom:4px}
-
-  /* park tabs */
-  .ptabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:18px}
-  .ptab{flex:1 1 auto;min-width:140px;border:1px solid var(--line);background:#FFFCF6;padding:10px 14px;border-radius:12px;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--ink-soft);text-align:left;line-height:1.3;transition:all .2s}
-  .ptab small{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
-  .ptab:hover{border-color:var(--accent);color:var(--accent)}
-  .ptab.active{background:#1A1814;color:#FAF6F0;border-color:#1A1814}
-  .ptab.active small{color:var(--accent-soft)}
-  .ppane{display:none}
-  .ppane.active{display:block}
-
-  /* source list */
-  .src{font-family:'Inter',sans-serif;font-size:13px;color:var(--ink-soft);line-height:1.7;word-break:break-word}
-  .src a{color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s}
-  .src a:hover{border-color:var(--accent)}
-  .src b{color:var(--ink);display:block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
-  .src b:first-child{margin-top:0}
-
-  /* legend chips inline */
-  .legend{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-  .legend .tag{margin-left:0}
-
-  .note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:14px;letter-spacing:.02em;line-height:1.6}
-
-  /* footer */
-  .footer{margin-top:64px;padding-top:28px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.05em}
-  .footer a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line)}
-  .footer a:hover{color:var(--accent);border-color:var(--accent)}
-  .footer .luba{display:inline-flex;align-items:center;gap:8px}
-  ::selection{background:var(--accent);color:#FAF6F0}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="screen"><div class="frame">
 
-  <div class="topbar">
-    <div><span class="dot"></span>Trip · 奥兰多 · 12/23 → 12/27</div>
-    <div><a href="index.html">← back to index</a></div>
-  </div>
-
-  <header class="hero">
-    <svg class="paw" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor">
-      <ellipse cx="50" cy="65" rx="20" ry="22"/>
-      <ellipse cx="22" cy="40" rx="10" ry="13"/>
-      <ellipse cx="42" cy="22" rx="9" ry="12"/>
-      <ellipse cx="62" cy="22" rx="9" ry="12"/>
-      <ellipse cx="78" cy="40" rx="10" ry="13"/>
-    </svg>
-    <div class="kicker">Trip · 奥兰多 · 12 月</div>
-    <h1>奥兰多各园 <em>逐时动线</em></h1>
-    <p class="lede">2 环球(3 园 2 天)+ 2 迪士尼(AK + EPCOT)· 12/23–27 · 2 人 · 住外面自驾。这是"总攻略"的配套战术版:每个园开门到闭园,玩什么、什么顺序、用哪种插队。</p>
-    <div class="route">
-      <span class="node">🌌 Epic</span><span class="arw">→</span>
-      <span class="node">🏰 IOA + USF</span><span class="arw">→</span>
-      <span class="node">🎄 圣诞休息</span><span class="arw">→</span>
-      <span class="node">🌐 EPCOT</span><span class="arw">→</span>
-      <span class="node">🐘 Animal Kingdom</span><span class="arw">→</span>
-      <span class="node">✈️</span>
-    </div>
-    <div class="facts">
-      <div class="fact"><span class="lbl">出行</span><span class="val">12/23 – 12/27</span></div>
-      <div class="fact"><span class="lbl">人数</span><span class="val">2 人</span></div>
-      <div class="fact"><span class="lbl">园数</span><span class="val">4 园</span></div>
-      <div class="fact"><span class="lbl">住宿</span><span class="val">外面自驾</span></div>
-    </div>
-  </header>
-
-  <nav class="jump">
-    <a href="#tactics">🧭 核心战术</a>
-    <a href="#parks">🎢 逐园动线</a>
-    <a href="#rednote">📕 小红书补充</a>
-    <a href="#sources">🔗 来源</a>
-  </nav>
-
-  <h2 class="sec" id="tactics"><em>Tactics</em> · 三条贯穿所有园的核心战术 <span class="num">3 RULES</span></h2>
-
-  <div class="card accent">
-    <div class="kicker">Core strategy · 头牌战术</div>
-    <h3>🧭 三条贯穿所有园的核心战术</h3>
-    <ul>
-      <li><b>① Rope drop(开门前到):</b> 每天提前 <b>45–60 分钟</b>到门口排队。头 90 分钟排队最短,能顶下午两三小时。</li>
-      <li><b>② Single rider(单人通道):</b> 你们 2 人,环球老两园 + Epic 狂用单人通道——分开坐、省一大半时间。<b>这是不买全套快通也能玩很多的关键。</b></li>
-      <li><b>③ 按需买插队:</b> 环球 Epic 买 <b>Epic Express</b>;迪士尼只给最热门那 1 个买 <b>Lightning Lane Single Pass</b>(AK 的 Flight of Passage、EPCOT 的 Cosmic Rewind)。</li>
-    </ul>
-    <div class="legend">
-      <span class="tag hot">必玩头牌</span>
-      <span class="tag cost">有单人通道</span>
-      <span class="tag time">建议买插队</span>
-      <span class="tag cool">演出/秀</span>
-      <span class="tag eat">吃饭</span>
-      <span class="tag book">圣诞限定</span>
-    </div>
-    <div class="tipbox" style="margin-top:14px"><b>多源校对:</b>本版动线交叉了 TouringPlans / AllEars / WDW Prep / Disney Tourist Blog / Orlando Informer / 数据站 Thrill-Data,以及中文社区(北美省钱快报、蚂蜂窝、知乎、小红书搜索摘要)——见文末来源。<br><b>关于时间:</b>钟点是<b>估算</b>(2026 圣诞周确切开放/演出时间还没公布)。出发前 1–2 周用官方 App 核对当日开放和秀场次。</div>
-  </div>
-
-  <h2 class="sec" id="parks"><em>Parks</em> · 逐园动线 <span class="num">4 PARKS</span></h2>
-
-  <div class="ptabs" id="tabs">
-    <button class="ptab active" data-t="epic">12/23 · Epic<small>环球 ①</small></button>
-    <button class="ptab" data-t="iou">12/24 · IOA+USF<small>环球 ②</small></button>
-    <button class="ptab" data-t="epcot">12/25 · EPCOT<small>迪士尼 · 圣诞</small></button>
-    <button class="ptab" data-t="ak">12/27 · AK<small>迪士尼 · 末日</small></button>
-  </div>
-
-  <!-- EPIC -->
-  <div class="ppane active" data-p="epic">
-    <div class="day accent">
-      <div class="dh">
-        <div class="left">
-          <div class="kicker">Day 1 · 12/23 周三</div>
-          <div class="dt">🌌 Epic Universe</div>
-        </div>
-        <div class="dd">环球 ①<br>估开门 9:00</div>
-      </div>
-      <div class="db">
-        <p style="margin:8px 0 4px;font-size:14px;color:var(--ink-soft);line-height:1.55">5 个世界 · <b>买了 Epic Express</b> + 单人通道 · 估开门 9:00(到 8:00)· 这园项目精,值一整天</p>
-        <div class="step">
-          <div class="tm">8:00</div>
-          <div class="ct">
-            <div class="ti">到门口排队 rope drop <span class="tag hot">开门前</span></div>
-            <div class="ds">提前 1 小时到。进门后 Celestial Park 是中央枢纽,5 个世界从这里发散。先想好第一冲哪个。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">9:00</div>
-          <div class="ct">
-            <div class="ti">Harry Potter and the Battle at the Ministry <span class="tag hot">头牌</span> <span class="tag cost">SR</span></div>
-            <div class="ds"><b>⚠️ 重要:它没有 Express!</b>(Epic Express 唯独不覆盖这个头牌)所以只有三条路:① 开门第一个冲;② 用<b>单人通道</b>;③ 留到闭园前刷。全园需求最高、排队涨最快。</div>
-            <div class="tipbox"><b>两种开园打法(任选,多方专家都提到):</b><br>· <b>求稳:</b>开门第一个直奔 Ministry 走正常队。<br>· <b>数据最优:</b>开门先冲低需求的 Mario Kart / Mine-Cart / Hiccup's(早上等位短很多),把 Ministry 留到 <b>晚 8–9 点</b>——它闭园前 1 小时排队会<b>暴跌约 74%</b>。</div>
-            <div class="tipbox"><b>🆕 圣诞旺季可能开"虚拟排队"Virtual Line:</b>小红书很多"哈利波特 virtual line 攻略"——那是 2025/26 初的系统,<b>后来取消了,但 Universal 随时可能在圣诞高峰重开</b>。<b>当天一进园先看 Universal App</b>:若有虚拟排队就立刻抢号(放号约 11:00/15:00/18:00,守在项目页面放号瞬间狂点);没有就按上面三条路走。免费、需 App 绑好两人的票。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">9:40</div>
-          <div class="ct">
-            <div class="ti">Super Nintendo World 超级马里奥</div>
-            <div class="ds">
-              <ul>
-                <li><b>Mario Kart: Bowser's Challenge</b> <span class="tag cost">SR</span> AR 头盔赛车,创新王</li>
-                <li><b>Mine-Cart Madness: Donkey Kong</b> 大金刚矿车,惊喜之作</li>
-              </ul>
-              <b>单人通道实测:</b>Mario Kart + Donkey Kong 用 single rider 约 <b>15–20 分钟</b>就刷完,即使 Express 线爆满。可选买 Power-Up Band 手环(~$40)把整个世界变互动游戏。
-            </div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">11:00</div>
-          <div class="ct">
-            <div class="ti">Stardust Racers <span class="tag hot">头牌</span> <span class="tag cost">SR</span></div>
-            <div class="ds">Celestial Park 的双轨竞速过山车(62 mph),园里最刺激。两条轨道(绿/黄)体感不同,两边都坐。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">12:30</div>
-          <div class="ct">
-            <div class="ti">午饭 <span class="tag eat">吃饭</span></div>
-            <div class="ds">避开 12:30–13:30 高峰可手机点单。</div>
-            <div class="eatbox"><b>🍽️ 园内:</b>Super Nintendo World 的 Toadstool Cafe(蘑菇主题),或 Celestial Park 的餐厅。避开 12:30–13:30 高峰可手机点单。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">13:30</div>
-          <div class="ct">
-            <div class="ti">How to Train Your Dragon — Isle of Berk 驯龙高手</div>
-            <div class="ds">
-              <ul>
-                <li><b>Hiccup's Wing Gliders</b> <span class="tag cost">SR</span> 家庭过山车,温和好玩</li>
-                <li>Dragon Racer's Rally · 看现场秀 <b>The Untrainable Dragon</b> <span class="tag cool">秀</span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">15:30</div>
-          <div class="ct">
-            <div class="ti">Dark Universe 环球怪物</div>
-            <div class="ds"><b>Monsters Unchained: The Frankenstein Experiment</b> <span class="tag cost">SR</span> — 机械臂黑暗骑乘,环球自称"史上最吓人",胆小慎入。排队场景一流。</div>
-            <div class="tipbox"><b>单人通道用法:</b>刺激项目放心用;但 Monsters、Ministry 的<b>排队场景很精彩</b>,有时间至少走一次正常队看 theming。下午用 Express 回刷最爱(Stardust / Mario Kart);<b>注意 Ministry 没 Express</b>。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">~晚</div>
-          <div class="ct">
-            <div class="ti">Universal Celestial Goodnight 夜秀 <span class="tag cool">秀</span></div>
-            <div class="ds">Celestial Park 中央水域的夜间灯光 + 喷泉 + 烟花秀,收尾。之后若还有力气,临走刷一次 Battle at the Ministry(这时人最少)。</div>
-            <div class="eatbox"><b>🍽️ 晚饭:</b>出园后西区 Pocha 93 韩式宵夜 / Walala 手拉面。</div>
-          </div>
-        </div>
-      </div>
+  <div class="appbar">
+    <div class="row">
+      <a class="back" href="orlando.html">←</a>
+      <div class="apptt"><span class="t">🗺️ 各园动线</span><span class="s">配套 · 奥兰多圣诞</span></div>
+      <a class="totop" href="orlando.html">← 总攻略</a>
     </div>
   </div>
 
-  <!-- IOA + USF -->
-  <div class="ppane" data-p="iou">
-    <div class="day plum">
-      <div class="dh">
-        <div class="left">
-          <div class="kicker">Day 2 · 12/24 周四 · 平安夜</div>
-          <div class="dt">🏰 Islands of Adventure + Universal Studios</div>
-        </div>
-        <div class="dd">环球 ②<br>估开门 9:00</div>
-      </div>
-      <div class="db">
-        <p style="margin:8px 0 4px;font-size:14px;color:var(--ink-soft);line-height:1.55"><b>Park-to-Park 票</b> · 一天扫两园 · 没买 Express → <b>靠 rope drop + 单人通道</b> · 估开门 9:00(到 8:00)</p>
-        <div class="step">
-          <div class="tm">8:00</div>
-          <div class="ct">
-            <div class="ti">到 <b>IOA</b> 门口排队 <span class="tag hot">开门前</span></div>
-            <div class="ds">今天从 Islands of Adventure 开始(头牌最多、排队涨最快)。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">9:00</div>
-          <div class="ct">
-            <div class="ti">Hagrid's Magical Creatures Motorbike Adventure <span class="tag hot">头牌</span></div>
-            <div class="ds"><b>全环球最好的过山车,排队涨最猛(中午就 120 分钟+)。一开门第一个冲它</b>,别犹豫。早上单人通道未必开,所以趁早走正常队。</div>
-            <div class="tipbox"><b>另一种经典开法(中文攻略常见):</b>反过来先去 USF 对角巷冲 <b>Gringotts</b>(公认全环球最佳 ride 之一,新、最热)。但 2026 排队最长的是 Hagrid's,所以<b>建议还是 IOA 先冲 Hagrid's</b>,Gringotts 留到下午回 USF 再玩。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">9:50</div>
-          <div class="ct">
-            <div class="ti">Jurassic World VelociCoaster <span class="tag hot">头牌</span> <span class="tag cost">SR</span></div>
-            <div class="ds">佛州最强过山车。紧接 Hagrid's 之后冲,或用单人通道。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">10:40</div>
-          <div class="ct">
-            <div class="ti">IOA 其余头牌</div>
-            <div class="ds">
-              <ul>
-                <li><b>Harry Potter and the Forbidden Journey</b> <span class="tag cost">SR</span>(霍格沃茨城堡里)</li>
-                <li><b>The Incredible Hulk Coaster</b> <span class="tag cost">SR</span> · <b>Spider-Man</b> · Jurassic Park River Adventure(12 月会湿会冷,选暖和时段)</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">~12:00</div>
-          <div class="ct">
-            <div class="ti">坐 Hogwarts Express → USF</div>
-            <div class="ds">从 Hogsmeade 站(IOA)坐到 King's Cross(USF)。<b>趁中午前坐</b>——这时等待通常 ≤30 分钟;两个方向车窗剧情不同。<b>需要 Park-to-Park 票。</b></div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">12:40</div>
-          <div class="ct">
-            <div class="ti">到 USF · 午饭 <span class="tag eat">吃饭</span></div>
-            <div class="ds">穿过 King's Cross 进 USF。</div>
-            <div class="eatbox"><b>🍽️ 对角巷:</b>The Leaky Cauldron(英式)或 Springfield(辛普森主题)。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">13:30</div>
-          <div class="ct">
-            <div class="ti">USF 头牌(狂用单人通道)</div>
-            <div class="ds">
-              <ul>
-                <li><b>Harry Potter and the Escape from Gringotts</b> <span class="tag cost">SR</span>(对角巷)</li>
-                <li><b>Revenge of the Mummy</b> <span class="tag cost">SR</span> · <b>Transformers 3-D</b> <span class="tag cost">SR</span> · <b>Men in Black</b></li>
-              </ul>
-            </div>
-            <div class="tipbox"><b>单人通道提醒:</b>VelociCoaster / Hagrid's 的单人通道<b>傍晚常关</b>(队太长或太短时)。所以那两个尽量上午用正常队解决。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">傍晚</div>
-          <div class="ct">
-            <div class="ti">平安夜圣诞特色 <span class="tag book">圣诞</span></div>
-            <div class="ds">
-              <ul>
-                <li>USF:<b>Macy's 风格圣诞大游行</b></li>
-                <li>两园哈利波特:<b>霍格沃茨城堡圣诞灯光投影秀</b>(整点场次)</li>
-                <li>IOA:<b>Grinchmas</b> 格林奇区域</li>
-                <li>对角巷(USF):晚上等 <b>火龙喷火</b>(随机,人聚多了就去等,slow-mo 拍很赞);买 <b>互动魔杖</b> 在两园做魔法,中文攻略都强推</li>
-              </ul>
-              <b>平安夜傍晚人流回落</b>,是全周最舒服的夜晚,留下来玩。
-            </div>
-            <div class="eatbox"><b>🍽️ 晚饭:</b>Mills 50 的 SUSURU 拉面 / Zaru 米其林乌冬(先查平安夜营业)。</div>
-          </div>
-        </div>
-        <div class="warnbox"><b>能一天扫完两园吗?</b>能——这是很多人的标准打法。<b>诀窍:Hagrid's + VelociCoaster 一开门先解决,单人通道用到底,中午前坐 Hogwarts Express。</b>圣诞周想更轻松,可只给这天单买 1 日 Express。</div>
-      </div>
-    </div>
+  <div class="hero">
+    <span class="wm">🗺️</span>
+    <h1>各园逐时动线</h1>
+    <div class="sub">2 环球（3 园 2 天）+ 2 迪士尼（AK + EPCOT） · 每个园开门到闭园</div>
+    <div class="hchips"><span>🌌 Epic</span><span>🏰 IOA + USF</span><span>🌐 EPCOT</span><span>🐘 AK</span></div>
   </div>
 
-  <!-- EPCOT -->
-  <div class="ppane" data-p="epcot">
-    <div class="day ocean">
-      <div class="dh">
-        <div class="left">
-          <div class="kicker">Day 3 · 12/25 圣诞当天</div>
-          <div class="dt">🌐 EPCOT</div>
-        </div>
-        <div class="dd">迪士尼 · 圣诞<br>估开门 9:00</div>
-      </div>
-      <div class="db">
-        <p style="margin:8px 0 4px;font-size:14px;color:var(--ink-soft);line-height:1.55">住外面 = <b>没有迪士尼提前入园</b>(那是住园区酒店才有,他们提前 30 分钟)· 你<b>只给 Cosmic Rewind 单买 Single Pass</b> · 估开门 9:00(到 8:15)</p>
-        <div class="warnbox"><b>2026 重要更新:</b>Cosmic Rewind <b>已取消虚拟排队</b>(2025 年 2 月起),现在是<b>普通排队 + 单买 Single Pass</b>($14–20/人)。所以策略 = 给它买 Single Pass,开门先冲别的。</div>
-        <div class="step">
-          <div class="tm">8:15</div>
-          <div class="ct">
-            <div class="ti">到门口排队 <span class="tag hot">开门前</span></div>
-            <div class="ds">住外面没提前入园,但<b>官方开门前 30–45 分钟到</b>,跟着第一批进。先买好 Cosmic Rewind 的 <b>Single Pass</b>(选中午左右的窗口)。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">9:00</div>
-          <div class="ct">
-            <div class="ti">Test Track 3.0 <span class="tag hot">头牌</span></div>
-            <div class="ds">2025 翻新版,人气极高。一开门先冲它(Cosmic Rewind 你已买 Single Pass,不用挤开门)。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">9:45</div>
-          <div class="ct">
-            <div class="ti">World Showcase 两大热门(开门会先放行 World Celebration 区,World Showcase 稍晚开)</div>
-            <div class="ds">
-              <ul>
-                <li><b>Frozen Ever After</b>(挪威馆,涨得快,趁早)</li>
-                <li><b>Remy's Ratatouille Adventure</b>(法国馆)</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">11:30</div>
-          <div class="ct">
-            <div class="ti">Cosmic Rewind <span class="tag hot">头牌</span> <span class="tag time">Single Pass</span></div>
-            <div class="ds">用你买的 Single Pass 在预约窗口去 —— 全迪士尼最好的过山车。</div>
-            <div class="eatbox"><b>🍽️ 午饭:</b>直接开吃 <b>Festival of the Holidays</b> 各国美食摊(见下)。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">12:00</div>
-          <div class="ct">
-            <div class="ti">其余项目 + Festival of the Holidays <span class="tag book">圣诞</span></div>
-            <div class="ds">
-              <ul>
-                <li>骑乘:Soarin' · Spaceship Earth · Mission: SPACE</li>
-                <li><b>Holiday Kitchens</b> 节日美食摊绕 World Showcase 一圈;玩 <b>Cookie Stroll</b>(集饼干);各国 <b>Storytellers</b> 讲本国圣诞传统</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">~17:00</div>
-          <div class="ct">
-            <div class="ti">Candlelight Processional 烛光圣诞颂 <span class="tag book">圣诞</span> <span class="tag cool">秀</span></div>
-            <div class="ds">America Gardens 剧场,名人朗读圣诞故事 + 50 人乐团合唱,每晚约 <b>3 场(约 17:00 / 18:45 / 20:15)</b>。<b>圣诞当天爆满</b>——想要座位强烈建议订"<b>餐饮套票</b>"(含保留座);否则站队提前 60–90 分钟。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">~21:00</div>
-          <div class="ct">
-            <div class="ti">Luminous The Symphony of Us <span class="tag cool">秀</span></div>
-            <div class="ds">World Showcase 湖面的夜间烟花灯光秀收尾。提前找好湖边位置。</div>
-          </div>
-        </div>
-        <div class="tipbox" style="margin-top:14px"><b>快通要不要买 Multi Pass?</b>EPCOT 头牌不多,<b>只买 Cosmic Rewind 一个 Single Pass 就够</b>;其余 rope drop + 错峰即可,不用买全套 Multi Pass。</div>
-      </div>
-    </div>
+  <div class="sech"><span class="h2">🧭 三条贯穿所有园的战术</span></div>
+  <div class="tactics pk-3col">
+    <div class="tactic"><div class="t">① Rope drop · 开门前到</div><div class="b">每天提前 45–60 分钟到门口排队。头 90 分钟排队最短，能顶下午两三小时。</div></div>
+    <div class="tactic"><div class="t">② Single rider · 单人通道</div><div class="b">你们 2 人，环球老两园 + Epic 狂用单人通道——分开坐、省一大半。不买全套快通也能玩很多的关键。</div></div>
+    <div class="tactic"><div class="t">③ 按需买插队</div><div class="b">环球 Epic 买 Epic Express；迪士尼只给最热门那 1 个买 Single Pass（AK 的 Flight of Passage、EPCOT 的 Cosmic Rewind）。</div></div>
   </div>
 
-  <!-- AK -->
-  <div class="ppane" data-p="ak">
-    <div class="day sage">
-      <div class="dh">
-        <div class="left">
-          <div class="kicker">Day 4 · 12/27 周日 · 玩完回酒店睡</div>
-          <div class="dt">🐘 Animal Kingdom</div>
-        </div>
-        <div class="dd">迪士尼 · 末日<br>估开门 8:00</div>
-      </div>
-      <div class="db">
-        <p style="margin:8px 0 4px;font-size:14px;color:var(--ink-soft);line-height:1.55">住外面无提前入园 · <b>只给 Flight of Passage 单买 Single Pass</b> · AK 最早开(估 8:00,到 7:15)、<b>关门最早(约 17:00–19:00)</b>,从容玩完回酒店;<b>12/28 才 9:15am 飞</b></p>
-        <div class="warnbox"><b>2026 重要更新:</b>DinoLand 已于 2026 年 2 月<b>永久关闭</b>(DINOSAUR 骑乘没了),正在改建成 Tropical Americas。别按旧攻略找 DINOSAUR。</div>
-        <div class="step">
-          <div class="tm">7:15</div>
-          <div class="ct">
-            <div class="ti">先退房、行李放车上 → 到门口排队 <span class="tag hot">开门前</span></div>
-            <div class="ds">AK 是迪士尼最早开的园。今天玩完直接奔机场,所以<b>早上先把酒店退了、行李装车</b>。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">8:00</div>
-          <div class="ct">
-            <div class="ti">Kilimanjaro Safaris 真动物巡游 <span class="tag hot">头牌</span></div>
-            <div class="ds"><b>一开门先冲 Safaris</b> —— 关键原因:<b>动物清晨最活跃</b>(中午都躲树荫睡觉)。Flight of Passage 你已买 Single Pass,不用挤开门。</div>
-            <div class="tipbox"><b>Safaris 值得刷两次:</b>① 开门(动物活跃 + 排队短);② 闭园前 1–2 小时(金色光线、动物又活跃、常几乎走入即上)。<b>11am–3pm 最不值</b>(动物都在睡)。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">9:00</div>
-          <div class="ct">
-            <div class="ti">Expedition Everest <span class="tag hot">头牌</span> <span class="tag cost">SR</span></div>
-            <div class="ds">雪山过山车,有单人通道。接着 Pandora 的 <b>Na'vi River Journey</b>(涨得快,趁早)。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">10:30</div>
-          <div class="ct">
-            <div class="ti">Avatar Flight of Passage <span class="tag hot">头牌</span> <span class="tag time">Single Pass</span></div>
-            <div class="ds">全迪士尼最佳骑乘之一,<b>10 点后常飙到 180 分钟</b>——用你买的 Single Pass 在窗口去,完美避开。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">12:00</div>
-          <div class="ct">
-            <div class="ti">午饭 + 步道 <span class="tag eat">吃饭</span></div>
-            <div class="ds">饭后走 <b>Maharajah Jungle Trek</b>(老虎)· <b>Gorilla Falls</b>(大猩猩)· <b>Discovery Island Trails</b>(生命之树)。</div>
-            <div class="eatbox"><b>🍽️ Satu'li Canteen</b>(Pandora,公认 AK 最好的快餐,生物碗 bowl)。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">14:00</div>
-          <div class="ct">
-            <div class="ti">演出 + 凉快项目 <span class="tag cool">秀</span></div>
-            <div class="ds">
-              <ul>
-                <li><b>Festival of the Lion King</b>(非洲区,必看音乐秀)</li>
-                <li><b>Finding Nemo: The Big Blue and Beyond</b> 音乐剧</li>
-                <li>Kali River Rapids(漂流,12 月会湿会冷——想玩选最暖时段,不然跳过)</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">~16:30</div>
-          <div class="ct">
-            <div class="ti">动物再活跃 + 收尾</div>
-            <div class="ds">傍晚动物又活跃起来,可二刷 Safaris 或看生命之树夜间 <b>Tree of Life Awakenings</b> 投影。</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="tm">关门后</div>
-          <div class="ct">
-            <div class="ti">吃晚饭 → 回 Vistana 睡;明早 9:15 飞 ✈️</div>
-            <div class="ds">回程顺路的 Jollibee(近 Florida Mall),或 Disney Springs / Mills 50。</div>
-            <div class="eatbox"><b>🍽️ 晚饭:</b>回程顺路的 Jollibee(近 Florida Mall),或 Disney Springs / Mills 50。</div>
-            <div class="tipbox"><b>12/27 晚分头走:</b>朋友(租车人)玩完去 MCO <b>还车 + 赶她 10:50PM 红眼</b>;<b>你</b>打 Uber 回 Vistana 再住一晚,<b>12/28 9:15am</b> 自己 Uber 去 MCO 飞。所以今晚别熬太晚。</div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="legend">
+    <span class="lg t-head">头牌</span><span class="lg t-sr">单人通道</span><span class="lg t-buy">买插队</span><span class="lg t-show">秀</span><span class="lg t-eat">吃饭</span><span class="lg t-xmas">圣诞限定</span>
   </div>
 
-  <h2 class="sec" id="rednote"><em>RedNote</em> · 小红书社区补充 <span class="num">4 NOTES</span></h2>
-
-  <div class="card plum">
-    <div class="kicker">小红书 / RedNote · 已交叉核对</div>
-    <h3>📕 社区补充</h3>
-    <ul>
-      <li><b>Epic 一天能玩完:</b>大量"一日通关 / 无速通"笔记证明不买 Express 也刷得完;你买了 Epic Express 会更轻松、更稳。</li>
-      <li><b>哈利波特 Battle at the Ministry 虚拟排队:</b>笔记常提"virtual line 必胜攻略"——那是 2025/26 初的系统,<b>现已取消、但圣诞高峰可能重开</b>,当天进园先看 App(详见 Epic 那天那条)。</li>
-      <li><b>Animal Kingdom 是社区人气王:</b>一篇"凭什么是人气王🦁动物王国"4000+ 赞,你选 AK 很稳;也有极少数人觉得 4 园里 AK 可舍,见仁见智。</li>
-      <li><b>⚠️ 迪士尼 Lightning Lane "宽限期/多刷"技巧:</b>热门笔记(1000+赞)说 1 小时窗口实际能晚到约 2 小时、过期后还能再约下一个 = 变相多持几个。<b>但评论区有人实测失败</b>——当 bonus 试试,<b>别把计划建立在它上面</b>。</li>
-    </ul>
-    <div class="tipbox"><b>抓取说明:</b>小红书笔记需登录,我在你登录的标签页里读的。社区经验都和官方/英文数据源交叉核对过;时效性强的(虚拟排队、速通规则)<b>一律以当天官方 App 为准</b>。</div>
+  <div class="pk-main">
+    <div class="ptabs" id="ptabs"></div>
+    <div class="ppanel" id="ppanel"></div>
   </div>
 
-  <h2 class="sec" id="sources"><em>Sources</em> · 来源 & 注意 <span class="num">REFS</span></h2>
-
-  <div class="card gold">
-    <div class="kicker">References · 多源校对</div>
-    <h3>🔗 来源 & 注意</h3>
-    <div class="src">
-      <b>英文专家 / 数据:</b>
-      <a href="https://allears.net/2026/03/31/i-asked-5-experts-which-epic-universe-ride-they-rope-drop-first-it-got-heated/">AllEars(5 专家 rope drop)</a> ·
-      <a href="https://travelingears.com/epic-universe-touring-strategy/">Traveling Ears(Epic 动线)</a> ·
-      <a href="https://rideready.app/parks/epic-universe/strategy/">Ride Ready</a> ·
-      <a href="https://touringplans.com/epic-universe">TouringPlans</a> ·
-      <a href="https://orlandoinformer.com/universal/touring-plan-universal-epic-universe/">Orlando Informer</a> ·
-      <a href="https://www.disneytouristblog.com/1-day-epic-universe-itinerary-touring-plan/">Disney Tourist Blog(Epic 1 日)</a>
-      <b>环球两园:</b>
-      <a href="https://www.disneytouristblog.com/1-day-universal-studios-florida-islands-of-adventure-2-park-itinerary/">Disney Tourist Blog(1 日两园)</a> ·
-      <a href="https://www.mousehacking.com/blog/universals-islands-of-adventure-one-day-plan">Mousehacking</a>
-      <b>EPCOT:</b>
-      <a href="https://touringplans.com/blog/2025-candlelight-processional-schedule-and-dining-packages/">TouringPlans(烛光颂场次/套票)</a> ·
-      <a href="https://mickeyvisit.com/epcot-candlelight-processional-guide/">Mickey Visit</a> ·
-      <a href="https://www.disneytouristblog.com/guardians-galaxy-cosmic-rewind-ride-guide-virtual-queue/">Cosmic Rewind(VQ 已取消)</a>
-      <b>Animal Kingdom:</b>
-      <a href="https://wdwprepschool.com/animal-kingdom-itinerary/">WDW Prep(1 日动线)</a> ·
-      <a href="https://www.mousehacking.com/blog/animal-kingdom-one-day-itinerary">Mousehacking</a> ·
-      <a href="https://limitlesspark.com/2026/02/02/dinosaur-ride-closes-at-disneys-animal-kingdom-as-dinoland-u-s-a-makes-way-for-tropical-americas/">DinoLand 永久关闭</a> ·
-      <a href="https://www.thrill-data.com/waits/attraction/animal-kingdom/avatarflightofpassage/">Thrill-Data(等位数据)</a>
-      <b>中文社区:</b>
-      <a href="https://www.dealmoon.com/guide/895481">北美省钱快报(一天两园实战路线)</a> ·
-      <a href="https://itf.mafengwo.cn/client/note.php/info/?id=5367239">蚂蜂窝(奥兰多圣诞)</a> ·
-      <a href="https://zhuanlan.zhihu.com/p/23847890">知乎(冒险岛全攻略)</a> ·
-      <a href="https://www.yourdisney.com.tw/universalorlando/universal-orlando-guide/">遊迪士尼(2026)</a>
-    </div>
-    <div class="tipbox" style="margin-top:14px"><b>小红书 / RedNote:</b>笔记需登录、网页端抓不到完整内容(我试了,返回空)。所以用了同源的中文社区干货(省钱快报实战路线、蚂蜂窝、知乎)+ 小红书搜索摘要交叉核对。<b>你若在 Chrome 登录了小红书,我可以直接在你浏览器里帮你翻几篇具体笔记。</b></div>
-    <div class="tipbox"><b>钟点都是估算</b>——2026 圣诞周确切开放/演出时间未公布。出发前用各园官方 App 核对当日开放、秀场次、单人通道是否开放。</div>
+  <div class="footer">
+    <div class="a">钟点为估算，2026 圣诞周确切开放 / 演出时间未公布。<br>出发前 1–2 周用各园官方 App 核对当日开放、秀场次、单人通道。</div>
+    <div class="b">配套「奥兰多圣诞 5 天 v2」· 监修 Luba 🐾</div>
   </div>
 
-  <footer class="footer">
-    <div class="luba">
-      <svg width="16" height="16" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true" style="color:var(--accent)">
-        <ellipse cx="50" cy="65" rx="20" ry="22"/>
-        <ellipse cx="22" cy="40" rx="10" ry="13"/>
-        <ellipse cx="42" cy="22" rx="9" ry="12"/>
-        <ellipse cx="62" cy="22" rx="9" ry="12"/>
-        <ellipse cx="78" cy="40" rx="10" ry="13"/>
-      </svg>
-      🗺️ 各园逐时动线 · 配套"奥兰多圣诞 5 天 v2"总攻略 · 生成于 2026 年 6 月 · 时间为估算,出发前 App 复核
-    </div>
-    <div><a href="index.html">← back to index</a></div>
-  </footer>
-
-</div>
+</div></div>
 
 <script>
-  document.getElementById('tabs').addEventListener('click',function(e){
-    var b=e.target.closest('.ptab');if(!b)return;
-    document.querySelectorAll('.ptab').forEach(x=>x.classList.remove('active'));
-    document.querySelectorAll('.ppane').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    document.querySelector('.ppane[data-p="'+b.dataset.t+'"]').classList.add('active');
-  });
+const TAGNAME={head:'头牌',sr:'单人通道',buy:'买插队',show:'秀',eat:'吃饭',xmas:'圣诞限定'};
+
+const PARKS=[
+  {name:'Epic',date:'12/23',emoji:'🌌',full:'Epic Universe',strategy:'5 个世界 · 买了 Epic Express + 单人通道 · 估开门 9:00（到 8:00），值一整天',alert:'',blocks:[
+    {time:'8:00',title:'到门口排队（rope drop）',tags:[],note:'提前 1 小时到。Celestial Park 是中央枢纽，5 个世界从这里发散，先想好第一冲哪个。'},
+    {time:'9:00',title:'Harry Potter and the Battle at the Ministry',tags:['head','sr'],note:'⚠️ 它没有 Express！三条路：①开门第一个冲 ②单人通道 ③留闭园前刷。求稳=开门直奔走正常队；数据最优=先冲低需求的 Mario Kart / Mine-Cart，把 Ministry 留到晚 8–9 点（闭园前排队暴跌约 74%）。圣诞旺季可能开虚拟排队，进园先看 Universal App。'},
+    {time:'9:40',title:'Super Nintendo World 超级马里奥',tags:['sr'],note:'Mario Kart: Bowsers Challenge（AR 头盔赛车）+ Mine-Cart Madness（大金刚）。单人通道实测 15–20 分钟刷完。可买 Power-Up Band 手环（~$40）把整个世界变互动游戏。'},
+    {time:'11:00',title:'Stardust Racers',tags:['head','sr'],note:'Celestial Park 双轨竞速过山车（62 mph），园里最刺激。两条轨道（绿 / 黄）体感不同，两边都坐。'},
+    {time:'12:30',title:'午饭',tags:['eat'],note:'Super Nintendo World 的 Toadstool Cafe（蘑菇主题），或 Celestial Park 餐厅。避开 12:30–13:30 高峰、手机点单。'},
+    {time:'13:30',title:'How to Train Your Dragon · 驯龙高手',tags:['sr','show'],note:'Hiccups Wing Gliders（温和家庭过山车）· Dragon Racers Rally · 看现场秀 The Untrainable Dragon。'},
+    {time:'15:30',title:'Dark Universe · Monsters Unchained',tags:['head','sr'],note:'机械臂黑暗骑乘，环球自称「史上最吓人」，排队场景一流。下午用 Express 回刷最爱（Stardust / Mario Kart）；注意 Ministry 没 Express。'},
+    {time:'闭园前',title:'Universal Celestial Goodnight 夜秀',tags:['show'],note:'中央水域夜间灯光 + 喷泉 + 烟花收尾。之后若还有力气，临走刷一次 Battle at the Ministry（这时人最少）。晚饭出园西区 Pocha 93 / Walala。'},
+  ]},
+  {name:'IOA+USF',date:'12/24',emoji:'🏰',full:'IOA + Universal Studios',strategy:'Park-to-Park 票 · 一天扫两园 · 没买 Express → 靠 rope drop + 单人通道 · 估开门 9:00（到 8:00）',alert:'',blocks:[
+    {time:'8:00',title:'到 IOA 门口排队',tags:[],note:'今天从 Islands of Adventure 开始（头牌最多、排队涨最快）。'},
+    {time:'9:00',title:'Hagrids Magical Creatures Motorbike Adventure',tags:['head'],note:'全环球最好的过山车，排队涨最猛（中午就 120 分钟+）。一开门第一个冲它，别犹豫。早上单人通道未必开，趁早走正常队。'},
+    {time:'9:50',title:'Jurassic World VelociCoaster',tags:['head','sr'],note:'佛州最强过山车。紧接 Hagrids 之后冲，或用单人通道。'},
+    {time:'10:40',title:'IOA 其余头牌',tags:['sr'],note:'Forbidden Journey（霍格沃茨城堡里）· Hulk · Spider-Man · Jurassic Park River Adventure（12 月会湿会冷，选暖时段）。'},
+    {time:'12:00',title:'坐 Hogwarts Express → USF',tags:[],note:'从 Hogsmeade 站坐到 Kings Cross。趁中午前坐（通常 ≤30 分钟），两个方向车窗剧情不同。需要 Park-to-Park 票。'},
+    {time:'12:40',title:'到 USF · 午饭',tags:['eat'],note:'对角巷 The Leaky Cauldron（英式）或 Springfield（辛普森主题）。'},
+    {time:'13:30',title:'USF 头牌（狂用单人通道）',tags:['sr'],note:'Escape from Gringotts（对角巷）· Revenge of the Mummy · Transformers 3-D · Men in Black。提醒：VelociCoaster / Hagrids 的单人通道傍晚常关，那两个尽量上午正常队解决。'},
+    {time:'傍晚',title:'平安夜圣诞特色',tags:['xmas'],note:'USF Macys 风格圣诞大游行；两园哈利波特城堡圣诞灯光投影秀（整点）；IOA Grinchmas；对角巷晚上等火龙喷火（slow-mo 拍很赞）；买互动魔杖做魔法。平安夜傍晚人流回落，是全周最舒服的夜晚，留下来玩。晚饭 Mills 50 的 SUSURU / Zaru。'},
+  ]},
+  {name:'EPCOT',date:'12/25',emoji:'🌐',full:'EPCOT · 圣诞当天',strategy:'住外面无提前入园 · 只给 Cosmic Rewind 单买 Single Pass · 估开门 9:00（到 8:15）',alert:'Cosmic Rewind 已取消虚拟排队（2025/2 起），现在是普通排队 + 单买 Single Pass（$14–20/人）。',blocks:[
+    {time:'8:15',title:'到门口排队',tags:[],note:'住外面没提前入园，但官方开门前 30–45 分钟到，跟第一批进。先买好 Cosmic Rewind 的 Single Pass（选中午左右窗口）。'},
+    {time:'9:00',title:'Test Track 3.0',tags:['head'],note:'2025 翻新版，人气极高。一开门先冲它（Cosmic Rewind 已买 Single Pass，不用挤开门）。'},
+    {time:'9:45',title:'World Showcase 两大热门',tags:[],note:'Frozen Ever After（挪威馆，涨得快，趁早）· Remys Ratatouille Adventure（法国馆）。'},
+    {time:'11:30',title:'Cosmic Rewind',tags:['head','buy'],note:'用 Single Pass 在预约窗口去 —— 全迪士尼最好的过山车。'},
+    {time:'12:00',title:'Festival of the Holidays',tags:['eat','xmas'],note:'Holiday Kitchens 节日美食摊绕 World Showcase 一圈；玩 Cookie Stroll（集饼干）；各国 Storytellers 讲圣诞传统。其余骑乘 Soarin · Spaceship Earth · Mission: SPACE。'},
+    {time:'~17:00',title:'Candlelight Processional 烛光圣诞颂',tags:['show','xmas'],note:'America Gardens 剧场，名人朗读圣诞故事 + 50 人乐团合唱，每晚约 3 场（17:00 / 18:45 / 20:15）。圣诞当天爆满——想座位强烈建议订「餐饮套票」（含保留座），否则提前 60–90 分钟站队。'},
+    {time:'~21:00',title:'Luminous The Symphony of Us',tags:['show'],note:'World Showcase 湖面的夜间烟花灯光秀收尾。提前找好湖边位置。'},
+  ]},
+  {name:'AK',date:'12/27',emoji:'🐘',full:'Animal Kingdom · 末日',strategy:'住外面无提前入园 · 只给 Flight of Passage 单买 Single Pass · AK 最早开（估 8:00，到 7:15）、关门最早，玩完回酒店；12/28 才 9:15am 飞',alert:'DinoLand 已于 2026/2 永久关闭（DINOSAUR 骑乘没了），正在改建 Tropical Americas。别按旧攻略找 DINOSAUR。',blocks:[
+    {time:'7:15',title:'先退房、行李放车上 → 到门口排队',tags:[],note:'AK 是迪士尼最早开的园。今天玩完直接奔机场，所以早上先把酒店退了、行李装车。'},
+    {time:'8:00',title:'Kilimanjaro Safaris 真动物巡游',tags:['head'],note:'一开门先冲 —— 动物清晨最活跃（中午都躲树荫睡）。值得刷两次：①开门；②闭园前 1–2 小时（金色光线、动物又活跃、常走入即上）。11am–3pm 最不值。'},
+    {time:'9:00',title:'Expedition Everest',tags:['head','sr'],note:'雪山过山车，有单人通道。接着 Pandora 的 Navi River Journey（涨得快，趁早）。'},
+    {time:'10:30',title:'Avatar Flight of Passage',tags:['head','buy'],note:'全迪士尼最佳骑乘之一，10 点后常飙到 180 分钟——用你买的 Single Pass 在窗口去，完美避开。'},
+    {time:'12:00',title:'午饭 + 步道',tags:['eat'],note:'Satuli Canteen（Pandora，公认 AK 最好的快餐，生物碗）。饭后走 Maharajah Jungle Trek（老虎）· Gorilla Falls（大猩猩）· Discovery Island Trails（生命之树）。'},
+    {time:'14:00',title:'演出 + 凉快项目',tags:['show'],note:'Festival of the Lion King（必看音乐秀）· Finding Nemo 音乐剧 · Kali River Rapids（漂流，12 月会湿会冷——想玩选最暖时段）。'},
+    {time:'~16:30',title:'动物再活跃 + 收尾',tags:[],note:'傍晚动物又活跃起来，可二刷 Safaris 或看生命之树夜间 Tree of Life Awakenings 投影。'},
+    {time:'关门后',title:'回酒店',tags:[],note:'吃晚饭 → 回 Vistana 睡。12/27 晚分头走：朋友（租车人）还车赶 10:50PM 红眼；你打 Uber 回 Vistana 再住一晚，12/28 9:15am 自己 Uber 去 MCO。别熬太晚。晚饭回程顺路 Jollibee / Disney Springs / Mills 50。'},
+  ]},
+];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+let sel=0;
+function renderTabs(){document.getElementById('ptabs').innerHTML=PARKS.map((p,i)=>'<button class="ptab'+(i===sel?' on':'')+'" onclick="pick('+i+')"><span class="n">'+esc(p.name)+'</span><span class="d">'+p.date+'</span></button>').join('');}
+function renderPark(){
+  const p=PARKS[sel];
+  let h='<div class="pfull">'+p.emoji+' '+esc(p.full)+'</div><div class="strat"><span style="font-size:15px">🎯</span><span style="flex:1">'+esc(p.strategy)+'</span></div>';
+  if(p.alert)h+='<div class="palert">⚠️ '+esc(p.alert)+'</div>';
+  h+='<div style="margin-top:12px">'+p.blocks.map(b=>{
+    let tg=(b.tags&&b.tags.length)?'<div class="tags">'+b.tags.map(k=>'<span class="tag t-'+k+'">'+TAGNAME[k]+'</span>').join('')+'</div>':'';
+    return '<div class="block"><div class="time">'+esc(b.time)+'</div><div class="ln"><span class="dot"></span><div class="bt">'+esc(b.title)+'</div>'+tg+'<div class="note">'+esc(b.note)+'</div></div></div>';
+  }).join('')+'</div>';
+  document.getElementById('ppanel').innerHTML=h;
+}
+function pick(i){sel=i;renderTabs();renderPark();}
+renderTabs();renderPark();
 </script>
 </body>
 </html>

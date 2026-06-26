@@ -3,778 +3,249 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>奥兰多圣诞 5 天 · Yixuan's Index</title>
-<meta name="description" content="2026/12/22–12/28 · 环球 3 园 + 迪士尼 AK + EPCOT + Crystal River 海牛浮潜。" />
+<title>🎄 奥兰多圣诞 5 天 · Yixuan</title>
+<meta name="description" content="奥兰多圣诞 5 天：环球(含 Epic) + 海牛浮潜 + Sheraton Vistana 自驾。行程、美食、打包、预算。" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --cream:#FAF6F0; --cream-2:#F2EBDC;
-    --ink:#1A1814; --ink-soft:#3A352E; --muted:#857F73;
-    --line:#E5DCC9; --line-soft:#EFE7D5;
-    --accent:#C44536; --accent-soft:#E07A56;
-    --sage:#7A8471; --gold:#B8923E; --plum:#5A4A7A; --ocean:#3B6B7A;
-  }
-  *{box-sizing:border-box}
+  *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+  :root{--ac:#C0395E;--screen:#F2D9E2;--frame:#FBEEF2;--ink:#3A2230;--sub:#8A6B78;--soft:#FBE4EC;--line:#F0DCE4;--cline:#F0DCE4}
   html{scroll-behavior:smooth}
-  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.6;font-size:15.5px;overflow-x:hidden}
-  a{color:var(--accent);text-decoration:none}
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-    background-image:
-      radial-gradient(circle at 20% 10%, rgba(196,69,54,.04), transparent 40%),
-      radial-gradient(circle at 80% 80%, rgba(122,132,113,.06), transparent 40%),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .1 0 0 0 0 .08 0 0 0 0 .05 0 0 0 .2 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.5'/></svg>");
-    opacity:.4;
+  body{background:var(--screen);font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}button{font-family:inherit}
+  ::-webkit-scrollbar{height:5px;width:5px}::-webkit-scrollbar-thumb{background:rgba(192,57,94,.3);border-radius:9px}
+  .screen{min-height:100vh;display:flex;justify-content:center}
+  .frame{width:100%;max-width:480px;background:var(--frame);min-height:100vh;position:relative;box-shadow:0 0 60px rgba(60,20,40,.10)}
+  .appbar{position:sticky;top:0;z-index:30;background:rgba(251,238,242,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .appbar .row{display:flex;align-items:center;gap:10px;padding:9px 12px}
+  .back{flex:none;width:36px;height:36px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ac)}
+  .apptt{flex:1;min-width:0;display:flex;flex-direction:column}
+  .apptt .t{font:800 15px 'Baloo 2','Noto Sans SC';line-height:1.1}
+  .apptt .s{font:600 10.5px 'Space Grotesk';color:#A98A96}
+  .cd{flex:none;font:700 11px 'Space Grotesk';color:#fff;background:var(--ac);padding:6px 11px;border-radius:999px;white-space:nowrap}
+  .chipnav{display:flex;gap:7px;padding:0 12px 9px;overflow-x:auto}
+  .chipnav a{flex:none;font:700 12px 'Noto Sans SC';color:var(--ink);background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+  .chipnav a.on{color:var(--ac);background:var(--soft);border-color:transparent}
+  .hero{background:linear-gradient(160deg,#CE4A6B 0%,#A82C50 100%);color:#fff;padding:22px 20px 24px;position:relative;overflow:hidden}
+  .hero .wm{position:absolute;right:-14px;top:-22px;font-size:124px;opacity:.15;pointer-events:none}
+  .hero h1{font:800 26px 'Baloo 2','Noto Sans SC';line-height:1.12;position:relative}
+  .hero .sub{font:500 12.5px 'Noto Sans SC';color:rgba(255,255,255,.88);margin-top:6px;position:relative}
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;position:relative}
+  .hchips span{font:600 11px 'Noto Sans SC';background:rgba(255,255,255,.16);padding:5px 10px;border-radius:999px}
+  .stats{display:flex;gap:8px;margin-top:16px;position:relative}
+  .stats .st{flex:1;background:rgba(255,255,255,.13);border-radius:13px;padding:10px 6px;text-align:center}
+  .stats .st .v{font:800 14px 'Space Grotesk'}.stats .st .l{font:600 10px 'Noto Sans SC';color:rgba(255,255,255,.8);margin-top:2px}
+  .h2{font:800 19px 'Baloo 2','Noto Sans SC';color:var(--ink)}
+  .sech{display:flex;align-items:center;gap:8px;padding:22px 18px 10px}
+  .sechb{display:flex;align-items:baseline;justify-content:space-between;padding:20px 18px 4px}
+  .subnote{font:500 12px 'Noto Sans SC';color:#A98A96;padding:0 18px 12px}
+  .card{background:#fff;border:1px solid var(--cline);border-radius:18px}
+  .todobox{margin:0 16px;padding:6px 15px;box-shadow:inset 4px 0 0 var(--ac)}
+  .todorow{display:flex;align-items:flex-start;gap:12px;padding:13px 2px;background:none;border:none;border-bottom:1px solid #FBEEF2;width:100%;text-align:left;cursor:pointer}
+  .todorow:last-child{border-bottom:none}
+  .cbox{flex:none;width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;font:800 14px 'Noto Sans SC';border:1.5px solid #D4BCC6;background:#fff;color:#fff}
+  .cbox.on{border-color:var(--ac);background:var(--ac)}
+  .todorow .when{display:inline-block;font:700 9.5px 'Space Grotesk';letter-spacing:.04em;color:var(--ac);background:var(--soft);padding:2px 7px;border-radius:999px;margin-bottom:4px}
+  .todorow .task{display:block;font:700 13px 'Noto Sans SC';line-height:1.45}
+  .todorow .task.on{color:#B49AA4;text-decoration:line-through}
+  .callout-y{margin:0 16px 12px;padding:13px 15px;background:#FCEFD6;border:1px solid #F1E0BE;border-radius:16px}
+  .callout-y .t{font:800 13px 'Noto Sans SC';color:#7A5A1E;margin-bottom:5px}
+  .callout-y .b{font:500 12px 'Noto Sans SC';color:#8A6A38;line-height:1.6}
+  .callout-y b{color:#7A5A1E}
+  .parkslink{display:flex;align-items:center;gap:12px;margin:0 16px 14px;padding:14px 15px;background:linear-gradient(135deg,#1F8A8A,#177373);border-radius:16px;box-shadow:0 8px 20px rgba(31,138,138,.28)}
+  .parkslink .ic{flex:none;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:20px}
+  .parkslink .pt{font:800 14px 'Noto Sans SC';color:#fff}
+  .parkslink .ps{font:500 11.5px 'Noto Sans SC';color:rgba(255,255,255,.85)}
+  .daytabs{position:sticky;top:99px;z-index:20;background:rgba(251,238,242,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 14px 9px;border-bottom:1px solid var(--line);display:flex;gap:7px;overflow-x:auto}
+  .daytab{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;min-width:62px;padding:8px;border-radius:13px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .daytab.on{border-color:var(--ac);background:var(--ac);color:#fff}
+  .daytab .d{font:800 14px 'Baloo 2';line-height:1}.daytab .dt{font:600 9px 'Noto Sans SC';opacity:.85}
+  .daypanel{padding:14px 16px 4px}
+  .dhd{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:5px}
+  .dwd{font:800 18px 'Baloo 2','Noto Sans SC';color:var(--ac)}
+  .dlabel{font:700 10.5px 'Noto Sans SC';padding:3px 10px;border-radius:999px}
+  .dttl{font:700 16px 'Noto Sans SC';line-height:1.35}
+  .dsum{font:500 12.5px 'Noto Sans SC';color:var(--sub);margin-top:3px;line-height:1.5}
+  .bullets{margin-top:13px;display:flex;flex-direction:column;gap:9px}
+  .bullet{display:flex;gap:10px;align-items:flex-start}
+  .bullet .dot{flex:none;width:7px;height:7px;border-radius:50%;background:var(--ac);margin-top:7px}
+  .bullet .tx{flex:1;font:500 13px 'Noto Sans SC';color:#4A3540;line-height:1.6}
+  .meal{margin-top:13px;display:flex;gap:10px;padding:12px 14px;background:#FFF6E9;border:1px solid #F1E2C6;border-radius:14px;font:500 12.5px 'Noto Sans SC';color:#7A5A2E;line-height:1.6}
+  .dtip{margin-top:10px;font:500 11.5px 'Noto Sans SC';color:#A98A96;line-height:1.55;padding-left:2px}
+  .foodwarn{margin:0 16px 12px;padding:10px 13px;background:#FBE3E0;border:1px solid #F1CDCA;border-radius:13px;font:600 11.5px 'Noto Sans SC';color:#A8352C;line-height:1.55}
+  .food-list{display:flex;flex-direction:column;gap:18px;padding:0 16px}
+  .fgroup .fhd{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .fgroup .fcity{font:800 15px 'Noto Sans SC'}
+  .fgroup .fwhen{font:600 10.5px 'Noto Sans SC';color:#A98A96;background:#F6E6EC;padding:3px 9px;border-radius:999px}
+  .fitems{display:flex;flex-direction:column;gap:8px}
+  .fitem{display:flex;align-items:center;gap:11px;padding:12px 13px;background:#fff;border:1px solid var(--cline);border-radius:15px}
+  .fitem .ic{flex:none;width:36px;height:36px;border-radius:11px;background:#FCEFF3;display:flex;align-items:center;justify-content:center;font-size:17px}
+  .fitem .fn{font:700 13.5px 'Noto Sans SC'}.fitem .fd{font:500 11.5px 'Noto Sans SC';color:var(--sub);line-height:1.45}
+  .fitem .fm{flex:none;font:700 11px 'Noto Sans SC';color:var(--ac)}
+  .packbox{margin:0 16px;padding:6px 16px}
+  .packrow{display:flex;align-items:center;gap:12px;padding:12px 2px;background:none;border:none;border-bottom:1px solid #FBEEF2;width:100%;cursor:pointer;text-align:left}
+  .packrow:last-child{border-bottom:none}
+  .plabel{flex:1;font:600 13.5px 'Noto Sans SC';line-height:1.4}.plabel.on{color:#B49AA4;text-decoration:line-through}
+  .budgetbox{margin:0 16px;padding:6px 16px 14px}
+  .brow{padding:10px 0;border-bottom:1px solid #FBEEF2}
+  .brow .bl{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .brow .bi{font:600 12.5px 'Noto Sans SC';flex:1;min-width:0}
+  .brow .bt{font:800 12.5px 'Space Grotesk';white-space:nowrap}
+  .brow .bn{font:500 11px 'Noto Sans SC';color:#A98A96;margin-top:2px}
+  .btot{display:flex;justify-content:space-between;align-items:baseline;padding:13px 0 5px}
+  .btot .l{font:800 13px 'Noto Sans SC'}.btot .v{font:800 15px 'Space Grotesk';color:var(--ac)}
+  .footer{text-align:center;padding:26px 24px 36px}
+  .footer .a{font:700 12.5px 'Noto Sans SC';color:#6E4F5C}
+  .footer .b{font:500 11px 'Noto Sans SC';color:#A98A96;margin-top:6px;line-height:1.6}
+  @media(min-width:880px){
+    .frame{max-width:1040px}
+    .or-body{display:grid;grid-template-columns:minmax(0,1fr) 332px;grid-template-areas:"over over" "days budget" "food budget" "pack budget";column-gap:24px;padding:0 22px 12px;align-items:start}
+    .a-over{grid-area:over}.a-days{grid-area:days}.a-food{grid-area:food}.a-pack{grid-area:pack}
+    .a-budget{grid-area:budget;position:sticky;top:108px;align-self:start}
+    .fitems.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   }
-  .wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:28px 22px 80px}
-  @media (max-width:640px){.wrap{padding:20px 16px 64px}}
-
-  /* topbar */
-  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
-  .topbar a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s, border-color .2s}
-  .topbar a:hover{color:var(--accent);border-color:var(--accent)}
-  .topbar .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:middle;animation:pulse 2s ease-in-out infinite}
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
-
-  /* hero */
-  .hero{position:relative;background:linear-gradient(135deg,#1A1814 0%, #2a2520 100%);color:#FAF6F0;border-radius:18px;padding:36px 36px 32px;overflow:hidden;margin-bottom:28px}
-  .hero::after{content:"";position:absolute;right:-100px;bottom:-100px;width:400px;height:400px;background:radial-gradient(circle, rgba(196,69,54,.35), transparent 65%);pointer-events:none}
-  .hero .paw{position:absolute;top:24px;right:30px;width:54px;height:54px;opacity:.18;color:#FAF6F0}
-  .hero .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-soft);margin-bottom:14px;position:relative;z-index:1}
-  .hero h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(32px,5vw,46px);line-height:1.05;letter-spacing:-.025em;margin:0 0 14px;font-variation-settings:"opsz" 144;position:relative;z-index:1}
-  .hero h1 em{font-style:italic;color:var(--accent-soft);font-weight:400}
-  .hero .lede{font-family:'Fraunces',serif;font-size:17px;line-height:1.5;color:rgba(250,246,240,.82);max-width:600px;margin:0 0 22px;position:relative;z-index:1;font-variation-settings:"opsz" 14}
-  .hero .route{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:22px;position:relative;z-index:1}
-  .hero .route .node{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;background:rgba(250,246,240,.1);border:1px solid rgba(250,246,240,.15);color:#FAF6F0;padding:5px 11px;border-radius:99px}
-  .hero .route .arw{color:rgba(250,246,240,.4);font-size:11px}
-  .hero .facts{display:flex;flex-wrap:wrap;gap:10px;position:relative;z-index:1}
-  .hero .fact{background:rgba(250,246,240,.08);border:1px solid rgba(250,246,240,.12);border-radius:10px;padding:9px 14px;min-width:100px}
-  .hero .fact .lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-soft);display:block;margin-bottom:3px}
-  .hero .fact .val{font-family:'Fraunces',serif;font-weight:500;font-size:15px;color:#FAF6F0;font-variation-settings:"opsz" 14}
-
-  /* sticky jump nav */
-  nav.jump{position:sticky;top:0;z-index:50;background:rgba(250,246,240,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin:0 -22px 0;padding:10px 22px;display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch}
-  @media (max-width:640px){nav.jump{margin:0 -16px 0;padding:10px 16px}}
-  nav.jump a{flex:0 0 auto;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--ink-soft);background:#FFFCF6;border:1px solid var(--line);padding:7px 13px;border-radius:99px;transition:all .2s}
-  nav.jump a:hover{border-color:var(--accent);color:var(--accent)}
-
-  /* section head */
-  h2.sec{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(24px,3.2vw,32px);letter-spacing:-.02em;margin:48px 0 4px;color:var(--ink);font-variation-settings:"opsz" 144;display:flex;align-items:baseline;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
-  h2.sec em{font-style:italic;color:var(--accent);font-weight:400}
-  h2.sec .num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--muted);margin-left:auto;font-style:normal;font-weight:400;text-transform:uppercase}
-
-  /* booked / alerts boxes */
-  .booked, .alerts{border-radius:14px;padding:18px 20px;margin-top:18px;position:relative;border:1px solid var(--line)}
-  .booked{background:#F4F7F1;border-color:#D7E0CC}
-  .booked .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:6px}
-  .booked b{color:#3A5A3A}
-  .booked .note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:8px;display:block;letter-spacing:.02em}
-
-  .alerts{background:#FCF6E3;border-color:#E8D49A}
-  .alerts .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#9A6500;font-weight:500;margin-bottom:10px}
-  .alerts .a{display:flex;gap:14px;padding:10px 0;border-bottom:1px dashed rgba(154,101,0,.25);font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
-  .alerts .a:last-child{border-bottom:none;padding-bottom:0}
-  .alerts .a:first-of-type{padding-top:0}
-  .alerts .a .ic{font-size:20px;flex:0 0 26px;text-align:center;line-height:1.3}
-  .alerts .a b{color:var(--accent)}
-
-  /* setup grid (already-decided facts) */
-  .setup{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:8px}
-  .su{background:#FFFCF6;border:1px solid var(--line);border-left:4px solid var(--sage);border-radius:10px;padding:12px 14px}
-  .su .k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:5px}
-  .su .v{font-family:'Fraunces',serif;font-size:15px;font-weight:500;color:var(--ink);line-height:1.35;font-variation-settings:"opsz" 14}
-  .su .v small{display:block;font-family:'Inter',sans-serif;font-weight:400;color:var(--muted);font-size:12px;margin-top:3px;line-height:1.45}
-
-  /* day cards */
-  .day{position:relative;background:#FFFCF6;border:1px solid var(--line);border-radius:14px;margin-top:18px;overflow:hidden;transition:box-shadow .2s, border-color .2s}
-  .day:hover{box-shadow:0 14px 30px -16px rgba(26,24,20,.15)}
-  .day::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--day-color,var(--accent));z-index:1}
-  .day > summary{list-style:none;cursor:pointer;padding:18px 22px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;border-bottom:1px solid transparent;transition:border-color .2s}
-  .day > summary::-webkit-details-marker{display:none}
-  .day[open] > summary{border-bottom-color:var(--line-soft)}
-  .day .dh-left{flex:1;min-width:0}
-  .day .dh-left .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--day-color,var(--accent));font-weight:500;margin-bottom:6px}
-  .day .dh-left .dt{font-family:'Fraunces',serif;font-weight:500;font-size:22px;line-height:1.2;letter-spacing:-.015em;color:var(--ink);font-variation-settings:"opsz" 144}
-  .day .dh-left .sub{font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);margin-top:4px;font-weight:400;line-height:1.5}
-  .day .dh-right{font-family:'JetBrains Mono',monospace;font-size:11px;text-align:right;line-height:1.5;color:var(--muted);letter-spacing:.04em;flex:0 0 auto;display:flex;align-items:flex-start;gap:8px}
-  .day .chev{color:var(--day-color,var(--accent));font-size:12px;transition:transform .2s;margin-top:2px}
-  .day[open] .chev{transform:rotate(90deg)}
-  .day .db{padding:14px 22px 18px}
-  .day.sage{--day-color:var(--sage)}
-  .day.plum{--day-color:var(--plum)}
-  .day.gold{--day-color:var(--gold)}
-  .day.ocean{--day-color:var(--ocean)}
-  .day.accent{--day-color:var(--accent)}
-
-  .hotel{font-family:'Inter',sans-serif;font-size:12.5px;color:var(--sage);background:#F4F7F1;border:1px solid #D7E0CC;border-radius:8px;padding:8px 12px;margin:4px 0 6px;display:inline-flex;align-items:center;gap:6px}
-  .hotel::before{content:"🏨";font-size:14px}
-
-  .day .db ul{margin:8px 0 0;padding-left:18px}
-  .day .db ul li{margin-bottom:7px;font-size:14px;color:var(--ink-soft);line-height:1.55}
-  .day .db ul li b{color:var(--ink);font-weight:600}
-
-  .step{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-soft)}
-  .step:last-child{border-bottom:none;padding-bottom:0}
-  .step .tm{flex:0 0 60px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--day-color,var(--accent));padding-top:3px;letter-spacing:.02em}
-  .step .ct{flex:1;min-width:0}
-  .step .ct .ti{font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:var(--ink);line-height:1.4;margin-bottom:5px}
-  .step .ct .ds{font-size:14px;color:var(--ink-soft);line-height:1.55}
-  .step .ct .ds b{color:var(--ink);font-weight:600}
-
-  /* tags / pills */
-  .tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;padding:3px 8px;border-radius:99px;margin-left:6px;vertical-align:1px;letter-spacing:.06em;text-transform:uppercase;border:1px solid}
-  .tag.cost{background:#F0F7EC;color:#3a7a3a;border-color:#c4dfc4}
-  .tag.time{background:#FDEEDE;color:#B5601F;border-color:#F3CDA3}
-  .tag.hot{background:#FCEAE6;color:var(--accent);border-color:#F0C3BA}
-  .tag.cool{background:#E8F1F4;color:var(--ocean);border-color:#BFD4DC}
-  .tag.book{background:#F0F7EC;color:#3a7a3a;border-color:#c4dfc4}
-  .tag.eat{background:#F3E9F2;color:var(--plum);border-color:#D9C7D7}
-  .tag.u{background:#FDEEDE;color:#B5601F;border-color:#F3CDA3}
-  .tag.d{background:#FCEAE6;color:var(--accent);border-color:#F0C3BA}
-  .tag.n{background:#E8F1F4;color:var(--ocean);border-color:#BFD4DC}
-
-  .maplink{display:inline-flex;align-items:center;gap:4px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--accent);margin-top:8px;transition:gap .2s}
-  .maplink:hover{gap:7px}
-  .maplink::before{content:"📍";font-size:13px}
-  .maplink a{color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s}
-  .maplink a:hover{border-color:var(--accent)}
-
-  .drive{background:#F4F1E8;border:1px solid #E5DCC9;border-radius:10px;padding:10px 14px;margin:12px 0;font-size:13.5px;color:var(--ink-soft);display:flex;gap:10px;align-items:flex-start;line-height:1.5}
-  .drive::before{content:"🚗";font-size:18px;flex:0 0 22px}
-
-  .meal{background:#F3E9F2;border-left:3px solid var(--plum);padding:9px 13px;border-radius:0 8px 8px 0;font-size:13.5px;margin-top:10px;color:var(--ink-soft);line-height:1.55}
-  .meal b{color:var(--plum);font-weight:600}
-
-  .tip{background:#FCF6E3;border-left:4px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13.5px;margin-top:10px;color:var(--ink-soft);line-height:1.55}
-  .tip b{color:#9A6500;font-weight:600}
-  .tip.pink{background:#F8EAEF;border-left-color:#B33A78;color:var(--ink-soft)}
-  .tip.pink b{color:#9A2D62}
-
-  /* generic card */
-  .card{background:#FFFCF6;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px;position:relative;overflow:hidden}
-  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--card-color,var(--accent))}
-  .card h3{font-family:'Fraunces',serif;font-weight:500;font-size:19px;letter-spacing:-.015em;margin:0 0 6px;color:var(--ink);font-variation-settings:"opsz" 144}
-  .card .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--card-color,var(--accent));font-weight:500;margin-bottom:10px}
-  .card.sage{--card-color:var(--sage)}
-  .card.plum{--card-color:var(--plum)}
-  .card.gold{--card-color:var(--gold)}
-  .card.ocean{--card-color:var(--ocean)}
-  .card p{margin:0 0 10px;font-size:14px;line-height:1.6;color:var(--ink-soft)}
-  .card p b{color:var(--ink);font-weight:600}
-  .card ul{margin:0;padding-left:19px;font-size:14px;line-height:1.7;color:var(--ink-soft)}
-  .card ul li{margin-bottom:5px}
-  .card ul li b{color:var(--ink);font-weight:600}
-
-  /* tables */
-  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px;line-height:1.55}
-  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top;color:var(--ink-soft)}
-  th{background:#F4F1E8;color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--line)}
-  td b{color:var(--ink);font-weight:600}
-  tr:last-child td{border-bottom:none}
-  .num{white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--ink)}
-  td small{color:var(--muted);font-size:12px;display:block;margin-top:3px}
-
-  /* tabs */
-  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:18px}
-  .tabbtn{border:1px solid var(--line);background:#FFFCF6;padding:8px 14px;border-radius:99px;cursor:pointer;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--ink-soft);transition:all .2s}
-  .tabbtn:hover{border-color:var(--accent);color:var(--accent)}
-  .tabbtn.active{background:var(--ink);color:var(--cream);border-color:var(--ink)}
-  .tabpane{display:none;background:#FFFCF6;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:10px;position:relative;overflow:hidden}
-  .tabpane::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
-  .tabpane.active{display:block}
-  .ride{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line-soft);font-size:14px;line-height:1.55;color:var(--ink-soft);align-items:flex-start}
-  .ride:last-child{border-bottom:none;padding-bottom:0}
-  .ride:first-of-type{padding-top:4px}
-  .ride b{color:var(--ink);font-weight:600}
-  .ride .pri{flex:0 0 auto;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;padding:3px 8px;border-radius:99px;letter-spacing:.06em;text-transform:uppercase;border:1px solid;margin-top:1px}
-  .pri.must{background:#FCEAE6;color:var(--accent);border-color:#F0C3BA}
-  .pri.top{background:#FCF6E3;color:#9A6500;border-color:#E8D49A}
-
-  /* food grid */
-  .foodgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:8px}
-  .fz{background:#FFFCF6;border:1px solid var(--line);border-top:4px solid var(--plum);border-radius:11px;padding:16px 18px}
-  .fz h4{font-family:'Fraunces',serif;font-weight:500;font-size:16px;margin:0 0 4px;color:var(--ink);letter-spacing:-.01em;font-variation-settings:"opsz" 14}
-  .fz .area{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--plum);margin-bottom:10px;font-weight:500}
-  .fz ul{margin:0;padding-left:17px;font-size:13.5px;color:var(--ink-soft);line-height:1.65}
-  .fz ul li{margin-bottom:5px}
-  .fz ul li b{color:var(--ink);font-weight:600}
-
-  .food{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line-soft);font-size:14px;line-height:1.55;color:var(--ink-soft)}
-  .food:last-child{border-bottom:none;padding-bottom:0}
-  .food:first-of-type{padding-top:6px}
-  .food .em{font-size:22px;flex:0 0 30px;line-height:1.3}
-  .food b{display:block;color:var(--ink);font-weight:600;margin-bottom:2px}
-
-  /* pills (budget) */
-  .pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;background:#F0F7EC;color:#3A7A3A;border:1px solid #C4DFC4;padding:5px 12px;border-radius:99px;font-weight:500;margin:4px 6px 0 0;letter-spacing:.04em}
-
-  /* deadlines / action items */
-  .deadline{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line-soft);font-size:14px;line-height:1.55;color:var(--ink-soft);align-items:flex-start}
-  .deadline:last-child{border-bottom:none;padding-bottom:0}
-  .deadline:first-of-type{padding-top:4px}
-  .deadline .when{flex:0 0 92px;font-family:'JetBrains Mono',monospace;font-weight:500;color:var(--accent);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding-top:3px}
-  .deadline b{color:var(--ink);font-weight:600}
-
-  /* checks */
-  .checks{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin-top:6px}
-  @media (max-width:560px){.checks{grid-template-columns:1fr}}
-  .checks label{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;padding:6px 0;cursor:pointer;line-height:1.45}
-  .checks input{margin-top:3px;width:17px;height:17px;accent-color:var(--accent);flex:0 0 auto;cursor:pointer}
-  .checks label.done span{text-decoration:line-through;color:var(--muted)}
-  .checks h4{grid-column:1/-1;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);font-weight:500;margin:14px 0 2px;padding-bottom:6px;border-bottom:1px solid var(--line-soft)}
-  .checks h4:first-child{margin-top:2px}
-  .note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:14px;letter-spacing:.02em}
-
-  /* source links */
-  .src{font-size:13.5px;line-height:1.85;color:var(--ink-soft);word-break:break-word}
-  .src a{color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s}
-  .src a:hover{border-color:var(--accent)}
-  .src b{color:var(--ink);font-weight:600}
-
-  /* footer */
-  .footer{margin-top:64px;padding-top:28px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.05em}
-  .footer a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line)}
-  .footer a:hover{color:var(--accent);border-color:var(--accent)}
-  .footer .luba{display:inline-flex;align-items:center;gap:8px}
-  ::selection{background:var(--accent);color:#FAF6F0}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="screen"><div class="frame">
 
-  <div class="topbar">
-    <div><span class="dot"></span>Trip · 已订 · 12/22 → 12/28</div>
-    <div><a href="index.html">← back to index</a></div>
-  </div>
-
-  <header class="hero">
-    <svg class="paw" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor">
-      <ellipse cx="50" cy="65" rx="20" ry="22"/>
-      <ellipse cx="22" cy="40" rx="10" ry="13"/>
-      <ellipse cx="42" cy="22" rx="9" ry="12"/>
-      <ellipse cx="62" cy="22" rx="9" ry="12"/>
-      <ellipse cx="78" cy="40" rx="10" ry="13"/>
-    </svg>
-    <div class="kicker">Trip · 奥兰多 · 12 月 · 圣诞</div>
-    <h1>🎄 奥兰多圣诞 <em>5 天</em></h1>
-    <p class="lede">12/22 夜到 – 12/28 早 9:15 飞(5 个整天)· 住外面 Sheraton Vistana(✅已订 6 晚)+ Turo 自驾。2 天环球(3 园全扫)+ 2 天迪士尼(AK + EPCOT)+ 1 天海牛浮潜 + 你的美食清单。</p>
-    <div class="route">
-      <span class="node">✈️ MCO</span><span class="arw">→</span>
-      <span class="node">🎢 Epic Universe</span><span class="arw">→</span>
-      <span class="node">🎢 IOA + USF</span><span class="arw">→</span>
-      <span class="node">🏰 EPCOT</span><span class="arw">→</span>
-      <span class="node">🦭 Crystal River</span><span class="arw">→</span>
-      <span class="node">🐘 Animal Kingdom</span><span class="arw">→</span>
-      <span class="node">✈️</span>
+  <div class="appbar">
+    <div class="row">
+      <a class="back" href="index.html">←</a>
+      <div class="apptt"><span class="t">🎄 奥兰多圣诞</span><span class="s">12/23 – 27 · 2 人</span></div>
+      <span class="cd" id="cd">⏳ … 天后</span>
     </div>
-    <div class="facts">
-      <div class="fact"><span class="lbl">出行</span><span class="val">12/22 – 12/28</span></div>
-      <div class="fact"><span class="lbl">人数</span><span class="val">2 人</span></div>
-      <div class="fact"><span class="lbl">玩乐日</span><span class="val">5 整天</span></div>
-      <div class="fact"><span class="lbl">住</span><span class="val">Sheraton Vistana ✅</span></div>
+    <div class="chipnav">
+      <a href="#todo" class="on">📋 现在订</a><a href="#days">📅 行程</a><a href="#food">🍜 美食</a><a href="#pack">🎒 打包</a><a href="#budget">💰 预算</a>
     </div>
-  </header>
-
-  <nav class="jump">
-    <a href="#setup">✅ 已定</a>
-    <a href="#strategy">⚡ 快通策略</a>
-    <a href="#days">📅 每日行程</a>
-    <a href="#universal">🎢 环球</a>
-    <a href="#hitlists">📋 各园必玩</a>
-    <a href="#disney">🏰 迪士尼</a>
-    <a href="#nature">🌿 自然</a>
-    <a href="#food">🍜 美食</a>
-    <a href="#budget">💰 预算</a>
-    <a href="#action">✅ 行动</a>
-    <a href="#todo">📋 清单</a>
-    <a href="#pack">🎒 打包</a>
-    <a href="#links">🔗 链接</a>
-  </nav>
-
-  <!-- CONFIRMED SETUP -->
-  <h2 class="sec" id="setup"><em>Confirmed</em> · 你已经定下的 <span class="num">6 ITEMS</span></h2>
-  <div class="booked">
-    <div class="kicker">All booked · 已订核心</div>
-    ✅ <b>机票 · Sheraton Vistana 6 晚 · Gray Line 海牛浮潜团 12/26 6:45am</b>
-    <span class="note">环球/迪士尼门票、Epic Express、迪士尼 Single Pass 仍待订(见行动清单)。</span>
-  </div>
-  <div class="setup">
-    <div class="su"><div class="k">日期</div><div class="v">12/22 夜到 – 12/28 早飞 <small>✅已订 6 晚 · 5 整天(12/28 9:15am 走)</small></div></div>
-    <div class="su"><div class="k">住</div><div class="v">Sheraton Vistana <small>Lake Buena Vista,带厨房,近 Disney Springs</small></div></div>
-    <div class="su"><div class="k">车</div><div class="v">朋友租 Turo <small>朋友 12/23 取、12/27 晚还;你机场打 Uber</small></div></div>
-    <div class="su"><div class="k">乐园</div><div class="v">环球 2 天 + 迪士尼 2 天 <small>环球 3 园(含 Epic)2 天扫完;迪士尼 AK + EPCOT</small></div></div>
-    <div class="su"><div class="k">海牛</div><div class="v">Gray Line 浮潜团 <small>✅已订 12/26 6:45am · 酒店接</small></div></div>
-    <div class="su"><div class="k">美食</div><div class="v">10 家清单 <small>已按区域排进每天</small></div></div>
   </div>
 
-  <!-- KEY CHANGE -->
-  <h2 class="sec" id="strategy"><em>Strategy</em> · 因为住外面:快通策略这样改 <span class="num">3 PARKS</span></h2>
-  <div class="card accent">
-    <div class="kicker">No free express · 自费策略</div>
-    <h3>⚡ 住 Sheraton Vistana = 没有环球的免费快通</h3>
-    <p>(那是住 Signature 酒店才送的)。所以:</p>
-    <table>
-      <tr><th>园</th><th>怎么少排队</th><th>花费</th></tr>
-      <tr><td><b>Epic Universe</b>(12/23)</td><td>建议<b>单买 Epic Express</b>(项目精但排队凶,尤其 Battle at the Ministry)+ single rider</td><td class="num">~$130–300/人</td></tr>
-      <tr><td><b>IOA + USF</b>(12/24)</td><td>想<b>一天扫两园</b>:开门前到 + 狂用 <b>single rider</b>;想更稳可单买这 1 天的 Express</td><td class="num">$0(或 ~$300/人)</td></tr>
-      <tr><td><b>迪士尼</b>(AK + EPCOT)</td><td>只给 <b>Flight of Passage</b>(AK)和 <b>Cosmic Rewind</b>(EPCOT)<b>单买 Single Pass</b>,别买全套</td><td class="num">$15–35/个</td></tr>
-    </table>
-    <div class="tip"><b>省下来的钱:</b>住外面比住 Signature 省了房费,正好拿去买 Epic Express + 迪士尼那两个热门的 Single Pass + 多吃几顿你清单上的馆子 🍜。</div>
+  <div class="hero">
+    <span class="wm">🎄</span>
+    <h1>奥兰多圣诞 5 天</h1>
+    <div class="sub">Sheraton Vistana + Turo 自驾 · 环球(含 Epic) + 海牛浮潜</div>
+    <div class="hchips"><span>🌌 Epic</span><span>🎢 环球两园</span><span>🦭 海牛</span><span>🏰 迪士尼</span></div>
+    <div class="stats">
+      <div class="st"><div class="v">12/23–27</div><div class="l">出行</div></div>
+      <div class="st"><div class="v">2</div><div class="l">人数</div></div>
+      <div class="st"><div class="v">4</div><div class="l">晚</div></div>
+      <div class="st"><div class="v">~$4k</div><div class="l">2 人</div></div>
+    </div>
   </div>
 
-  <!-- DAY BY DAY -->
-  <h2 class="sec" id="days"><em>Days</em> · 5 整天行程(2 环球 + 2 迪士尼 + 海牛)<span class="num">7 DAYS</span></h2>
-  <p style="font-family:'Inter',sans-serif;font-size:14px;color:var(--muted);margin:14px 0 0;line-height:1.6">12/22 夜里到、12/28 一早飞 = <b style="color:var(--ink-soft)">12/23–27 五个完整玩乐日</b>(12/28 只剩赶早班机)。基地 Sheraton Vistana(到环球 ~20 分钟、迪士尼 ~15 分钟)。节奏:上午猛冲、下午歇、傍晚吃好的。点开看每天。</p>
+  <div class="or-body">
+    <div id="todo" class="a-over" style="scroll-margin-top:120px">
+      <div class="sechb"><span class="h2">📋 出发前行动清单</span><span id="todocount" style="font:700 12px 'Space Grotesk';color:var(--ac)"></span></div>
+      <div class="subnote">圣诞周会涨价 / 售罄 · 勾选自动存本机</div>
+      <div class="card todobox" id="todobox"></div>
+    </div>
 
-  <!-- DAY 22 -->
-  <details class="day ocean">
-    <summary>
-      <div class="dh-left">
-        <div class="kicker">Day 0 · 到达夜</div>
-        <div class="dt">夜里抵达 + 取车 + 入住</div>
-        <div class="sub">当晚不玩,避开 22 号白天人潮,养精神</div>
+    <div id="days" class="a-days" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">📅 5 天行程</span></div>
+      <div class="callout-y">
+        <div class="t">🎟️ 住外面 = 没有环球免费快通</div>
+        <div class="b">Epic 那天单买 <b>Epic Express</b>；IOA + USF 靠 <b>rope drop + single rider</b>(两人省超多)；迪士尼只单买 1–2 个最想玩的 <b>Lightning Lane Single Pass</b>，别买 $429 全套。</div>
       </div>
-      <div class="dh-right">周二 12/22<br>🛬 20:27<span class="chev">▶</span></div>
-    </summary>
-    <div class="db">
-      <div class="hotel">入住 Sheraton Vistana(✅已订 6 晚)</div>
-      <ul>
-        <li>你 <b>晚 8:27 落地 MCO(Terminal B)</b> → <b>打 Uber 去酒店</b>(朋友明早才到、车在朋友那)</li>
-        <li>入住 <b>Sheraton Vistana</b>(有厨房,顺路超市囤水 + 早餐,省钱)</li>
-        <li>早点睡,第二天满血开玩</li>
-      </ul>
-      <div class="meal">🍽️ <b>到得晚就来顿宵夜:</b> Pocha 93(韩式,"宵夜"本命)。</div>
-      <div class="tip">12/22 是圣诞前高峰日,<b>当晚到、不进园</b>正好躲过,还把 12/23 整天空出来。<b>朋友 12/23 早 6:29 才到。</b></div>
+      <a class="parkslink" href="orlando-parks.html">
+        <span class="ic">🗺️</span>
+        <span style="flex:1"><div class="pt">各园逐时动线</div><div class="ps">每个园开门到闭园的战术打法 · 配套页</div></span>
+        <span style="flex:none;font:800 16px 'Noto Sans SC';color:#fff">→</span>
+      </a>
+      <div class="daytabs" id="daytabs"></div>
+      <div class="daypanel" id="daypanel"></div>
     </div>
-  </details>
 
-  <!-- DAY 23 -->
-  <details class="day accent" open>
-    <summary>
-      <div class="dh-left">
-        <div class="kicker">Day 1 · 环球① · Epic</div>
-        <div class="dt">环球 Epic Universe <span class="tag u">环球</span></div>
-        <div class="sub">3 园第 1 天:Epic 一整天玩透(见下方 🎢 专区)</div>
-      </div>
-      <div class="dh-right">周三 12/23<br>🎢 一整天<span class="chev">▶</span></div>
-    </summary>
-    <div class="db">
-      <div class="hotel">今晚 Sheraton Vistana</div>
-      <ul>
-        <li><b>朋友早 6:29 落地</b> → 取 Turo 车 → 到酒店会合;她坐了红眼会累,Epic 可晚点进、靠 Epic Express + single rider 省力</li>
-        <li>开门即冲 <b>Harry Potter and the Battle at the Ministry</b>(排队最长)</li>
-        <li><b>Stardust Racers</b>(双轨竞速)· <b>Mario Kart: Bowser's Challenge</b> · Mine-Cart Madness · Hiccup's Wing Gliders · Monsters Unchained</li>
-        <li>两人多用 <b>single rider</b> + 已买的 <b>Epic Express</b> = 不累</li>
-        <li>晚上看新夜秀 <b>Universal Celestial Goodnight</b></li>
-      </ul>
-      <div class="meal">🍽️ <b>晚饭(西区/近环球):</b> Pocha 93 / Walala 手拉面 / Gaga Yummy。</div>
+    <div id="food" class="a-food" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">🍜 美食清单</span></div>
+      <div class="subnote" style="padding-bottom:6px">10 家按区域排好 · 配进顺路的那天</div>
+      <div class="foodwarn">⚠️ 圣诞前后(12/24–25)很多家庭餐馆关门，出发前用 Google Maps 查营业时间。</div>
+      <div class="food-list" id="food-list"></div>
     </div>
-  </details>
 
-  <!-- DAY 24 -->
-  <details class="day plum">
-    <summary>
-      <div class="dh-left">
-        <div class="kicker">Day 2 · 环球② · 平安夜</div>
-        <div class="dt">环球 IOA + USF <span class="tag u">环球</span></div>
-        <div class="sub">3 园第 2 天:一天扫两园 = 3 园 2 天搞定!</div>
-      </div>
-      <div class="dh-right">周四 12/24<br>🎄 平安夜<span class="chev">▶</span></div>
-    </summary>
-    <div class="db">
-      <div class="hotel">今晚 Sheraton Vistana</div>
-      <ul>
-        <li>一开门在 IOA:<b>Hagrid's</b>(第一个冲)→ <b>VelociCoaster</b> → Forbidden Journey → Hulk / Spider-Man</li>
-        <li>中段坐 <b>Hogwarts Express</b> 从 Hogsmeade(IOA)→ Diagon Alley(USF)(需 Park-to-Park 票)</li>
-        <li>USF 下午:Escape from Gringotts → Mummy → Transformers → Men in Black</li>
-        <li><b>狂用 single rider</b> —— 这是一天扫两园的关键</li>
-        <li>圣诞:<b>Grinchmas</b>、哈利波特城堡灯光秀、USF <b>Macy's 游行</b></li>
-      </ul>
-      <div class="meal">🍽️ <b>晚饭:</b> SUSURU 拉面 / Zaru 米其林乌冬。<b>⚠️ 平安夜部分餐馆早关,先用 Google Maps 查!</b></div>
-      <div class="tip"><b>平安夜傍晚</b>园内人流明显回落,是全周难得的软窗口,留到晚上玩。</div>
+    <div id="pack" class="a-pack" style="scroll-margin-top:120px">
+      <div class="sechb"><span class="h2">🎒 打包清单</span><span id="packcount" style="font:700 12px 'Space Grotesk';color:var(--ac)"></span></div>
+      <div class="subnote">早晚 40–50°F、中午 70°F · 勾选自动存本机</div>
+      <div class="card packbox" id="packbox"></div>
     </div>
-  </details>
 
-  <!-- DAY 25 -->
-  <details class="day gold">
-    <summary>
-      <div class="dh-left">
-        <div class="kicker">Day 3 · 圣诞 · EPCOT</div>
-        <div class="dt">迪士尼 EPCOT <span class="tag d">迪士尼</span></div>
-        <div class="sub">圣诞氛围最足:美食节 + 烛光颂(见下方 🏰 专区)</div>
-      </div>
-      <div class="dh-right">周五 12/25<br>🎄 圣诞节<span class="chev">▶</span></div>
-    </summary>
-    <div class="db">
-      <div class="hotel">今晚 Sheraton Vistana</div>
-      <ul>
-        <li>开门冲 <b>Guardians: Cosmic Rewind</b>(抢免费虚拟排队 / 单买 Single Pass)· Test Track · Frozen Ever After</li>
-        <li>圣诞限定:<b>Festival of the Holidays</b> 各国美食摊 + <b>Candlelight Processional</b> 烛光颂(想坐着看订餐饮套票)</li>
-        <li>傍晚逛 World Showcase 边吃边喝,晚上看烟花 <b>Luminous</b></li>
-      </ul>
-      <div class="meal">🍽️ <b>晚饭:</b> 直接吃遍 EPCOT World Showcase 的圣诞美食摊;或回程 Mills 50 补一家(圣诞当天先查营业)。</div>
-    </div>
-  </details>
-
-  <!-- DAY 26 -->
-  <details class="day sage">
-    <summary>
-      <div class="dh-left">
-        <div class="kicker">Day 4 · 海牛日 · 休整</div>
-        <div class="dt">🦭 Crystal River 海牛浮潜 <span class="tag n">自然</span></div>
-        <div class="sub">躲开全年最挤的园,去和海牛同游</div>
-      </div>
-      <div class="dh-right">周六 12/26<br>🚐 6:45am 接<span class="chev">▶</span></div>
-    </summary>
-    <div class="db">
-      <div class="hotel">今晚 Sheraton Vistana</div>
-      <ul>
-        <li><b>✅ 已订 Gray Line 浮潜团</b>(12/26 <b>6:45am</b> 在 Sheraton Vistana 大堂接 → <b>这天不用开车</b>):全天约 10.5 小时,含接送、船、浮潜装备、午餐、Homosassa 野生动物园;另付 $15 潜水服</li>
-        <li><b>泳衣穿在里面</b>,带毛巾 + 换洗衣;早上冷(海牛最多的时候就是最冷的早上)</li>
-        <li>放在 <b>12/26</b> 很聪明——这天是全年园区最挤的开始,正好出城躲开</li>
-      </ul>
-      <div class="meal">🍽️ <b>回程顺路(Mills 50 亚洲美食区):</b> Tieling 烧烤 / 好味坊 Haoweifang / YH Seafood / Caravan 新疆菜,一次扫。</div>
-      <div class="tip"><b>6:45am 接 = 早起:</b>6:30 到大堂等;泳衣穿里面、带毛巾 + 换洗衣 + 偏光太阳镜。冬天 Crystal River 一般都有海牛,放心。</div>
-    </div>
-  </details>
-
-  <!-- DAY 27 -->
-  <details class="day gold">
-    <summary>
-      <div class="dh-left">
-        <div class="kicker">Day 5 · AK · 朋友走</div>
-        <div class="dt">迪士尼 Animal Kingdom <span class="tag d">迪士尼</span></div>
-        <div class="sub">AK 关门早,从容玩一天;今晚住 Vistana</div>
-      </div>
-      <div class="dh-right">周日 12/27<br>🐘 玩完回酒店<span class="chev">▶</span></div>
-    </summary>
-    <div class="db">
-      <div class="hotel">今晚 Sheraton Vistana(最后一晚)</div>
-      <ul>
-        <li>开门冲 <b>Kilimanjaro Safaris</b>(动物清晨最活跃)→ <b>Expedition Everest</b> → <b>Avatar Flight of Passage</b>(用单买的 Single Pass)</li>
-        <li>Festival of the Lion King 秀 · Maharajah Jungle Trek;<b>闭园前 1–2 小时再刷一次 Safaris</b>(金色光线、人少)</li>
-        <li>AK 通常 <b>下午 5–6 点关</b>。玩完吃晚饭后<b>分头走:朋友去 MCO 还车 + 赶她 10:50PM 红眼</b>(回 LAX);<b>你打 Uber 回 Vistana,今晚再住一晚、收好行李</b></li>
-      </ul>
-      <div class="meal">🍽️ <b>晚饭:</b> 回程顺路补清单没吃的(Jollibee 近 Florida Mall / Disney Springs / Mills 50)。</div>
-    </div>
-  </details>
-
-  <!-- DAY 28 -->
-  <details class="day ocean">
-    <summary>
-      <div class="dh-left">
-        <div class="kicker">Day 6 · 早飞 ✈️</div>
-        <div class="dt">早班机回家</div>
-        <div class="sub">MCO 9:15am 起飞(Delta 经 ATL 回 DSM 1:27pm)</div>
-      </div>
-      <div class="dh-right">周一 12/28 ✈️<br>🛫 09:15<span class="chev">▶</span></div>
-    </summary>
-    <div class="db">
-      <ul>
-        <li><b>约 6:30 出发</b>:退房(可手机快速退)→ <b>打 Uber 去 MCO</b>(车昨晚朋友已还,你不用管车)</li>
-        <li>航班 <b>MCO 9:15am → ATL → DSM 1:27pm</b>(Delta 2204 / 4911);圣诞周机场人多,提前到</li>
-        <li>前一晚先把 Uber 叫车设好(清晨可能要等几分钟)</li>
-      </ul>
-      <div class="tip"><b>早起提醒:</b>9:15 航班 → 建议 7:00 前到机场 → 6:30 出门叫 Uber。所以 <b>12/27 晚别熬太晚</b>。</div>
-    </div>
-  </details>
-
-  <!-- UNIVERSAL 3-IN-2 -->
-  <h2 class="sec" id="universal"><em>Universal</em> · 3 个园 2 天扫完(你要的 plan)<span class="num">3 PARKS / 2 DAYS</span></h2>
-  <p style="font-family:'Inter',sans-serif;font-size:14px;color:var(--muted);margin:14px 0 0;line-height:1.6">关键:买 <b style="color:var(--ink-soft)">多日 Park-to-Park 票</b>(才能当天用 Hogwarts Express 在 USF↔IOA 穿梭)。没免费快通,靠 <b style="color:var(--ink-soft)">开门前到(rope drop)+ 两人 single rider</b>;想更轻松可只在第 2 天买 1 日 Express。</p>
-
-  <div class="card accent">
-    <div class="kicker">Day 1 · 12/23</div>
-    <h3>📅 第 1 天(12/23):Epic Universe 整整一天</h3>
-    <ul>
-      <li>Epic 是独立的园、项目最精,<b>值一整天</b>,别和别的园挤一起</li>
-      <li>开门即冲 <b>Harry Potter and the Battle at the Ministry</b>(排队最长)</li>
-      <li>再扫 <b>Stardust Racers</b> · <b>Mario Kart: Bowser's Challenge</b> · Mine-Cart Madness · Hiccup's Wing Gliders · Monsters Unchained</li>
-      <li><b>单买 Epic Express</b>(Epic 不在任何酒店免费快通范围)+ 两人多用 single rider</li>
-      <li>留到晚上看 <b>Celestial Goodnight</b> 夜秀</li>
-    </ul>
-  </div>
-
-  <div class="card plum">
-    <div class="kicker">Day 2 · 12/24</div>
-    <h3>📅 第 2 天(12/24):IOA + USF 一天扫两园</h3>
-    <ul>
-      <li><b>一开门先在 IOA:</b> Hagrid's(全环球最佳、排最久,第一个冲)→ VelociCoaster → Forbidden Journey → Hulk / Spider-Man / Jurassic World</li>
-      <li><b>中段坐 Hogwarts Express</b>:Hogsmeade(IOA)→ Diagon Alley(USF),需 Park-to-Park 票</li>
-      <li><b>USF 下午:</b> Escape from Gringotts → Revenge of the Mummy → Transformers → Men in Black</li>
-      <li><b>single rider 用到底</b>(两人分开坐省一大半排队)——这是 2 天扫完的核心</li>
-      <li>最满的一天,<b>想稳就买这 1 天的 Express</b>(覆盖 USF+IOA,不含 Epic)</li>
-    </ul>
-    <div class="tip"><b>能 2 天扫完吗?</b>能 —— Epic 占 1 天、IOA+USF 合 1 天,是很多人的标准打法。诀窍就是 <b>天天开门前到 + single rider 用到底</b>,主攻头牌、不纠结小项目。</div>
-  </div>
-
-  <!-- PARK HIT LISTS -->
-  <h2 class="sec" id="hitlists"><em>Hit lists</em> · 各园"不能错过"(快速版)<span class="num">5 PARKS</span></h2>
-  <div class="tabs" id="tabs">
-    <button class="tabbtn active" data-t="epic">Epic Universe</button>
-    <button class="tabbtn" data-t="ioa">Islands of Adventure</button>
-    <button class="tabbtn" data-t="usf">Universal Studios</button>
-    <button class="tabbtn" data-t="ak">Animal Kingdom</button>
-    <button class="tabbtn" data-t="epcot">EPCOT</button>
-  </div>
-  <div class="tabpane active" data-p="epic">
-    <div class="ride"><span class="pri must">必玩</span><div><b>Harry Potter and the Battle at the Ministry</b> — 全园头牌,排队最长,开门先冲。single rider 有</div></div>
-    <div class="ride"><span class="pri must">必玩</span><div><b>Stardust Racers</b> 双轨竞速 · <b>Mario Kart: Bowser's Challenge</b> AR 赛车</div></div>
-    <div class="ride"><span class="pri top">推荐</span><div>Mine-Cart Madness(大金刚)· Hiccup's Wing Gliders(驯龙)· Monsters Unchained(最吓人)</div></div>
-  </div>
-  <div class="tabpane" data-p="ioa">
-    <div class="ride"><span class="pri must">必玩</span><div><b>Hagrid's Magical Creatures Motorbike Adventure</b> — 全环球最好的过山车。single rider 有</div></div>
-    <div class="ride"><span class="pri must">必玩</span><div><b>Jurassic World VelociCoaster</b> — 佛州最强过山车。single rider 有</div></div>
-    <div class="ride"><span class="pri top">推荐</span><div>Forbidden Journey · Spider-Man · Hulk</div></div>
-  </div>
-  <div class="tabpane" data-p="usf">
-    <div class="ride"><span class="pri must">必玩</span><div><b>Harry Potter and the Escape from Gringotts</b> · <b>Revenge of the Mummy</b></div></div>
-    <div class="ride"><span class="pri top">推荐</span><div>Transformers 3-D · Men in Black · Hogwarts Express(需 Park-to-Park 票)</div></div>
-  </div>
-  <div class="tabpane" data-p="ak">
-    <div class="ride"><span class="pri must">必玩</span><div><b>Avatar Flight of Passage</b> — 全迪士尼最佳骑乘之一,排最久。单买 Single Pass / 一早先冲</div></div>
-    <div class="ride"><span class="pri must">必玩</span><div><b>Expedition Everest</b> · <b>Kilimanjaro Safaris</b>(真动物,清晨/傍晚最活跃)</div></div>
-    <div class="ride"><span class="pri top">推荐</span><div>Na'vi River Journey · Festival of the Lion King 音乐秀 · DINOSAUR · Maharajah Jungle Trek</div></div>
-  </div>
-  <div class="tabpane" data-p="epcot">
-    <div class="ride"><span class="pri must">必玩</span><div><b>Guardians of the Galaxy: Cosmic Rewind</b> — 全迪士尼最好的过山车。抢免费虚拟排队 / 单买 Single Pass</div></div>
-    <div class="ride"><span class="pri top">推荐</span><div>Test Track · Frozen Ever After · Remy's Ratatouille · Soarin' · Spaceship Earth</div></div>
-    <div class="ride"><span class="pri top">圣诞</span><div>Festival of the Holidays 各国美食 · Candlelight Processional 烛光颂 · Luminous 烟花</div></div>
-  </div>
-
-  <!-- DISNEY AK + EPCOT -->
-  <h2 class="sec" id="disney"><em>Disney</em> · 2 天:AK + EPCOT 详细 plan <span class="num">2 PARKS</span></h2>
-  <p style="font-family:'Inter',sans-serif;font-size:14px;color:var(--muted);margin:14px 0 0;line-height:1.6">你选的这两个园很搭:<b style="color:var(--ink-soft)">AK</b> 偏动物/自然/白天(关门早),<b style="color:var(--ink-soft)">EPCOT</b> 偏未来/美食/夜晚(圣诞氛围足)。没免费快通,用迪士尼自己的付费 Lightning Lane,只<b style="color:var(--ink-soft)">单买最热门那 1–2 个</b>。</p>
-
-  <div class="card sage">
-    <div class="kicker">Day · 12/27 · 关门早</div>
-    <h3>🐘 Animal Kingdom(排 12/27,关门早正好赶红眼)</h3>
-    <ul>
-      <li>必玩:<b>Avatar Flight of Passage</b>(全迪士尼最佳之一,排最久——单买 Single Pass 或一早 rope drop 先冲)· Na'vi River Journey · <b>Expedition Everest</b></li>
-      <li><b>Kilimanjaro Safaris</b> 真动物巡游:<b>清晨或傍晚</b>动物最活跃</li>
-      <li>看 <b>Festival of the Lion King</b> 音乐秀 · 走 Maharajah Jungle Trek · 看 Tree of Life</li>
-      <li>AK 通常 <b>下午 5–6 点就关</b>——正好玩完吃晚饭、还车、赶 12/27 深夜红眼</li>
-    </ul>
-  </div>
-
-  <div class="card gold">
-    <div class="kicker">Day · 12/25 · 圣诞氛围</div>
-    <h3>🌐 EPCOT(排 12/25 圣诞,氛围最足)</h3>
-    <ul>
-      <li>必玩:<b>Guardians: Cosmic Rewind</b>(全迪士尼最好的过山车,抢免费虚拟排队或单买 Single Pass)· <b>Test Track</b> · Frozen Ever After · Remy's Ratatouille · Soarin' · Spaceship Earth</li>
-      <li>圣诞限定:<b>Festival of the Holidays</b> 各国节日美食摊 + <b>Candlelight Processional</b> 烛光圣诞颂(名人朗读 + 大合唱;想保证座位订"餐饮套票")</li>
-      <li>傍晚逛 World Showcase 边吃边喝,晚上看烟花 <b>Luminous</b></li>
-    </ul>
-    <div class="tip"><b>快通策略:</b>别买全套。只给 <b>Flight of Passage</b>(AK)和 <b>Cosmic Rewind</b>(EPCOT)单买 Lightning Lane Single Pass,其余靠 rope drop + 免费虚拟排队。</div>
-  </div>
-
-  <!-- NATURE -->
-  <h2 class="sec" id="nature"><em>Nature</em> · 海牛 + 你"想去"的自然点 <span class="num">5 SPOTS</span></h2>
-  <div class="card ocean">
-    <div class="kicker">附冬季提醒</div>
-    <h3>🌿 海牛 + 自然点</h3>
-    <table>
-      <tr><th>地方</th><th>车程</th><th>冬天合适吗</th></tr>
-      <tr><td><b>🦭 Crystal River 浮潜</b>(你的主选 · 12/26)</td><td class="num">1.5–2 时</td><td>✅ <b>12 月正是黄金季</b>,唯一能合法和野生海牛同游</td></tr>
-      <tr><td><b>Blue Spring SP</b>(栈道看海牛,备选)</td><td class="num">45 分</td><td>✅ 天天开、$6/车、几百只海牛;冬天不能下水,栈道看</td></tr>
-      <tr><td><b>Silver Springs SP</b>(你列的)</td><td class="num">~1.5 时</td><td>✅ 玻璃底船看泉、猴子、短吻鳄;冬天也行(不下水)。<small>注:这不是看海牛的地方</small></td></tr>
-      <tr><td><b>King's Landing</b>(你列的)</td><td class="num">~35 分</td><td>🟡 皮划艇划 Rock Springs Run,很美;中午暖和时还行</td></tr>
-      <tr><td><b>Kelly Park - Rock Springs</b>(你列的)</td><td class="num">~35 分</td><td>🟡 天然漂流,但 <b>12 月下水会冻</b>;想玩水建议暖季再来</td></tr>
-    </table>
-    <div class="tip"><b>取舍提醒:</b>这趟 5 天排满了(2 环球 + 2 迪士尼 + 海牛),<b>三个泉水点这次塞不下,留暖季再来</b>。野生动物已由海牛日(12/26)+ Animal Kingdom 覆盖,不亏。</div>
-    <div class="tip pink"><b>📕 小红书本地人补充(已核对):</b><br>· <b>海牛多少看天气 + 运气</b>——海牛水温低于 65°F 活不了,11–2 月躲进 72°F 恒温泉:<b>越冷的清晨泉里越多</b>,暖天/大中午它们出去吃草就少 → <b>挑你这几天最冷那天的清晨去</b>。<br>· <b>Blue Spring 的 Facebook 每天发当天海牛数量(50–400 只)</b>,出发前刷一下再决定去哪。<br>· 有人发"避雷"(某天没看到几只)——<b>别抱过高期望、看天</b>。<br>· 你列的 <b>Silver Springs</b> 在小红书很火:坐<b>透明皮划艇/玻璃底船</b>看海牛更轻松,但不如 Crystal River 稳;<b>真要下水同游,Crystal River 最靠谱</b>。</div>
-  </div>
-
-  <!-- FOOD -->
-  <h2 class="sec" id="food"><em>Food</em> · 你的美食清单 → 按区域排好 <span class="num">3 ZONES</span></h2>
-  <p style="font-family:'Inter',sans-serif;font-size:14px;color:var(--muted);margin:14px 0 0;line-height:1.6">把你 Doc 里 10 家店按位置分组,配进顺路的那天。<b style="color:var(--ink-soft)">⚠️ 圣诞前后(12/24–25)很多家庭餐馆关门,出发前务必用 Google Maps 查营业时间。</b></p>
-  <div class="foodgrid">
-    <div class="fz" style="border-top-color:var(--accent)">
-      <h4>🎢 环球/西区(玩环球那两天 12/23–24)</h4>
-      <div class="area" style="color:var(--accent)">离环球近,玩完顺路吃</div>
-      <ul>
-        <li><b>Pocha 93</b> — 韩式宵夜(你已标地图,最近;到达夜或 12/23)</li>
-        <li>Walala Hand-Pulled Noodle — 手拉面</li>
-        <li>Gaga Yummy</li>
-      </ul>
-    </div>
-    <div class="fz" style="border-top-color:var(--plum)">
-      <h4>🍲 Mills 50 亚洲美食区(海牛日回程顺路 12/26)</h4>
-      <div class="area" style="color:var(--plum)">奥兰多亚洲餐饮中心,北边回程路上</div>
-      <ul>
-        <li>SUSURU — 拉面</li>
-        <li>Zaru — 米其林乌冬面</li>
-        <li>Tieling express — 烧烤</li>
-        <li>Haoweifang 好味坊</li>
-        <li>YH Seafood — 海鲜</li>
-        <li>CARAVAN — 新疆菜/乌兹别克</li>
-      </ul>
-    </div>
-    <div class="fz" style="border-top-color:var(--gold)">
-      <h4>🏠 酒店/南区 & 迪士尼方向(12/25 · 12/27)</h4>
-      <div class="area" style="color:var(--gold)">近 Vistana / Disney Springs / Florida Mall</div>
-      <ul>
-        <li>Jollibee — 菲律宾炸鸡(近 Florida Mall,机场方向顺路,适合末日)</li>
-        <li>12/25 可直接吃 EPCOT 各国美食摊</li>
-        <li>(清单没吃到的,末日补)</li>
-      </ul>
-    </div>
-  </div>
-  <div class="tip"><b>分组是按"大概位置"排的</b>——有几家(好味坊、YH、Caravan 等)确切地址我没百分百确认,出发前在 Google Maps 上确认位置 + 营业时间最稳。要的话我可以帮你把 10 家逐一查地址、标到地图上。</div>
-  <div class="tip pink"><b>📕 小红书验证:</b>你清单里的 <b>SUSURU(拉面)、Zaru(米其林乌冬)、Tieling(东北烧烤)</b> 都是奥兰多小红书的热门店;"<b>玩完乐园宵夜吃啥</b>"也是热搜话题(你的 Pocha 93 选得很对)。想再加可在小红书搜"<b>奥兰多九大必吃 / 本地人排队</b>"。</div>
-
-  <!-- BUDGET -->
-  <h2 class="sec" id="budget"><em>Budget</em> · 预算(2 人) <span class="num">EST.</span></h2>
-  <div class="card gold">
-    <div class="kicker">2 环球 + 2 迪士尼 + 海牛</div>
-    <h3>💰 估算(不含机票)</h3>
-    <table>
-      <tr><th>项目</th><th class="num">估算</th><th>说明</th></tr>
-      <tr><td>酒店 Sheraton Vistana 6 晚(✅已订)</td><td class="num">~$1,200</td><td>1 卧 villa,12/22–28;停车另 +$32/晚 ≈ $190</td></tr>
-      <tr><td>Turo 租车 ~5–6 天</td><td class="num">~$320–430</td><td>Kia K4 ~$62/天;深夜还车跟车主确认;+ 园区停车 ~$105</td></tr>
-      <tr><td>环球门票(2 人,含 Epic 多日 P2P)</td><td class="num">~$700–950</td><td>多日 Park-to-Park,2 天用,含 Epic + Hogwarts Express</td></tr>
-      <tr><td>Epic Express(2 人 ×1 天)</td><td class="num">~$300–500</td><td>住外面无免费快通,12/23 Epic 那天单买</td></tr>
-      <tr><td>IOA+USF 1 日 Express(可选)</td><td class="num">$0–600</td><td>12/24 想更省力可买;靠 rope drop + single rider 也能扫完</td></tr>
-      <tr><td>迪士尼 2 天票(2 人,AK + EPCOT)</td><td class="num">~$600–760</td><td>按 2 个 1 日票或 2 日票</td></tr>
-      <tr><td>迪士尼 Single Pass(Flight of Passage + Cosmic Rewind)</td><td class="num">~$60–120</td><td>只买这两个最热门的</td></tr>
-      <tr><td>海牛 Gray Line(2 人)</td><td class="num">$368</td><td>$169/人 + $15 潜水服</td></tr>
-      <tr><td>吃饭(你清单那些 + 日常)</td><td class="num">~$700–1,000</td><td>住有厨房可省早餐</td></tr>
-    </table>
-    <div style="margin-top:10px">
-      <span class="pill">全程估 ≈ $4,400–5,600(不含机票)</span>
-      <span class="pill">不买 IOA+USF Express 可省 ~$600</span>
+    <div id="budget" class="a-budget" style="scroll-margin-top:120px">
+      <div class="sechb"><span class="h2">💰 预算</span><span style="font:700 12px 'Space Grotesk';color:var(--ac)">2 人</span></div>
+      <div class="subnote">住外面 + 自驾 · 不含机票</div>
+      <div class="card budgetbox" id="budgetbox"></div>
     </div>
   </div>
 
-  <!-- ACTION -->
-  <h2 class="sec" id="action"><em>Action</em> · 出发前行动清单 <span class="num">6 ITEMS</span></h2>
-  <div class="card accent">
-    <div class="kicker">Deadlines · 按时间</div>
-    <h3>✅ 该做的事</h3>
-    <div class="deadline"><span class="when">现在</span><div>订<b>环球多日票(含 Epic,Park-to-Park)</b> + <b>Epic Express</b>(圣诞周会涨/售罄)</div></div>
-    <div class="deadline"><span class="when">现在</span><div>订<b>迪士尼票(AK + EPCOT 两天)</b>;给 <b>Flight of Passage</b> / <b>Cosmic Rewind</b> 单买 Single Pass;想看烛光颂订 EPCOT 餐饮套票</div></div>
-    <div class="deadline"><span class="when">待办</span><div>✅机酒海牛已订。<b>朋友的 Turo 设成 12/23 上午取(她 6:29 到)→ 12/27 晚还(赶 10:50PM 红眼前)</b>;你机场两头打 Uber。想一起开车就让朋友把你加成 additional driver(免费)</div></div>
-    <div class="deadline"><span class="when">现在</span><div>订 <b>Gray Line 海牛团</b>(选 12/26,确认那天发车)</div></div>
-    <div class="deadline"><span class="when">出发前 2 周</span><div>用 <b>Google Maps</b> 把 10 家餐厅查清营业时间(<b>圣诞很多关门</b>),标到地图</div></div>
-    <div class="deadline"><span class="when">每天</span><div>开门前到、用官方 App 看排队、两人多用 single rider</div></div>
+  <div class="footer">
+    <div class="a">为你定制 · 奥兰多圣诞 5 天 v2 🎄</div>
+    <div class="b">按你 Google Doc 的真实选择重做 · 价格会变，出发前按行动清单复核 · 监修 Luba 🐾</div>
   </div>
 
-  <!-- TODO CHECKLIST -->
-  <h2 class="sec" id="todo"><em>Todo</em> · 出发前 & 每天 · 可勾选 <span class="num">19 ITEMS</span></h2>
-  <div class="card sage">
-    <div class="kicker">Todo list · 可勾选</div>
-    <h3>📋 出发前 & 旅行中</h3>
-    <p style="margin:0 0 10px;color:var(--muted);font-size:13.5px">勾完自动记住(存你浏览器里)。出发前从上往下清;旅行中每天扫一眼"每天"那组。</p>
-    <div class="checks" id="todolist">
-      <h4>🧳 出发前(现在 → 出发)</h4>
-      <label><input type="checkbox" data-k="t1"><span>✅ 已订:机票、Sheraton Vistana(6 晚)、Gray Line 海牛(12/26 6:45am)</span></label>
-      <label><input type="checkbox" data-k="t2"><span><b>朋友的 Turo 车</b>:日期设 12/23 上午取 → 12/27 晚还;想你也开车就让朋友把你加成 additional driver(免费)</span></label>
-      <label><input type="checkbox" data-k="t3"><span>订 <b>环球多日票(含 Epic,Park-to-Park)</b> + <b>Epic Express</b>(圣诞周涨价/售罄,早订)</span></label>
-      <label><input type="checkbox" data-k="t4"><span>订 <b>迪士尼 2 天票(AK + EPCOT)</b>;给 <b>Flight of Passage</b> / <b>Cosmic Rewind</b> 单买 Lightning Lane Single Pass</span></label>
-      <label><input type="checkbox" data-k="t5"><span>想看 EPCOT <b>烛光颂</b> → 订"餐饮套票"保座(约 10 月中开订)</span></label>
-      <label><input type="checkbox" data-k="t6"><span>出发前 2 周:Google Maps 查那 10 家餐厅营业时间(<b>圣诞很多关门</b>),收藏到地图</span></label>
-      <label><input type="checkbox" data-k="t7"><span>装好 App:<b>Universal</b>(绑两人的票)+ <b>My Disney Experience</b>(绑票)+ <b>Uber</b></span></label>
-      <label><input type="checkbox" data-k="t8"><span>出发前 1 周:看天气(海牛日挑相对冷的早晨更好)</span></label>
-      <label><input type="checkbox" data-k="t9"><span>存好确认号(酒店 2489106561、海牛 59521796、机票)+ 截图离线备份</span></label>
-      <label><input type="checkbox" data-k="t10"><span>打包(见下方清单)+ 驾照 / 信用卡放好</span></label>
-
-      <h4>🔁 每天(乐园日)</h4>
-      <label><input type="checkbox" data-k="d1"><span>开门前 <b>45 分钟到</b>(rope drop)</span></label>
-      <label><input type="checkbox" data-k="d2"><span>官方 App 看<b>实时排队 + 当天开放/演出时间</b>;两人多用 <b>single rider</b></span></label>
-      <label><input type="checkbox" data-k="d3"><span>Epic 那天:进园先看 App <b>Battle at the Ministry 有没有虚拟排队</b>,有就立刻抢号</span></label>
-      <label><input type="checkbox" data-k="d4"><span>中午回酒店/错峰歇;<b>多喝水、舒服鞋、充电宝、防晒</b></span></label>
-      <label><input type="checkbox" data-k="d5"><span>手机 mobile order 点快餐省排队;每天好好坐下吃一顿</span></label>
-
-      <h4>📌 关键日子</h4>
-      <label><input type="checkbox" data-k="k1"><span><b>12/22 晚</b>:你 8:27 落地 → <b>Uber 去酒店</b>(朋友次日 6:29 到)</span></label>
-      <label><input type="checkbox" data-k="k2"><span><b>12/26 6:30am</b>:到大堂等海牛接车(泳衣穿里面 + 毛巾 + 偏光镜;不用开车)</span></label>
-      <label><input type="checkbox" data-k="k3"><span><b>12/27 晚</b>:分头——朋友还车 + 赶 10:50 红眼;你 Uber 回 Vistana 住最后一晚</span></label>
-      <label><input type="checkbox" data-k="k4"><span><b>12/28 6:30am</b>:退房 → Uber 去 MCO → 9:15 飞(前一晚先约好车)</span></label>
-    </div>
-    <p class="note">勾选状态自动保存在本机浏览器,下次打开还在。</p>
-  </div>
-
-  <!-- PACK -->
-  <h2 class="sec" id="pack"><em>Pack</em> · 打包清单 <span class="num">7 ITEMS</span></h2>
-  <div class="card plum">
-    <div class="kicker">Pack list · 可勾选,自动记住</div>
-    <h3>🎒 出发前过一遍</h3>
-    <div class="checks" id="packlist">
-      <label><input type="checkbox" data-k="p1"><span>分层穿搭 + 薄羽绒(早晚 40–50°F、中午 70°F)</span></label>
-      <label><input type="checkbox" data-k="p2"><span><b>偏光太阳镜</b>(看海牛必备)</span></label>
-      <label><input type="checkbox" data-k="p3"><span>磨合过的舒服走路鞋</span></label>
-      <label><input type="checkbox" data-k="p4"><span>海牛日:泳衣穿里面 + 毛巾 + 换洗衣</span></label>
-      <label><input type="checkbox" data-k="p5"><span>可重复灌水杯 + 充电宝 + 薄雨衣</span></label>
-      <label><input type="checkbox" data-k="p6"><span>驾照(Turo 取车用)+ 信用卡</span></label>
-      <label><input type="checkbox" data-k="p7"><span>到超市囤水/早餐(Vistana 有厨房,省钱)</span></label>
-    </div>
-    <p class="note">勾选状态自动保存在本机浏览器,下次打开还在。</p>
-  </div>
-
-  <!-- LINKS -->
-  <h2 class="sec" id="links"><em>Links</em> · 你的链接 & 来源 <span class="num">REFS</span></h2>
-  <div class="card ocean">
-    <div class="kicker">Sources · 出处</div>
-    <h3>🔗 预订 & 资料</h3>
-    <div class="src">
-      你的预订:<a href="https://turo.com/us/en/search">Turo 租车</a> · <a href="https://www.expedia.com/Orlando-Hotels-Sheraton-Vistana-Resort-Villas.h23110.Hotel-Information">Sheraton Vistana</a> · <a href="https://graylineorlando.com/tours/manatees-swim-snorkel-and-boat-day-tour-from-orlando/">Gray Line 海牛浮潜团</a><br>
-      环球:<a href="https://orlando-themeparks.com/universal-orlando/epic-universe/rides-list-epic-universe/">Epic 项目</a> · <a href="https://orlando-themeparks.com/universal-orlando/epic-universe/express-pass-epic-universe/">Epic Express</a><br>
-      迪士尼:<a href="https://disneyworld.disney.go.com/admission/tickets/">门票</a> · <a href="https://disneyworld.disney.go.com/events-tours/holidays/">圣诞活动(EPCOT 烛光颂等)</a><br>
-      自然:<a href="https://www.floridastateparks.org/parks-and-trails/blue-spring-state-park/manatees-blue-spring-state-park">Blue Spring 海牛</a> · <a href="https://www.crystalriverfl.org/sisters/page/how-can-i-swim-three-sisters-springs">Crystal River 浮潜规则</a>
-    </div>
-  </div>
-
-  <footer class="footer">
-    <div class="luba">
-      <svg width="16" height="16" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true" style="color:var(--accent)">
-        <ellipse cx="50" cy="65" rx="20" ry="22"/>
-        <ellipse cx="22" cy="40" rx="10" ry="13"/>
-        <ellipse cx="42" cy="22" rx="9" ry="12"/>
-        <ellipse cx="62" cy="22" rx="9" ry="12"/>
-        <ellipse cx="78" cy="40" rx="10" ry="13"/>
-      </svg>
-      🎄 v2 · 2 环球(3 园 2 天)+ 2 迪士尼(AK + EPCOT)+ 海牛 · 12/22–27 五整天 · 更新于 2026 年 6 月 · 价格会变,出发前按行动清单复核
-    </div>
-    <div><a href="index.html">← back to index</a></div>
-  </footer>
-
-</div>
+</div></div>
 
 <script>
-  // tabs
-  document.getElementById('tabs').addEventListener('click',function(e){
-    var b=e.target.closest('.tabbtn');if(!b)return;
-    document.querySelectorAll('.tabbtn').forEach(function(x){x.classList.remove('active');});
-    document.querySelectorAll('.tabpane').forEach(function(x){x.classList.remove('active');});
-    b.classList.add('active');
-    document.querySelector('.tabpane[data-p="'+b.dataset.t+'"]').classList.add('active');
-  });
-  // pack checkboxes — preserve key 'orl2_pack'
-  try{
-    var s=JSON.parse(localStorage.getItem('orl2_pack')||'{}');
-    document.querySelectorAll('#packlist input').forEach(function(c){
-      if(s[c.dataset.k]){c.checked=true;c.closest('label').classList.add('done');}
-      c.addEventListener('change',function(){
-        c.closest('label').classList.toggle('done',c.checked);
-        s[c.dataset.k]=c.checked;
-        try{localStorage.setItem('orl2_pack',JSON.stringify(s));}catch(e){}
-      });
-    });
-  }catch(e){}
-  // todo checkboxes — preserve key 'orl2_todo'
-  try{
-    var t=JSON.parse(localStorage.getItem('orl2_todo')||'{}');
-    document.querySelectorAll('#todolist input').forEach(function(c){
-      if(t[c.dataset.k]){c.checked=true;c.closest('label').classList.add('done');}
-      c.addEventListener('change',function(){
-        c.closest('label').classList.toggle('done',c.checked);
-        t[c.dataset.k]=c.checked;
-        try{localStorage.setItem('orl2_todo',JSON.stringify(t));}catch(e){}
-      });
-    });
-  }catch(e){}
+const M='https://www.google.com/maps/search/?api=1&query=';
+const START=new Date('2026-12-23T00:00:00');
+const LABEL={arrive:['抵达','background:#EFE9EC;color:#6E5C66'],uniEve:['平安夜·环球','background:#FBE4EC;color:#C0395E'],uniXmas:['圣诞·环球','background:#FBE4EC;color:#C0395E'],manatee:['海牛·休整','background:#DCF0EF;color:#1F8A8A'],leave:['离开','background:#FCEFD6;color:#B07A1E']};
+
+const DAYS=[
+  {wd:'周三',date:'12/23',kind:'arrive',title:'抵达 + 安顿 + Disney Springs',summary:'取车、入住、轻松开吃，不进园',bullets:['落地 MCO → Turo 现场取车（Kia K4 / Camry Hybrid）','入住 Sheraton Vistana（有厨房，可去超市囤水 + 早餐省钱）','傍晚 Disney Springs（免费逛、餐厅多、圣诞气氛），就在酒店旁'],meal:'第一顿（近酒店 / 南区）：Jollibee 菲律宾炸鸡（近 Florida Mall）或 Gaga Yummy。注意查营业时间——平安夜 / 圣诞当天很多店提早关或不开。',tip:'12/23 园区已经很挤，当抵达 + 缓冲日最舒服，不浪费门票。'},
+  {wd:'周四',date:'12/24',kind:'uniEve',title:'🌌 Epic Universe',summary:'全新园，买 Epic Express；平安夜傍晚人变少',bullets:['开门即冲 Harry Potter and the Battle at the Ministry（排队最长）','Stardust Racers 双轨竞速 · Mario Kart · Mine-Cart Madness · Hiccups · Monsters Unchained','两人多用 single rider + 已买 Epic Express = 不累','晚上看新夜秀 Universal Celestial Goodnight'],meal:'晚饭（西区 / 近环球）：Pocha 93 韩式宵夜（离环球很近，你已标地图）。',tip:'平安夜傍晚园内人流明显回落，是全周难得的软窗口，留到晚上玩。'},
+  {wd:'周五',date:'12/25',kind:'uniXmas',title:'🎢 IOA + Universal Studios',summary:'买 Park-to-Park，坐 Hogwarts Express 穿两园',bullets:['圣诞当天很挤——一定开门前到，先冲 Hagrids 和 VelociCoaster','IOA：Forbidden Journey · Spider-Man · Hulk；USF：Gringotts · Mummy · Transformers','坐 Hogwarts Express 往返霍格莫德 ↔ 对角巷；两园多用 single rider','圣诞特色（含门票）：Grinchmas、哈利波特圣诞城堡灯光秀、USF Macys 圣诞游行'],meal:'晚饭（Dr. Phillips 或 Mills 50）：Walala 手拉面 / SUSURU 拉面 / Zaru 乌冬（米其林）。⚠️ 圣诞当天部分中餐馆关门，出发前 Google Maps 确认！',tip:'坐 Hogwarts Express 需要 Park-to-Park 票；趁中午前坐，等待通常 ≤30 分钟。'},
+  {wd:'周六',date:'12/26',kind:'manatee',title:'🦭 Crystal River 海牛浮潜',summary:'躲开全年最挤的园，去和海牛同游',bullets:['Gray Line 浮潜团：全天约 10.5h，含接送、船、浮潜装备、午餐、Homosassa 野生动物园；另付 $15 潜水服','泳衣穿在里面，带毛巾 + 换洗衣；早上冷（海牛最多的时候正是最冷的早上）','不想自驾？Gray Line 是接送团。想省钱自驾？当地潜店 ~$65–85/人，或先看 Blue Spring 栈道（$6/车、圣诞也开）'],meal:'回程顺路（Mills 50 亚洲美食区）：Tieling 烧烤 / 好味坊 / YH Seafood / Caravan 新疆菜。',tip:'放在 12/26 很聪明——这天是全年园区最挤的开始，正好出城躲开。'},
+  {wd:'周日',date:'12/27',kind:'leave',title:'迪士尼半天 或 泉水点 → 还车飞',summary:'看航班时间二选一',bullets:['航班晚 → 迪士尼 Magic Kingdom 半天（七矮人 / TRON / Space Mountain，只单买 1–2 个 Lightning Lane）','想要自然 → Kings Landing 皮划艇 或 Kelly Park-Rock Springs（北边 ~35 分钟）。⚠️ 12 月泉水漂流偏冷，坐皮划艇还行','航班早 → 睡到自然醒 + 最后一顿，还车走'],meal:'最后一顿：清单里还没吃的随便补（机场方向顺路那家）。',tip:'留足 还 Turo 车 + 到 MCO 的时间（机场取还都在现场，方便）。'},
+];
+
+const TODO=[['现在','订环球多日票（含 Epic, Park-to-Park）+ Epic Express'],['现在','订 Sheraton Vistana + Turo 车（确认司机年龄 / 保险方案）'],['现在','订 Gray Line 海牛团（选 12/26，确认那天发车）'],['出发前 2 周','用 Google Maps 把 10 家餐厅查清营业时间（圣诞很多关门），标记到地图'],['出发前 1 周','看天气；若想去 Kings Landing / Silver Springs，挑暖和的那天']];
+
+const FOOD=[
+  {icon:'🎢',area:'环球 / 西区',when:'玩环球那两天',items:[['Pocha 93','韩式宵夜（你已标地图，最近）','Pocha+93+Orlando'],['Walala Hand-Pulled Noodle','手拉面','Walala+Hand+Pulled+Noodle+Orlando'],['Gaga Yummy','近南区','Gaga+Yummy+Orlando']]},
+  {icon:'🍲',area:'Mills 50 亚洲美食区',when:'海牛日回程顺路',items:[['SUSURU','拉面','SUSURU+Orlando'],['Zaru','米其林乌冬面','Zaru+Orlando'],['Tieling express','烧烤','Tieling+Express+Orlando'],['好味坊 Haoweifang','家常中餐','Haoweifang+Orlando'],['YH Seafood','海鲜','YH+Seafood+Orlando'],['CARAVAN','新疆 / 乌兹别克菜','Caravan+Uzbek+Orlando']]},
+  {icon:'🏠',area:'酒店 / 南区',when:'抵达日 & 离开日',items:[['Jollibee','菲律宾炸鸡（近 Florida Mall）','Jollibee+Florida+Mall+Orlando']]},
+];
+
+const PACK=['分层穿搭 + 薄羽绒（早晚 40–50°F、中午 70°F）','偏光太阳镜（看海牛必备）','磨合过的舒服走路鞋','海牛日：泳衣穿里面 + 毛巾 + 换洗衣','可重复灌水杯 + 充电宝 + 薄雨衣','驾照（Turo 取车用）+ 信用卡','到超市囤水 / 早餐（Vistana 有厨房，省钱）'];
+
+const BUDGET=[['酒店 Sheraton Vistana 4 晚','$806','1 卧 villa；停车另 +$128'],['Turo 租车 4 天','$250–340','+ 园区停车 ~$105'],['环球门票（2 人，含 Epic P2P）','$750–1k','按 2–3 天'],['Epic Express（2 人 ×1 天）','$300–500','住外面无免费快通'],['迪士尼 1 天票（2 人）','$300–360','+ 1–2 个 Single Pass'],['海牛 Gray Line（2 人）','$368','$169/人 + $15 潜水服'],['吃饭（清单 + 日常）','$600–900','有厨房可省早餐']];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+(function(){var d=Math.max(0,Math.ceil((START-new Date())/86400000));document.getElementById('cd').textContent=d>0?('⏳ '+d+' 天后'):'🎉 出发啦';})();
+
+// todos
+let todo=(function(){try{return JSON.parse(localStorage.getItem('orlando-todo-v1')||'{}')}catch(e){return {}}})();
+function renderTodo(){
+  document.getElementById('todobox').innerHTML=TODO.map((it,i)=>{const id='a'+i,on=!!todo[id];return '<button class="todorow" onclick="togTodo('+i+')"><span class="cbox'+(on?' on':'')+'">'+(on?'✓':'')+'</span><span style="flex:1;min-width:0"><span class="when">'+esc(it[0])+'</span><span class="task'+(on?' on':'')+'">'+esc(it[1])+'</span></span></button>';}).join('');
+  document.getElementById('todocount').textContent=TODO.filter((_,i)=>!!todo['a'+i]).length+' / '+TODO.length;
+}
+function togTodo(i){const id='a'+i;todo[id]=!todo[id];try{localStorage.setItem('orlando-todo-v1',JSON.stringify(todo))}catch(e){}renderTodo();}
+renderTodo();
+
+// days
+let sel=(function(){var i=Math.floor((new Date()-START)/86400000);return i>=0&&i<=4?i:0;})();
+function renderTabs(){document.getElementById('daytabs').innerHTML=DAYS.map((d,i)=>'<button class="daytab'+(i===sel?' on':'')+'" onclick="pick('+i+')"><span class="d">'+d.date+'</span><span class="dt">'+d.wd+'</span></button>').join('');}
+function renderDay(){
+  const d=DAYS[sel],lab=LABEL[d.kind]||LABEL.arrive;
+  let h='<div class="dhd"><span class="dwd">'+d.wd+' '+d.date+'</span><span class="dlabel" style="'+lab[1]+'">'+lab[0]+'</span></div>';
+  h+='<div class="dttl">'+esc(d.title)+'</div><div class="dsum">'+esc(d.summary)+'</div>';
+  h+='<div class="bullets">'+d.bullets.map(b=>'<div class="bullet"><span class="dot"></span><span class="tx">'+esc(b)+'</span></div>').join('')+'</div>';
+  h+='<div class="meal"><span style="font-size:16px">🍽️</span><span style="flex:1">'+esc(d.meal)+'</span></div>';
+  h+='<div class="dtip">💡 '+esc(d.tip)+'</div>';
+  document.getElementById('daypanel').innerHTML=h;
+}
+function pick(i){sel=i;renderTabs();renderDay();}
+renderTabs();renderDay();
+
+// food
+document.getElementById('food-list').innerHTML=FOOD.map(g=>'<div class="fgroup"><div class="fhd"><span style="font-size:16px">'+g.icon+'</span><span class="fcity">'+esc(g.area)+'</span><span class="fwhen">'+esc(g.when)+'</span></div><div class="fitems two">'+g.items.map(it=>'<a class="fitem" href="'+M+it[2]+'" target="_blank" rel="noopener"><span class="ic">🍴</span><span style="flex:1;min-width:0"><div class="fn">'+esc(it[0])+'</div><div class="fd">'+esc(it[1])+'</div></span><span class="fm">地图 ›</span></a>').join('')+'</div></div>').join('');
+
+// packing
+let checked=(function(){try{return JSON.parse(localStorage.getItem('orlando-pack-v1')||'{}')}catch(e){return {}}})();
+function renderPack(){document.getElementById('packbox').innerHTML=PACK.map((label,i)=>{const id='p'+i,on=!!checked[id];return '<button class="packrow" onclick="togPack('+i+')"><span class="cbox'+(on?' on':'')+'">'+(on?'✓':'')+'</span><span class="plabel'+(on?' on':'')+'">'+esc(label)+'</span></button>';}).join('');document.getElementById('packcount').textContent=PACK.filter((_,i)=>!!checked['p'+i]).length+' / '+PACK.length;}
+function togPack(i){const id='p'+i;checked[id]=!checked[id];try{localStorage.setItem('orlando-pack-v1',JSON.stringify(checked))}catch(e){}renderPack();}
+renderPack();
+
+// budget
+document.getElementById('budgetbox').innerHTML=BUDGET.map(r=>'<div class="brow"><div class="bl"><span class="bi">'+esc(r[0])+'</span><span class="bt">'+esc(r[1])+'</span></div>'+(r[2]?'<div class="bn">'+esc(r[2])+'</div>':'')+'</div>').join('')+'<div class="btot"><span class="l">全程估</span><span class="v">$3.6k–4.4k</span></div><div style="font-size:11px;font-weight:500;color:#A98A96;line-height:1.5">比住 Signature 省了房费，够买 Epic 快通 + 多吃几顿 🍜</div>';
 </script>
 </body>
 </html>
