@@ -1,134 +1,262 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oregon Cascades · 8-Stop Loop Road Trip</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Oregon Cascades · 8-Stop Loop Road Trip · Yixuan's Index</title>
+<meta name="description" content="Portland → Mt. Hood → McKenzie Falls → Crater Lake — 8-stop Cascades loop, 3 days · 2 nights." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --forest:#1f4d3a; --forest2:#2e6b50; --lake:#1d7fa6; --lake2:#3aa6c9;
-    --sky:#eaf4f1; --sand:#f6f1e7; --ink:#1b2622; --muted:#5e6f68;
-    --gold:#d9a441; --alert:#c0532b; --card:#ffffff; --line:#dfe7e2;
+    --cream:#FAF6F0; --cream-2:#F2EBDC;
+    --ink:#1A1814; --ink-soft:#3A352E; --muted:#857F73;
+    --line:#E5DCC9; --line-soft:#EFE7D5;
+    --accent:#C44536; --accent-soft:#E07A56;
+    --sage:#7A8471; --gold:#B8923E; --plum:#5A4A7A; --ocean:#3B6B7A;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,"PingFang SC","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink);background:linear-gradient(180deg,#eaf4f1 0%,#f6f1e7 100%);line-height:1.6;}
-  .wrap{max-width:1000px;margin:0 auto;padding:0 18px 60px;}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.6;font-size:15.5px;overflow-x:hidden}
+  a{color:var(--accent);text-decoration:none}
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(196,69,54,.04), transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(122,132,113,.06), transparent 40%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .1 0 0 0 0 .08 0 0 0 0 .05 0 0 0 .2 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.5'/></svg>");
+    opacity:.4;
+  }
+  .wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:28px 22px 80px}
+  @media (max-width:640px){.wrap{padding:20px 16px 64px}}
 
-  header.hero{background:linear-gradient(135deg,rgba(31,77,58,.86) 0%,rgba(29,127,166,.78) 130%),url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Crater_Lake_winter_pano2.jpg/1280px-Crater_Lake_winter_pano2.jpg') center 38%/cover;
-    color:#fff;padding:20px 22px 34px;border-radius:0 0 26px 26px;box-shadow:0 10px 30px rgba(31,77,58,.25);}
-  .hero-inner{max-width:1000px;margin:0 auto;}
-  .langsw{display:flex;gap:6px;justify-content:flex-end;margin-bottom:14px;flex-wrap:wrap;}
-  .langsw button{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);color:#fff;
-    padding:6px 12px;border-radius:20px;font-size:13px;cursor:pointer;font-weight:600;transition:.15s;}
-  .langsw button:hover{background:rgba(255,255,255,.25);}
-  .langsw button.on{background:#fff;color:var(--forest);}
-  .eyebrow{letter-spacing:3px;font-size:12px;text-transform:uppercase;opacity:.85;}
-  h1{font-size:30px;margin:6px 0 4px;font-weight:800;letter-spacing:.5px;}
-  .sub{opacity:.92;font-size:15px;}
-  .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
-  .stat{background:rgba(255,255,255,.14);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.22);
-    padding:9px 14px;border-radius:12px;font-size:13px;}
-  .stat b{font-size:17px;display:block;}
+  /* topbar */
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+  .topbar a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s, border-color .2s}
+  .topbar a:hover{color:var(--accent);border-color:var(--accent)}
+  .topbar .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:middle;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
 
-  section{margin-top:26px;}
-  h2{font-size:20px;color:var(--forest);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;
-    box-shadow:0 4px 14px rgba(31,77,58,.06);}
+  /* hero */
+  .hero{position:relative;background:linear-gradient(135deg,#1A1814 0%, #2a2520 100%);color:#FAF6F0;border-radius:18px;padding:36px 36px 32px;overflow:hidden;margin-bottom:28px}
+  .hero::after{content:"";position:absolute;right:-100px;bottom:-100px;width:400px;height:400px;background:radial-gradient(circle, rgba(196,69,54,.35), transparent 65%);pointer-events:none}
+  .hero .paw{position:absolute;top:24px;right:30px;width:54px;height:54px;opacity:.18;color:#FAF6F0}
+  .hero .langsw{display:flex;gap:6px;justify-content:flex-end;margin-bottom:16px;flex-wrap:wrap;position:relative;z-index:2}
+  .hero .langsw button{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(250,246,240,.25);background:rgba(250,246,240,.08);color:#FAF6F0;padding:6px 12px;border-radius:99px;cursor:pointer;font-weight:500;transition:.15s}
+  .hero .langsw button:hover{background:rgba(250,246,240,.18);border-color:rgba(250,246,240,.5)}
+  .hero .langsw button.on{background:#FAF6F0;color:var(--ink);border-color:#FAF6F0}
+  .hero .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-soft);margin-bottom:14px;position:relative;z-index:1}
+  .hero h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(30px,4.6vw,44px);line-height:1.05;letter-spacing:-.025em;margin:0 0 14px;font-variation-settings:"opsz" 144;position:relative;z-index:1}
+  .hero h1 em{font-style:italic;color:var(--accent-soft);font-weight:400}
+  .hero .lede{font-family:'Fraunces',serif;font-size:17px;line-height:1.5;color:rgba(250,246,240,.82);max-width:600px;margin:0 0 22px;position:relative;z-index:1;font-variation-settings:"opsz" 14}
+  .hero .route{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:22px;position:relative;z-index:1}
+  .hero .route .node{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;background:rgba(250,246,240,.1);border:1px solid rgba(250,246,240,.15);color:#FAF6F0;padding:5px 11px;border-radius:99px}
+  .hero .route .arw{color:rgba(250,246,240,.4);font-size:11px}
+  .hero .facts{display:flex;flex-wrap:wrap;gap:10px;position:relative;z-index:1}
+  .hero .fact{background:rgba(250,246,240,.08);border:1px solid rgba(250,246,240,.12);border-radius:10px;padding:9px 14px;min-width:100px}
+  .hero .fact .lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-soft);display:block;margin-bottom:3px}
+  .hero .fact .val{font-family:'Fraunces',serif;font-weight:500;font-size:15px;color:#FAF6F0;font-variation-settings:"opsz" 14}
 
-  .months{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin:10px 0 6px;}
-  .m{padding:7px 2px;text-align:center;border-radius:7px;font-size:11px;font-weight:600;color:#fff;}
-  .m.no{background:#c2cbc6;color:#5e6f68;}
-  .m.ok{background:#8bbf9f;}
-  .m.best{background:var(--forest2);}
-  .m.peak{background:var(--gold);color:#3a2c08;}
-  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px;}
-  .legend span{display:inline-flex;align-items:center;gap:5px;}
-  .dot{width:11px;height:11px;border-radius:3px;display:inline-block;}
+  /* sticky jump nav */
+  nav.jump{position:sticky;top:0;z-index:50;background:rgba(250,246,240,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin:0 -22px 0;padding:10px 22px;display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  @media (max-width:640px){nav.jump{margin:0 -16px 0;padding:10px 16px}}
+  nav.jump a{flex:0 0 auto;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--ink-soft);background:#FFFCF6;border:1px solid var(--line);padding:7px 13px;border-radius:99px;transition:all .2s;text-decoration:none}
+  nav.jump a:hover{border-color:var(--accent);color:var(--accent)}
 
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-  @media(max-width:680px){.grid2{grid-template-columns:1fr;}}
+  /* section head */
+  h2.sec{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(24px,3.2vw,32px);letter-spacing:-.02em;margin:48px 0 4px;color:var(--ink);font-variation-settings:"opsz" 144;display:flex;align-items:baseline;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  h2.sec em{font-style:italic;color:var(--accent);font-weight:400}
+  h2.sec .num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--muted);margin-left:auto;font-style:normal;font-weight:400;text-transform:uppercase}
 
-  .alert{background:#fdf3ee;border:1px solid #f0cdb9;border-left:5px solid var(--alert);
-    border-radius:12px;padding:13px 16px;font-size:14px;margin-bottom:10px;}
-  .alert b{color:var(--alert);}
+  /* booked / alerts boxes */
+  .booked, .alerts{border-radius:14px;padding:18px 20px;margin-top:18px;position:relative;border:1px solid var(--line)}
+  .booked{background:#F4F7F1;border-color:#D7E0CC}
+  .booked .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:6px}
+  .booked b{color:#3A5A3A}
+  .booked .note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:8px;display:block;letter-spacing:.02em}
 
-  .route{display:flex;flex-direction:column;gap:0;}
-  .leg{display:flex;align-items:flex-start;gap:14px;}
-  .leg .pin{flex:0 0 auto;min-width:34px;height:30px;padding:0 6px;border-radius:16px;background:var(--lake);color:#fff;
-    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;z-index:2;position:relative;}
-  .leg .body{padding-bottom:18px;flex:1;}
-  .leg .body .nm{font-weight:700;}
-  .leg .body .en{color:var(--muted);font-size:13px;}
-  .leg .body .drv{font-size:12px;color:var(--lake);background:#e7f3f8;display:inline-block;
-    padding:2px 9px;border-radius:20px;margin-top:4px;}
-  .leg .rail{position:relative;align-self:stretch;}
-  .leg .rail:before{content:"";position:absolute;left:16px;top:0;bottom:0;width:2px;background:var(--line);}
-  .leg:last-child .rail:before{display:none;}
+  .alerts{background:#FCF6E3;border-color:#E8D49A}
+  .alerts .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#9A6500;font-weight:500;margin-bottom:10px}
+  .alerts .a{display:flex;gap:14px;padding:10px 0;border-bottom:1px dashed rgba(154,101,0,.25);font-size:14.5px;line-height:1.55;color:var(--ink-soft)}
+  .alerts .a:last-child{border-bottom:none;padding-bottom:0}
+  .alerts .a:first-of-type{padding-top:0}
+  .alerts .a .ic{font-size:20px;flex:0 0 26px;text-align:center;line-height:1.3}
+  .alerts .a b{color:var(--accent)}
 
-  .tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
-  .tab{flex:1;min-width:150px;cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:13px;
-    padding:12px 14px;transition:.15s;}
-  .tab.active{background:var(--forest);color:#fff;border-color:var(--forest);box-shadow:0 6px 16px rgba(31,77,58,.25);}
-  .tab .d{font-size:12px;letter-spacing:1px;opacity:.8;text-transform:uppercase;}
-  .tab .t{font-weight:700;font-size:15px;margin-top:2px;}
-  .day{display:none;}
-  .day.show{display:block;animation:fade .25s ease;}
+  /* day cards / stop cards */
+  .day-card{position:relative;background:#FFFCF6;border:1px solid var(--line);border-radius:14px;margin-top:18px;overflow:hidden;transition:box-shadow .2s, border-color .2s}
+  .day-card:hover{box-shadow:0 14px 30px -16px rgba(26,24,20,.15)}
+  .day-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--day-color,var(--accent))}
+  .day-card .dh{padding:18px 22px 14px;border-bottom:1px solid var(--line-soft);display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+  .day-card .dh .left{flex:1;min-width:0}
+  .day-card .dh .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--day-color,var(--accent));font-weight:500;margin-bottom:6px}
+  .day-card .dh .dt{font-family:'Fraunces',serif;font-weight:500;font-size:22px;line-height:1.2;letter-spacing:-.015em;color:var(--ink);font-variation-settings:"opsz" 144}
+  .day-card .dh .dd{font-family:'JetBrains Mono',monospace;font-size:11px;text-align:right;line-height:1.5;color:var(--muted);letter-spacing:.04em;flex:0 0 auto}
+  .day-card .db{padding:8px 22px 18px}
+  .day-card.sage{--day-color:var(--sage)}
+  .day-card.plum{--day-color:var(--plum)}
+  .day-card.gold{--day-color:var(--gold)}
+  .day-card.ocean{--day-color:var(--ocean)}
+  .day-card.accent{--day-color:var(--accent)}
+
+  .hotel{font-family:'Inter',sans-serif;font-size:12.5px;color:var(--sage);background:#F4F7F1;border:1px solid #D7E0CC;border-radius:8px;padding:8px 12px;margin:12px 0 6px;display:inline-flex;align-items:center;gap:6px}
+  .hotel::before{content:"🏨";font-size:14px}
+
+  .step{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-soft)}
+  .step:last-child{border-bottom:none;padding-bottom:0}
+  .step .tm{flex:0 0 70px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--day-color,var(--accent));padding-top:3px;letter-spacing:.02em}
+  .step .ico{flex:0 0 28px;font-size:22px;text-align:center;line-height:1.2}
+  .step .ct{flex:1;min-width:0}
+  .step .ct .ti{font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:var(--ink);line-height:1.4;margin-bottom:5px}
+  .step .ct .ti .en{font-weight:400;color:var(--muted);font-size:12.5px;margin-left:4px}
+  .step .ct .ds{font-size:14px;color:var(--ink-soft);line-height:1.55}
+  .step .ct .ds b{color:var(--ink);font-weight:600}
+
+  /* tags / pills */
+  .tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;padding:3px 8px;border-radius:99px;margin:0 4px 4px 0;letter-spacing:.06em;text-transform:uppercase;border:1px solid;background:#F0F7EC;color:#3a7a3a;border-color:#c4dfc4}
+  .tag.cost{background:#F0F7EC;color:#3a7a3a;border-color:#c4dfc4}
+  .tag.time{background:#FDEEDE;color:#B5601F;border-color:#F3CDA3}
+  .tag.hot, .tag.warn{background:#FCEAE6;color:var(--accent);border-color:#F0C3BA}
+  .tag.cool, .tag.drive{background:#E8F1F4;color:var(--ocean);border-color:#BFD4DC}
+  .tag.book{background:#F0F7EC;color:#3a7a3a;border-color:#c4dfc4}
+  .tag.eat{background:#F3E9F2;color:var(--plum);border-color:#D9C7D7}
+  .tagrow{margin-top:8px;display:flex;flex-wrap:wrap}
+
+  .drive{background:#F4F1E8;border:1px solid #E5DCC9;border-radius:10px;padding:10px 14px;margin:12px 0;font-size:13.5px;color:var(--ink-soft);display:flex;gap:10px;align-items:flex-start;line-height:1.5}
+  .drive::before{content:"🚗";font-size:18px;flex:0 0 22px}
+
+  /* generic card */
+  .card{background:#FFFCF6;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--card-color,var(--accent))}
+  .card h3{font-family:'Fraunces',serif;font-weight:500;font-size:19px;letter-spacing:-.015em;margin:0 0 6px;color:var(--ink);font-variation-settings:"opsz" 144}
+  .card .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--card-color,var(--accent));font-weight:500;margin-bottom:10px}
+  .card.sage{--card-color:var(--sage)}
+  .card.plum{--card-color:var(--plum)}
+  .card.gold{--card-color:var(--gold)}
+  .card.ocean{--card-color:var(--ocean)}
+
+  /* route timeline */
+  .route-list{display:flex;flex-direction:column;gap:0}
+  .leg{display:flex;align-items:flex-start;gap:14px;position:relative}
+  .leg .pin{flex:0 0 auto;min-width:38px;height:32px;padding:0 8px;border-radius:16px;background:var(--ocean);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:11px;letter-spacing:.05em;z-index:2;position:relative}
+  .leg .body{padding-bottom:18px;flex:1;min-width:0}
+  .leg .body .nm{font-family:'Inter',sans-serif;font-weight:600;color:var(--ink);font-size:14.5px}
+  .leg .body .nm .en{color:var(--muted);font-weight:400;font-size:12.5px;margin-left:6px}
+  .leg .body .drv{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ocean);background:#E8F1F4;border:1px solid #BFD4DC;display:inline-block;padding:3px 10px;border-radius:99px;margin-top:6px;letter-spacing:.02em}
+  .leg .rail{position:relative;align-self:stretch;width:38px;flex:0 0 38px;display:flex;justify-content:center}
+  .leg .rail:before{content:"";position:absolute;left:50%;transform:translateX(-50%);top:0;bottom:0;width:2px;background:var(--line)}
+  .leg:last-child .rail:before{display:none}
+
+  /* months grid */
+  .months{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin:10px 0 8px}
+  .m{padding:8px 2px;text-align:center;border-radius:7px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.02em;color:#fff}
+  .m.no{background:#C7CFC8;color:#5e6f68}
+  .m.ok{background:#A5BFA9}
+  .m.best{background:var(--sage)}
+  .m.peak{background:var(--gold);color:#3A2C08}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);margin-top:10px;letter-spacing:.02em;text-transform:uppercase}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .legend .ldot{width:10px;height:10px;border-radius:3px;display:inline-block}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr}}
+  .grid2 p{font-size:14px;line-height:1.6;color:var(--ink-soft);margin:0}
+
+  /* tabs */
+  .tabs{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+  .tab{flex:1;min-width:150px;cursor:pointer;border:1px solid var(--line);background:#FFFCF6;border-radius:13px;padding:12px 14px;transition:.18s}
+  .tab:hover{border-color:var(--accent-soft)}
+  .tab.active{background:linear-gradient(135deg,#1A1814 0%, #2a2520 100%);color:#FAF6F0;border-color:#1A1814;box-shadow:0 8px 18px -8px rgba(26,24,20,.4)}
+  .tab .d{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+  .tab.active .d{color:var(--accent-soft)}
+  .tab .t{font-family:'Fraunces',serif;font-weight:500;font-size:16px;margin-top:2px;font-variation-settings:"opsz" 14}
+  .tab.active .t{color:#FAF6F0}
+  .day-panel{display:none}
+  .day-panel.show{display:block;animation:fade .25s ease}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-  .stop{display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line);}
-  .stop:last-child{border-bottom:none;}
-  .stop .time{flex:0 0 64px;font-weight:700;color:var(--lake);font-size:13px;padding-top:2px;}
-  .stop .ico{flex:0 0 34px;font-size:24px;text-align:center;}
-  .stop .info h4{font-size:16px;margin-bottom:2px;}
-  .stop .info .en{color:var(--muted);font-size:12.5px;font-weight:500;}
-  .stop .info p{font-size:13.5px;color:#3a4742;margin-top:5px;}
-  .tagrow{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;}
-  .tag{font-size:11px;padding:2px 8px;border-radius:20px;background:#eef4f1;color:var(--forest2);font-weight:600;}
-  .tag.warn{background:#fdeee6;color:var(--alert);}
-  .tag.drive{background:#e7f3f8;color:var(--lake);}
-  .shot{position:relative;margin-top:10px;border-radius:12px;overflow:hidden;cursor:zoom-in;line-height:0;box-shadow:0 3px 10px rgba(31,77,58,.12);}
-  .shot img{width:100%;height:172px;object-fit:cover;display:block;transition:transform .35s ease;}
-  .shot:hover img{transform:scale(1.05);}
-  .shot .zoom{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.55);color:#fff;font-size:13px;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-  .shot.broken{display:none;}
-  @media(max-width:680px){.shot img{height:152px;}}
-  #lb{display:none;position:fixed;inset:0;background:rgba(8,14,12,.93);z-index:9999;align-items:center;justify-content:center;padding:18px;cursor:zoom-out;}
-  #lb.on{display:flex;}
-  #lb img{max-width:100%;max-height:90vh;border-radius:10px;box-shadow:0 14px 50px rgba(0,0,0,.6);}
-  #lb .x{position:absolute;top:14px;right:20px;color:#fff;font-size:28px;cursor:pointer;opacity:.85;}
+  /* hotelbox styled like booked */
+  .hotelbox{background:#F4F7F1;border:1px solid #D7E0CC;border-radius:12px;padding:14px 16px;margin-top:14px;font-size:13.5px;color:var(--ink-soft)}
+  .hotelbox .htitle{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:8px}
+  .hotelbox .h{margin:5px 0;line-height:1.55}
+  .hotelbox .h b{color:var(--ink);font-weight:600}
+  .hotelbox .hnote{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:10px;display:block;letter-spacing:.02em;line-height:1.55;font-family:'Inter',sans-serif;font-size:13px}
 
-  .hotelbox{background:#f4faf7;border:1px solid #d6e9df;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:13.5px;}
-  .hotelbox h4{color:var(--forest);font-size:14px;margin-bottom:6px;}
-  .hotelbox .h{margin:4px 0;}
-  .hotelbox .h b{color:var(--ink);}
+  /* photo shots */
+  .shot{position:relative;margin-top:12px;border-radius:12px;overflow:hidden;cursor:zoom-in;line-height:0;border:1px solid var(--line)}
+  .shot img{width:100%;height:180px;object-fit:cover;display:block;transition:transform .35s ease}
+  .shot:hover img{transform:scale(1.04)}
+  .shot .zoom{position:absolute;right:8px;bottom:8px;background:rgba(26,24,20,.7);color:#FAF6F0;font-size:13px;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace}
+  .shot.broken{display:none}
+  @media(max-width:680px){.shot img{height:152px}}
+  #lb{display:none;position:fixed;inset:0;background:rgba(8,8,8,.93);z-index:9999;align-items:center;justify-content:center;padding:18px;cursor:zoom-out}
+  #lb.on{display:flex}
+  #lb img{max-width:100%;max-height:90vh;border-radius:10px;box-shadow:0 14px 50px rgba(0,0,0,.6)}
+  #lb .x{position:absolute;top:14px;right:20px;color:#fff;font-size:28px;cursor:pointer;opacity:.85;font-family:'JetBrains Mono',monospace}
 
-  ul.chk{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;}
-  @media(max-width:680px){ul.chk{grid-template-columns:1fr;}}
-  ul.chk li{font-size:14px;display:flex;align-items:flex-start;gap:9px;cursor:pointer;padding:4px 0;}
-  ul.chk li input{margin-top:4px;accent-color:var(--forest2);width:16px;height:16px;flex:0 0 auto;}
-  ul.chk li.done span{text-decoration:line-through;color:#9aa8a2;}
+  /* checks */
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin-top:6px;list-style:none;padding:0}
+  @media (max-width:560px){.checks{grid-template-columns:1fr}}
+  .checks li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;padding:6px 0;cursor:pointer;line-height:1.45}
+  .checks li input{margin-top:3px;width:17px;height:17px;accent-color:var(--accent);flex:0 0 auto;cursor:pointer}
+  .checks li.done span{text-decoration:line-through;color:var(--muted)}
 
-  .tip{font-size:14px;padding:8px 0;border-bottom:1px dashed var(--line);}
-  .tip:last-child{border-bottom:none;}
-  .tip b{color:var(--forest2);}
+  /* tips */
+  .tip{font-size:14px;padding:12px 0;border-bottom:1px solid var(--line-soft);line-height:1.6;color:var(--ink-soft)}
+  .tip:last-child{border-bottom:none;padding-bottom:0}
+  .tip:first-child{padding-top:0}
+  .tip b{color:var(--ink);font-weight:600}
 
-  .note{font-size:13px;color:var(--muted);background:#f0f5f2;border-radius:10px;padding:10px 14px;margin-top:10px;}
-  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:34px;}
+  .note{font-family:'Inter',sans-serif;font-size:13.5px;color:var(--ink-soft);background:#F4F1E8;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:14px;line-height:1.55}
+  .note.mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);background:transparent;border:none;padding:0;margin-top:12px;letter-spacing:.02em}
+
+  /* footer */
+  .footer{margin-top:64px;padding-top:28px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.05em;text-align:left}
+  .footer a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line)}
+  .footer a:hover{color:var(--accent);border-color:var(--accent)}
+  .footer .luba{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:75%}
+  .footer .luba svg{flex:0 0 auto}
+  .footer .stack{display:flex;flex-direction:column;gap:4px}
+  ::selection{background:var(--accent);color:#FAF6F0}
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<header class="hero"><div class="hero-inner">
-  <div class="langsw">
-    <button data-lang="zh">中文</button>
-    <button data-lang="en">English</button>
-    <button data-lang="vi">Tiếng Việt</button>
+  <div class="topbar">
+    <div><span class="dot"></span>Trip · Oregon Cascades · 8-Stop Loop</div>
+    <div><a href="index.html">← back to index</a></div>
   </div>
-  <div id="hero-body"></div>
-</div></header>
 
-<div class="wrap" id="app"></div>
+  <header class="hero">
+    <svg class="paw" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor">
+      <ellipse cx="50" cy="65" rx="20" ry="22"/>
+      <ellipse cx="22" cy="40" rx="10" ry="13"/>
+      <ellipse cx="42" cy="22" rx="9" ry="12"/>
+      <ellipse cx="62" cy="22" rx="9" ry="12"/>
+      <ellipse cx="78" cy="40" rx="10" ry="13"/>
+    </svg>
+    <div class="langsw">
+      <button data-lang="zh">中文</button>
+      <button data-lang="en">English</button>
+      <button data-lang="vi">Tiếng Việt</button>
+    </div>
+    <div id="hero-body"></div>
+  </header>
+
+  <nav class="jump">
+    <a href="#best">🗓️ 时间</a>
+    <a href="#alerts">⚠️ 必读</a>
+    <a href="#route">🧭 路线</a>
+    <a href="#days">📅 行程</a>
+    <a href="#bonus">🌟 加料</a>
+    <a href="#pack">🎒 打包</a>
+    <a href="#tips">💡 贴士</a>
+  </nav>
+
+  <div id="app"></div>
+</div>
+
 <div id="lb" onclick="lbClose()"><span class="x">✕</span><img id="lbimg" src="" alt=""></div>
 
 <script>
@@ -140,21 +268,22 @@ var T = {
     bonusIntro:`Smith Rock is now built into Day 1. The Painted Hills are the other gem nearby — but they're a real ~2 hr detour east (opposite your route), so they only make sense if you add a day or do a separate east-side trip.`,
     bonus:[{ico:`🎨`,name:`Painted Hills`,sub:`~2 hr detour east · John Day Fossil Beds`,p:`One of the 7 Wonders of Oregon — surreal hills banded in red, gold, black and tan from ancient volcanic ash. Several short trails (Overlook, Painted Cove boardwalk, Carroll Rim). Colors glow most in late-afternoon light or just after rain. A real detour east (~2 hrs from Bend), so best as its own half-day or if you extend the trip.`,tags:[{t:`Stay 2–4h`},{t:`Free entry`},{t:`Best: late afternoon`},{t:`Detour east`,c:`warn`}]}],
     hero:{ eyebrow:`Oregon Cascades · Road Trip`,
-      h1:`Oregon Cascades — 8-Stop Loop Road Trip`,
+      h1:`Oregon Cascades`, h1em:`8-Stop Loop`,
       sub:`Portland → Mt. Hood → McKenzie River Falls → Crater Lake → back to Portland`,
+      route:[`🛫 Portland`,`🏔️ Trillium`,`💧 Little Crater`,`🌋 Dee Wright`,`💙 Blue Pool`,`🌊 Sahalie`,`🛶 Clear Lake`,`🪶 Jackson Kimball`,`🌅 Crater Lake`,`🛬 Portland`],
       stats:[{b:`8`,l:`must-see stops`},{b:`3`,l:`days · 2 nights`},{b:`~500 mi`,l:`total distance`},{b:`~14 hr`,l:`total driving`},{b:`Loop`,l:`back to PDX`}]},
-    bestTitle:`🗓️ Best Time to Visit`,
+    bestTitle:`Best Time to Visit`, bestEm:`When`,
     months:[`Jan`,`Feb`,`Mar`,`Apr`,`May`,`Jun`,`Jul`,`Aug`,`Sep`,`Oct`,`Nov`,`Dec`],
     legend:[`Closed / not feasible`,`Open (weather permitting)`,`Great`,`Peak`],
     bestCol1:`🏆 <b>Best: mid-July – late Sept.</b> All roads and trails open, daytime 65–80°F, perfect for hiking and boating. <b>After Labor Day (early Sept)</b> has the fewest crowds with still-warm weather — the best-value window.`,
     bestCol2:`🌊 <b>Right now (late June) is great too:</b> just opened for the season, waterfalls roaring with snowmelt, wildflowers blooming, fewer people. One caveat: Crater Lake's rim trails may still have lingering snow.`,
     bestNote:`⛔ <b>Avoid Nov–May:</b> heavy snow closes McKenzie Pass (Hwy 242 → Dee Wright) and Crater Lake's Rim Drive, so most of this route is impassable. Hwy 242 just opened June 15, 2026 and usually stays open through early November.`,
-    alertTitle:`⚠️ Important 2026 Alerts`,
+    alertTitle:`Important 2026 Alerts`, alertEm:`Alerts`,
     alerts:[
       `<b>Crater Lake major construction (2026–2028):</b> the Cleetwood Cove Trail (the only path down to the water) and all boat tours are closed — no swimming or boating this year. East Rim Drive is partially closed. Good news: West Rim Drive and the main overlooks stay open, and the view of one of the bluest lakes on Earth from the rim is still stunning.`,
       `<b>Blue Pool — no jumping or swimming:</b> the water stays around 38°F (4°C) year-round, and there have been paralysis and fatal accidents from jumping. View from the shore only.`,
       `<b>McKenzie Pass (Hwy 242):</b> narrow with tight switchbacks, no RVs or trailers, drive slow. Cell signal is poor — download offline maps before you go.`],
-    routeTitle:`🧭 Route Overview (North → South)`,
+    routeTitle:`Route Overview (North → South)`, routeEm:`Route`,
     legs:[
       {pin:`START`,nm:`Portland`,drv:`↓ ~1 hr 15 min · 60 mi`},
       {pin:`1`,nm:`Trillium Lake`,sub:`Mt. Hood`,drv:`↓ ~30 min`},
@@ -167,7 +296,7 @@ var T = {
       {pin:`8`,nm:`Crater Lake`,drv:`↓ ~4.5–5 hr (Hwy 138 + I-5)`},
       {pin:`END`,nm:`Back to Portland`,drv:``}],
     routeNote:`📍 The 8 stops line up neatly north-to-south, so this is a "drive south, then loop back to Portland" route. Day 3's drive home is long, but Hwy 138 (North Umpqua) is a celebrated scenic byway in its own right.`,
-    dailyTitle:`📅 Day-by-Day Itinerary`,
+    dailyTitle:`Day-by-Day Itinerary`, dailyEm:`Days`,
     tabs:[{d:`Day 1`,t:`Mt. Hood Lakes`},{d:`Day 2`,t:`McKenzie Falls Loop`},{d:`Day 3`,t:`Crater Lake + Return`}],
     days:[
       {stops:[
@@ -200,10 +329,10 @@ var T = {
         {time:`10:00`,ico:`🌅`,h4:`Crater Lake (south entrance)`,sub:`Rim Village & West Rim`,p:`The deepest lake in the US and one of the bluest on Earth. Get your first overlook at Rim Village, then stop along West Rim Drive: Sinnott Memorial, Discovery Point, and Watchman Overlook. The rim views are still unbeatable (no going down to the water this year).`,tags:[{t:`Stay ~2.5–3h`},{t:`Entry ~$30/vehicle (7 days)`},{t:`⚠️ East rim & boats closed`,c:`warn`}]},
         {time:`13:00`,ico:`🚗`,h4:`Exit north → return to Portland`,sub:`North Entrance → OR-138 → I-5 N`,p:`Take Hwy 138 (the North Umpqua scenic byway) down the mountain and stop at Watson Falls, one of Oregon's tallest, on the way. Then I-5 north to Portland, about 4.5–5 hours. Plan a dinner break in Roseburg or Eugene.`,tags:[{t:`🚗 ~4.5–5h · 245 mi`,c:`drive`},{t:`Waterfalls en route`}]}],
        end:`🌙 Day 3's drive home is long. To make it easier, split it over two days (add a night in Roseburg or Eugene) and turn the whole trip into a more relaxed 4 days.`}],
-    packTitle:`🎒 Packing Checklist (tap to check off)`,
+    packTitle:`Packing Checklist`, packEm:`Pack`, packSub:`(tap to check off)`,
     pack:[`Layered / warm clothing (big day-night temp swings; nights can hit ~40°F)`,`Hiking shoes (Blue Pool trail has gravel sections)`,`Sunscreen + hat + sunglasses`,`Plenty of water + snacks (few supplies en route)`,`Offline maps (often no cell signal in the mountains)`,`Fill up on gas early (stations are sparse down south)`,`Cash for park entry / America the Beautiful annual pass`,`Camera / swimsuit (Clear Lake boating)`,`Bug spray + basic first-aid kit`,`Some cash (small resorts may not take cards)`,`Insulated bottle / rain jacket (mountain weather changes fast)`,`Lodging confirmations + a screenshot of this page`],
     packMsg:`Checkboxes save automatically (stored in this browser).`,
-    tipTitle:`💡 Practical Tips`,
+    tipTitle:`Practical Tips`, tipEm:`Tips`,
     tips:[`<b>Entry fee:</b> Crater Lake is about $30/vehicle, valid 7 days. If you visit parks often, the $80 annual pass pays for itself.`,`<b>Gas stops:</b> main supplies are in Government Camp, Sisters, Bend, and Klamath Falls. Fill up before heading into the mountains.`,`<b>Driving safety:</b> Hwy 242 (Dee Wright) and Rim Drive have tight curves and steep grades — go slow and use low gears; watch for deer at dawn.`,`<b>Lodging:</b> Crater Lake fills up fast in summer. Book Mazama Village cabins and Crater Lake Lodge as early as possible.`,`<b>Safety lines:</b> never jump at Blue Pool, and don't cross the railings at Crater Lake — the rim rock is loose and dangerous.`,`<b>Want it easier?</b> Three days for 8 stops is tight (~14 hrs of driving total). One extra day means less driving and more time soaking in each spot.`],
     footer:[`Custom-built for you · Oregon Cascades 8-stop loop · Info based on public sources as of June 2026 — re-check road and weather conditions before you go.`,`Happy travels! 🌲💧🏔️`]
   },
@@ -214,21 +343,22 @@ var T = {
     bonusIntro:`Smith Rock 已经排进第 1 天了。Painted Hills 是附近另一个宝藏——但它在偏东方向、要绕 ~2 小时(和你的路线相反),所以只有在多加一天、或单独安排东线时才划算。`,
     bonus:[{ico:`🎨`,name:`Painted Hills 彩绘山`,sub:`向东绕 ~2 小时 · John Day 化石带`,p:`俄勒冈七大奇观之一——红、金、黑、棕层层相间的梦幻山丘,是远古火山灰留下的痕迹。几条短步道(Overlook 观景、Painted Cove 木栈道、Carroll Rim)。傍晚斜阳或雨后,色彩最浓。它在偏东方向、离 Bend ~2 小时,是真正的绕路,适合单独安排半天,或行程延长时再去。`,tags:[{t:`停留 2–4h`},{t:`免费`},{t:`最佳:傍晚光线`},{t:`需向东绕路`,c:`warn`}]}],
     hero:{ eyebrow:`Oregon Cascades · Road Trip`,
-      h1:`俄勒冈喀斯喀特山脉 · 8 站环线自驾`,
+      h1:`俄勒冈喀斯喀特`, h1em:`8 站环线自驾`,
       sub:`从波特兰出发 → 胡德山 → McKenzie 河瀑布 → 火山口湖 → 返回波特兰`,
+      route:[`🛫 Portland`,`🏔️ Trillium`,`💧 Little Crater`,`🌋 Dee Wright`,`💙 Blue Pool`,`🌊 Sahalie`,`🛶 Clear Lake`,`🪶 Jackson Kimball`,`🌅 Crater Lake`,`🛬 Portland`],
       stats:[{b:`8`,l:`经典景点`},{b:`3`,l:`天 · 2 晚`},{b:`~500 mi`,l:`总里程`},{b:`~14 hr`,l:`总驾驶`},{b:`环线`,l:`回到 PDX`}]},
-    bestTitle:`🗓️ 最佳出行时间`,
+    bestTitle:`最佳出行时间`, bestEm:`When`,
     months:[`1月`,`2月`,`3月`,`4月`,`5月`,`6月`,`7月`,`8月`,`9月`,`10月`,`11月`,`12月`],
     legend:[`封路/不可行`,`可去(看天)`,`很棒`,`黄金期`],
     bestCol1:`🏆 <b>最推荐:7月中–9月底。</b>所有道路和步道全开,白天 18–27°C,适合徒步和划船。<b>劳动节(9月初)之后</b>人最少、天气仍好,是性价比最高的窗口。`,
     bestCol2:`🌊 <b>现在(6月下旬)也很好:</b>刚开山,瀑布因融雪水量最大、最壮观,野花盛开,人也较少。唯一要注意:火山口湖崖顶步道可能仍有残雪。`,
     bestNote:`⛔ <b>避开 11月–5月:</b>大雪封路,McKenzie Pass(242 号 → Dee Wright)和火山口湖环湖路都会关闭,这条线大部分走不通。242 号公路 2026 年 6月15日 刚开放,通常开到 11月初。`,
-    alertTitle:`⚠️ 2026 年重要提醒`,
+    alertTitle:`2026 年重要提醒`, alertEm:`Alerts`,
     alerts:[
       `<b>火山口湖大型施工(2026–2028):</b> Cleetwood Cove 步道(唯一能下到湖边的路)和所有游船全部关闭,今年不能游泳、不能坐船。East Rim Drive(东环湖路)部分封闭。好消息:西环湖路和主要崖顶观景点照常开放,从崖顶俯瞰那片世界最蓝的湖依旧震撼。`,
       `<b>Blue Pool 蓝池严禁跳水/游泳:</b> 水温常年约 4°C(38°F),已多次发生跳水致瘫、致死事故。只可在岸边观赏拍照。`,
       `<b>McKenzie Pass(242 号公路):</b> 狭窄多急弯,禁止房车/拖挂车通行,开慢一点。手机信号差,出发前下载离线地图。`],
-    routeTitle:`🧭 路线总览(由北向南)`,
+    routeTitle:`路线总览(由北向南)`, routeEm:`Route`,
     legs:[
       {pin:`起`,nm:`波特兰 Portland`,drv:`↓ 约 1 小时 15 分 · 60 mi`},
       {pin:`1`,nm:`三叶草湖 Trillium Lake`,sub:`胡德山`,drv:`↓ 约 30 分`},
@@ -241,7 +371,7 @@ var T = {
       {pin:`8`,nm:`火山口湖 Crater Lake`,drv:`↓ 约 4.5–5 小时(138 号 + I-5)`},
       {pin:`终`,nm:`回到波特兰 Portland`,drv:``}],
     routeNote:`📍 8 个景点正好由北向南排成一条线,所以这是一条顺路的「往南玩、再开回波特兰」的环线。第 3 天回程较长,但 138 号公路(North Umpqua)本身就是著名风景线。`,
-    dailyTitle:`📅 每日详细行程`,
+    dailyTitle:`每日详细行程`, dailyEm:`Days`,
     tabs:[{d:`Day 1`,t:`胡德山双湖`},{d:`Day 2`,t:`McKenzie 瀑布环线`},{d:`Day 3`,t:`火山口湖 + 回程`}],
     days:[
       {stops:[
@@ -274,10 +404,10 @@ var T = {
         {time:`10:00`,ico:`🌅`,h4:`火山口湖(南门进)`,sub:`Rim Village & 西环湖路`,p:`美国最深的湖、世界最蓝的湖之一。先到 Rim Village 第一眼俯瞰,再沿西环湖路停几个观景点:Sinnott Memorial、Discovery Point、Watchman Overlook。崖顶视角依旧无敌(今年不能下水)。`,tags:[{t:`停留 ~2.5–3h`},{t:`门票 ~$30/车(7天)`},{t:`⚠️ 东环线/游船关闭`,c:`warn`}]},
         {time:`13:00`,ico:`🚗`,h4:`北门出 → 返回波特兰`,sub:`North Entrance → OR-138 → I-5 N`,p:`从北门走 138 号公路(North Umpqua 风景线)下山,可顺路看 Watson Falls(俄勒冈最高瀑布之一)。之后转 I-5 北上回波特兰,约 4.5–5 小时。建议中途在 Roseburg/Eugene 吃晚饭休息。`,tags:[{t:`🚗 ~4.5–5h · 245 mi`,c:`drive`},{t:`沿途瀑布加分`}]}],
        end:`🌙 第 3 天回程较长。若想轻松,可把这天拆成两天(在 Roseburg 或 Eugene 加住一晚),整趟变成 4 天更从容。`}],
-    packTitle:`🎒 打包清单(可勾选)`,
+    packTitle:`打包清单`, packEm:`Pack`, packSub:`(可勾选)`,
     pack:[`分层保暖衣物(山区昼夜温差大,夜里可低至 4°C)`,`徒步鞋(蓝池步道有碎石路面)`,`防晒霜 + 帽子 + 墨镜`,`充足饮用水 + 零食(多处无补给)`,`离线地图(山区手机常无信号)`,`提前加满油(南部加油站稀少)`,`国家公园门票现金 / America the Beautiful 年票`,`相机 / 泳衣(Clear Lake 划船)`,`防蚊液 + 基础急救包`,`少量现金(小度假村可能不收卡)`,`保温杯 / 雨衣(山区天气多变)`,`住宿确认单 + 行程这页截图`],
     packMsg:`勾选会自动记住(保存在本机浏览器)。`,
-    tipTitle:`💡 实用贴士`,
+    tipTitle:`实用贴士`, tipEm:`Tips`,
     tips:[`<b>门票:</b>火山口湖约 $30/车,7 天有效。常去国家公园的话,$80 的年票更划算。`,`<b>加油点:</b>主要补给在 Government Camp、Sisters、Bend、Klamath Falls。进山前一定加满。`,`<b>开车安全:</b>242 号(Dee Wright)和环湖路弯多坡陡,开慢、多用低挡;清晨可能有鹿上路。`,`<b>住宿:</b>火山口湖一带夏天极抢手,Mazama Village 小屋和 Crater Lake Lodge 建议尽早预订。`,`<b>安全红线:</b>Blue Pool 绝对不要跳水;火山口湖崖边别越护栏,崖壁松散危险。`,`<b>想更轻松?</b>这条线塞进 3 天偏紧(总驾驶约 14 小时)。多加 1 天 = 每天少开车、多泡在景里。`],
     footer:[`为你定制 · 俄勒冈喀斯喀特 8 站环线 · 行程信息基于 2026 年 6 月公开资料,出发前请再核对道路与天气状况。`,`祝旅途愉快!🌲💧🏔️`]
   },
@@ -288,21 +418,22 @@ var T = {
     bonusIntro:`Smith Rock đã được đưa vào Ngày 1. Painted Hills là viên ngọc khác gần đó — nhưng là đường vòng ~2 giờ về phía đông (ngược hướng của bạn), nên chỉ hợp lý nếu bạn thêm một ngày hoặc làm chuyến phía đông riêng.`,
     bonus:[{ico:`🎨`,name:`Painted Hills (Đồi Sơn)`,sub:`đường vòng ~2 giờ về phía đông · John Day Fossil Beds`,p:`Một trong 7 kỳ quan của Oregon — những ngọn đồi sọc đỏ, vàng, đen, nâu kỳ ảo từ tro núi lửa cổ đại. Vài đường mòn ngắn (Overlook, lối ván Painted Cove, Carroll Rim). Màu rực nhất lúc chiều muộn hoặc ngay sau mưa. Là đường vòng thật sự về phía đông (~2 giờ từ Bend), hợp làm nửa ngày riêng hoặc khi kéo dài chuyến đi.`,tags:[{t:`Ở lại 2–4h`},{t:`Miễn phí`},{t:`Tốt nhất: chiều muộn`},{t:`Đường vòng phía đông`,c:`warn`}]}],
     hero:{ eyebrow:`Oregon Cascades · Road Trip`,
-      h1:`Cascades Oregon — Cung Đường Vòng 8 Điểm`,
+      h1:`Cascades Oregon`, h1em:`Cung Vòng 8 Điểm`,
       sub:`Portland → Núi Hood → Thác sông McKenzie → Hồ Crater → quay về Portland`,
+      route:[`🛫 Portland`,`🏔️ Trillium`,`💧 Little Crater`,`🌋 Dee Wright`,`💙 Blue Pool`,`🌊 Sahalie`,`🛶 Clear Lake`,`🪶 Jackson Kimball`,`🌅 Crater Lake`,`🛬 Portland`],
       stats:[{b:`8`,l:`điểm phải đến`},{b:`3`,l:`ngày · 2 đêm`},{b:`~500 mi`,l:`tổng quãng đường`},{b:`~14 giờ`,l:`tổng thời gian lái`},{b:`Vòng`,l:`về PDX`}]},
-    bestTitle:`🗓️ Thời Điểm Lý Tưởng`,
+    bestTitle:`Thời Điểm Lý Tưởng`, bestEm:`When`,
     months:[`Th1`,`Th2`,`Th3`,`Th4`,`Th5`,`Th6`,`Th7`,`Th8`,`Th9`,`Th10`,`Th11`,`Th12`],
     legend:[`Đóng / không khả thi`,`Mở (tùy thời tiết)`,`Tuyệt`,`Cao điểm`],
     bestCol1:`🏆 <b>Tốt nhất: giữa tháng 7 – cuối tháng 9.</b> Mọi đường và lối mòn đều mở, ban ngày 18–27°C, lý tưởng để đi bộ và chèo thuyền. <b>Sau Labor Day (đầu tháng 9)</b> ít người nhất mà trời vẫn ấm — khung thời gian đáng giá nhất.`,
     bestCol2:`🌊 <b>Ngay bây giờ (cuối tháng 6) cũng rất tốt:</b> vừa mở mùa, thác chảy mạnh nhất nhờ tuyết tan, hoa dại nở rộ, ít người hơn. Lưu ý: lối mòn ven miệng hồ Crater có thể vẫn còn sót tuyết.`,
     bestNote:`⛔ <b>Tránh tháng 11–5:</b> tuyết dày đóng McKenzie Pass (Hwy 242 → Dee Wright) và đường Rim Drive của hồ Crater, nên phần lớn cung đường không đi được. Hwy 242 vừa mở ngày 15/6/2026 và thường mở đến đầu tháng 11.`,
-    alertTitle:`⚠️ Lưu Ý Quan Trọng 2026`,
+    alertTitle:`Lưu Ý Quan Trọng 2026`, alertEm:`Alerts`,
     alerts:[
       `<b>Hồ Crater thi công lớn (2026–2028):</b> đường mòn Cleetwood Cove (lối duy nhất xuống mặt nước) và toàn bộ tour thuyền đều đóng — năm nay không bơi, không đi thuyền. East Rim Drive đóng một phần. Tin tốt: West Rim Drive và các điểm ngắm chính vẫn mở, và cảnh nhìn một trong những hồ xanh nhất Trái Đất từ vành miệng núi lửa vẫn cực kỳ ngoạn mục.`,
       `<b>Blue Pool — cấm nhảy hoặc bơi:</b> nước quanh năm khoảng 4°C (38°F), đã có tai nạn liệt người và tử vong do nhảy xuống. Chỉ ngắm từ bờ.`,
       `<b>McKenzie Pass (Hwy 242):</b> hẹp và nhiều khúc cua gắt, cấm xe RV/rơ-moóc, lái chậm. Sóng điện thoại yếu — tải bản đồ ngoại tuyến trước khi đi.`],
-    routeTitle:`🧭 Tổng Quan Lộ Trình (Bắc → Nam)`,
+    routeTitle:`Tổng Quan Lộ Trình (Bắc → Nam)`, routeEm:`Route`,
     legs:[
       {pin:`ĐẦU`,nm:`Portland`,drv:`↓ ~1 giờ 15 phút · 60 mi`},
       {pin:`1`,nm:`Trillium Lake`,sub:`Núi Hood`,drv:`↓ ~30 phút`},
@@ -315,7 +446,7 @@ var T = {
       {pin:`8`,nm:`Crater Lake`,drv:`↓ ~4,5–5 giờ (Hwy 138 + I-5)`},
       {pin:`CUỐI`,nm:`Quay về Portland`,drv:``}],
     routeNote:`📍 8 điểm xếp gọn theo hướng bắc-nam, nên đây là cung "đi xuống phía nam rồi vòng về Portland". Chặng về ngày 3 khá dài, nhưng Hwy 138 (North Umpqua) tự nó đã là một con đường ngắm cảnh nổi tiếng.`,
-    dailyTitle:`📅 Lịch Trình Từng Ngày`,
+    dailyTitle:`Lịch Trình Từng Ngày`, dailyEm:`Days`,
     tabs:[{d:`Ngày 1`,t:`Hồ Núi Hood`},{d:`Ngày 2`,t:`Vòng Thác McKenzie`},{d:`Ngày 3`,t:`Hồ Crater + Về`}],
     days:[
       {stops:[
@@ -348,10 +479,10 @@ var T = {
         {time:`10:00`,ico:`🌅`,h4:`Hồ Crater (cổng nam)`,sub:`Rim Village & West Rim`,p:`Hồ sâu nhất nước Mỹ và một trong những hồ xanh nhất Trái Đất. Ngắm lần đầu ở Rim Village, rồi dừng dọc West Rim Drive: Sinnott Memorial, Discovery Point và Watchman Overlook. View từ vành hồ vẫn vô địch (năm nay không xuống mặt nước được).`,tags:[{t:`Ở lại ~2,5–3h`},{t:`Vé ~$30/xe (7 ngày)`},{t:`⚠️ East rim & thuyền đóng`,c:`warn`}]},
         {time:`13:00`,ico:`🚗`,h4:`Ra cổng bắc → quay về Portland`,sub:`North Entrance → OR-138 → I-5 N`,p:`Đi Hwy 138 (đường ngắm cảnh North Umpqua) xuống núi và ghé Watson Falls, một trong những thác cao nhất Oregon, trên đường. Rồi theo I-5 lên bắc về Portland, khoảng 4,5–5 giờ. Nên nghỉ ăn tối ở Roseburg hoặc Eugene.`,tags:[{t:`🚗 ~4,5–5h · 245 mi`,c:`drive`},{t:`Có thác dọc đường`}]}],
        end:`🌙 Chặng về ngày 3 khá dài. Cho nhẹ nhàng, hãy chia thành hai ngày (thêm một đêm ở Roseburg hoặc Eugene) và biến cả chuyến thành 4 ngày thong thả hơn.`}],
-    packTitle:`🎒 Danh Sách Hành Lý (chạm để đánh dấu)`,
+    packTitle:`Danh Sách Hành Lý`, packEm:`Pack`, packSub:`(chạm để đánh dấu)`,
     pack:[`Quần áo nhiều lớp/giữ ấm (chênh lệch nhiệt ngày-đêm lớn; đêm có thể ~4°C)`,`Giày đi bộ (lối Blue Pool có đoạn sỏi đá)`,`Kem chống nắng + mũ + kính râm`,`Nhiều nước + đồ ăn nhẹ (ít chỗ mua dọc đường)`,`Bản đồ ngoại tuyến (núi thường không có sóng)`,`Đổ đầy xăng sớm (trạm xăng thưa thớt ở phía nam)`,`Tiền mặt vé công viên / thẻ năm America the Beautiful`,`Máy ảnh / đồ bơi (chèo thuyền Clear Lake)`,`Thuốc chống côn trùng + bộ sơ cứu cơ bản`,`Ít tiền mặt (resort nhỏ có thể không nhận thẻ)`,`Bình giữ nhiệt / áo mưa (thời tiết núi thay đổi nhanh)`,`Xác nhận đặt phòng + chụp màn hình trang này`],
     packMsg:`Các ô đánh dấu tự lưu (trong trình duyệt này).`,
-    tipTitle:`💡 Mẹo Thực Tế`,
+    tipTitle:`Mẹo Thực Tế`, tipEm:`Tips`,
     tips:[`<b>Vé vào:</b> Hồ Crater khoảng $30/xe, có giá trị 7 ngày. Nếu hay đi công viên, thẻ năm $80 sẽ hời hơn.`,`<b>Trạm xăng:</b> tiếp tế chính ở Government Camp, Sisters, Bend và Klamath Falls. Đổ đầy trước khi vào núi.`,`<b>An toàn lái xe:</b> Hwy 242 (Dee Wright) và Rim Drive nhiều cua gắt, dốc đứng — đi chậm, về số thấp; coi chừng hươu lúc rạng sáng.`,`<b>Chỗ nghỉ:</b> hồ Crater kín phòng nhanh vào mùa hè. Đặt cabin Mazama Village và Crater Lake Lodge càng sớm càng tốt.`,`<b>Lằn ranh an toàn:</b> tuyệt đối không nhảy ở Blue Pool, và đừng vượt lan can ở hồ Crater — đá vành hồ rời rạc, nguy hiểm.`,`<b>Muốn nhẹ nhàng hơn?</b> Ba ngày cho 8 điểm là hơi gấp (~14 giờ lái tổng cộng). Thêm một ngày nghĩa là lái ít hơn và đắm mình lâu hơn ở mỗi điểm.`],
     footer:[`Thiết kế riêng cho bạn · Cung vòng 8 điểm Cascades Oregon · Thông tin dựa trên nguồn công khai tính đến tháng 6/2026 — kiểm tra lại đường và thời tiết trước khi đi.`,`Chúc thượng lộ bình an! 🌲💧🏔️`]
   }
@@ -359,12 +490,14 @@ var T = {
 
 /* ===================== RENDER ===================== */
 var MCLS=['no','no','no','no','ok','best','peak','peak','peak','ok','no','no'];
-var LEGC=['#c2cbc6','#8bbf9f','#2e6b50','#d9a441'];
+var LEGC=['#C7CFC8','#A5BFA9','#7A8471','#B8923E'];
 var state={lang:'en',day:0};
 var packKey='or_loop_pack_v2', packSaved={};
 try{packSaved=JSON.parse(localStorage.getItem(packKey)||'{}');}catch(e){}
 
-function esc(){return '';}
+/* Cycle day-card colors across stops within a panel */
+var DAY_COLORS=['accent','plum','sage','ocean','gold'];
+
 var IMG={
  "0-1":{t:"https://upload.wikimedia.org/wikipedia/commons/4/44/Trilliumlake.jpg",f:"https://upload.wikimedia.org/wikipedia/commons/4/44/Trilliumlake.jpg",c:"Trillium Lake"},
  "0-2":{t:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Little_Crater_lake_2016.jpg/1280px-Little_Crater_lake_2016.jpg",f:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Little_Crater_lake_2016.jpg/1280px-Little_Crater_lake_2016.jpg",c:"Little Crater Lake"},
@@ -383,27 +516,40 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')lbClose();})
 function tagsHtml(tags){return (tags||[]).map(function(x){return '<span class="tag '+(x.c||'')+'">'+x.t+'</span>';}).join('');}
 function stopHtml(s,img){
   var ih=img?'<div class="shot" onclick="lb(\''+img.f+'\')"><img src="'+img.t+'" loading="eager" referrerpolicy="no-referrer" alt="'+img.c+'" onerror="this.parentNode.classList.add(\'broken\')"><span class="zoom">⤢</span></div>':'';
-  return '<div class="stop"><div class="time">'+s.time+'</div><div class="ico">'+s.ico+'</div>'+
-    '<div class="info"><h4>'+s.h4+(s.sub?' <span class="en">'+s.sub+'</span>':'')+'</h4>'+
-    '<p>'+s.p+'</p>'+((s.tags&&s.tags.length)?'<div class="tagrow">'+tagsHtml(s.tags)+'</div>':'')+ih+'</div></div>';
+  var tirow=s.h4+(s.sub?' <span class="en">'+s.sub+'</span>':'');
+  return '<div class="step"><div class="tm">'+s.time+'</div><div class="ico">'+s.ico+'</div>'+
+    '<div class="ct"><div class="ti">'+tirow+'</div>'+
+    '<div class="ds">'+s.p+'</div>'+((s.tags&&s.tags.length)?'<div class="tagrow">'+tagsHtml(s.tags)+'</div>':'')+ih+'</div></div>';
 }
 function legHtml(l){
   return '<div class="leg"><div class="rail"><div class="pin">'+l.pin+'</div></div><div class="body">'+
     '<div class="nm">'+l.nm+(l.sub?' <span class="en">'+l.sub+'</span>':'')+'</div>'+
     (l.drv?'<div class="drv">'+l.drv+'</div>':'')+'</div></div>';
 }
-function dayHtml(day,dayIdx){
-  var h='<div class="card">';
-  if(day.lead) h+='<div class="note" style="margin-top:0;margin-bottom:8px">'+day.lead+'</div>';
-  day.stops.forEach(function(s,si){h+=stopHtml(s,IMG[dayIdx+'-'+si]);});
+function dayPanelHtml(day,dayIdx,tabsMeta){
+  var colorCls=DAY_COLORS[dayIdx % DAY_COLORS.length];
+  var tabMeta=tabsMeta[dayIdx]||{d:'',t:''};
+  var stopCount=day.stops.length;
+  var h='<div class="day-card '+colorCls+'">';
+  h+='<div class="dh"><div class="left">';
+  h+='<div class="kicker">'+tabMeta.d+'</div>';
+  h+='<div class="dt">'+tabMeta.t+'</div>';
+  h+='</div><div class="dd">'+stopCount+' stops</div></div>';
+  h+='<div class="db">';
+  if(day.lead) h+='<div class="note">'+day.lead+'</div>';
+  day.stops.forEach(function(s,si){
+    var img=IMG[dayIdx+'-'+si];
+    // If stop's icon is a car emoji or its time is HH:MM, it may be a drive segment; we still render as a step
+    h+=stopHtml(s,img);
+  });
   if(day.hotel){
-    h+='<div class="hotelbox"><h4>'+day.hotel.title+'</h4>';
+    h+='<div class="hotelbox"><div class="htitle">'+day.hotel.title+'</div>';
     day.hotel.lines.forEach(function(l){h+='<div class="h">'+l+'</div>';});
-    if(day.hotel.note) h+='<div class="note" style="margin-top:8px">'+day.hotel.note+'</div>';
+    if(day.hotel.note) h+='<div class="hnote">'+day.hotel.note+'</div>';
     h+='</div>';
   }
-  if(day.end) h+='<div class="note" style="margin-top:6px">'+day.end+'</div>';
-  h+='</div>';
+  if(day.end) h+='<div class="note">'+day.end+'</div>';
+  h+='</div></div>';
   return h;
 }
 
@@ -413,58 +559,90 @@ function render(lang){
   document.title=d.docTitle;
 
   /* hero */
-  var hs=d.hero.stats.map(function(s){return '<div class="stat"><b>'+s.b+'</b>'+s.l+'</div>';}).join('');
+  var routeChips=d.hero.route.map(function(node,i){
+    var sep=(i<d.hero.route.length-1)?'<span class="arw">→</span>':'';
+    return '<span class="node">'+node+'</span>'+sep;
+  }).join('');
+  var hs=d.hero.stats.map(function(s){return '<div class="fact"><span class="lbl">'+s.l+'</span><span class="val">'+s.b+'</span></div>';}).join('');
   document.getElementById('hero-body').innerHTML=
-    '<div class="eyebrow">'+d.hero.eyebrow+'</div><h1>'+d.hero.h1+'</h1>'+
-    '<div class="sub">'+d.hero.sub+'</div><div class="stats">'+hs+'</div>';
+    '<div class="kicker">'+d.hero.eyebrow+'</div>'+
+    '<h1>'+d.hero.h1+' <em>'+d.hero.h1em+'</em></h1>'+
+    '<p class="lede">'+d.hero.sub+'</p>'+
+    '<div class="route">'+routeChips+'</div>'+
+    '<div class="facts">'+hs+'</div>';
 
   /* best time */
   var months=d.months.map(function(m,i){return '<div class="m '+MCLS[i]+'">'+m+'</div>';}).join('');
-  var legend=d.legend.map(function(l,i){return '<span><i class="dot" style="background:'+LEGC[i]+'"></i>'+l+'</span>';}).join('');
-  var best='<section><h2>'+d.bestTitle+'</h2><div class="card">'+
+  var legend=d.legend.map(function(l,i){return '<span><i class="ldot" style="background:'+LEGC[i]+'"></i>'+l+'</span>';}).join('');
+  var best='<h2 class="sec" id="best"><em>'+d.bestEm+'</em> · '+d.bestTitle+' <span class="num">12 MO</span></h2>'+
+    '<div class="card sage"><div class="kicker">'+d.bestTitle+'</div>'+
     '<div class="months">'+months+'</div><div class="legend">'+legend+'</div>'+
-    '<div class="grid2" style="margin-top:14px"><div><p style="font-size:14px">'+d.bestCol1+'</p></div>'+
-    '<div><p style="font-size:14px">'+d.bestCol2+'</p></div></div>'+
-    '<div class="note">'+d.bestNote+'</div></div></section>';
+    '<div class="grid2"><p>'+d.bestCol1+'</p><p>'+d.bestCol2+'</p></div>'+
+    '<div class="note">'+d.bestNote+'</div></div>';
 
   /* alerts */
-  var alerts='<section><h2>'+d.alertTitle+'</h2>'+
-    d.alerts.map(function(a){return '<div class="alert">'+a+'</div>';}).join('')+'</section>';
+  var alerts='<h2 class="sec" id="alerts"><em>'+d.alertEm+'</em> · '+d.alertTitle+' <span class="num">'+d.alerts.length+' ITEMS</span></h2>'+
+    '<div class="alerts"><div class="kicker">Don\'t forget</div>'+
+    d.alerts.map(function(a){return '<div class="a"><div class="ic">⚠️</div><div>'+a+'</div></div>';}).join('')+
+    '</div>';
 
   /* route */
-  var route='<section><h2>'+d.routeTitle+'</h2><div class="card"><div class="route">'+
-    d.legs.map(legHtml).join('')+'</div><div class="note">'+d.routeNote+'</div></div></section>';
+  var route='<h2 class="sec" id="route"><em>'+d.routeEm+'</em> · '+d.routeTitle+' <span class="num">'+d.legs.length+' LEGS</span></h2>'+
+    '<div class="card ocean"><div class="kicker">'+d.routeTitle+'</div>'+
+    '<div class="route-list">'+d.legs.map(legHtml).join('')+'</div>'+
+    '<div class="note">'+d.routeNote+'</div></div>';
 
   /* daily */
   var tabs=d.tabs.map(function(tb,i){
     return '<div class="tab'+(i===state.day?' active':'')+'" data-day="'+i+'"><div class="d">'+tb.d+'</div><div class="t">'+tb.t+'</div></div>';
   }).join('');
   var days=d.days.map(function(day,i){
-    return '<div class="day'+(i===state.day?' show':'')+'" data-dayp="'+i+'">'+dayHtml(day,i)+'</div>';
+    return '<div class="day-panel'+(i===state.day?' show':'')+'" data-dayp="'+i+'">'+dayPanelHtml(day,i,d.tabs)+'</div>';
   }).join('');
-  var daily='<section><h2>'+d.dailyTitle+'</h2><div class="tabs">'+tabs+'</div>'+days+'</section>';
+  var daily='<h2 class="sec" id="days"><em>'+d.dailyEm+'</em> · '+d.dailyTitle+' <span class="num">3 DAYS</span></h2>'+
+    '<div class="tabs">'+tabs+'</div>'+days;
 
   /* bonus */
-  var bonus='<section><h2>'+d.bonusTitle+'</h2><div class="card"><p style="font-size:14px">'+d.bonusIntro+'</p></div>'+
-    d.bonus.map(function(b,bi){var im=BIMG[bi];
-      return '<div class="card" style="margin-top:12px"><div class="shot" style="margin-top:0" onclick="lb(\''+im.f+'\')"><img src="'+im.t+'" loading="eager" referrerpolicy="no-referrer" alt="'+b.name+'" onerror="this.parentNode.classList.add(\'broken\')"><span class="zoom">⤢</span></div>'+
-        '<h4 style="font-size:16px;margin:11px 0 2px">'+b.ico+' '+b.name+' <span style="color:#5e6f68;font-size:12.5px;font-weight:500">'+b.sub+'</span></h4>'+
-        '<p style="font-size:13.5px;color:#3a4742">'+b.p+'</p><div class="tagrow">'+tagsHtml(b.tags)+'</div></div>';
-    }).join('')+'</section>';
+  var bonusCards=d.bonus.map(function(b,bi){
+    var im=BIMG[bi];
+    var shot=im?'<div class="shot" onclick="lb(\''+im.f+'\')"><img src="'+im.t+'" loading="eager" referrerpolicy="no-referrer" alt="'+b.name+'" onerror="this.parentNode.classList.add(\'broken\')"><span class="zoom">⤢</span></div>':'';
+    return '<div class="card gold"><div class="kicker">'+b.sub+'</div><h3>'+b.ico+' '+b.name+'</h3>'+
+      '<div style="font-size:14px;color:var(--ink-soft);line-height:1.6;margin-top:8px">'+b.p+'</div>'+
+      '<div class="tagrow">'+tagsHtml(b.tags)+'</div>'+shot+'</div>';
+  }).join('');
+  var bonus='<h2 class="sec" id="bonus"><em>Bonus</em> · '+d.bonusTitle+' <span class="num">+1 DAY</span></h2>'+
+    '<div class="card plum"><div class="kicker">If you have an extra day</div><div style="font-size:14px;color:var(--ink-soft);line-height:1.6">'+d.bonusIntro+'</div></div>'+
+    bonusCards;
 
   /* packing */
   var items=d.pack.map(function(p,i){
     return '<li data-i="'+i+'"><input type="checkbox"><span>'+p+'</span></li>';
   }).join('');
-  var pack='<section><h2>'+d.packTitle+'</h2><div class="card"><ul class="chk" id="chk">'+items+
-    '</ul><div class="note">'+d.packMsg+'</div></div></section>';
+  var pack='<h2 class="sec" id="pack"><em>'+d.packEm+'</em> · '+d.packTitle+' <span class="num">'+d.pack.length+' ITEMS</span></h2>'+
+    '<div class="card sage"><div class="kicker">Pack list · '+d.packSub+'</div><h3>🎒 '+d.packTitle+'</h3>'+
+    '<ul class="checks" id="chk">'+items+'</ul>'+
+    '<p class="note mono">'+d.packMsg+'</p></div>';
 
   /* tips */
-  var tips='<section><h2>'+d.tipTitle+'</h2><div class="card">'+
-    d.tips.map(function(t){return '<div class="tip">'+t+'</div>';}).join('')+'</div></section>';
+  var tips='<h2 class="sec" id="tips"><em>'+d.tipEm+'</em> · '+d.tipTitle+' <span class="num">'+d.tips.length+' TIPS</span></h2>'+
+    '<div class="card accent"><div class="kicker">'+d.tipTitle+'</div>'+
+    d.tips.map(function(t){return '<div class="tip">'+t+'</div>';}).join('')+
+    '</div>';
 
   /* footer */
-  var foot='<footer>'+d.footer[0]+'<br>'+d.footer[1]+'<br><span style="opacity:.72">\U0001F4F7 Photos · 照片 · Ảnh: Wikimedia Commons (free license)</span></footer>';
+  var foot='<footer class="footer">'+
+    '<div class="luba">'+
+    '<svg width="16" height="16" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true" style="color:var(--accent)">'+
+    '<ellipse cx="50" cy="65" rx="20" ry="22"/>'+
+    '<ellipse cx="22" cy="40" rx="10" ry="13"/>'+
+    '<ellipse cx="42" cy="22" rx="9" ry="12"/>'+
+    '<ellipse cx="62" cy="22" rx="9" ry="12"/>'+
+    '<ellipse cx="78" cy="40" rx="10" ry="13"/>'+
+    '</svg>'+
+    '<div class="stack"><div>'+d.footer[0]+'</div><div>'+d.footer[1]+'</div><div style="opacity:.7">📷 Photos · 照片 · Ảnh: Wikimedia Commons (free license)</div></div>'+
+    '</div>'+
+    '<div><a href="index.html">← back to index</a></div>'+
+    '</footer>';
 
   document.getElementById('app').innerHTML=best+alerts+route+daily+bonus+pack+tips+foot;
 
@@ -482,9 +660,9 @@ function wireTabs(){
     t.addEventListener('click',function(){
       state.day=parseInt(t.dataset.day,10);
       document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
-      document.querySelectorAll('.day').forEach(function(x){x.classList.remove('show');});
+      document.querySelectorAll('.day-panel').forEach(function(x){x.classList.remove('show');});
       t.classList.add('active');
-      document.querySelector('.day[data-dayp="'+state.day+'"]').classList.add('show');
+      document.querySelector('.day-panel[data-dayp="'+state.day+'"]').classList.add('show');
     });
   });
 }
