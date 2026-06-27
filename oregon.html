@@ -103,6 +103,9 @@
     .og-body{display:grid;grid-template-columns:minmax(0,1fr) 332px;grid-template-areas:"over over" "main pack";column-gap:24px;padding:0 22px 12px;align-items:start}
     .a-over{grid-area:over}.a-main{grid-area:main}.a-pack{grid-area:pack;position:sticky;top:108px;align-self:start}
   }
+  .langsw{flex:none;display:flex;gap:1px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:2px}
+  .langsw button{border:none;background:none;font:700 11px 'Noto Sans SC';padding:4px 7px;border-radius:999px;color:#84988C;cursor:pointer;line-height:1}
+  .langsw button.on{background:var(--ac);color:#fff}
 </style>
 </head>
 <body>
@@ -111,6 +114,7 @@
   <div class="appbar">
     <div class="row">
       <div class="apptt"><span class="t">🌲 Oregon Cascades</span><span class="s">9/4 – 8 · 劳动节</span></div>
+      <div class="langsw" id="langsw"><button data-l="zh">中</button><button data-l="en">EN</button><button data-l="vi">VI</button></div>
       <span class="cd" id="cd">⏳ … 天后</span>
     </div>
     <div class="chipnav">
@@ -145,7 +149,7 @@
 
     <div class="a-main">
       <div id="route" style="scroll-margin-top:120px">
-        <div class="sech"><span class="h2">🧭 路线总览</span><span style="font:600 11px 'Noto Sans SC';color:#84988C">由北向南</span></div>
+        <div class="sech"><span class="h2">🧭 路线总览</span><span id="routeSub" style="font:600 11px 'Noto Sans SC';color:#84988C">由北向南</span></div>
         <div class="card routebox" id="routebox"></div>
       </div>
 
@@ -168,7 +172,7 @@
 
     <div id="pack" class="a-pack" style="scroll-margin-top:120px">
       <div class="sech" style="justify-content:space-between"><span class="h2">🎒 打包清单</span><span id="packcount" style="font:700 12px 'Space Grotesk';color:var(--ac)"></span></div>
-      <div style="font:500 12px 'Noto Sans SC';color:#84988C;padding:0 18px 12px">山区昼夜温差大 · 勾选自动存本机</div>
+      <div id="packSub" style="font:500 12px 'Noto Sans SC';color:#84988C;padding:0 18px 12px">山区昼夜温差大 · 勾选自动存本机</div>
       <div class="card packbox" id="packbox"></div>
     </div>
   </div>
@@ -233,32 +237,104 @@ const TIPS=[
 const PACK=['分层保暖衣物（昼夜温差大，夜里可低至 4°C）','徒步鞋（蓝池步道有碎石）','防晒霜 + 帽子 + 墨镜','充足饮用水 + 零食（多处无补给）','离线地图（山区常无信号）','提前加满油（南部加油站稀少）','门票现金 / America the Beautiful 年票','相机 / 泳衣（Clear Lake 划船）','防蚊液 + 基础急救包','少量现金（小度假村可能不收卡）','保温杯 / 雨衣（山区天气多变）','住宿确认单 + 这页截图'];
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-(function(){var d=Math.max(0,Math.ceil((START-new Date())/86400000));document.getElementById('cd').textContent=d>0?('⏳ '+d+' 天后'):'🎉 出发啦';})();
-document.getElementById('alerts-list').innerHTML=ALERTS.map(a=>'<div class="alert" style="box-shadow:inset 4px 0 0 '+a.bar+'"><span class="ic" style="background:'+a.soft+'">'+a.icon+'</span><div style="flex:1;min-width:0"><div class="at">'+esc(a.title)+'</div><div class="ab">'+esc(a.body)+'</div></div></div>').join('');
-document.getElementById('routebox').innerHTML=ROUTE.map((r,i)=>'<div class="rrow"><div class="rrail"><span class="rdot"'+(i===ROUTE.length-1?' style="box-shadow:0 0 0 1.5px #B07A1E;background:#B07A1E"':'')+'></span>'+(i<ROUTE.length-1?'<span class="rline"></span>':'')+'</div><div style="padding-bottom:12px;flex:1"><div class="rname">'+esc(r[0])+'</div>'+(r[1]?'<div class="rseg">↓ '+esc(r[1])+'</div>':'')+'</div></div>').join('');
-document.getElementById('tips').innerHTML=TIPS.map(t=>'<div class="tiprow"><span style="font-size:16px">'+t[0]+'</span><span style="flex:1"><b>'+esc(t[1])+'　</b>'+esc(t[2])+'</span></div>').join('');
 
+const L={
+ zh:{nav:'🧭 导航',appSub:'9/4 – 8 · 劳动节',chips:['⚠️ 提醒','🧭 路线','📅 行程','🎒 打包','💡 贴士'],heroH1:'Oregon Cascades 8 站环线',heroSub:'Portland → 胡德山 → McKenzie 瀑布 → 火山口湖 → 回 Portland',heroChips:['🌲 8 站','💧 瀑布 + 蓝池','🏔️ 火山口湖'],statL:['3 天','景点','英里','开车'],dateTitle:'📅 你的日期 · 9月4–8日（劳动节长周末）',dateBody:'周五 9/4 晚 8:45 落地 PDX → 住朋友家（波特兰）→ 周二 9/8 下午 1:25 飞回。中间 3 个整天：9/5 · 9/6 · 9/7。周一晚回波特兰朋友家，所以<b>只剩 1 晚要订——Bend（周六）</b>；周日 Union Creek 已订 ✓。⚠️ 劳动节长周末，Bend 尽快订、景点会挤。',heads:['⚠️ 2026 重要提醒','🧭 路线总览','📅 每日行程','💡 实用贴士','🎒 打包清单'],routeSub:'由北向南',packSub:'山区昼夜温差大 · 勾选自动存本机',bonusTitle:'🌟 多一天的话：Painted Hills 彩绘山',bonusBody:'向东绕 ~2 小时 · 免费 · 傍晚光线最佳。俄勒冈七大奇观之一，红金黑棕层层相间的火山灰山丘；短步道 Overlook / Painted Cove 木栈道 / Carroll Rim。离 Bend ~2h，适合单独半天，或行程延长时再去。',footA:'为你定制 · 俄勒冈喀斯喀特 8 站环线 🌲💧🏔️',footB:'信息基于 2026/6 公开资料，出发前再核对道路与天气 · 监修 Luba 本猫 🐾',cdSuffix:'天后',cdGo:'🎉 出发啦',alerts:ALERTS,route:ROUTE,days:DAYS,tips:TIPS,pack:PACK},
+
+ en:{nav:'🧭 Map',appSub:'Sep 4–8 · Labor Day',chips:['⚠️ Alerts','🧭 Route','📅 Days','🎒 Pack','💡 Tips'],heroH1:'Oregon Cascades · 8-stop loop',heroSub:'Portland → Mt. Hood → McKenzie Falls → Crater Lake → Portland',heroChips:['🌲 8 stops','💧 Falls + Blue Pool','🏔️ Crater Lake'],statL:['3 days','stops','miles','driving'],dateTitle:'📅 Your dates · Sep 4–8 (Labor Day weekend)',dateBody:'Land PDX Fri 9/4 8:45 PM → friend’s place (Portland) → fly home Tue 9/8 1:25 PM. 3 full days: 9/5 · 9/6 · 9/7. Back in Portland Mon night, so <b>only 1 night left to book — Bend (Sat)</b>; Sun Union Creek booked ✓. ⚠️ Labor Day weekend — lock in Bend soon, expect crowds.',heads:['⚠️ 2026 alerts','🧭 Route overview','📅 Day by day','💡 Practical tips','🎒 Packing list'],routeSub:'North → South',packSub:'Big day-night temp swings · ticks save on this device',bonusTitle:'🌟 With an extra day: Painted Hills',bonusBody:'~2 hr detour east · free · best in late-afternoon light. One of the 7 Wonders of Oregon — hills banded red, gold, black and tan from volcanic ash; short trails (Overlook / Painted Cove boardwalk / Carroll Rim). ~2h from Bend — best as its own half-day or if you extend the trip.',footA:'Made for you · Oregon Cascades 8-stop loop 🌲💧🏔️',footB:'Based on public info as of Jun 2026 — re-check roads and weather before you go · supervised by Luba the cat 🐾',cdSuffix:'days to go',cdGo:'🎉 Let us go',
+  alerts:[
+   {icon:'🚧',bar:'#B07A1E',soft:'#FCEFD6',title:'Crater Lake major construction (2026–2028)',body:'Cleetwood Cove Trail (the only path to the water) and all boat tours are closed — no swimming or boating this year; East Rim Drive partly closed. Good news: West Rim Drive and the main overlooks stay open, and the rim view is still stunning.'},
+   {icon:'🚫',bar:'#C0392B',soft:'#FBE3E0',title:'Blue Pool — no jumping or swimming',body:'Water stays about 4°C (38°F) year-round; there have been paralysis and fatal jumping accidents. View from the shore only.'},
+   {icon:'🛣️',bar:'#3E6FB0',soft:'#E4ECF8',title:'McKenzie Pass (Hwy 242)',body:'Narrow with tight switchbacks, no RVs or trailers, drive slow. Poor cell signal — download offline maps first.'}],
+  route:[
+   ['Start · Portland','~1h15 · 60 mi'],['Trillium Lake (Mt. Hood)','~30 min'],['Little Crater Lake','~2.5h → overnight Bend'],
+   ['Dee Wright Observatory (Hwy 242)','~45 min'],['Tamolitch Blue Pool','~10 min'],['Sahalie Falls','~10 min'],
+   ['Clear Lake Resort','~3h → Union Creek'],['Jackson F. Kimball (Wood River springs)','~40 min'],['Crater Lake','~4.5–5h (138 + I-5)'],['End · back to Portland','']],
+  tips:[
+   ['🎟️','Entry','Crater Lake is about $30/car, valid 7 days. Visit parks often? The $80 annual pass pays off.'],
+   ['⛽','Gas','Main supplies at Government Camp, Sisters, Bend, Klamath Falls. Fill up before the mountains.'],
+   ['🚗','Driving','Hwy 242 and Rim Drive are curvy and steep — go slow, low gear; watch for deer at dawn.'],
+   ['🏨','Lodging','Book Bend for Sat soon (Labor Day is busy); Sun Union Creek booked ✓.'],
+   ['🚧','Safety','Never jump at Blue Pool; do not cross the rim railings at Crater Lake — loose rock.'],
+   ['🌙','Easier pace','3 days for 8 stops is tight (~14h driving). One more day means less driving and more time in each spot.']],
+  pack:['Layered warm clothing (big day-night swings; nights to ~4°C)','Hiking shoes (Blue Pool trail is gravelly)','Sunscreen + hat + sunglasses','Plenty of water + snacks (few supplies)','Offline maps (often no signal in the mountains)','Fill up on gas early (sparse stations down south)','Cash for entry / America the Beautiful pass','Camera / swimsuit (Clear Lake boating)','Bug spray + basic first-aid','Some cash (small resorts may not take cards)','Insulated bottle / rain jacket (changeable weather)','Booking confirmations + a screenshot of this page'],
+  days:[
+   {wd:'Sat',date:'9/5',title:'Mt. Hood lakes',tip:'',hotelKind:'open',hotel:'Overnight in Bend (try McMenamins Old St. Francis / Riverhouse / The Oxford) — not booked yet, lock it in early for the holiday weekend',blocks:[
+    {time:'8:00',title:'Depart Portland (US-26 E)',badges:[],img:'',note:'Leave early and head southeast up Mt. Hood on Hwy 26. Government Camp has gas and supplies on the way.',map:''},
+    {time:'9:15',title:'Trillium Lake',badges:[['Stay ~1.5h','stay'],['2 mi flat loop','dist'],['$5 parking','cash']],img:IMG+'4/44/Trilliumlake.jpg',note:'The classic Mt. Hood reflection-postcard lake. A flat ~2-mile loop mirrors the snowy peak — the top photo spot of the trip.',map:M+'Trillium+Lake+Mount+Hood+Oregon'},
+    {time:'11:15',title:'Little Crater Lake',badges:[['Stay ~1h','stay'],['0.4 mi walk','dist'],['Quiet','stay']],img:IMG+'thumb/7/77/Little_Crater_lake_2016.jpg/1280px-Little_Crater_lake_2016.jpg',note:'Just a ~0.4-mile walk from the lot. A small but 45-ft-deep spring pool, impossibly blue and clear — a wildly underrated gem.',map:M+'Little+Crater+Lake+Oregon'},
+    {time:'12:30',title:'Lunch + drive toward Bend',badges:[['🚗 ~2.5h · 130 mi','drive']],img:'',note:'Lunch in Government Camp or pack a picnic. Afternoon drive Hwy 26 → 97 south through high-desert pines toward Bend, about 2.5 hours (you pass Smith Rock on the way).',map:''},
+    {time:'15:00',title:'Smith Rock State Park',badges:[['Stay 1.5–2.5h','stay'],['$5 parking','cash'],['Best late-day light','stay'],['⚠️ Full Day 1','warn']],img:IMG+'5/57/Scenic_view_of_Smith_Rock.jpg',note:'Right on the way south; arrive late afternoon when the heat eases and the ochre cliffs glow. Stroll the flat River Trail, or climb the steep Misery Ridge for Monkey Face views. Then ~25 min to Bend.',map:M+'Smith+Rock+State+Park+Terrebonne+Oregon'},
+    {time:'Eve',title:'Overnight in Bend',badges:[],img:'',note:'Bend is the hub of central Oregon — lots of restaurants, breweries and hotels, and handy for the McKenzie loop tomorrow (via Sisters).',map:''}]},
+   {wd:'Sun',date:'9/6',title:'McKenzie falls loop',tip:'Busiest day: morning is the McKenzie falls loop, afternoon is a 3-hour drive to Crater Lake. Leave by 7:30. If rushed, skip the Clear Lake boat or shorten the Blue Pool hike.',hotelKind:'booked',hotel:'Union Creek Resort (Prospect) · booked ✓ check-in 9/6 → out 9/7. Historic 1920s resort, famous Beckies Cafe pie; next door Rogue Gorge and Natural Bridge are gorgeous 5–10 min strolls.',blocks:[
+    {time:'8:00',title:'Dee Wright Observatory (Hwy 242)',badges:[['Stay ~45m','stay'],['⚠️ Narrow · no RVs','warn'],['🚗 40m','drive']],img:IMG+'3/38/Dee_Wright_Observatory_%28Deschutes_County%2C_Oregon_scenic_images%29_%28desDB1726%29.jpg',note:'From Sisters take Hwy 242 over McKenzie Pass. An observatory built entirely of lava rock, 360° views of 11 volcanic peaks over a black lava field — like the moon.',map:M+'Dee+Wright+Observatory+Oregon'},
+    {time:'9:30',title:'Tamolitch Blue Pool',badges:[['Hike ~2h','stay'],['4.1 mi round trip','dist'],['⚠️ No jumping/swim','warn']],img:IMG+'thumb/e/e5/Tamolitch-falls-blue-pool-by-Natalie-inouye-17.jpg/1280px-Tamolitch-falls-blue-pool-by-Natalie-inouye-17.jpg',note:'The McKenzie River runs underground through lava then resurfaces here as a glowing gem-blue pool. ~4.1 mi round trip, gentle, beautiful riverside. Water is about 4°C year-round — view from shore only.',map:M+'Tamolitch+Blue+Pool+Oregon'},
+    {time:'12:00',title:'Sahalie & Koosah Falls',badges:[['Stay ~45m','stay'],['Short loop','dist']],img:IMG+'thumb/c/cc/Sahalie_Falls.jpg/1280px-Sahalie_Falls.jpg',note:'Right off Hwy 126, two adjacent thundering falls; a short loop links both. Flow peaks in snowmelt season (around June); September is gentler but still lovely.',map:M+'Sahalie+Falls+Oregon'},
+    {time:'13:00',title:'Clear Lake Resort',badges:[['Stay ~1.5h','stay'],['Boat rentals','stay'],['Lakeside lunch','stay']],img:IMG+'thumb/d/da/Clear_Lake%2C_Oregon.jpg/1280px-Clear_Lake%2C_Oregon.jpg',note:'The McKenzie source lake, so clear you can see a 3,000-year-old underwater forest on the bottom. Rent a rowboat at the resort (no motors), lunch at the lakeside cafe.',map:M+'Clear+Lake+Resort+Oregon'},
+    {time:'15:00',title:'Drive to Union Creek Resort (Prospect)',badges:[['🚗 ~3h · 150 mi','drive']],img:'',note:'Afternoon, about 3 hours south to Union Creek on the west side of Crater Lake for the night. Fill up in Bend / Sisters first and grab food for tomorrow (Oakridge also has gas en route).',map:''}]},
+   {wd:'Mon',date:'9/7',title:'Crater Lake + drive home (Labor Day)',tip:'',hotelKind:'',hotel:'',blocks:[
+    {time:'8:30',title:'Crater Lake (Rim Village & West Rim)',badges:[['Stay ~2.5–3h','stay'],['Entry ~$30/car · 7 days','cash'],['⚠️ East rim/boats closed','warn']],img:IMG+'thumb/0/01/Crater_Lake_winter_pano2.jpg/1280px-Crater_Lake_winter_pano2.jpg',note:'From Union Creek, about 45 min up Hwy 62 to the rim. First overlook at Rim Village, then along West Rim Drive stop at Sinnott Memorial, Discovery Point, Watchman Overlook. Deepest lake in the US and one of the bluest on Earth — rim views are unbeatable (no going down to the water this year).',map:M+'Crater+Lake+Rim+Village+Oregon'},
+    {time:'Option',title:'Jackson F. Kimball (Wood River springs)',badges:[['Optional detour','warn'],['~2h round trip','drive'],['Open May–Nov','stay']],img:IMG+'5/59/Jackson_F_Kimball_State_Park.jpg',note:'If you want it, head southeast from Crater Lake down to Fort Klamath (~50 min): the Wood River bubbles up from springs, very clear, pale blue-green, lovely early morning. But it is a detour opposite your way home — skip it to start the drive earlier.',map:M+'Jackson+F+Kimball+State+Recreation+Site+Oregon'},
+    {time:'13:00',title:'North Entrance → back to Portland',badges:[['🚗 ~4.5–5h · 245 mi','drive'],['Waterfalls en route','stay']],img:'',note:'If you skip the detour, exit the North Entrance on Hwy 138 (the North Umpqua scenic byway), stopping at Watson Falls (one of the tallest in Oregon). Then I-5 north to Portland, about 4.5–5 hours. Dinner break in Roseburg / Eugene.',map:M+'Watson+Falls+Oregon'}]}]
+ },
+
+ vi:{nav:'🧭 Bản đồ',appSub:'4–8/9 · Labor Day',chips:['⚠️ Lưu ý','🧭 Lộ trình','📅 Lịch','🎒 Hành lý','💡 Mẹo'],heroH1:'Oregon Cascades · Vòng 8 điểm',heroSub:'Portland → Núi Hood → Thác McKenzie → Hồ Crater → Portland',heroChips:['🌲 8 điểm','💧 Thác + Blue Pool','🏔️ Hồ Crater'],statL:['3 ngày','điểm','dặm','lái xe'],dateTitle:'📅 Ngày của bạn · 4–8/9 (cuối tuần Labor Day)',dateBody:'Hạ cánh PDX T6 4/9 20:45 → nhà bạn (Portland) → bay về T3 8/9 13:25. 3 ngày trọn: 5/9 · 6/9 · 7/9. Tối T2 về Portland, nên <b>chỉ còn 1 đêm cần đặt — Bend (T7)</b>; CN Union Creek đã đặt ✓. ⚠️ Cuối tuần Labor Day — đặt Bend sớm, sẽ đông.',heads:['⚠️ Lưu ý 2026','🧭 Tổng quan lộ trình','📅 Lịch từng ngày','💡 Mẹo thực tế','🎒 Danh sách hành lý'],routeSub:'Bắc → Nam',packSub:'Chênh lệch nhiệt ngày-đêm lớn · tự lưu trên máy này',bonusTitle:'🌟 Nếu có thêm ngày: Painted Hills',bonusBody:'Đường vòng ~2 giờ về đông · miễn phí · đẹp nhất lúc chiều muộn. Một trong 7 kỳ quan Oregon — đồi sọc đỏ, vàng, đen, nâu từ tro núi lửa; lối ngắn (Overlook / ván Painted Cove / Carroll Rim). Cách Bend ~2h — hợp nửa ngày riêng hoặc khi kéo dài chuyến.',footA:'Dành riêng cho bạn · Vòng 8 điểm Cascades Oregon 🌲💧🏔️',footB:'Dựa trên thông tin công khai đến 6/2026 — kiểm tra đường và thời tiết trước khi đi · giám sát bởi mèo Luba 🐾',cdSuffix:'ngày nữa',cdGo:'🎉 Lên đường',
+  alerts:[
+   {icon:'🚧',bar:'#B07A1E',soft:'#FCEFD6',title:'Hồ Crater thi công lớn (2026–2028)',body:'Đường mòn Cleetwood Cove (lối duy nhất xuống nước) và toàn bộ tour thuyền đều đóng — năm nay không bơi/đi thuyền; East Rim Drive đóng một phần. Tin tốt: West Rim Drive và các điểm ngắm chính vẫn mở, view vành hồ vẫn ngoạn mục.'},
+   {icon:'🚫',bar:'#C0392B',soft:'#FBE3E0',title:'Blue Pool — cấm nhảy/bơi',body:'Nước quanh năm khoảng 4°C (38°F); đã có tai nạn liệt và tử vong do nhảy. Chỉ ngắm từ bờ.'},
+   {icon:'🛣️',bar:'#3E6FB0',soft:'#E4ECF8',title:'McKenzie Pass (Hwy 242)',body:'Hẹp, nhiều cua gắt, cấm RV/rơ-moóc, lái chậm. Sóng yếu — tải bản đồ ngoại tuyến trước.'}],
+  route:[
+   ['Bắt đầu · Portland','~1h15 · 60 mi'],['Trillium Lake (Núi Hood)','~30 phút'],['Little Crater Lake','~2.5h → nghỉ Bend'],
+   ['Dee Wright Observatory (Hwy 242)','~45 phút'],['Tamolitch Blue Pool','~10 phút'],['Sahalie Falls','~10 phút'],
+   ['Clear Lake Resort','~3h → Union Creek'],['Jackson F. Kimball (đầu nguồn Wood River)','~40 phút'],['Hồ Crater','~4.5–5h (138 + I-5)'],['Kết thúc · về Portland','']],
+  tips:[
+   ['🎟️','Vé vào','Hồ Crater khoảng $30/xe, dùng 7 ngày. Hay đi công viên? Thẻ năm $80 lợi hơn.'],
+   ['⛽','Đổ xăng','Tiếp tế chính ở Government Camp, Sisters, Bend, Klamath Falls. Đổ đầy trước khi vào núi.'],
+   ['🚗','Lái an toàn','Hwy 242 và Rim Drive nhiều cua dốc — đi chậm, về số thấp; coi chừng hươu lúc sáng sớm.'],
+   ['🏨','Chỗ nghỉ','Đặt Bend cho T7 sớm (Labor Day đông); CN Union Creek đã đặt ✓.'],
+   ['🚧','An toàn','Tuyệt đối không nhảy ở Blue Pool; đừng vượt lan can ở hồ Crater — đá rời.'],
+   ['🌙','Nhẹ hơn','3 ngày 8 điểm hơi gấp (~14h lái). Thêm 1 ngày = lái ít hơn, ở lâu hơn mỗi điểm.']],
+  pack:['Quần áo nhiều lớp (chênh nhiệt lớn; đêm ~4°C)','Giày đi bộ (lối Blue Pool có sỏi)','Kem chống nắng + mũ + kính râm','Nhiều nước + đồ ăn nhẹ (ít chỗ mua)','Bản đồ ngoại tuyến (núi hay mất sóng)','Đổ xăng sớm (trạm thưa ở phía nam)','Tiền mặt vé / thẻ America the Beautiful','Máy ảnh / đồ bơi (chèo thuyền Clear Lake)','Thuốc chống côn trùng + sơ cứu','Ít tiền mặt (resort nhỏ có thể không nhận thẻ)','Bình giữ nhiệt / áo mưa (thời tiết thất thường)','Xác nhận đặt phòng + chụp màn hình trang này'],
+  days:[
+   {wd:'T7',date:'9/5',title:'Hồ Núi Hood',tip:'',hotelKind:'open',hotel:'Nghỉ đêm ở Bend (McMenamins Old St. Francis / Riverhouse / The Oxford) — chưa đặt, đặt sớm cho cuối tuần lễ',blocks:[
+    {time:'8:00',title:'Khởi hành từ Portland (US-26 E)',badges:[],img:'',note:'Khởi hành sớm, theo Hwy 26 đi đông nam lên Núi Hood. Dọc đường có Government Camp để đổ xăng/mua đồ.',map:''},
+    {time:'9:15',title:'Trillium Lake',badges:[['Ở lại ~1.5h','stay'],['Vòng phẳng 2 mi','dist'],['Đỗ xe $5','cash']],img:IMG+'4/44/Trilliumlake.jpg',note:'Hồ phản chiếu kinh điển của Núi Hood. Vòng phẳng ~2 dặm soi bóng đỉnh tuyết — điểm chụp ảnh đẹp nhất chuyến đi.',map:M+'Trillium+Lake+Mount+Hood+Oregon'},
+    {time:'11:15',title:'Little Crater Lake',badges:[['Ở lại ~1h','stay'],['Đi bộ 0.4 mi','dist'],['Ít người','stay']],img:IMG+'thumb/7/77/Little_Crater_lake_2016.jpg/1280px-Little_Crater_lake_2016.jpg',note:'Chỉ đi bộ ~0.4 dặm từ bãi xe. Hồ nước ngầm nhỏ mà sâu 45 ft, xanh khó tin, trong vắt — viên ngọc bị xem nhẹ.',map:M+'Little+Crater+Lake+Oregon'},
+    {time:'12:30',title:'Ăn trưa + đi về hướng Bend',badges:[['🚗 ~2.5h · 130 mi','drive']],img:'',note:'Ăn trưa ở Government Camp hoặc mang theo. Chiều lái Hwy 26 → 97 xuống nam qua rừng thông cao nguyên về Bend, ~2.5 giờ (ngang qua Smith Rock).',map:''},
+    {time:'15:00',title:'Công viên Smith Rock',badges:[['Ở lại 1.5–2.5h','stay'],['Đỗ xe $5','cash'],['Đẹp lúc chiều','stay'],['⚠️ Ngày 1 kín','warn']],img:IMG+'5/57/Scenic_view_of_Smith_Rock.jpg',note:'Tiện đường xuống nam; đến cuối chiều khi đỡ nóng, vách đá hoàng thổ rực sáng. Đi River Trail bằng phẳng, hoặc leo Misery Ridge dốc ngắm đỉnh Monkey Face. Rồi ~25 phút tới Bend.',map:M+'Smith+Rock+State+Park+Terrebonne+Oregon'},
+    {time:'Tối',title:'Nghỉ đêm ở Bend',badges:[],img:'',note:'Bend là trung tâm Trung Oregon — nhiều nhà hàng, quán bia, khách sạn, tiện đi vòng McKenzie ngày mai (qua Sisters).',map:''}]},
+   {wd:'CN',date:'9/6',title:'Vòng thác McKenzie',tip:'Ngày bận nhất: sáng đi vòng thác McKenzie, chiều lái 3 giờ tới hồ Crater. Khởi hành trước 7:30. Nếu gấp, bỏ chèo thuyền Clear Lake hoặc rút ngắn Blue Pool.',hotelKind:'booked',hotel:'Union Creek Resort (Prospect) · đã đặt ✓ nhận 6/9 → trả 7/9. Khu nghỉ lịch sử thập niên 1920, bánh Beckies Cafe nổi tiếng; cạnh đó Rogue Gorge và Natural Bridge đi 5–10 phút rất đẹp.',blocks:[
+    {time:'8:00',title:'Dee Wright Observatory (Hwy 242)',badges:[['Ở lại ~45m','stay'],['⚠️ Hẹp · cấm RV','warn'],['🚗 40m','drive']],img:IMG+'3/38/Dee_Wright_Observatory_%28Deschutes_County%2C_Oregon_scenic_images%29_%28desDB1726%29.jpg',note:'Từ Sisters đi Hwy 242 qua McKenzie Pass. Đài quan sát xây hoàn toàn bằng đá dung nham, view 360° thấy 11 đỉnh núi lửa trên cánh đồng dung nham đen — như Mặt Trăng.',map:M+'Dee+Wright+Observatory+Oregon'},
+    {time:'9:30',title:'Tamolitch Blue Pool',badges:[['Đi bộ ~2h','stay'],['4.1 mi khứ hồi','dist'],['⚠️ Cấm nhảy/bơi','warn']],img:IMG+'thumb/e/e5/Tamolitch-falls-blue-pool-by-Natalie-inouye-17.jpg/1280px-Tamolitch-falls-blue-pool-by-Natalie-inouye-17.jpg',note:'Sông McKenzie chảy ngầm qua dung nham rồi trồi lên đây thành hồ xanh ngọc phát sáng. Đi-về ~4.1 dặm, ít dốc, ven sông đẹp. Nước quanh năm ~4°C — chỉ ngắm từ bờ.',map:M+'Tamolitch+Blue+Pool+Oregon'},
+    {time:'12:00',title:'Sahalie & Koosah Falls',badges:[['Ở lại ~45m','stay'],['Vòng ngắn','dist']],img:IMG+'thumb/c/cc/Sahalie_Falls.jpg/1280px-Sahalie_Falls.jpg',note:'Ngay cạnh Hwy 126, hai thác hùng vĩ liền kề; vòng ngắn nối cả hai. Nước mạnh nhất mùa tuyết tan (khoảng tháng 6); tháng 9 dịu hơn nhưng vẫn đẹp.',map:M+'Sahalie+Falls+Oregon'},
+    {time:'13:00',title:'Clear Lake Resort',badges:[['Ở lại ~1.5h','stay'],['Thuê thuyền','stay'],['Ăn trưa ven hồ','stay']],img:IMG+'thumb/d/da/Clear_Lake%2C_Oregon.jpg/1280px-Clear_Lake%2C_Oregon.jpg',note:'Hồ đầu nguồn McKenzie, trong đến mức thấy rừng chìm 3.000 năm dưới đáy. Thuê thuyền chèo ở resort (cấm động cơ), ăn trưa quán ven hồ.',map:M+'Clear+Lake+Resort+Oregon'},
+    {time:'15:00',title:'Lái tới Union Creek Resort (Prospect)',badges:[['🚗 ~3h · 150 mi','drive']],img:'',note:'Chiều, ~3 giờ về nam tới Union Creek ở phía tây hồ Crater để nghỉ. Đổ đầy xăng ở Bend / Sisters trước và mua đồ ăn cho ngày mai (Oakridge dọc đường cũng có xăng).',map:''}]},
+   {wd:'T2',date:'9/7',title:'Hồ Crater + về (Labor Day)',tip:'',hotelKind:'',hotel:'',blocks:[
+    {time:'8:30',title:'Hồ Crater (Rim Village & West Rim)',badges:[['Ở lại ~2.5–3h','stay'],['Vé ~$30/xe · 7 ngày','cash'],['⚠️ East rim/thuyền đóng','warn']],img:IMG+'thumb/0/01/Crater_Lake_winter_pano2.jpg/1280px-Crater_Lake_winter_pano2.jpg',note:'Từ Union Creek, ~45 phút lên Hwy 62 tới vành hồ. Ngắm đầu tiên ở Rim Village, rồi dọc West Rim Drive dừng Sinnott Memorial, Discovery Point, Watchman Overlook. Hồ sâu nhất nước Mỹ, xanh nhất Trái Đất — view vành hồ vô địch (năm nay không xuống nước).',map:M+'Crater+Lake+Rim+Village+Oregon'},
+    {time:'Tùy chọn',title:'Jackson F. Kimball (đầu nguồn Wood River)',badges:[['Đường vòng tùy chọn','warn'],['Khứ hồi ~2h','drive'],['Mở T5–T11','stay']],img:IMG+'5/59/Jackson_F_Kimball_State_Park.jpg',note:'Nếu muốn, từ hồ Crater xuống đông nam tới Fort Klamath (~50 phút): sông Wood trào lên từ mạch ngầm, rất trong, xanh lục nhạt, sáng sớm rất thư thái. Nhưng là đường vòng ngược hướng về — bỏ qua nếu muốn về sớm.',map:M+'Jackson+F+Kimball+State+Recreation+Site+Oregon'},
+    {time:'13:00',title:'Ra cổng Bắc → về Portland',badges:[['🚗 ~4.5–5h · 245 mi','drive'],['Có thác dọc đường','stay']],img:'',note:'Nếu bỏ đường vòng, ra cổng Bắc theo Hwy 138 (đường ngắm cảnh North Umpqua), ghé Watson Falls (một trong những thác cao nhất Oregon). Rồi I-5 lên bắc về Portland, ~4.5–5 giờ. Nghỉ ăn tối ở Roseburg / Eugene.',map:M+'Watson+Falls+Oregon'}]}]
+ }
+};
+
+let lang='zh';try{var _sl=localStorage.getItem('oregon-lang');if(_sl&&L[_sl])lang=_sl;}catch(e){}
 let sel=(function(){var i=Math.floor((new Date()-DSTART)/86400000);return i>=0&&i<=2?i:0;})();
-function renderTabs(){document.getElementById('daytabs').innerHTML=DAYS.map((d,i)=>'<button class="daytab'+(i===sel?' on':'')+'" onclick="pick('+i+')"><span class="d">'+d.date+'</span><span class="dt">'+d.wd+'</span></button>').join('');}
-function renderDay(){
-  const d=DAYS[sel];let h='<div class="dwd">'+d.wd+' '+d.date+'</div><div class="dttl">'+esc(d.title)+'</div>';
-  if(d.tip)h+='<div class="tip"><span>⏱️</span><span>'+esc(d.tip)+'</span></div>';
-  if(d.hotel)h+='<div class="hotelc '+(d.hotelKind==='booked'?'booked':'open')+'"><span>🛏️</span><span>'+esc(d.hotel)+'</span></div>';
-  h+='<div style="margin-top:10px">'+d.blocks.map(b=>{
-    let bd=(b.badges&&b.badges.length)?'<div class="badges">'+b.badges.map(x=>'<span class="bdg b-'+x[1]+'">'+esc(x[0])+'</span>').join('')+'</div>':'';
-    let im=b.img?'<div class="thumb" style="background-image:url('+b.img+')"></div>':'';
-    let mp=b.map?'<a class="mapbtn" href="'+b.map+'" target="_blank" rel="noopener">🧭 导航</a>':'';
-    return '<div class="block"><div class="time">'+b.time+'</div><div class="ln"><span class="dot"></span><div style="display:flex;gap:11px"><div style="flex:1;min-width:0"><div class="bt">'+esc(b.title)+'</div>'+bd+'</div>'+im+'</div><div class="note">'+esc(b.note)+'</div>'+mp+'</div></div>';
-  }).join('')+'</div>';
-  document.getElementById('daypanel').innerHTML=h;
-}
-function pick(i){sel=i;renderTabs();renderDay();}
-renderTabs();renderDay();
-
 let checked=(function(){try{return JSON.parse(localStorage.getItem('oregon-pack-v1')||'{}')}catch(e){return {}}})();
-function renderPack(){document.getElementById('packbox').innerHTML=PACK.map((label,i)=>{const id='p'+i,on=!!checked[id];return '<button class="packrow" onclick="togglePack('+i+')"><span class="cbox'+(on?' on':'')+'">'+(on?'✓':'')+'</span><span class="plabel'+(on?' on':'')+'">'+esc(label)+'</span></button>';}).join('');document.getElementById('packcount').textContent=PACK.filter((_,i)=>!!checked['p'+i]).length+' / '+PACK.length;}
-function togglePack(i){const id='p'+i;checked[id]=!checked[id];try{localStorage.setItem('oregon-pack-v1',JSON.stringify(checked))}catch(e){}renderPack();}
-renderPack();
+const $=s=>document.querySelector(s);
+
+function renderAlerts(D){document.getElementById('alerts-list').innerHTML=D.alerts.map(a=>'<div class="alert" style="box-shadow:inset 4px 0 0 '+a.bar+'"><span class="ic" style="background:'+a.soft+'">'+a.icon+'</span><div style="flex:1;min-width:0"><div class="at">'+esc(a.title)+'</div><div class="ab">'+esc(a.body)+'</div></div></div>').join('');}
+function renderRoute(D){document.getElementById('routebox').innerHTML=D.route.map((r,i)=>'<div class="rrow"><div class="rrail"><span class="rdot"'+(i===D.route.length-1?' style="box-shadow:0 0 0 1.5px #B07A1E;background:#B07A1E"':'')+'></span>'+(i<D.route.length-1?'<span class="rline"></span>':'')+'</div><div style="padding-bottom:12px;flex:1"><div class="rname">'+esc(r[0])+'</div>'+(r[1]?'<div class="rseg">↓ '+esc(r[1])+'</div>':'')+'</div></div>').join('');}
+function renderTips(D){document.getElementById('tips').innerHTML=D.tips.map(t=>'<div class="tiprow"><span style="font-size:16px">'+t[0]+'</span><span style="flex:1"><b>'+esc(t[1])+'　</b>'+esc(t[2])+'</span></div>').join('');}
+function renderTabs(D){document.getElementById('daytabs').innerHTML=D.days.map((d,i)=>'<button class="daytab'+(i===sel?' on':'')+'" onclick="pick('+i+')"><span class="d">'+d.date+'</span><span class="dt">'+esc(d.wd)+'</span></button>').join('');}
+function renderDay(D){const d=D.days[sel];let h='<div class="dwd">'+esc(d.wd)+' '+d.date+'</div><div class="dttl">'+esc(d.title)+'</div>';if(d.tip)h+='<div class="tip"><span>⏱️</span><span>'+esc(d.tip)+'</span></div>';if(d.hotel)h+='<div class="hotelc '+(d.hotelKind==='booked'?'booked':'open')+'"><span>🛏️</span><span>'+esc(d.hotel)+'</span></div>';h+='<div style="margin-top:10px">'+d.blocks.map(b=>{let bd=(b.badges&&b.badges.length)?'<div class="badges">'+b.badges.map(x=>'<span class="bdg b-'+x[1]+'">'+esc(x[0])+'</span>').join('')+'</div>':'';let im=b.img?'<div class="thumb" style="background-image:url('+b.img+')"></div>':'';let mp=b.map?'<a class="mapbtn" href="'+b.map+'" target="_blank" rel="noopener">'+D.nav+'</a>':'';return '<div class="block"><div class="time">'+esc(b.time)+'</div><div class="ln"><span class="dot"></span><div style="display:flex;gap:11px"><div style="flex:1;min-width:0"><div class="bt">'+esc(b.title)+'</div>'+bd+'</div>'+im+'</div><div class="note">'+esc(b.note)+'</div>'+mp+'</div></div>';}).join('')+'</div>';document.getElementById('daypanel').innerHTML=h;}
+function renderPack(D){document.getElementById('packbox').innerHTML=D.pack.map((label,i)=>{const id='p'+i,on=!!checked[id];return '<button class="packrow" onclick="togglePack('+i+')"><span class="cbox'+(on?' on':'')+'">'+(on?'✓':'')+'</span><span class="plabel'+(on?' on':'')+'">'+esc(label)+'</span></button>';}).join('');document.getElementById('packcount').textContent=D.pack.filter((_,i)=>!!checked['p'+i]).length+' / '+D.pack.length;}
+function renderCd(D){var dd=Math.max(0,Math.ceil((START-new Date())/86400000));document.getElementById('cd').textContent=dd>0?('⏳ '+dd+' '+D.cdSuffix):D.cdGo;}
+function applyStatic(D){$('.apptt .s').textContent=D.appSub;document.querySelectorAll('.chipnav a').forEach((a,i)=>{a.textContent=D.chips[i];});$('.hero h1').textContent=D.heroH1;$('.hero .sub').textContent=D.heroSub;document.querySelectorAll('.hchips span').forEach((s,i)=>{s.textContent=D.heroChips[i];});document.querySelectorAll('.stats .st .l').forEach((s,i)=>{s.textContent=D.statL[i];});$('.datebox .t').textContent=D.dateTitle;$('.datebox .b').innerHTML=D.dateBody;document.querySelectorAll('.sech .h2').forEach((s,i)=>{s.textContent=D.heads[i];});var rs=document.getElementById('routeSub');if(rs)rs.textContent=D.routeSub;var ps=document.getElementById('packSub');if(ps)ps.textContent=D.packSub;$('.bonus .bt').textContent=D.bonusTitle;$('.bonus .bn').textContent=D.bonusBody;$('.footer .a').textContent=D.footA;$('.footer .b').textContent=D.footB;}
+function applyLang(code){lang=code;try{localStorage.setItem('oregon-lang',code)}catch(e){}document.documentElement.lang=(code==='zh'?'zh-Hans':code);document.querySelectorAll('#langsw button').forEach(b=>b.classList.toggle('on',b.dataset.l===code));const D=L[code];applyStatic(D);renderAlerts(D);renderRoute(D);renderTips(D);renderTabs(D);renderDay(D);renderPack(D);renderCd(D);}
+function pick(i){sel=i;const D=L[lang];renderTabs(D);renderDay(D);}
+function togglePack(i){const id='p'+i;checked[id]=!checked[id];try{localStorage.setItem('oregon-pack-v1',JSON.stringify(checked))}catch(e){}renderPack(L[lang]);}
+document.querySelectorAll('#langsw button').forEach(b=>b.addEventListener('click',function(){applyLang(b.dataset.l);}));
+applyLang(lang);
+
 </script>
 </body>
 </html>
