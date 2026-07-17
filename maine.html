@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>🦞 Maine 缅因 5 天 · Yixuan</title>
+<meta name="description" content="缅因 5 天：Portland 灯塔+龙虾 · Acadia 国家公园 · Ferncrest 几何穹顶露营看银河。Labor Day 长周末。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+  :root{--ac:#1F5674;--red:#C63B2E;--screen:#D7E3EB;--frame:#EEF4F8;--ink:#16303F;--sub:#5C7382;--soft:#DCEAF2;--line:#CFDEE8;--cline:#D9E6EE}
+  html{scroll-behavior:smooth}
+  body{background:var(--screen);font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}button{font-family:inherit}
+  ::-webkit-scrollbar{height:5px;width:5px}::-webkit-scrollbar-thumb{background:rgba(31,86,116,.32);border-radius:9px}
+  .screen{min-height:100vh;display:flex;justify-content:center}
+  .frame{width:100%;max-width:480px;background:var(--frame);min-height:100vh;position:relative;box-shadow:0 0 60px rgba(10,35,50,.10)}
+  .appbar{position:sticky;top:0;z-index:30;background:rgba(238,244,248,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .appbar .row{display:flex;align-items:center;gap:10px;padding:9px 12px}
+  .back{flex:none;width:36px;height:36px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ac)}
+  .apptt{flex:1;min-width:0;display:flex;flex-direction:column}
+  .apptt .t{font:800 15px 'Baloo 2','Noto Sans SC';line-height:1.1}
+  .apptt .s{font:600 10.5px 'Space Grotesk';color:#6E8896}
+  .cd{flex:none;font:700 11px 'Space Grotesk';color:#fff;background:var(--ac);padding:6px 11px;border-radius:999px;white-space:nowrap}
+  .chipnav{display:flex;gap:7px;padding:0 12px 9px;overflow-x:auto}
+  .chipnav a{flex:none;font:700 12px 'Noto Sans SC';color:var(--ink);background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+  .chipnav a.on{color:var(--ac);background:var(--soft);border-color:transparent}
+  .hero{position:relative;color:#fff;overflow:hidden;background:#123A50}
+  .hero .bg{position:absolute;inset:0;background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Portland_Head_Light_2016.jpg/1280px-Portland_Head_Light_2016.jpg);background-size:cover;background-position:center;opacity:.42}
+  .hero .ov{position:absolute;inset:0;background:linear-gradient(165deg,rgba(31,86,116,.62) 0%,rgba(12,40,58,.92) 100%)}
+  .hero .in{position:relative;padding:22px 20px 24px}
+  .hero h1{font:800 26px 'Baloo 2','Noto Sans SC';line-height:1.12}
+  .hero .sub{font:500 12.5px 'Noto Sans SC';color:rgba(255,255,255,.9);margin-top:6px}
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .hchips span{font:600 11px 'Noto Sans SC';background:rgba(255,255,255,.18);padding:5px 10px;border-radius:999px}
+  .stats{display:flex;gap:8px;margin-top:16px}
+  .stats .st{flex:1;background:rgba(255,255,255,.15);border-radius:13px;padding:10px 6px;text-align:center}
+  .stats .st .v{font:800 14px 'Space Grotesk'}.stats .st .l{font:600 10px 'Noto Sans SC';color:rgba(255,255,255,.82);margin-top:2px}
+  .h2{font:800 19px 'Baloo 2','Noto Sans SC';color:var(--ink)}
+  .sech{display:flex;align-items:center;gap:8px;padding:22px 18px 10px}
+  .card{background:#fff;border:1px solid var(--cline);border-radius:18px}
+  .over{margin:16px 16px 0;padding:6px 16px}
+  .orow{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #E9F0F4}
+  .orow:last-child{border-bottom:none}
+  .orow .k{flex:none;font-size:17px;width:24px;text-align:center}
+  .orow .lab{flex:none;width:52px;font:700 12px 'Noto Sans SC';color:var(--ac)}
+  .orow .v{flex:1;font:500 12.5px 'Noto Sans SC';color:#39515F;line-height:1.5}
+  .daytabs{position:sticky;top:99px;z-index:20;background:rgba(238,244,248,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 14px 9px;border-bottom:1px solid var(--cline);display:flex;gap:7px;overflow-x:auto}
+  .daytab{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;min-width:64px;padding:8px 10px;border-radius:13px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .daytab.on{border-color:var(--ac);background:var(--ac);color:#fff}
+  .daytab .d{font:800 13px 'Baloo 2','Noto Sans SC';line-height:1}.daytab .dt{font:600 9px 'Noto Sans SC';opacity:.85}
+  .daypanel{padding:14px 16px 4px}
+  .dwd{font:800 19px 'Baloo 2','Noto Sans SC';color:var(--ac)}
+  .dttl{font:700 14px 'Noto Sans SC';margin-top:2px;color:#39515F}
+  .block{display:flex;gap:11px}
+  .block .time{flex:none;width:44px;text-align:right;font:700 11.5px 'Space Grotesk';color:var(--ac);padding-top:13px;line-height:1.3}
+  .block .ln{flex:1;min-width:0;border-left:2px solid #CFDEE8;padding:13px 0 16px 16px;position:relative}
+  .block .dot{position:absolute;left:-7px;top:17px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--ac)}
+  .block .bt{font:700 14.5px 'Noto Sans SC';line-height:1.4}
+  .block .note{font:500 12.5px 'Noto Sans SC';color:var(--sub);margin-top:6px;line-height:1.6}
+  .block .note b{color:#39515F}
+  .plan{margin:0 16px 12px;padding:15px;background:#fff;border:1px solid var(--cline);border-radius:18px;box-shadow:inset 4px 0 0 var(--pc,#1F5674)}
+  .plan .pt{font:800 14.5px 'Baloo 2','Noto Sans SC';color:#16303F;margin-bottom:6px}
+  .plan .pb{font:500 12px 'Noto Sans SC';color:#4A6270;line-height:1.7}
+  .plan .pb b{color:#16303F}
+  .footer{text-align:center;padding:26px 24px 36px}
+  .footer .a{font:700 12.5px 'Noto Sans SC';color:#39515F}
+  .footer .b{font:500 11px 'Noto Sans SC';color:#6E8896;margin-top:6px;line-height:1.6}
+  @media(min-width:880px){
+    .frame{max-width:1040px}
+    .me-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;grid-template-areas:"over over" "days plans";column-gap:24px;padding:0 22px 12px;align-items:start}
+    .a-over{grid-area:over}.a-days{grid-area:days}.a-plans{grid-area:plans;position:sticky;top:108px;align-self:start}
+  }
+</style>
+</head>
+<body>
+<div class="screen"><div class="frame">
+
+  <div class="appbar">
+    <div class="row">
+      <a class="back" href="index.html">←</a>
+      <div class="apptt"><span class="t">🦞 Maine 缅因</span><span class="s">8/27 – 9/1 · 2025 · Labor Day</span></div>
+      <span class="cd" id="cd">🏁 已走过</span>
+    </div>
+    <div class="chipnav">
+      <a href="#over" class="on">🧭 概览</a><a href="#days">📅 行程</a><a href="#plans">🦞 攻略</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="bg"></div><div class="ov"></div>
+    <div class="in">
+      <h1>Maine 缅因 5 天</h1>
+      <div class="sub">Portland 灯塔+龙虾 · Acadia 国家公园 · Ferncrest 几何穹顶看银河</div>
+      <div class="hchips"><span>🗼 Portland Head Light</span><span>🏞️ Acadia</span><span>🦞 龙虾六吃</span><span>🌌 穹顶银河</span></div>
+      <div class="stats">
+        <div class="st"><div class="v">8/27–9/1</div><div class="l">出行</div></div>
+        <div class="st"><div class="v">5</div><div class="l">晚</div></div>
+        <div class="st"><div class="v">4</div><div class="l">家住宿</div></div>
+        <div class="st"><div class="v">2025</div><div class="l">已走过</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="me-body">
+    <div id="over" class="a-over" style="scroll-margin-top:120px">
+      <div class="card over">
+        <div class="orow"><span class="k">✈️</span><span class="lab">航班</span><span class="v">8/27 傍晚落地 Portland（PWM）→ 9/1（劳动节）下午飞回家</span></div>
+        <div class="orow"><span class="k">🏨</span><span class="lab">住</span><span class="v">Inn at St John（Portland）· <b>Ferncrest Acadia</b> 穹顶（Sedgwick）· Elsa’s Inn on the Harbor（Prospect Harbor）· Days Inn Wyndham（Portland 机场）</span></div>
+        <div class="orow"><span class="k">🌡️</span><span class="lab">天气</span><span class="v">9 月白天 ~20°C / 夜 ~14°C · 带薄外套 + 驱蚊液（Acadia 湿地蚊多）</span></div>
+        <div class="orow"><span class="k">🦞</span><span class="lab">主题</span><span class="v">灯塔 + 龙虾（卷/整只/披萨/寿司/冰淇淋/芝士热三明治）+ 银河</span></div>
+      </div>
+    </div>
+
+    <div id="days" class="a-days" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">📅 每日行程</span></div>
+      <div class="daytabs" id="daytabs"></div>
+      <div class="daypanel" id="daypanel"></div>
+    </div>
+
+    <div id="plans" class="a-plans" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">🦞 攻略 & 贴士</span></div>
+      <div class="plan" style="--pc:#C63B2E"><div class="pt">🦞 龙虾六吃</div><div class="pb">最爱 <b>Trenton Bridge Lobster Pound</b>（Trenton 老牌 lobster pound）。此外：龙虾卷 · 整只清蒸 · <b>龙虾披萨</b> · 龙虾寿司 · <b>龙虾冰淇淋</b>（Bar Harbor Ben &amp; Bill’s）· 龙虾芝士热三明治。海边长大 vs 内陆人 battle 龙虾钳。还在 <b>ISF Trading</b> 海鲜市场买生鱼自己拼刺身。</div></div>
+      <div class="plan" style="--pc:#B07A1E"><div class="pt">🌅 灯塔 &amp; 日出</div><div class="pb">看日出 <b>Portland Head Light</b>（那天记不太清了 😅；first light ~5:35 / 日出 ~5:58）→ 沿海灯塔一路刷（Bug Light、Ram Island Ledge、Cape Elizabeth）。想避人：<b>Schoodic Point</b> 的粉色花岗岩海岸最安静。</div></div>
+      <div class="plan" style="--pc:#5647A8"><div class="pt">🌌 星空</div><div class="pb">Acadia 是国际暗夜协会认证的观星地，Bar Harbor / Schoodic 一带能看银河；穹顶露营那晚拍到了<b>银河</b>。九月还有 Acadia Night Sky Festival。</div></div>
+      <div class="plan" style="--pc:#2E7D5B"><div class="pt">🍺 啤酒</div><div class="pb">波特兰是新英格兰精酿小城，主打 <b>New England IPA</b>（Allagash / Definitive / Battery Steele）。想省事：Walmart 能买到 Shipyard <b>Pumpkinhead</b> 季节南瓜啤酒。</div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="a">为你复原 · Maine 缅因 5 天 🦞🗼🌌</div>
+    <div class="b">依据你的 ChatGPT 规划 + 亲口补充的每日日程 + 现场照片整理 · 监修 Luba 本猫 🐾</div>
+  </div>
+
+</div></div>
+
+<script>
+const M='https://www.google.com/maps/search/?api=1&query=';
+const START=new Date('2025-08-27T00:00:00');
+
+const DAYS=[
+  {wd:'周三 8/27',short:'8/27',dd:'抵达',title:'傍晚落地 Portland',blocks:[
+    {time:'傍晚',title:'落地 Portland（PWM）→ 取车',note:'',map:''},
+    {time:'晚',title:'🏨 入住 Inn at St John',note:'Portland 老牌小旅馆，靠近市区。安顿 + 第一顿龙虾。',map:M+'Inn+at+St+John+Portland+Maine'},
+  ]},
+  {wd:'周四 8/28',short:'8/28',dd:'→ Ferncrest',title:'采购 BBQ → 开去穹顶露营',blocks:[
+    {time:'上午',title:'🛒 超市囤 BBQ 食材',note:'肉、玉米、龙虾、饮料——晚上穹顶烧烤用。',map:''},
+    {time:'下午',title:'🌌 开车去 Ferncrest Acadia（几何穹顶）',note:'Sedgwick（蓝山半岛）的 geodesic dome glamping，离 Acadia ~1h，下午到。',map:M+'Ferncrest+Acadia+Sedgwick+Maine'},
+    {time:'傍晚',title:'🔥 篝火 BBQ + 采蓝莓 + 银河',note:'穹顶前生火烧烤，院子里现摘蓝莓；入夜拍<b>银河</b>（Acadia 是认证暗夜天空）。',map:''},
+    {time:'夜',title:'睡穹顶 😴',note:'',map:''},
+  ]},
+  {wd:'周五 8/29',short:'8/29',dd:'龙虾 + Acadia',title:'Trenton Bridge 龙虾 + Acadia',blocks:[
+    {time:'中午',title:'🦞 Trenton Bridge Lobster Pound',note:'<b>你最爱的龙虾！</b>MDI 门口 Trenton 的老牌 lobster pound，柴火大锅煮整只。',map:M+'Trenton+Bridge+Lobster+Pound'},
+    {time:'下午',title:'🏞️ Acadia 国家公园 + Bar Harbor',note:'Park Loop Road、Cadillac、Sand Beach、Jordan Pond；Bar Harbor 逛街 + Ben &amp; Bill’s 龙虾冰淇淋 + 龙虾披萨 + seafood boil。',map:M+'Acadia+National+Park'},
+    {time:'晚',title:'🏨 入住 Elsa’s Inn on the Harbor B&B',note:'Prospect Harbor（Schoodic 一侧）的海边 B&B。',map:M+'Elsas+Inn+on+the+Harbor+Prospect+Harbor+Maine'},
+  ]},
+  {wd:'周六 8/30',short:'8/30',dd:'Schoodic',title:'Schoodic Point → 开回 Portland',blocks:[
+    {time:'上午',title:'🪨 Schoodic Point',note:'Acadia 人少的一角，粉色花岗岩海岸、浪打礁石、海鸥（"下辈子当这个"）。',map:M+'Schoodic+Point+Acadia'},
+    {time:'下午',title:'🚗 开始开回 Portland（~3h）',note:'一路海岸线南下。',map:''},
+    {time:'晚',title:'🏨 住 Days Inn by Wyndham Airport / Maine Mall',note:'机场 / 商场旁，方便最后一天。',map:M+'Days+Inn+Wyndham+Portland+Maine+Mall'},
+  ]},
+  {wd:'周日 8/31',short:'8/31',dd:'灯塔巡礼',title:'Portland 灯塔一路刷',blocks:[
+    {time:'清晨',title:'🌅 Portland Head Light 看日出',note:'（那天记不太清了 😅）first light ~5:35、日出 ~5:58，提前 20–30 分钟到占位。',map:M+'Portland+Head+Light'},
+    {time:'白天',title:'🗼 沿海灯塔巡礼',note:'Portland Head Light、Bug Light、Ram Island Ledge、Cape Elizabeth 一带一路刷；龙虾卷 / 龙虾芝士热三明治 / 寿司 / 蓝莓汽水。',map:M+'Bug+Light+Portland+Maine'},
+    {time:'傍晚',title:'🐟 ISF Trading 海鲜市场',note:'灯塔刷完去 ISF Trading（亚洲海鲜市场）扫货——龙虾 / 三文鱼 / 生鱼片，回住处自己拼刺身 + temaki 🍣。',map:M+'ISF+Trading+seafood+market'},
+  ]},
+  {wd:'周一 9/1',short:'9/1',dd:'返程',title:'劳动节 · 飞回家',blocks:[
+    {time:'上午',title:'🦞 最后一顿龙虾 + 退房',note:'',map:''},
+    {time:'下午',title:'✈️ 起飞回家 🏠',note:'',map:''},
+  ]},
+];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+(function(){var d=Math.ceil((START-new Date())/86400000);document.getElementById('cd').textContent=d>0?('⏳ '+d+' 天后'):'🏁 已走过';})();
+
+let sel=0;
+function renderTabs(){document.getElementById('daytabs').innerHTML=DAYS.map((d,i)=>'<button class="daytab'+(i===sel?' on':'')+'" onclick="pick('+i+')"><span class="d">'+d.short+'</span><span class="dt">'+d.dd+'</span></button>').join('');}
+function renderDay(){
+  const d=DAYS[sel];
+  let h='<div class="dwd">'+d.wd+'</div><div class="dttl">'+esc(d.title)+'</div><div style="margin-top:10px">';
+  h+=d.blocks.map(b=>{
+    let nt=b.note?'<div class="note">'+b.note+'</div>':'';
+    let mp=b.map?'<a class="block-map" href="'+b.map+'" target="_blank" rel="noopener" style="margin-top:9px;display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:11px;background:#fff;border:1.5px solid var(--ac);color:var(--ac);font-weight:700;font-size:11.5px">🧭 地图</a>':'';
+    return '<div class="block"><div class="time">'+esc(b.time)+'</div><div class="ln"><span class="dot"></span><div class="bt">'+esc(b.title)+'</div>'+nt+mp+'</div></div>';
+  }).join('')+'</div>';
+  document.getElementById('daypanel').innerHTML=h;
+}
+function pick(i){sel=i;renderTabs();renderDay();}
+renderTabs();renderDay();
+</script>
+</body>
+</html>

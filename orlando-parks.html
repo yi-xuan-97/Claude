@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>🗺️ 奥兰多各园逐时动线 · Yixuan</title>
+<meta name="description" content="奥兰多各园开门到闭园战术：Epic / IOA+USF / EPCOT / AK 逐时动线、单人通道、买插队、圣诞限定。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+  :root{--ac:#1F8A8A;--screen:#CFE6E4;--frame:#EAF5F4;--ink:#163B3B;--sub:#5C7F7C;--soft:#D7EDEB;--line:#D2E7E5;--cline:#DDEDEC}
+  html{scroll-behavior:smooth}
+  body{background:var(--screen);font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}button{font-family:inherit}
+  ::-webkit-scrollbar{height:5px;width:5px}::-webkit-scrollbar-thumb{background:rgba(31,138,138,.32);border-radius:9px}
+  .screen{min-height:100vh;display:flex;justify-content:center}
+  .frame{width:100%;max-width:480px;background:var(--frame);min-height:100vh;position:relative;box-shadow:0 0 60px rgba(10,50,50,.10)}
+  .appbar{position:sticky;top:0;z-index:30;background:rgba(234,245,244,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .appbar .row{display:flex;align-items:center;gap:10px;padding:9px 12px}
+  .back{flex:none;width:36px;height:36px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ac)}
+  .apptt{flex:1;min-width:0;display:flex;flex-direction:column}
+  .apptt .t{font:800 15px 'Baloo 2','Noto Sans SC';line-height:1.1}
+  .apptt .s{font:600 10.5px 'Space Grotesk';color:#6E928F}
+  .totop{flex:none;font:700 11px 'Noto Sans SC';color:var(--ac);background:var(--soft);padding:6px 11px;border-radius:999px}
+  .hero{background:linear-gradient(160deg,#249a9a 0%,#147070 100%);color:#fff;padding:22px 20px 24px;position:relative;overflow:hidden}
+  .hero .wm{position:absolute;right:-14px;top:-22px;font-size:120px;opacity:.15;pointer-events:none}
+  .hero h1{font:800 25px 'Baloo 2','Noto Sans SC';line-height:1.12;position:relative}
+  .hero .sub{font:500 12.5px 'Noto Sans SC';color:rgba(255,255,255,.88);margin-top:6px;position:relative}
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;position:relative}
+  .hchips span{font:600 11px 'Noto Sans SC';background:rgba(255,255,255,.16);padding:5px 10px;border-radius:999px}
+  .sech{padding:20px 18px 6px}
+  .sech .h2{font:800 18px 'Baloo 2','Noto Sans SC';color:var(--ink)}
+  .tactics{display:flex;flex-direction:column;gap:9px;padding:0 16px}
+  .tactic{padding:14px;background:#fff;border:1px solid var(--cline);border-radius:16px;box-shadow:inset 4px 0 0 var(--ac)}
+  .tactic .t{font:800 13.5px 'Noto Sans SC'}
+  .tactic .b{font:500 12px 'Noto Sans SC';color:var(--sub);margin-top:5px;line-height:1.6}
+  .legend{display:flex;flex-wrap:wrap;gap:7px;padding:14px 16px 4px}
+  .lg{font:700 10.5px 'Noto Sans SC';padding:3px 9px;border-radius:999px}
+  .t-head{background:#FDE7E3;color:#C0392B}.t-sr{background:#DCF0EF;color:#1F8A8A}.t-buy{background:#E4ECF8;color:#3E6FB0}.t-show{background:#EDE7F6;color:#6A57B0}.t-eat{background:#E6F1EB;color:#2E7D5B}.t-xmas{background:#FBE4EC;color:#C0395E}
+  .ptabs{position:sticky;top:53px;z-index:20;background:rgba(234,245,244,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:10px 14px;border-top:1px solid var(--cline);border-bottom:1px solid var(--cline);display:flex;gap:7px;overflow-x:auto;margin-top:14px}
+  .ptab{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;padding:8px 12px;border-radius:13px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .ptab.on{border-color:var(--ac);background:var(--ac);color:#fff}
+  .ptab .n{font:800 13px 'Baloo 2','Noto Sans SC';line-height:1}.ptab .d{font:600 9px 'Noto Sans SC';opacity:.85}
+  .ppanel{padding:16px 16px 4px}
+  .pfull{font:800 20px 'Baloo 2','Noto Sans SC';color:#147070}
+  .strat{display:flex;align-items:center;gap:8px;margin-top:6px;padding:11px 13px;background:#DCEEEC;border:1px solid #C9E4E1;border-radius:14px;font:600 12px 'Noto Sans SC';color:#1F5E5C;line-height:1.5}
+  .palert{margin-top:9px;padding:11px 13px;background:#FBE4EC;border:1px solid #F2CCD8;border-radius:14px;font:600 11.5px 'Noto Sans SC';color:#A82C50;line-height:1.6}
+  .block{display:flex;gap:11px}
+  .block .time{flex:none;width:52px;text-align:right;font:700 12px 'Space Grotesk';color:var(--ac);padding-top:13px;line-height:1.25}
+  .block .ln{flex:1;min-width:0;border-left:2px solid var(--line);padding:13px 0 16px 16px;position:relative}
+  .block .dot{position:absolute;left:-7px;top:17px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--ac)}
+  .block .bt{font:700 14.5px 'Noto Sans SC';line-height:1.4}
+  .block .note{font:500 12.5px 'Noto Sans SC';color:var(--sub);margin-top:7px;line-height:1.65}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+  .tag{font:700 10px 'Noto Sans SC';padding:3px 8px;border-radius:999px;white-space:nowrap}
+  .footer{text-align:center;padding:22px 24px 36px}
+  .footer .a{font:600 11.5px 'Noto Sans SC';color:var(--sub);line-height:1.7}
+  .footer .b{font:500 11px 'Noto Sans SC';color:#8AA8A5;margin-top:8px}
+  @media(min-width:880px){
+    .frame{max-width:880px}
+    .pk-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+    .pk-main{max-width:660px;margin:0 auto}
+  }
+</style>
+</head>
+<body>
+<div class="screen"><div class="frame">
+
+  <div class="appbar">
+    <div class="row">
+      <a class="back" href="orlando.html">←</a>
+      <div class="apptt"><span class="t">🗺️ 各园动线</span><span class="s">配套 · 奥兰多圣诞</span></div>
+      <a class="totop" href="orlando.html">← 总攻略</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <span class="wm">🗺️</span>
+    <h1>各园逐时动线</h1>
+    <div class="sub">2 环球（3 园 2 天）+ 2 迪士尼（AK + EPCOT） · 每个园开门到闭园</div>
+    <div class="hchips"><span>🌌 Epic</span><span>🏰 IOA + USF</span><span>🌐 EPCOT</span><span>🐘 AK</span></div>
+  </div>
+
+  <div class="sech"><span class="h2">🧭 三条贯穿所有园的战术</span></div>
+  <div class="tactics pk-3col">
+    <div class="tactic"><div class="t">① Rope drop · 开门前到</div><div class="b">每天提前 45–60 分钟到门口排队。头 90 分钟排队最短，能顶下午两三小时。</div></div>
+    <div class="tactic"><div class="t">② Single rider · 单人通道</div><div class="b">你们 2 人，环球老两园 + Epic 狂用单人通道——分开坐、省一大半。不买全套快通也能玩很多的关键。</div></div>
+    <div class="tactic"><div class="t">③ 按需买插队</div><div class="b">环球 Epic 买 Epic Express；迪士尼只给最热门那 1 个买 Single Pass（AK 的 Flight of Passage、EPCOT 的 Cosmic Rewind）。</div></div>
+  </div>
+
+  <div class="legend">
+    <span class="lg t-head">头牌</span><span class="lg t-sr">单人通道</span><span class="lg t-buy">买插队</span><span class="lg t-show">秀</span><span class="lg t-eat">吃饭</span><span class="lg t-xmas">圣诞限定</span>
+  </div>
+
+  <div class="pk-main">
+    <div class="ptabs" id="ptabs"></div>
+    <div class="ppanel" id="ppanel"></div>
+  </div>
+
+  <div class="footer">
+    <div class="a">钟点为估算，2026 圣诞周确切开放 / 演出时间未公布。<br>出发前 1–2 周用各园官方 App 核对当日开放、秀场次、单人通道。</div>
+    <div class="b">配套「奥兰多圣诞 5 天 v2」· 监修 Luba 🐾</div>
+  </div>
+
+</div></div>
+
+<script>
+const TAGNAME={head:'头牌',sr:'单人通道',buy:'买插队',show:'秀',eat:'吃饭',xmas:'圣诞限定'};
+
+const PARKS=[
+  {name:'Epic',date:'12/23',emoji:'🌌',full:'Epic Universe',strategy:'5 个世界 · 不买 Epic Express（省 ~$300/人）· 反人流 rope drop + 免费单人通道 + Ministry 留到最后 · 提前 45 分钟到',alert:'住园外没有提前入园（那是环球酒店客人的福利）。好消息：Epic 大多数项目都有免费单人通道（single rider），配合聪明的时间安排，基本能替代昂贵的 Epic Express。',blocks:[
+    {time:'8:00',title:'到门口排队（rope drop）',tags:[],note:'提前 1 小时到。Celestial Park 是中央枢纽，5 个世界从这里发散，先想好第一冲哪个。'},
+    {time:'9:00',title:'Harry Potter and the Battle at the Ministry',tags:['head','sr'],note:'⚠️ 它没有 Express！三条路：①开门第一个冲 ②单人通道 ③留闭园前刷。求稳=开门直奔走正常队；数据最优=先冲低需求的 Mario Kart / Mine-Cart，把 Ministry 留到晚 8–9 点（闭园前排队暴跌约 74%）。圣诞旺季可能开虚拟排队，进园先看 Universal App。'},
+    {time:'9:40',title:'Super Nintendo World 超级马里奥',tags:['sr'],note:'Mario Kart: Bowsers Challenge（AR 头盔赛车）+ Mine-Cart Madness（大金刚）。单人通道实测 15–20 分钟刷完。可买 Power-Up Band 手环（~$40）把整个世界变互动游戏。'},
+    {time:'11:00',title:'Stardust Racers',tags:['head','sr'],note:'Celestial Park 双轨竞速过山车（62 mph），园里最刺激。两条轨道（绿 / 黄）体感不同，两边都坐。'},
+    {time:'12:30',title:'午饭',tags:['eat'],note:'Super Nintendo World 的 Toadstool Cafe（蘑菇主题），或 Celestial Park 餐厅。避开 12:30–13:30 高峰、手机点单。'},
+    {time:'13:30',title:'How to Train Your Dragon · 驯龙高手',tags:['sr','show'],note:'Hiccups Wing Gliders（温和家庭过山车）· Dragon Racers Rally · 看现场秀 The Untrainable Dragon。'},
+    {time:'15:30',title:'Dark Universe · Monsters Unchained',tags:['head','sr'],note:'机械臂黑暗骑乘，环球自称「史上最吓人」，排队场景一流。下午用免费单人通道回刷最爱（Stardust / Mario Kart）；Ministry 和大多数项目都有 single rider。'},
+    {time:'闭园前',title:'Universal Celestial Goodnight 夜秀',tags:['show'],note:'中央水域夜间灯光 + 喷泉 + 烟花收尾。之后若还有力气，临走刷一次 Battle at the Ministry（这时人最少）。晚饭出园西区 Pocha 93 / Walala。'},
+  ]},
+  {name:'IOA+USF',date:'12/24',emoji:'🏰',full:'IOA + Universal Studios',strategy:'Park-to-Park 票 · 一天扫两园 · ✅ 这天买 Express（~$300–360/人，两园全天最值）· 估开门 9:00（到 8:00）',alert:'⚡ Express 圣诞周会卖光，提前网上买、别等现场。⚠️ Hagrid 从 2026/7/1 起不在 Express 里了——就算买了快通也得排普通队，所以一开门第一个冲它。',blocks:[
+    {time:'8:00',title:'到 IOA 门口排队',tags:[],note:'今天从 Islands of Adventure 开始（头牌最多、排队涨最快）。'},
+    {time:'9:00',title:'Hagrids Magical Creatures Motorbike Adventure',tags:['head'],note:'全环球最好的过山车，排队涨最猛（中午就 120 分钟+）。⚠️ 不在 Express 里（2026/7 起）——一开门第一个冲它，别犹豫。早上单人通道未必开，趁早走正常队。'},
+    {time:'9:50',title:'Jurassic World VelociCoaster',tags:['head','sr'],note:'佛州最强过山车。紧接 Hagrids 之后冲，或用单人通道。'},
+    {time:'10:40',title:'IOA 其余头牌',tags:['sr'],note:'Forbidden Journey（霍格沃茨城堡里）· Hulk · Spider-Man · Jurassic Park River Adventure（12 月会湿会冷，选暖时段）。'},
+    {time:'12:00',title:'坐 Hogwarts Express → USF',tags:[],note:'从 Hogsmeade 站坐到 Kings Cross。趁中午前坐（通常 ≤30 分钟），两个方向车窗剧情不同。需要 Park-to-Park 票。'},
+    {time:'12:40',title:'到 USF · 午饭',tags:['eat'],note:'对角巷 The Leaky Cauldron（英式）或 Springfield（辛普森主题）。'},
+    {time:'13:30',title:'USF 头牌（用 Express 横扫）',tags:['sr'],note:'Escape from Gringotts（对角巷）· Revenge of the Mummy · Transformers 3-D · Men in Black —— 这天有 Express，直接刷。提醒：Hagrid 不在 Express，已在上午正常队解决。'},
+    {time:'傍晚',title:'平安夜圣诞特色',tags:['xmas'],note:'USF Macys 风格圣诞大游行；两园哈利波特城堡圣诞灯光投影秀（整点）；IOA Grinchmas；对角巷晚上等火龙喷火（slow-mo 拍很赞）；买互动魔杖做魔法。平安夜傍晚人流回落，是全周最舒服的夜晚，留下来玩。晚饭 Mills 50 的 SUSURU / Zaru。'},
+  ]},
+  {name:'EPCOT',date:'12/25',emoji:'🌐',full:'EPCOT · 圣诞当天',strategy:'买 Lightning Lane Multi Pass（~$40/人，7am App 买）刷常规项目 · Cosmic Rewind 另外搞定 · 提前 45 分钟到',alert:'⚡ Lightning Lane：Multi Pass（~$40/人）打包 Test Track / Frozen / Remy / Soarin 等。Cosmic Rewind 不在 Multi Pass：进园先在 App 看 7am / 1pm 有没有免费虚拟排队放号，抢到最省；没有就单买 Single Pass（圣诞约 $20–30/人）。日期票不用 park reservation。',blocks:[
+    {time:'8:15',title:'到门口排队',tags:[],note:'住外面没提前入园，但官方开门前 30–45 分钟到，跟第一批进。⏰ 7am 先在 App 抢 Cosmic Rewind 免费虚拟排队；没抢到再买它的 Single Pass（选中午窗口）。同时 7am 买 Multi Pass。'},
+    {time:'9:00',title:'Test Track 3.0',tags:['head'],note:'2025 翻新版，人气极高。一开门先冲它（Cosmic Rewind 用 VQ 或 Single Pass 搞定，不用挤开门）。'},
+    {time:'9:45',title:'World Showcase 两大热门',tags:[],note:'Frozen Ever After（挪威馆，涨得快，趁早）· Remys Ratatouille Adventure（法国馆）。🛍️ 法国馆礼品店买 Remy 磁吸肩膀玩偶（~$25–35，超出片，蹲你肩上逛园）。'},
+    {time:'11:30',title:'Cosmic Rewind',tags:['head','buy'],note:'用免费虚拟排队（抢到的话）或 Single Pass 在窗口去 —— 全迪士尼最好的过山车。'},
+    {time:'12:00',title:'Festival of the Holidays',tags:['eat','xmas'],note:'Holiday Kitchens 节日美食摊绕 World Showcase 一圈；玩 Cookie Stroll（集饼干）；各国 Storytellers 讲圣诞传统。其余骑乘 Soarin · Spaceship Earth · Mission: SPACE。'},
+    {time:'~17:00',title:'Candlelight Processional 烛光圣诞颂',tags:['show','xmas'],note:'America Gardens 剧场，名人朗读圣诞故事 + 50 人乐团合唱，每晚约 3 场（17:00 / 18:45 / 20:15）。圣诞当天爆满——想座位强烈建议订「餐饮套票」（含保留座），否则提前 60–90 分钟站队。'},
+    {time:'~21:00',title:'Luminous The Symphony of Us',tags:['show'],note:'World Showcase 湖面的夜间烟花灯光秀收尾。提前找好湖边位置。'},
+  ]},
+  {name:'AK',date:'12/27',emoji:'🐘',full:'Animal Kingdom · 末日',strategy:'Multi Pass（~$35/人，AK 最便宜）刷 Safaris / Everest / Navi · Flight of Passage 单买 Single Pass · AK 最早开（到 7:15）、关门最早，玩完回酒店；12/28 才 9:15am 飞',alert:'DinoLand 已于 2026/2 永久关闭（DINOSAUR 骑乘没了），正在改建 Tropical Americas。别按旧攻略找 DINOSAUR。⚡ Lightning Lane：Multi Pass 打包 Kilimanjaro Safaris / Expedition Everest / Navi River；Flight of Passage 不在 Multi Pass，单买 Single Pass（圣诞约 $20–30/人）。',blocks:[
+    {time:'7:15',title:'到门口排队（rope drop）',tags:[],note:'AK 是迪士尼最早开的园，7:15 到门口。今晚还住 Vistana、不用退房（明早 12/28 才飞），轻装来就行。'},
+    {time:'8:00',title:'Kilimanjaro Safaris 真动物巡游',tags:['head'],note:'一开门先冲 —— 动物清晨最活跃（中午都躲树荫睡）。值得刷两次：①开门；②闭园前 1–2 小时（金色光线、动物又活跃、常走入即上）。11am–3pm 最不值。'},
+    {time:'9:00',title:'Expedition Everest',tags:['head','sr'],note:'雪山过山车，有单人通道。接着 Pandora 的 Navi River Journey（涨得快，趁早）。'},
+    {time:'10:30',title:'Avatar Flight of Passage',tags:['head','buy'],note:'全迪士尼最佳骑乘之一，10 点后常飙到 180 分钟——用 Single Pass（圣诞约 $20–30/人）在窗口去，完美避开。'},
+    {time:'12:00',title:'午饭 + 步道',tags:['eat','xmas'],note:'Satuli Canteen（Pandora，公认 AK 最好的快餐，生物碗）。饭后走 Maharajah Jungle Trek（老虎）· Gorilla Falls（大猩猩）· Discovery Island Trails（生命之树）。🎄 在 Discovery Island 上找 Merry Menagerie 动物木偶 —— AK 的圣诞限定亮点。'},
+    {time:'14:00',title:'演出 + 凉快项目',tags:['show'],note:'Festival of the Lion King（必看音乐秀）· Finding Nemo 音乐剧 · Kali River Rapids（漂流，12 月会湿会冷——想玩选最暖时段）。'},
+    {time:'~16:30',title:'动物再活跃 + 收尾',tags:[],note:'傍晚动物又活跃起来，可二刷 Safaris 或看生命之树夜间 Tree of Life Awakenings 投影。'},
+    {time:'关门后',title:'送朋友去机场 → 回酒店睡',tags:[],note:'12/27 晚：你开车送朋友去 MCO 赶她 10:50PM 红眼（回 LAX），再开回 Vistana 住最后一晚。12/28 早：还 Turo 车（8:30am）→ 9:15am 飞回 DSM。别熬太晚。晚饭回程顺路 Jollibee / Disney Springs / Mills 50。'},
+  ]},
+];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+let sel=0;
+function renderTabs(){document.getElementById('ptabs').innerHTML=PARKS.map((p,i)=>'<button class="ptab'+(i===sel?' on':'')+'" onclick="pick('+i+')"><span class="n">'+esc(p.name)+'</span><span class="d">'+p.date+'</span></button>').join('');}
+function renderPark(){
+  const p=PARKS[sel];
+  let h='<div class="pfull">'+p.emoji+' '+esc(p.full)+'</div><div class="strat"><span style="font-size:15px">🎯</span><span style="flex:1">'+esc(p.strategy)+'</span></div>';
+  if(p.alert)h+='<div class="palert">⚠️ '+esc(p.alert)+'</div>';
+  h+='<div style="margin-top:12px">'+p.blocks.map(b=>{
+    let tg=(b.tags&&b.tags.length)?'<div class="tags">'+b.tags.map(k=>'<span class="tag t-'+k+'">'+TAGNAME[k]+'</span>').join('')+'</div>':'';
+    return '<div class="block"><div class="time">'+esc(b.time)+'</div><div class="ln"><span class="dot"></span><div class="bt">'+esc(b.title)+'</div>'+tg+'<div class="note">'+esc(b.note)+'</div></div></div>';
+  }).join('')+'</div>';
+  document.getElementById('ppanel').innerHTML=h;
+}
+function pick(i){sel=i;renderTabs();renderPark();}
+renderTabs();renderPark();
+</script>
+</body>
+</html>

@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>🏔️ Colorado · Bucket List · Yixuan</title>
+<meta name="description" content="科罗拉多想去的所有地方汇总：RMNP、San Juans、Pikes Peak、Strawberry Park、Maroon Bells、Ice Lakes 等。未来再去的参考。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;}
+  html{scroll-behavior:smooth;}
+  body{background:#DCE4F0;font-family:'Noto Sans SC',sans-serif;color:#1F2733;}
+  a{text-decoration:none;}
+  ::-webkit-scrollbar{height:5px;width:5px;}
+  ::-webkit-scrollbar-thumb{background:rgba(62,111,176,.32);border-radius:9px;}
+
+  .cl-shell{min-height:100vh;background:#DCE4F0;display:flex;justify-content:center;}
+  .cl-frame{width:100%;max-width:480px;background:#EEF2F8;min-height:100vh;position:relative;box-shadow:0 0 60px rgba(20,30,50,.10);}
+
+  /* APPBAR */
+  .appbar{position:sticky;top:0;z-index:30;background:rgba(238,242,248,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #DCE4F0;}
+  .appbar-row{display:flex;align-items:center;gap:10px;padding:9px 12px;}
+  .appbar-mono{flex:none;width:36px;height:36px;border-radius:11px;background:#fff;border:1px solid #DCE4F0;display:flex;align-items:center;justify-content:center;font-size:18px;}
+  .appbar-title{flex:1;min-width:0;display:flex;flex-direction:column;}
+  .appbar-title .t1{font:800 15px 'Baloo 2','Noto Sans SC';color:#1F2733;line-height:1.1;}
+  .appbar-title .t2{font:600 10.5px 'Space Grotesk';color:#8B94A3;}
+  .appbar-chip{flex:none;font:700 11px 'Space Grotesk';color:#fff;background:#3E6FB0;padding:6px 11px;border-radius:999px;}
+  .appbar-nav{display:flex;gap:7px;padding:0 12px 9px;overflow-x:auto;}
+  .appbar-nav a{flex:none;font:700 12px 'Noto Sans SC';color:#1F2733;background:#fff;border:1px solid #DCE4F0;padding:6px 12px;border-radius:999px;}
+  .appbar-nav a.primary{color:#3E6FB0;background:#E4ECF8;border-color:transparent;}
+
+  /* HERO */
+  .hero{background:linear-gradient(160deg,#4A78B8 0%,#2F5C99 100%);color:#fff;padding:22px 20px 24px;position:relative;overflow:hidden;}
+  .hero .wm{position:absolute;right:-16px;top:-22px;font-size:128px;opacity:.14;pointer-events:none;}
+  .hero h1{font:800 26px 'Baloo 2','Noto Sans SC';line-height:1.12;position:relative;}
+  .hero .sub{font:500 12.5px 'Noto Sans SC';color:rgba(255,255,255,.88);margin-top:6px;position:relative;}
+  .hero .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;position:relative;}
+  .hero .chips span{font:600 11px 'Noto Sans SC';background:rgba(255,255,255,.16);padding:5px 10px;border-radius:999px;}
+  .hero .stats{display:flex;gap:8px;margin-top:16px;position:relative;}
+  .hero .stat{flex:1;background:rgba(255,255,255,.13);border-radius:13px;padding:10px 6px;text-align:center;}
+  .hero .stat .v{font:800 15px 'Space Grotesk';}
+  .hero .stat .l{font:600 10px 'Noto Sans SC';color:rgba(255,255,255,.8);margin-top:2px;}
+
+  /* BODY GRID */
+  .cl-body{padding-bottom:12px;}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;padding:20px 18px 4px;}
+  .sec-head .title{font:800 19px 'Baloo 2','Noto Sans SC';color:#1F2733;}
+  .sec-head .meta{font:700 12px 'Space Grotesk';color:#3E6FB0;}
+  .sec-sub{font:500 12px 'Noto Sans SC';color:#8B94A3;padding:0 18px 12px;}
+
+  /* TODO */
+  .todo-card{margin:0 16px;padding:6px 15px;background:#fff;border:1px solid #E2E8F1;border-radius:18px;box-shadow:inset 4px 0 0 #C0392B;}
+  .todo-row{display:flex;align-items:flex-start;gap:12px;padding:13px 2px;background:none;border:none;border-bottom:1px solid #EEF2F8;width:100%;text-align:left;cursor:pointer;}
+  .todo-row:last-child{border-bottom:none;}
+  .todo-row:active{opacity:.7;}
+  .todo-box{flex:none;width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;margin-top:1px;border:1.5px solid #B9C2D2;background:#fff;color:#fff;transition:background .2s,border-color .2s;}
+  .todo-row.done .todo-box{border-color:#3E6FB0;background:#3E6FB0;}
+  .todo-row.done .todo-box::before{content:"✓";}
+  .todo-body{flex:1;min-width:0;}
+  .todo-title{font:700 13.5px 'Noto Sans SC';color:#1F2733;line-height:1.4;display:block;transition:color .2s,text-decoration .2s;}
+  .todo-row.done .todo-title{color:#9AA3B2;text-decoration:line-through;}
+  .todo-note{display:block;font:500 11.5px 'Noto Sans SC';color:#8B94A3;margin-top:3px;line-height:1.5;}
+
+  /* DAY TABS */
+  .daytabs{position:sticky;top:99px;z-index:20;background:rgba(238,242,248,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 14px 9px;border-bottom:1px solid #E2E8F1;display:flex;gap:7px;overflow-x:auto;}
+  .daytab{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;min-width:54px;padding:8px 8px;border-radius:13px;cursor:pointer;border:1px solid #DCE4F0;background:#fff;color:#1F2733;}
+  .daytab .dn{font:800 15px 'Baloo 2';line-height:1;}
+  .daytab .dd{font:600 9px 'Noto Sans SC';opacity:.85;}
+  .daytab.active{background:#3E6FB0;border-color:#3E6FB0;color:#fff;}
+
+  .day-panel{display:none;padding:14px 16px 4px;}
+  .day-panel.active{display:block;}
+  .day-head{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:6px;}
+  .day-head .wd{font:800 19px 'Baloo 2','Noto Sans SC';color:#3E6FB0;}
+  .day-head .badge{font:700 10.5px 'Noto Sans SC';padding:3px 10px;border-radius:999px;}
+  .day-title{font:700 15px 'Noto Sans SC';color:#1F2733;line-height:1.4;}
+  .day-route{display:flex;align-items:center;gap:8px;margin:10px 0;padding:10px 13px;background:#E8EEF7;border:1px solid #D3DEEE;border-radius:14px;}
+  .day-route .ic{font-size:15px;}
+  .day-route .tx{font:600 12px 'Noto Sans SC';color:#34568C;line-height:1.45;}
+  .day-hotel{display:flex;align-items:center;gap:9px;margin:10px 0;padding:11px 13px;background:#EAF0F8;border:1px solid #D3DEEE;border-radius:14px;}
+  .day-hotel .ic{font-size:16px;}
+  .day-hotel .tx{font:600 12.5px 'Noto Sans SC';color:#3F5170;line-height:1.4;}
+
+  /* Timeline */
+  .tl-list{margin-top:8px;}
+  .tl-block{display:flex;gap:11px;}
+  .tl-time{flex:none;width:62px;text-align:right;font:700 11.5px 'Space Grotesk';color:#3E6FB0;padding-top:13px;letter-spacing:.04em;text-transform:uppercase;}
+  .tl-body{flex:1;min-width:0;border-left:2px solid #D6DEEA;padding:13px 0 16px 16px;position:relative;}
+  .tl-body::before{content:"";position:absolute;left:-7px;top:17px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid #3E6FB0;box-sizing:border-box;}
+  .tl-title{font:700 14.5px 'Noto Sans SC';color:#1F2733;line-height:1.4;}
+  .tl-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px;}
+  .tl-badges span{font:700 10.5px 'Noto Sans SC';padding:3px 9px;border-radius:999px;white-space:nowrap;}
+  .b-must{background:#FBE3E0;color:#C0392B;}
+  .b-free{background:#E6F1EB;color:#2E7D5B;}
+  .b-cash{background:#FCEFD6;color:#B07A1E;}
+  .b-warn{background:#FBE3E0;color:#C0392B;}
+  .b-cool{background:#DCF0EF;color:#1F8A8A;}
+  .b-eat{background:#EDE7F6;color:#6A57B0;}
+  .b-book{background:#E4ECF8;color:#3E6FB0;}
+  .tl-note{font:500 12.5px 'Noto Sans SC';color:#6C7689;margin-top:7px;line-height:1.6;}
+  .tl-note b{color:#1F2733;font-weight:700;}
+  .tl-note a{color:#3E6FB0;border-bottom:1px solid rgba(62,111,176,.4);}
+  .tl-map{margin-top:10px;display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:11px;background:#fff;border:1.5px solid #3E6FB0;color:#3E6FB0;font:700 12px 'Noto Sans SC';}
+  .tl-map:active{transform:scale(.96);}
+
+  /* Notes */
+  .note-box{margin:11px 0 0;padding:12px 14px;background:#EAF0F8;border:1px solid #D3DEEE;border-radius:14px;font:500 12px 'Noto Sans SC';color:#3F5170;line-height:1.6;}
+  .note-box.warn{background:#FBE3E0;border-color:#F0C3BA;color:#7A2419;}
+  .note-box b{color:#1F2733;font-weight:700;}
+  .note-box.warn b{color:#7A2419;}
+
+  /* HOTELS */
+  .hotel-card{display:flex;align-items:center;gap:12px;padding:13px 14px;background:#fff;border:1px solid #E2E8F1;border-radius:16px;box-shadow:inset 4px 0 0 #9AA3B2;}
+  .hotel-card.acc{box-shadow:inset 4px 0 0 #3E6FB0;}
+  .hotel-card.red{box-shadow:inset 4px 0 0 #C0392B;}
+  .hotel-card.green{box-shadow:inset 4px 0 0 #2E7D5B;}
+  .hotel-region{flex:none;font:700 10px 'Space Grotesk';color:#3E6FB0;background:#E4ECF8;padding:6px 8px;border-radius:10px;text-align:center;min-width:64px;line-height:1.25;}
+  .hotel-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+  .hotel-name{font:700 13px 'Noto Sans SC';color:#1F2733;line-height:1.3;}
+  .hotel-name a{color:#1F2733;}
+  .hotel-city{font:500 11px 'Noto Sans SC';color:#8B94A3;line-height:1.4;}
+  .hotel-price{flex:none;font:800 12.5px 'Space Grotesk';color:#1F2733;text-align:right;}
+  .hotels-list{display:flex;flex-direction:column;gap:9px;padding:0 16px;}
+
+  /* BUDGET / Variations */
+  .var-card{margin:0 16px;padding:6px 16px 12px;background:#fff;border:1px solid #E2E8F1;border-radius:18px;}
+  .var-row{padding:11px 0;border-bottom:1px solid #EEF2F8;}
+  .var-row:last-child{border-bottom:none;}
+  .var-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:5px;}
+  .var-name{font:700 13px 'Noto Sans SC';color:#1F2733;}
+  .var-tag{font:700 9.5px 'Space Grotesk';letter-spacing:.06em;color:#3E6FB0;background:#E4ECF8;padding:3px 8px;border-radius:999px;text-transform:uppercase;}
+  .var-desc{font:500 12px 'Noto Sans SC';color:#6C7689;line-height:1.6;margin-bottom:6px;}
+  .var-desc b{color:#1F2733;font-weight:700;}
+  .var-chain{display:flex;flex-wrap:wrap;gap:5px;align-items:center;}
+  .var-chain .s{font:600 10.5px 'Noto Sans SC';color:#3F5170;background:#EAF0F8;padding:4px 9px;border-radius:999px;border:1px solid #D3DEEE;}
+  .var-chain .a{font:500 10px 'Space Grotesk';color:#9AA3B2;}
+
+  /* FOOD CARDS */
+  .food-card{margin:0 16px;padding:0 14px;background:#fff;border:1px solid #E2E8F1;border-radius:18px;}
+  .food-row{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #EEF2F8;}
+  .food-row:last-child{border-bottom:none;}
+  .food-em{flex:none;font-size:22px;line-height:1.2;width:30px;text-align:center;}
+  .food-body{flex:1;min-width:0;}
+  .food-name{font:700 13.5px 'Noto Sans SC';color:#1F2733;line-height:1.35;}
+  .food-row.avoid .food-name{color:#C0392B;}
+  .food-desc{font:500 12px 'Noto Sans SC';color:#6C7689;line-height:1.55;margin-top:3px;}
+  .food-desc b{color:#1F2733;font-weight:700;}
+  .food-meta{font:600 10.5px 'Space Grotesk';color:#8B94A3;letter-spacing:.04em;margin-top:5px;}
+
+  /* WISDOM list inside todo style is reused */
+
+  /* GEAR */
+  .gear-card{margin:0 16px;padding:6px 16px 12px;background:#fff;border:1px solid #E2E8F1;border-radius:18px;}
+  .gear-cat{font:700 13px 'Noto Sans SC';color:#3E6FB0;margin:14px 0 6px;padding-top:8px;border-top:1px solid #EEF2F8;}
+  .gear-cat:first-child{border-top:none;padding-top:0;}
+  .gear-list{list-style:none;padding:0;margin:0;}
+  .gear-list li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid #F4F7FB;font:500 12.5px 'Noto Sans SC';color:#3A4250;line-height:1.55;}
+  .gear-list li:last-child{border-bottom:none;}
+  .gear-list li::before{content:"□";color:#9AA3B2;font:500 13px 'Space Grotesk';line-height:1.4;flex:none;}
+  .gear-list li b{color:#1F2733;font-weight:700;}
+
+  /* FOOTER */
+  .footer{text-align:center;padding:26px 24px 36px;}
+  .footer .f1{font:700 12.5px 'Noto Sans SC';color:#3F5170;}
+  .footer .f2{font:500 11px 'Noto Sans SC';color:#8B94A3;margin-top:6px;line-height:1.6;}
+
+  /* DESKTOP */
+  @media (min-width:880px){
+    .cl-frame{max-width:1040px !important;}
+    .cl-body{display:grid;grid-template-columns:minmax(0,1fr) 332px;grid-template-areas:"over over" "days budget" "hotels budget" "food food" "gear gear";column-gap:24px;padding:0 22px 12px;align-items:start;}
+    .a-over{grid-area:over;}
+    .a-days{grid-area:days;}
+    .a-hotels{grid-area:hotels;}
+    .a-budget{grid-area:budget;position:sticky;top:108px;align-self:start;}
+    .a-food{grid-area:food;}
+    .a-gear{grid-area:gear;}
+    .hotels-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  }
+</style>
+</head>
+<body>
+<div class="cl-shell">
+<div class="cl-frame">
+
+  <!-- APPBAR -->
+  <div class="appbar">
+    <div class="appbar-row">
+      <span class="appbar-mono" aria-hidden="true">🏔️</span>
+      <div class="appbar-title">
+        <span class="t1">🏔️ Colorado Bucket List</span>
+        <span class="t2">7 regions · 未来某天 · Yixuan</span>
+      </div>
+      <span class="appbar-chip" id="ctChip">🗺️ 未定档</span>
+    </div>
+    <div class="appbar-nav">
+      <a href="#todo" class="primary">🚨 必读</a>
+      <a href="#days">📅 地区</a>
+      <a href="#hotels">🏨 住宿</a>
+      <a href="#budget">📋 模板</a>
+      <a href="#food">🥢 中餐</a>
+      <a href="#eat">🍴 美食</a>
+      <a href="#gear">🎒 装备</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="wm">🏔️</span>
+    <h1>Colorado · 想去的全部</h1>
+    <div class="sub">2026 年 7 月那次没去成。把所有研究过的地方、想吃的、想泡的、想 hike 的，都搬到这里——下次开这页就行。</div>
+    <div class="chips">
+      <span>🪨 Denver Metro</span>
+      <span>🚂 Pikes Peak</span>
+      <span>🏔️ San Juans</span>
+      <span>🌲 RMNP</span>
+      <span>♨️ Hot Springs</span>
+      <span>🐐 Mt Blue Sky</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v">6–8</div><div class="l">天自驾</div></div>
+      <div class="stat"><div class="v">1,500</div><div class="l">英里</div></div>
+      <div class="stat"><div class="v">$1.5k+</div><div class="l">人均</div></div>
+      <div class="stat"><div class="v">14k</div><div class="l">ft 顶</div></div>
+    </div>
+  </div>
+
+  <!-- BODY GRID -->
+  <div class="cl-body">
+
+    <!-- 必读 (Wisdom as checkable TODO) -->
+    <div id="todo" class="a-over" style="scroll-margin-top:120px;">
+      <div class="sec-head">
+        <span class="title">🚨 出行前必读</span>
+        <span class="meta" id="todoCounter">0 / 11</span>
+      </div>
+      <div class="sec-sub">11 条铁律 · 勾选自动存本机</div>
+      <div class="todo-card" id="todoCard">
+        <button class="todo-row" data-id="w0">
+          <span class="todo-box"></span>
+          <span class="todo-body">
+            <span class="todo-title">⛰️ 海拔阶梯：Day 1 不要超过 6,500 ft</span>
+            <span class="todo-note">Iowa Johnston ~900 ft，直接飞到 Estes 7,522 ft 或 Ouray 7,792 ft 几乎保证高反。分阶段：Denver 5,280 → Manitou 6,400 → 后面 9-12k ft。第一晚不喝酒，3-4L 水/天。Diamox 可问医生预防。</span>
+          </span>
+        </button>
+        <button class="todo-row" data-id="w1">
+          <span class="todo-box"></span>
+          <span class="todo-body">
+            <span class="todo-title">🌧️ 7 月雷暴铁律：1pm 前下山</span>
+            <span class="todo-note">Colorado 高原 7-8 月午后 2pm 必有雷暴。Bear Lake / Trail Ridge / Million Dollar Hwy 必须 1pm 前下山。听到雷声立刻下撤。早起策略：hike 7am 上 / 自驾 7:30am 出发。</span>
+          </span>
+        </button>
+        <button class="todo-row" data-id="w2">
+          <span class="todo-box"></span>
+          <span class="todo-body">
+            <span class="todo-title">🔥 野火 + 烟雾监测</span>
+            <span class="todo-note">Colorado 7-8 月野火季。每天早 7am 和午 1pm 查 AirNow Fire & Smoke Map。AQI > 150 红色 = 全室内 + N95。Plan B：跳过 RMNP 改 Mt Blue Sky；或全室内 Denver Art Museum / Botanic Gardens。</span>
+          </span>
+        </button>
+        <button class="todo-row" data-id="w3">
+          <span class="todo-box"></span>
+          <span class="todo-body">
+            <span class="todo-title">🎫 RMNP Bear Lake Permit 抢票</span>
+            <span class="todo-note">每月 1 号早 8am MT 释放下月票；每天前一晚 7pm MT 释放第二天剩余。选 Bear Lake Corridor permit（含整个园区）vs Rest of Park（不含 Bear Lake）。$2 fee + $30 park entry/车。</span>
+          </span>
+        </button>
+        <button class="todo-row" data-id="w4">
+          <span class="todo-box"></span>
+          <span class="todo-body">
+            <span class="todo-title">🚂 Pikes Peak Cog Rail 早订</span>
+            <span class="todo-note">夏季 9-10am 班 1-2 周前就售罄。出发前 2 个月预订最稳。$58.50/人。</span>
+          </span>
+        </button>
+        <button class="todo-row" data-id="w5">
+          <span class="todo-box"></span>
+          <span class="todo-body">
+            <span class="todo-title">🐛 蜱虫 + 防晒</span>
+            <span class="todo-note">RMNP / San Juans 都是 Colorado Wood Tick hot zone。Picaridin 20% 喷雾（比 DEET 温和）。长裤塞袜筒。Hike 后互相检查后背 + 腋下 + 发际线。高原 UV：海拔每 1,000 ft +10%，SPF 50+ 2h 补涂。</span>
+          </span>
+        </button>
+        <button class="todo-row" data-id="w6">
+          <span class="todo-box"></span>
+          <span class="todo-body">
+            <span class="todo-title">🚗 Million Dollar Highway 驾驶安全</span>
+            <span class="todo-note">US-550 Ouray → Silverton 25 mi：无护栏 + 悬崖 + 急转弯。双人轮流开。前一晚不喝酒。雨雪天能见度极差——查 CoTrip 路况。中型 SUV 以上比 Corolla compact 体感稳。</span>
+          </span>
+        </button>
+        <button class="todo-row" data-id="w7">
+          <span class="todo-box"></span>
+          <span class="todo-body">
+            <span class="todo-title">🎆 7/4 国庆周末注意</span>
+            <span class="todo-note">Ouray / Telluride 等小镇 7/4 是著名"老式 4th of July 庆典"——人潮翻 3-5 倍，酒店半年前抢光，溢价 50-100%。建议避开 7/4 周末（选 6 月底或 7 月中下旬）。如非 7/4 不可：主动绕开 Main St 烟花时段。</span>
+          </span>
+        </button>
+        <button class="todo-row" data-id="w8">
+          <span class="todo-box"></span>
+          <span class="todo-body">
+            <span class="todo-title">🥾 装备：跑鞋 vs Hiking Boots</span>
+            <span class="todo-note">跑鞋只适合：Bear Lake 0.7 mi 环湖、Garden of Gods 铺装道、Red Rocks Trading Post、城里 walking。Emerald Lake / Haiyaha / Ice Lakes 都需要 hiking boots（碎石 + 阶梯 + 滚石）。出发前 1-2 周买好穿熟避免起泡。</span>
+          </span>
+        </button>
+        <button class="todo-row" data-id="w9">
+          <span class="todo-box"></span>
+          <span class="todo-body">
+            <span class="todo-title">🩸 经期 + 高海拔</span>
+            <span class="todo-note">经期 + 高海拔 = 痛感放大。避免 D1-3 重流量日 hike 12k+ ft。棉条多带（trail 无卫生间）+ 暖宝宝 + Tylenol。经期想泡温泉，Box Canyon Lodge 私人桶比公共池更舒服。</span>
+          </span>
+        </button>
+        <button class="todo-row" data-id="w10">
+          <span class="todo-box"></span>
+          <span class="todo-body">
+            <span class="todo-title">🐱 Luba 在家方案模板</span>
+            <span class="todo-note">5-6 晚 = Rover drop-in × 5-6 次（$25/次 × 6 = $150）。LR5 自动猫砂 + 自动喂食 + Whisker app 远程监控。Sitter brief 必备：紧急 vet = Rush Animal Care Clive (515) 727-4631 24/7。FIC red flags：straining without urinating / crying / blood / no eat 12h+。</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- DAYS = REGIONS -->
+    <div id="days" class="a-days" style="scroll-margin-top:120px;">
+      <div class="sec-head">
+        <span class="title">📅 七大地区</span>
+        <span class="meta">7 regions</span>
+      </div>
+
+      <div class="daytabs" id="dayTabs">
+        <button class="daytab active" data-day="0"><span class="dn">R1</span><span class="dd">Denver</span></button>
+        <button class="daytab" data-day="1"><span class="dn">R2</span><span class="dd">Pikes Peak</span></button>
+        <button class="daytab" data-day="2"><span class="dn">R3</span><span class="dd">San Juans</span></button>
+        <button class="daytab" data-day="3"><span class="dn">R4</span><span class="dd">RMNP</span></button>
+        <button class="daytab" data-day="4"><span class="dn">R5</span><span class="dd">Aspen</span></button>
+        <button class="daytab" data-day="5"><span class="dn">R6</span><span class="dd">Steamboat</span></button>
+        <button class="daytab" data-day="6"><span class="dn">R7</span><span class="dd">Mt Blue Sky</span></button>
+      </div>
+
+      <!-- R1 Denver Metro -->
+      <div class="day-panel active" data-day="0">
+        <div class="day-head">
+          <span class="wd">R1 Denver Metro</span>
+          <span class="badge b-free">🟢 缓冲日</span>
+        </div>
+        <div class="day-title">🪨 Denver 都市 + 红岩 + Boulder</div>
+        <div class="day-route"><span class="ic">🧭</span><span class="tx">5,280 ft · 飞抵 / 低海拔缓冲日 · Region 01 · Denver Metro & Front Range</span></div>
+
+        <div class="tl-list">
+          <div class="tl-block">
+            <div class="tl-time">P0 必去</div>
+            <div class="tl-body">
+              <div class="tl-title">Red Rocks Park & Amphitheatre</div>
+              <div class="tl-badges"><span class="b-must">⭐ MUST</span><span class="b-free">免费</span></div>
+              <div class="tl-note">全球唯一天然声学完美露天剧场（Tripadvisor #2 Denver）。<b>白天免费参观</b>，黄昏 golden hour 红岩最饱和。Trading Post Trail 1.4 mi 土路看 Amphitheatre 外景。如果有想看的乐队 → Ticketmaster 抢票看 concert。</div>
+              <a href="https://www.redrocksonline.com/" target="_blank" class="tl-map">🧭 Red Rocks Park</a>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P0</div>
+            <div class="tl-body">
+              <div class="tl-title">Union Station + LoDo 步行区</div>
+              <div class="tl-badges"><span class="b-must">⭐ MUST</span></div>
+              <div class="tl-note">1881 Beaux-Arts 火车站，2014 翻新成美食 + 酒店地标。James Beard 获奖餐厅集群（Tavernetta、Snooze）。周边 Larimer Square（Denver 最老街区）+ 16th Street Mall 步行可达。</div>
+              <a href="https://denverunionstation.com/" target="_blank" class="tl-map">🧭 Union Station</a>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">RiNo Art District（街头壁画 walking）</div>
+              <div class="tl-note">River North 区域，全美最大街头壁画集中地之一。可参加 <a href="https://www.denvermicrobrewtour.com/rino-beer-and-graffiti-tour/" target="_blank">RiNo Beer & Graffiti Tour</a>（$55/人，2.5h，3 啤酒厂 + 1 cidery + 涂鸦 walking）</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Denver Museum of Nature & Science</div>
+              <div class="tl-note">Tripadvisor top 5 Denver，雷暴 / 烟雾天的 Plan B 首选。City Park 内，downtown 5 min 车。Google 4.7。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Denver Botanic Gardens</div>
+              <div class="tl-note">24 acres，"全美最佳植物园之一"。夏季开到 8pm，傍晚最美。门票 $20+。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Boulder（Pearl Street + Chautauqua Park）</div>
+              <div class="tl-note">Denver 北 30 min。Pearl Street 步行街 = "Boulder 灵魂"。Chautauqua Park Ranger Cottage 草坪看 Flatirons 远景（不爬山）。海拔 5,318 ft，可作为缓冲住宿替代 Denver。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P2 可选</div>
+            <div class="tl-body">
+              <div class="tl-title">Coors Field（Rockies 棒球）/ Coors Brewery Tour</div>
+              <div class="tl-note">Coors Field 看主场比赛（看时段）。Coors Brewery in Golden 免费，30 min 车。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P2</div>
+            <div class="tl-body">
+              <div class="tl-title">Cherry Creek Shopping District</div>
+              <div class="tl-note">高端 outdoor mall，Lululemon / Athleta / Nordstrom。Uber 单程 $15 from downtown。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P2</div>
+            <div class="tl-body">
+              <div class="tl-title">Denver Art Museum</div>
+              <div class="tl-note">芝加哥-加州之间最大博物馆之一，70,000 件藏品（原住民艺术 + 当代）。</div>
+            </div>
+          </div>
+        </div>
+        <div class="note-box">💡 Denver 5,280 ft <b>一英里高</b>——刚从平原飞到要适应。永远把 Day 1 安排在 Denver 或 Boulder，<b>不要直接上山</b>。多喝水，第一晚不喝酒。</div>
+      </div>
+
+      <!-- R2 Pikes Peak -->
+      <div class="day-panel" data-day="1">
+        <div class="day-head">
+          <span class="wd">R2 Pikes Peak</span>
+          <span class="badge b-cool">🟡 风景日</span>
+        </div>
+        <div class="day-title">🚂 Pikes Peak + Garden of the Gods</div>
+        <div class="day-route"><span class="ic">🧭</span><span class="tx">6,035–14,115 ft · Denver 南 70 mi · Region 02 · South · Pikes Peak / CO Springs</span></div>
+
+        <div class="tl-list">
+          <div class="tl-block">
+            <div class="tl-time">P0 必去</div>
+            <div class="tl-body">
+              <div class="tl-title">Garden of the Gods</div>
+              <div class="tl-badges"><span class="b-must">⭐ MUST</span><span class="b-free">免费</span></div>
+              <div class="tl-note">Tripadvisor <b>#1 in Colorado Springs（all 301 things）</b>。免费！包括停车。Perkins Central Garden Trail 1.5 mi 铺装无障碍。看 Kissing Camels + Steamboat Rock + Siamese Twins overlook。</div>
+              <a href="https://gardenofgods.com/" target="_blank" class="tl-map">🧭 Garden of the Gods</a>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P0</div>
+            <div class="tl-body">
+              <div class="tl-title">Pikes Peak Cog Railway</div>
+              <div class="tl-badges"><span class="b-must">🚂 MUST</span><span class="b-warn">高反风险</span></div>
+              <div class="tl-note">齿轨火车上 <b>14,115 ft Summit</b>。3h 来回（1h15 上 + 40 min 顶 + 1h15 下）。$58.50/人，必须提前订（夏季旺季售罄快）。Katherine Lee Bates 1893 在山顶写下《America the Beautiful》。<b>高反 SOP</b>：上山前喝 1L 水 + Ibuprofen 备用，顶部只走平地不爬高台。</div>
+              <a href="https://www.cograilway.com/" target="_blank" class="tl-map">🧭 cograilway.com</a>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Manitou Springs 老镇</div>
+              <div class="tl-note">Victorian 时代温泉度假镇 6,400 ft。Main St 散步 + <b>Penny Arcade</b> 古董投币游戏厅（免费看，玩几个 quarter）。也是 Pikes Peak Cog Rail 的起点站。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P2</div>
+            <div class="tl-body">
+              <div class="tl-title">Manitou Cliff Dwellings / Cave of the Winds</div>
+              <div class="tl-note">Cliff Dwellings = Anasazi 古居复刻博物馆。Cave of the Winds = 800-step 洞穴 tour 或绳索 zip。各 $25/人。</div>
+            </div>
+          </div>
+        </div>
+        <div class="note-box">💡 推荐住 <b>Cliff House at Pikes Peak</b>（1873 历史酒店，Cog Rail 5 min 车）或 Holiday Inn Express。Manitou 6,400 ft 是上 14k 前的<b>二级海拔缓冲</b>，前一晚住这。</div>
+      </div>
+
+      <!-- R3 San Juans -->
+      <div class="day-panel" data-day="2">
+        <div class="day-head">
+          <span class="wd">R3 San Juans</span>
+          <span class="badge b-warn">🔴 最累</span>
+        </div>
+        <div class="day-title">🏔️ Ouray + Silverton + Telluride + Million Dollar Hwy</div>
+        <div class="day-route"><span class="ic">🧭</span><span class="tx">7,800–14,000 ft · Denver SW 320 mi · 5.5h 车 · Region 03 · SW · San Juan Mountains</span></div>
+
+        <div class="tl-list">
+          <div class="tl-block">
+            <div class="tl-time">P0 必驾</div>
+            <div class="tl-body">
+              <div class="tl-title">Million Dollar Highway (US-550)</div>
+              <div class="tl-badges"><span class="b-must">⭐ MUST</span></div>
+              <div class="tl-note">Ouray → Silverton 25 mi 但要开 1h（弯路 + <b>Red Mountain Pass 11,018 ft</b>）。<b>无护栏 + 悬崖 + 急转弯</b>，公认全美最险最美 scenic byway 之一。双人轮流开。途中 <b>Crystal Lake 路边停 30 min 拍照</b>（10,032 ft，免费）。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P0</div>
+            <div class="tl-body">
+              <div class="tl-title">Ouray "美版瑞士" 老镇</div>
+              <div class="tl-badges"><span class="b-must">⭐ MUST</span></div>
+              <div class="tl-note">7,792 ft 维多利亚老镇，群山环抱。Main St 19 世纪建筑保留完整。<b>Box Canyon Falls</b> $5/人 5 分钟步道看一线天瀑布。<b>Cascade Falls</b> 镇北 0.5 mi 短走。<b>Ouray Hot Springs Pool</b>（公共大池 $25）可选。</div>
+              <a href="https://www.cityofouray.com/government/departments/box-canyon-park.php" target="_blank" class="tl-map">🧭 Box Canyon Falls</a>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P0</div>
+            <div class="tl-body">
+              <div class="tl-title">Telluride 缆车 + 小镇</div>
+              <div class="tl-badges"><span class="b-must">⭐ MUST</span><span class="b-free">免费缆车</span></div>
+              <div class="tl-note">小资圣地 8,750 ft。<b>全美唯一免费高空 Gondola</b> 13 min 跨山到 Mountain Village 10,540 ft。镇内看 <b>Bridal Veil Falls</b>（Colorado 最高瀑布 365 ft）远景。</div>
+              <a href="https://www.tellurideskiresort.com/the-mountain/getting-around/gondola/" target="_blank" class="tl-map">🧭 Telluride Gondola</a>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Silverton 老金矿小镇</div>
+              <div class="tl-note">9,318 ft 国家历史地标。Main St 老金矿氛围。<b>Mayflower Gold Mill</b> tour $28/人 1.5h（可选）。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Durango & Silverton Narrow Gauge Railroad</div>
+              <div class="tl-note">1882 年开的蒸汽火车 3.5h，穿梭峡谷。$100+/人。需提前订。<b>注意</b>：Durango 在更南，要拉很长一天才能塞进 trip。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Yankee Boy Basin 4WD（替代 Ice Lakes）</div>
+              <div class="tl-note">Ouray Camp Bird Mine Rd 4WD only。<b>Switzerland of America Tours $98/人 4h guided</b>。7 月底野花峰值——"漫山野花地毯"。看 Twin Falls + 矿山遗迹 + Mt Sneffels 14er。<b>80% Ice Lakes 视觉效果，0 hike</b>。</div>
+              <a href="https://www.soajeep.com/" target="_blank" class="tl-map">🧭 Switzerland of America Tours</a>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1 硬核</div>
+            <div class="tl-body">
+              <div class="tl-title">Ice Lakes Basin Trail</div>
+              <div class="tl-badges"><span class="b-warn">硬核 8h hike</span></div>
+              <div class="tl-note"><b>7.6 mi RT, 2,500 ft 爬升, 顶 12,250 ft</b>。Colorado <b>最 instagram-able 蒂芙尼蓝高山湖</b>。AllTrails 评 "strenuous"，需要 1 个月体能训练。<b>Lower Ice Lake 简化版</b>：3.6 mi RT, 1,000 ft 爬升, 3-4h, 50% 体验。<b>无任何道路 / 缆车 / 直升机可达</b>（wilderness 保护区）。Telluride Helitours scenic flight 可飞过看 $350/人。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Black Canyon of the Gunnison NP</div>
+              <div class="tl-note">South Rim 入口费 $30/车。<b>Painted Wall Overlook + Chasm View</b> 几个停车点拍照，1-2h 足够。沿途几百米深漆黑垂直悬崖。Ouray → Black Canyon 1.5h。</div>
+            </div>
+          </div>
+        </div>
+        <div class="note-box warn">⚠️ 7/4 周末 Ouray 是著名 "老式 4th of July 小镇"——上午 parade + 21:00-22:00 烟花峰值。<b>酒店半年前抢光</b>。如果想避人潮：从 Dallas Divide 进 Box Canyon Lodge 后方入口，房间私人温泉桶看远处烟花。</div>
+      </div>
+
+      <!-- R4 RMNP -->
+      <div class="day-panel" data-day="3">
+        <div class="day-head">
+          <span class="wd">R4 RMNP</span>
+          <span class="badge b-free">🟢 经典</span>
+        </div>
+        <div class="day-title">🌲 RMNP + Estes Park + Stanley Hotel</div>
+        <div class="day-route"><span class="ic">🧭</span><span class="tx">7,522–12,183 ft · Denver N 75 mi · 1.5h 车 · Region 04 · North · Rocky Mountain NP</span></div>
+
+        <div class="tl-list">
+          <div class="tl-block">
+            <div class="tl-time">P0 必去</div>
+            <div class="tl-body">
+              <div class="tl-title">Bear Lake 环湖 0.7 mi</div>
+              <div class="tl-badges"><span class="b-must">⭐ MUST</span></div>
+              <div class="tl-note">9,475 ft 高山湖。<b>完全铺装环湖步道 0.7 mi, 49 ft 海拔变化</b>——任何鞋都 OK。第一次来 Colorado 不进 RMNP 不算来过。AllTrails 3,737 reviews。</div>
+              <a href="https://www.nps.gov/romo/planyourvisit/exploring-the-bear-lake-road-corridor.htm" target="_blank" class="tl-map">🧭 Bear Lake NPS</a>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P0</div>
+            <div class="tl-body">
+              <div class="tl-title">Trail Ridge Road（全美最高州际公路）</div>
+              <div class="tl-badges"><span class="b-must">⭐ MUST</span></div>
+              <div class="tl-note">12,183 ft 顶。<b>Alpine Visitor Center 11,796 ft</b> 短走 Alpine Ridge Trail 0.6 mi（有台阶）。看高原 tundra + Kawuneeche Valley elk 鹿群。<b>需 Bear Lake Corridor permit</b>（含整个园区）或 Rest of Park permit。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1 升级</div>
+            <div class="tl-body">
+              <div class="tl-title">Bear → Nymph → Dream → Emerald Lake hike</div>
+              <div class="tl-note"><b>3.6 mi RT, 605 ft 爬升, 2.5-3h</b>。4 个高山湖（Nymph 1.2 mi, Dream 2.2 mi, Emerald 3.6 mi）。需要 hiking boots（碎石 + 原木阶梯）。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1 进阶</div>
+            <div class="tl-body">
+              <div class="tl-title">Emerald + Haiyaha Lake 5 湖全程</div>
+              <div class="tl-note"><b>5.5 mi RT, ~1,100 ft 爬升, 4-5h</b>。Haiyaha Lake 在 Dream Lake 岔路向南 0.9 mi，本地小红书帖（211 likes）评 "5 个湖最美的——翡翠绿"，比 Emerald 还惊艳。途中部分巨石滚石区，需登山杖。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Estes Park 镇 + Stanley Hotel</div>
+              <div class="tl-note">RMNP 东门门口小镇 7,522 ft。<b>Stanley Hotel</b> 是《闪灵》原著灵感来源，参加 Ghost Tour $30/人。Lake Estes 平地环线散步 1h。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">必读 permit</div>
+            <div class="tl-body">
+              <div class="tl-title">RMNP Timed Entry Permit System ⚠️</div>
+              <div class="tl-badges"><span class="b-warn">必读</span></div>
+              <div class="tl-note">5 月底-10 月中旬必须预约。<b>2 种 permit</b>：① Bear Lake Road Corridor（包含整个园区通行，5am-6pm 时段窗口）② Rest of Park（不含 Bear Lake，9am-2pm 时段）。<b>1 permit / 车</b>，不是 / 人。<b>双重释放窗口</b>：每月 1 号早 8am MT 释放下月票，每天前一晚 7pm MT 释放第二天剩余。$2 处理费 + $30 公园门票/车。</div>
+              <a href="https://www.recreation.gov/timed-entry/10086910" target="_blank" class="tl-map">🧭 recreation.gov RMNP</a>
+            </div>
+          </div>
+        </div>
+        <div class="note-box warn">⚠️ 7 月雷暴铁律：<b>下午 2pm 后山区雷暴</b>。Bear Lake 必须 7am 上山，1pm 前下山。听到雷声立刻下撤，不要在 tree line 以上停留。</div>
+      </div>
+
+      <!-- R5 Aspen & Glenwood -->
+      <div class="day-panel" data-day="4">
+        <div class="day-head">
+          <span class="wd">R5 Aspen</span>
+          <span class="badge b-cool">🟡 风景日</span>
+        </div>
+        <div class="day-title">🏘️ Aspen · Maroon Bells · Glenwood Springs</div>
+        <div class="day-route"><span class="ic">🧭</span><span class="tx">5,761–12,095 ft · Denver W 160 mi · 2.5h 车 · Region 05 · West · Aspen & Glenwood</span></div>
+
+        <div class="tl-list">
+          <div class="tl-block">
+            <div class="tl-time">P0</div>
+            <div class="tl-body">
+              <div class="tl-title">Maroon Bells</div>
+              <div class="tl-badges"><span class="b-must">⭐ MUST</span></div>
+              <div class="tl-note">Colorado <b>#1 明信片风景</b>——两座 14,000+ ft 双峰倒映在 Maroon Lake 上的经典构图。Aspen 西南 10 mi，需预约 shuttle bus（夏季）$16/人。湖边 1.5 mi easy loop 拍经典明信片。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P0</div>
+            <div class="tl-body">
+              <div class="tl-title">Glenwood Hot Springs Pool</div>
+              <div class="tl-badges"><span class="b-must">♨️ MUST</span></div>
+              <div class="tl-note"><b>全美最大温泉池 405 ft 长</b>，90-104°F。一年 365 天开放，<b>晚上 9pm-10pm 灯光夜场最浪漫</b>。$35/人 day pass。Day pass walk-in OK 不需预约。</div>
+              <a href="https://www.hotspringspool.com/" target="_blank" class="tl-map">🧭 Glenwood Hot Springs</a>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Glenwood Canyon (I-70 段)</div>
+              <div class="tl-note"><b>全美最美州际公路段之一</b>。穿过红色峡谷，火车轨道 + Colorado River 平行。副驾抓拍，开车专注。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Hanging Lake Trail</div>
+              <div class="tl-note">1.2 mi RT 但 1,000 ft 爬升 + 铁索段。<b>必须提前预约 permit</b>（夏季售罄快）。湖水悬挂在悬崖边，号称 "Colorado 最美瀑布湖"。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Independence Pass (CO-82)</div>
+              <div class="tl-note">12,095 ft，全美最高州道之一。Aspen 东 20 mi。冬季关闭，仅 5 月底-10 月中旬开放。开过去顶部短走 + 360° 风景。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P2</div>
+            <div class="tl-body">
+              <div class="tl-title">Aspen 镇 + Ashcroft Ghost Town</div>
+              <div class="tl-note">Aspen 7,907 ft 富人滑雪镇，夏季也很活跃。Ashcroft Ghost Town 镇南 12 mi 老矿镇遗址 $5/人。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P2 spa</div>
+            <div class="tl-body">
+              <div class="tl-title">Iron Mountain Hot Springs (Glenwood)</div>
+              <div class="tl-note">Glenwood 城里另一温泉，16 个小型 soaking 池 + 主大池。比 Hot Springs Pool 更精品。$35+/人。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- R6 Steamboat & Strawberry -->
+      <div class="day-panel" data-day="5">
+        <div class="day-head">
+          <span class="wd">R6 Steamboat</span>
+          <span class="badge b-cool">🟡 温泉日</span>
+        </div>
+        <div class="day-title">♨️ Strawberry Park + Fish Creek Falls</div>
+        <div class="day-route"><span class="ic">🧭</span><span class="tx">6,732–7,400 ft · Denver NW 160 mi · 3h 车 · Region 06 · NW · Steamboat Springs</span></div>
+
+        <div class="tl-list">
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Strawberry Park Hot Springs</div>
+              <div class="tl-badges"><span class="b-warn">非 must-do</span></div>
+              <div class="tl-note">4 个天然岩石池森林环抱，温度 95-104°F。<b>$20/人现金/支票</b>（不收信用卡），2h 限时预约。15 min 土路从 Steamboat 镇开过去。<b>诚实评估</b>：高 Tripadvisor 评分 + 独特氛围，<b>但 Colorado 类似温泉很多</b>（Glenwood / Iron Mountain / Ouray Hot Springs / Mt Princeton 都不输），不是"一生必去"等级。</div>
+              <a href="https://strawberryhotsprings.com/" target="_blank" class="tl-map">🧭 Strawberry Hot Springs</a>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P1</div>
+            <div class="tl-body">
+              <div class="tl-title">Fish Creek Falls</div>
+              <div class="tl-note">Steamboat 镇 5 min 车。<b>1 mi RT easy walk</b> 到观景台，瀑布 280 ft 高。镇旁最便利景点。</div>
+            </div>
+          </div>
+          <div class="tl-block">
+            <div class="tl-time">P2</div>
+            <div class="tl-body">
+              <div class="tl-title">Steamboat Springs 镇 Main St</div>
+              <div class="tl-note">滑雪小镇 6,732 ft，夏季也活跃。Main St 步行 + 老牛仔氛围。</div>
+            </div>
+          </div>
+        </div>
+        <div class="note-box">💡 Steamboat 在 Colorado <b>西北方向</b>，跟 San Juans（西南）和 Pikes Peak（南）是相反路径。如果 trip 重点放 San Juans + Pikes Peak，<b>很难塞进 Steamboat</b>——需要单独 3-4 天专程去。或者 trip 拉到 7-8 天。</div>
+      </div>
+
+      <!-- R7 Mt Blue Sky -->
+      <div class="day-panel" data-day="6">
+        <div class="day-head">
+          <span class="wd">R7 Mt Blue Sky</span>
+          <span class="badge b-cool">🟡 备选</span>
+        </div>
+        <div class="day-title">🐐 Mt Blue Sky 看高山羊</div>
+        <div class="day-route"><span class="ic">🧭</span><span class="tx">14,130 ft 顶 · Denver W 1h 车 · Region 07 · West · Mt Blue Sky (前 Mt Evans)</span></div>
+
+        <div class="tl-list">
+          <div class="tl-block">
+            <div class="tl-time">P2 备选</div>
+            <div class="tl-body">
+              <div class="tl-title">Mt Blue Sky Scenic Byway（前 Mt Evans）</div>
+              <div class="tl-note">14,130 ft——<b>比 Trail Ridge Road 12,000 ft 还高</b>。Denver 西 1h，需<b>$2 timed entry permit</b>（2-4pm slot 推荐）。一路开上山可看 <b>Bighorn Sheep + Mountain Goats + Yellow-bellied Marmots + Pikas</b>。山顶有小段 trail 可登顶，40°F 大风。下山可停 Summit Lake 拍照。</div>
+            </div>
+          </div>
+        </div>
+        <div class="note-box warn">⚠️ 如果已经去过 Pikes Peak Cog Rail（14,115 ft）或 Trail Ridge Road（12,183 ft）——Mt Blue Sky 体验<b>高度重叠</b>。建议：3 选 1，不要 3 个都做（高反风险叠加）。或者作为 RMNP 不可用时的 <b>Plan B 顶包替代</b>。</div>
+      </div>
+
+    </div>
+
+    <!-- HOTELS -->
+    <div id="hotels" class="a-hotels" style="scroll-margin-top:120px;">
+      <div class="sec-head">
+        <span class="title">🏨 酒店参考</span>
+        <span class="meta">14 选项</span>
+      </div>
+      <div class="sec-sub">按地区 · $130 – $320/晚</div>
+      <div class="hotels-list">
+        <div class="hotel-card">
+          <span class="hotel-region">DEN<br>airport</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://www.marriott.com/hotels/travel/denbg-aloft-denver-airport-at-gateway-park/" target="_blank">Aloft Denver Airport</a></div>
+            <div class="hotel-city">机场 5 min 车，Day 1 落地直接睡</div>
+          </div>
+          <div class="hotel-price">$130</div>
+        </div>
+        <div class="hotel-card acc">
+          <span class="hotel-region">Denver<br>LoDo</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://www.therallyhotel.com/" target="_blank">The Rally Hotel</a></div>
+            <div class="hotel-city">McGregor Square，Union Station 步行 5 min</div>
+          </div>
+          <div class="hotel-price">$200</div>
+        </div>
+        <div class="hotel-card acc">
+          <span class="hotel-region">Denver<br>LoDo</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://www.ihg.com/hotelindigo/hotels/us/en/denver/dendt/hoteldetail" target="_blank">Hotel Indigo Denver Downtown</a></div>
+            <div class="hotel-city">IHG 系，干净舒适</div>
+          </div>
+          <div class="hotel-price">$180</div>
+        </div>
+        <div class="hotel-card">
+          <span class="hotel-region">Boulder</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://www.hyatt.com/hyatt-place/en-US/bouhp-hyatt-place-boulderpearl-street" target="_blank">Hyatt Place Boulder / Pearl St</a></div>
+            <div class="hotel-city">Pearl Street 步行 2 个 block，含早</div>
+          </div>
+          <div class="hotel-price">$200</div>
+        </div>
+        <div class="hotel-card acc">
+          <span class="hotel-region">Manitou<br>Springs</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://www.thecliffhouse.com/" target="_blank">The Cliff House at Pikes Peak</a></div>
+            <div class="hotel-city">1873 历史酒店，Cog Rail 5 min</div>
+          </div>
+          <div class="hotel-price">$260</div>
+        </div>
+        <div class="hotel-card green">
+          <span class="hotel-region">Estes<br>Park</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://www.thelandingestespark.com/" target="_blank">The Landing Estes Park</a></div>
+            <div class="hotel-city">河边 cabin，独立出入</div>
+          </div>
+          <div class="hotel-price">$230</div>
+        </div>
+        <div class="hotel-card green">
+          <span class="hotel-region">Estes<br>Park</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://www.alpinetrailridgeinn.com/" target="_blank">Alpine Trail Ridge Inn</a></div>
+            <div class="hotel-city">距 Trail Ridge Road 西门最近</div>
+          </div>
+          <div class="hotel-price">$160</div>
+        </div>
+        <div class="hotel-card">
+          <span class="hotel-region">Montrose</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://www.ihg.com/holidayinnexpress/hotels/us/en/montrose/mtjco/hoteldetail" target="_blank">Holiday Inn Express Montrose</a></div>
+            <div class="hotel-city">San Juans 出入口</div>
+          </div>
+          <div class="hotel-price">$180</div>
+        </div>
+        <div class="hotel-card red">
+          <span class="hotel-region">Ouray ⭐</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://www.boxcanyonouray.com/" target="_blank">Box Canyon Lodge & Hot Springs</a></div>
+            <div class="hotel-city">房间自带<b>私人温泉浴桶</b></div>
+          </div>
+          <div class="hotel-price">$280–320</div>
+        </div>
+        <div class="hotel-card">
+          <span class="hotel-region">Ouray<br>经济</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://www.twinpeakslodging.com/" target="_blank">Twin Peaks Lodge</a></div>
+            <div class="hotel-city">无温泉，省 $80/晚</div>
+          </div>
+          <div class="hotel-price">$200</div>
+        </div>
+        <div class="hotel-card acc">
+          <span class="hotel-region">Silverton</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://thewyman.com/" target="_blank">Wyman Hotel & Inn</a></div>
+            <div class="hotel-city">历史 boutique</div>
+          </div>
+          <div class="hotel-price">$200–260</div>
+        </div>
+        <div class="hotel-card acc">
+          <span class="hotel-region">Glenwood<br>Springs</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://www.hotspringspool.com/" target="_blank">Glenwood Hot Springs Resort</a></div>
+            <div class="hotel-city">酒店和温泉池一体</div>
+          </div>
+          <div class="hotel-price">$280</div>
+        </div>
+        <div class="hotel-card acc">
+          <span class="hotel-region">Steamboat<br>Springs</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://www.ihg.com/holidayinn/hotels/us/en/steamboat-springs/hdnco/hoteldetail" target="_blank">Holiday Inn Steamboat</a></div>
+            <div class="hotel-city">Strawberry Park 15 min</div>
+          </div>
+          <div class="hotel-price">$220</div>
+        </div>
+        <div class="hotel-card green">
+          <span class="hotel-region">Granby<br>RMNP W</span>
+          <div class="hotel-info">
+            <div class="hotel-name"><a href="https://snowmountainranch.org/" target="_blank">Snow Mountain Ranch YMCA</a></div>
+            <div class="hotel-city">RMNP 西门 15 min</div>
+          </div>
+          <div class="hotel-price">$190</div>
+        </div>
+      </div>
+      <div class="note-box warn" style="margin:11px 16px 0;">⚠️ 7/4 周末（Indep. Day）山区酒店<b>溢价 40-80%</b>。Ouray 7/4 房间通常半年前抢光。如果旺季出行，<b>3-4 个月前订</b>。</div>
+    </div>
+
+    <!-- VARIATIONS (replaces budget area) -->
+    <div id="budget" class="a-budget" style="scroll-margin-top:120px;">
+      <div class="sec-head">
+        <span class="title">📋 行程模板</span>
+        <span class="meta">6 versions</span>
+      </div>
+      <div class="sec-sub">按天数 · 4–8 天</div>
+      <div class="var-card">
+        <div class="var-row">
+          <div class="var-head"><span class="var-name">📅 4 天精华版</span><span class="var-tag">FRI–MON</span></div>
+          <div class="var-desc">短周末，只玩 Denver + RMNP 双线。<b>砍掉</b>所有西部山口。适合第一次来不想累 + 想看 Bear Lake。</div>
+          <div class="var-chain"><span class="s">DEN 飞抵</span><span class="a">→</span><span class="s">Denver/Boulder 缓冲</span><span class="a">→</span><span class="s">RMNP Bear Lake + Trail Ridge</span><span class="a">→</span><span class="s">Estes Park 住</span><span class="a">→</span><span class="s">Red Rocks + Denver LoDo</span><span class="a">→</span><span class="s">飞回</span></div>
+        </div>
+        <div class="var-row">
+          <div class="var-head"><span class="var-name">📅 5 天南线版</span><span class="var-tag">5 DAYS</span></div>
+          <div class="var-desc">Denver + RMNP + Garden of Gods + Pikes Peak。不去西部山口。</div>
+          <div class="var-chain"><span class="s">DEN</span><span class="a">→</span><span class="s">Manitou + Garden of Gods</span><span class="a">→</span><span class="s">Pikes Peak Cog Rail</span><span class="a">→</span><span class="s">RMNP Bear Lake + Trail Ridge</span><span class="a">→</span><span class="s">Red Rocks 黄昏</span><span class="a">→</span><span class="s">飞回</span></div>
+        </div>
+        <div class="var-row">
+          <div class="var-head"><span class="var-name">📅 6 天顺时针环游</span><span class="var-tag">⭐ 平衡</span></div>
+          <div class="var-desc">⭐ <b>"野心 + 合理"平衡版</b>：南下 Pikes Peak + 西转 San Juans + 北上 RMNP 收尾。每天平均 3.7h 驾驶。</div>
+          <div class="var-chain"><span class="s">DEN + Red Rocks</span><span class="a">→</span><span class="s">Garden of Gods + Manitou</span><span class="a">→</span><span class="s">Pikes Peak Cog + 西移 Montrose</span><span class="a">→</span><span class="s">San Juans 环线</span><span class="a">→</span><span class="s">Glenwood Hot Springs + Granby</span><span class="a">→</span><span class="s">RMNP Trail Ridge + Bear Lake → 飞回</span></div>
+        </div>
+        <div class="var-row">
+          <div class="var-head"><span class="var-name">📅 6 天 + Strawberry</span><span class="var-tag">替代</span></div>
+          <div class="var-desc">用 Strawberry Park 替代 RMNP。<b>注意</b>：Steamboat 距其它热门点远，会有单日 6h 驾驶。</div>
+          <div class="var-chain"><span class="s">DEN + Red Rocks</span><span class="a">→</span><span class="s">Garden of Gods + Manitou</span><span class="a">→</span><span class="s">Pikes Peak Cog → Montrose</span><span class="a">→</span><span class="s">San Juans 环线 → Ouray</span><span class="a">→</span><span class="s">长开 Ouray → Steamboat</span><span class="a">→</span><span class="s">Strawberry Park → 飞回</span></div>
+        </div>
+        <div class="var-row">
+          <div class="var-head"><span class="var-name">📅 7-8 天豪华版</span><span class="var-tag">最完整</span></div>
+          <div class="var-desc">把所有想去都装下：Aspen + Maroon Bells + Ice Lakes 都加进去。<b>需要</b>更多 PTO + 较高预算。</div>
+          <div class="var-chain"><span class="s">DEN + Red Rocks</span><span class="a">→</span><span class="s">CO Springs (Pikes Peak)</span><span class="a">→</span><span class="s">Aspen + Maroon Bells</span><span class="a">→</span><span class="s">Glenwood Hot Springs</span><span class="a">→</span><span class="s">San Juans 2 nights (Ice Lakes option)</span><span class="a">→</span><span class="s">Black Canyon NP</span><span class="a">→</span><span class="s">Steamboat + Strawberry</span><span class="a">→</span><span class="s">RMNP → 飞回</span></div>
+        </div>
+        <div class="var-row">
+          <div class="var-head"><span class="var-name">📅 朋友"硬核"版</span><span class="var-tag">HARDCORE</span></div>
+          <div class="var-desc">⚠️ <b>不推荐第一次来 + 经期</b>。Ice Lakes 8h hike + 多个 12k+ ft 点。32h 总驾驶。需要 1 个月体能训练。</div>
+          <div class="var-chain"><span class="s">Red Rocks concert</span><span class="a">→</span><span class="s">RMNP Dream/Emerald Lake</span><span class="a">→</span><span class="s">Durango Train + Black Canyon</span><span class="a">→</span><span class="s">Ice Lakes hardcore hike</span><span class="a">→</span><span class="s">Million Dollar + Telluride + Steamboat</span><span class="a">→</span><span class="s">Strawberry Park</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOD (Chinese + Other) -->
+    <div id="food" class="a-food" style="scroll-margin-top:120px;">
+      <div class="sec-head">
+        <span class="title">🥢 Denver / Boulder 中餐 Atlas</span>
+        <span class="meta">9 推 1 避雷</span>
+      </div>
+      <div class="sec-sub">CVPR 本地华人验证 · Chinese</div>
+      <div class="food-card">
+        <div class="food-row">
+          <span class="food-em">🐻</span>
+          <div class="food-body">
+            <div class="food-name">China Cafe (Iliff) — Denver</div>
+            <div class="food-desc">最强东北菜，<b>锅包肉</b>得到本东北人认可（酸甜挂浆、外酥里嫩）。本地华人公认"吃出回家的感觉"。</div>
+            <div class="food-meta">$40-60/2 人 · 最实惠且最正宗</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🦆</span>
+          <div class="food-body">
+            <div class="food-name">Imperial Chinese Restaurant — Denver Baker 区</div>
+            <div class="food-desc">北京烤鸭招牌，连续 13 年蝉联 5280 "Best of Denver"。OpenTable 必订位。</div>
+            <div class="food-meta">$90-120/2 人 · 双人一只鸭 + 配菜刚好</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">❤️</span>
+          <div class="food-body">
+            <div class="food-name">Chef Liu's Kitchen — Denver DTC 区</div>
+            <div class="food-desc">小红书 CVPR 帖主"本人最常去"。<b>孜然羊 + 毛血旺</b>百吃不厌。</div>
+            <div class="food-meta">$40-55/2 人 · 离机场顺路</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🌷</span>
+          <div class="food-body">
+            <div class="food-name">Sunflower Asian Cafe (扬州馆) — Denver</div>
+            <div class="food-desc">滋润江南味。<b>盐水鸭、狮子头、文思豆腐</b>。"想吃口清雅滋润的淮扬菜来这儿准没错"。</div>
+            <div class="food-meta">$50-70/2 人 · 不辣不油不腻</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🔥</span>
+          <div class="food-body">
+            <div class="food-name">Bistro King Asian Restaurant — Denver</div>
+            <div class="food-desc">东北×川菜混血，<b>烤鱼</b>是招牌。</div>
+            <div class="food-meta">$50-80/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🌶</span>
+          <div class="food-body">
+            <div class="food-name">Noodles Express Inc — Denver</div>
+            <div class="food-desc">"Denver 辣味一绝"，<b>辣子鸡丁 + 尖椒肥肠</b>。</div>
+            <div class="food-meta">$30-50/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🍜</span>
+          <div class="food-body">
+            <div class="food-name">Zoe Ma Ma — Boulder Pearl Street</div>
+            <div class="food-desc">中国街头小吃，<b>红烧牛肉面 / 炸酱面 / 葱油饼</b>。Erica 第一顿落地必吃。不收订位，排队 15-30 min。</div>
+            <div class="food-meta">$30-45/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🍲</span>
+          <div class="food-body">
+            <div class="food-name">Little Chengdu — DTC</div>
+            <div class="food-desc">川味火锅 AYCE $25.99/人 + 兰州手拉面 + 大盘鸡。</div>
+            <div class="food-meta">$52 AYCE 火锅 / $60 散点</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🍜</span>
+          <div class="food-body">
+            <div class="food-name">Hop Alley — RiNo 区</div>
+            <div class="food-desc">现代川菜 + Cocktail bar，氛围年轻、网红打卡，<b>麻婆豆腐 + 担担面</b>。</div>
+            <div class="food-meta">$80-110/2 人</div>
+          </div>
+        </div>
+        <div class="food-row avoid">
+          <span class="food-em">🚫</span>
+          <div class="food-body">
+            <div class="food-name">The Ginger Pig — 避雷</div>
+            <div class="food-desc">小红书帖主明确"避雷预警 ⚠️"：老外开的"中餐"，<b>巨甜、做法迷惑</b>。"据说吃得惯的都不是中国胃"。</div>
+            <div class="food-meta">不要去！</div>
+          </div>
+        </div>
+      </div>
+      <div class="note-box">💡 这些餐厅大多在 <b>Denver 市中心外围</b>（Iliff Ave / Baker / DTC），需要自驾或打车。如果没车，建议从 Imperial Chinese 优先（最方便位置）。</div>
+    </div>
+
+    <!-- EAT (other restaurants) -->
+    <div id="eat" class="a-food" style="scroll-margin-top:120px;">
+      <div class="sec-head">
+        <span class="title">🍴 路上美食</span>
+        <span class="meta">18 家</span>
+      </div>
+      <div class="sec-sub">美式 / 国际 / brunch / brewery · By Region</div>
+      <div class="food-card">
+        <div class="food-row">
+          <span class="food-em">🥩</span>
+          <div class="food-body">
+            <div class="food-name">The Fort — Morrison（Red Rocks 附近）</div>
+            <div class="food-desc">西部牛排招牌，野味（bison / elk）经典。</div>
+            <div class="food-meta">$60-80/人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🥞</span>
+          <div class="food-body">
+            <div class="food-name">Snooze A.M. Eatery (Ballpark) — Denver LoDo</div>
+            <div class="food-desc">网红 brunch，<b>Pancake Flight</b> 4 种 mini pancake 必点。早 7:30 之前到不用等。</div>
+            <div class="food-meta">$40-55/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🍝</span>
+          <div class="food-body">
+            <div class="food-name">Tavernetta — Union Station 旁</div>
+            <div class="food-desc">意大利菜 + counter seating 独自吃饭友好。OpenTable 提前 1-2 周订位。</div>
+            <div class="food-meta">$150-200/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🍺</span>
+          <div class="food-body">
+            <div class="food-name">Wynkoop Brewing Co. — LoDo</div>
+            <div class="food-desc">Colorado 首家精酿 brewpub，纪念性的一顿。</div>
+            <div class="food-meta">$50/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🍔</span>
+          <div class="food-body">
+            <div class="food-name">Mountain Sun Pub & Brewery — Boulder</div>
+            <div class="food-desc">Boulder 老牌 burger + 自酿啤酒。</div>
+            <div class="food-meta">$30-50/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🦌</span>
+          <div class="food-body">
+            <div class="food-name">Bird & Jim — Estes Park</div>
+            <div class="food-desc">当地特色 <b>elk burger / Bison meatloaf / Trout</b> + 山景。RMNP 出来正好一顿。OpenTable 订位。</div>
+            <div class="food-meta">$55-80/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🍟</span>
+          <div class="food-body">
+            <div class="food-name">Penelope's World Famous Burgers — Estes Park</div>
+            <div class="food-desc">老派 50s diner，便宜实惠。</div>
+            <div class="food-meta">$25-35/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🥐</span>
+          <div class="food-body">
+            <div class="food-name">Marigold Cafe & Bakery — Colorado Springs</div>
+            <div class="food-desc">高分法式 brunch + bakery。</div>
+            <div class="food-meta">$40-60/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🧆</span>
+          <div class="food-body">
+            <div class="food-name">Heart of Jerusalem Cafe — Manitou Springs</div>
+            <div class="food-desc">地中海菜，换口味。</div>
+            <div class="food-meta">$30-50/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🥗</span>
+          <div class="food-body">
+            <div class="food-name">Adam's Mountain Cafe — Manitou Springs</div>
+            <div class="food-desc">健康有机，Cog Rail 后午餐。</div>
+            <div class="food-meta">$30-50/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🌮</span>
+          <div class="food-body">
+            <div class="food-name">Slope & Hatch — Glenwood Springs</div>
+            <div class="food-desc">Mexican fusion，性价比好。</div>
+            <div class="food-meta">$30-50/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🍳</span>
+          <div class="food-body">
+            <div class="food-name">Camp Robber Cafe — Montrose</div>
+            <div class="food-desc">Montrose 早餐天花板。</div>
+            <div class="food-meta">$30-45/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🍺</span>
+          <div class="food-body">
+            <div class="food-name">Avalanche Brewing — Silverton</div>
+            <div class="food-desc">山区精酿 + burger。</div>
+            <div class="food-meta">$40-60/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🥩</span>
+          <div class="food-body">
+            <div class="food-name">The Butcher & The Baker — Telluride</div>
+            <div class="food-desc">高分美式 fusion。</div>
+            <div class="food-meta">$80-120/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🥃</span>
+          <div class="food-body">
+            <div class="food-name">Bon Ton Restaurant — Ouray</div>
+            <div class="food-desc">老酒店内意式美食，Ouray 镇最高分。OpenTable 订位。</div>
+            <div class="food-meta">$60-90/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🍻</span>
+          <div class="food-body">
+            <div class="food-name">Colorado Boy Brewery — Montrose</div>
+            <div class="food-desc">当地精酿 + pizza。</div>
+            <div class="food-meta">$40-60/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🥃</span>
+          <div class="food-body">
+            <div class="food-name">The Rock Inn Mountain Tavern — Estes Park</div>
+            <div class="food-desc">山区氛围晚餐 + elk。</div>
+            <div class="food-meta">$60-90/2 人</div>
+          </div>
+        </div>
+        <div class="food-row">
+          <span class="food-em">🍻</span>
+          <div class="food-body">
+            <div class="food-name">Carl's Tavern — Steamboat Springs</div>
+            <div class="food-desc">当地高分美式。</div>
+            <div class="food-meta">$40-60/2 人</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GEAR -->
+    <div id="gear" class="a-gear" style="scroll-margin-top:120px;">
+      <div class="sec-head">
+        <span class="title">🎒 装备清单</span>
+        <span class="meta">5 类</span>
+      </div>
+      <div class="sec-sub">按 trip 强度 · Packing by trip type</div>
+      <div class="gear-card">
+        <div class="gear-cat">城市 + 短 hike（Bear Lake / Garden of Gods）</div>
+        <ul class="gear-list">
+          <li><b>跑鞋</b>（ASICS / Hoka 都够用）</li>
+          <li>速干长袖 + 防晒帽 + 太阳镜（UV400）</li>
+          <li>抓绒外套（早晚温差 60-70°F）</li>
+          <li>1L 水壶 + 电解质粉</li>
+          <li>SPF 50+ 防晒霜 + 唇膏</li>
+          <li>Picaridin 20% 蜱虫喷雾</li>
+          <li>Zyrtec / Allegra / Ibuprofen / 创可贴</li>
+          <li>充电宝 + 手机支架</li>
+        </ul>
+
+        <div class="gear-cat">中级 hike（Emerald / Haiyaha Lake 5.5 mi）</div>
+        <ul class="gear-list">
+          <li><b>Hiking boots</b>（出发前 1-2 周买好穿熟）⭐</li>
+          <li>登山袜（merino wool 不起泡）</li>
+          <li>2L 水袋 + 备用瓶</li>
+          <li>登山杖 1 副（下山救膝盖）</li>
+          <li>防风外套 + 抓绒（高原大风）</li>
+          <li>急救包 + Advil + 镊子（夹蜱）</li>
+        </ul>
+
+        <div class="gear-cat">硬核 hike（Ice Lakes 7.6 mi / Maroon Bells）</div>
+        <ul class="gear-list">
+          <li>Hiking boots（已经磨合好）</li>
+          <li>登山杖 2 副（必须）</li>
+          <li>3L 水袋 + 电解质粉（高浓度）</li>
+          <li>高卡零食（trail mix + 能量胶 + 巧克力）</li>
+          <li>头灯（万一摸黑下山）</li>
+          <li>保暖外套 + 防风外套（顶部 40-50°F）</li>
+          <li>离线 AllTrails 地图（无信号）</li>
+          <li>暖宝宝 + 经期补给</li>
+          <li>急救包加强版（leuko tape + space blanket）</li>
+        </ul>
+
+        <div class="gear-cat">温泉日</div>
+        <ul class="gear-list">
+          <li>泳衣（朋友 + Yixuan 各 1 套）</li>
+          <li>拖鞋（温泉走道用）</li>
+          <li>毛巾（Strawberry 不带要 $5 租）</li>
+          <li>密封塑料袋装湿泳衣</li>
+          <li>现金 $40-80（Strawberry / Ouray Hot Springs 不收信用卡）</li>
+        </ul>
+
+        <div class="gear-cat">飞机 / 行李提示</div>
+        <ul class="gear-list">
+          <li>United Basic Economy 不含 carry-on，升 Main Cabin +$30-50/人</li>
+          <li>SW 自动 2 件免费托运 50lb/件——多人 + 户外装备首选</li>
+          <li>Frontier 行李费 $50-99/人，便宜机票会被吃掉</li>
+          <li>混合 PNR（不同航司）= 没跨航司延误保护，雷暴季风险</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /cl-body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="f1">Bucket list · Colorado · 未来某天再启程 · Yixuan + Erica 🏔️</div>
+    <div class="f2">所有信息以官方为准 · 监修 Luba 本猫 🐾</div>
+  </div>
+
+</div>
+</div>
+
+<script>
+(function(){
+  // Day tabs
+  var tabs = document.querySelectorAll('#dayTabs .daytab');
+  var panels = document.querySelectorAll('.day-panel');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var d = tab.getAttribute('data-day');
+      tabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-day') === d); });
+      panels.forEach(function(p){ p.classList.toggle('active', p.getAttribute('data-day') === d); });
+    });
+  });
+
+  // TODO localStorage
+  var KEY = 'colorado-todo-v1';
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { state = {}; }
+  var rows = document.querySelectorAll('#todoCard .todo-row');
+  var counter = document.getElementById('todoCounter');
+  function refreshCounter(){
+    var done = 0;
+    rows.forEach(function(r){ if(r.classList.contains('done')) done++; });
+    if(counter) counter.textContent = done + ' / ' + rows.length;
+  }
+  rows.forEach(function(r){
+    var id = r.getAttribute('data-id');
+    if(state[id]) r.classList.add('done');
+    r.addEventListener('click', function(){
+      r.classList.toggle('done');
+      state[id] = r.classList.contains('done');
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {}
+      refreshCounter();
+    });
+  });
+  refreshCounter();
+
+  // Countdown — bucket list has no fixed date, show static label
+  // (chip already shows "🗺️ 未定档" in HTML)
+})();
+</script>
+</body>
+</html>

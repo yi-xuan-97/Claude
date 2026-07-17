@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>🤠 德州自驾 6 天 5 晚 · Yixuan</title>
+<meta name="description" content="2026/7/1–7/6 圣安东尼奥 + Hill Country + 奥斯汀 + 休斯顿 NASA。每日行程、美食、打包清单。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+  :root{
+    --ac:#BC4B2B; --hero1:#C5532E; --hero2:#A83E22;
+    --screen:#E8DBCC; --frame:#F6EEE6; --ink:#2A2520; --sub:#8A7B6B;
+    --soft:#F7E7DE; --line:#E7DACB; --cline:#EFE0D2;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--screen);font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  button{font-family:inherit}
+  ::-webkit-scrollbar{height:5px;width:5px}
+  ::-webkit-scrollbar-thumb{background:rgba(188,75,43,.3);border-radius:9px}
+  .baloo{font-family:'Baloo 2','Noto Sans SC',sans-serif}
+  .gk{font-family:'Space Grotesk',sans-serif}
+
+  .screen{min-height:100vh;display:flex;justify-content:center}
+  .frame{width:100%;max-width:480px;background:var(--frame);min-height:100vh;position:relative;box-shadow:0 0 60px rgba(0,0,0,.08)}
+
+  .appbar{position:sticky;top:0;z-index:30;background:rgba(246,238,230,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .appbar .row{display:flex;align-items:center;gap:10px;padding:9px 12px}
+  .back{flex:none;width:36px;height:36px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ac)}
+  .apptt{flex:1;min-width:0;display:flex;flex-direction:column}
+  .apptt .t{font:800 15px 'Baloo 2','Noto Sans SC';line-height:1.1}
+  .apptt .s{font:600 10.5px 'Space Grotesk';color:#A8917F}
+  .cd{flex:none;font:700 11px 'Space Grotesk';color:#fff;background:var(--ac);padding:6px 11px;border-radius:999px;white-space:nowrap}
+  .chipnav{display:flex;gap:7px;padding:0 12px 9px;overflow-x:auto}
+  .chipnav a{flex:none;font:700 12px 'Noto Sans SC';color:var(--ink);background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+  .chipnav a.on{color:var(--ac);background:var(--soft);border-color:transparent}
+
+  .hero{background:linear-gradient(160deg,var(--hero1) 0%,var(--hero2) 100%);color:#fff;padding:22px 20px 24px;position:relative;overflow:hidden}
+  .hero .wm{position:absolute;right:-18px;top:-24px;font-size:130px;opacity:.13;pointer-events:none}
+  .hero h1{font:800 26px 'Baloo 2','Noto Sans SC';line-height:1.12;position:relative}
+  .hero .sub{font:500 12.5px 'Noto Sans SC';color:rgba(255,255,255,.88);margin-top:6px;position:relative}
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;position:relative}
+  .hchips span{font:600 11px 'Noto Sans SC';background:rgba(255,255,255,.16);padding:5px 10px;border-radius:999px}
+  .stats{display:flex;gap:8px;margin-top:16px;position:relative}
+  .stats .st{flex:1;background:rgba(255,255,255,.13);border-radius:13px;padding:10px 8px;text-align:center}
+  .stats .st .v{font:800 16px 'Space Grotesk'}
+  .stats .st .l{font:600 10px 'Noto Sans SC';color:rgba(255,255,255,.8);margin-top:2px}
+
+  .h2{font:800 19px 'Baloo 2','Noto Sans SC';color:var(--ink)}
+  .card{background:#fff;border:1px solid var(--cline);border-radius:18px}
+
+  .booked{margin:16px 16px 0;padding:15px}
+  .booked .bchips{display:flex;flex-wrap:wrap;gap:7px}
+  .booked .bchips span{font:600 11.5px 'Noto Sans SC';color:#2E7D5B;background:#E6F1EB;padding:5px 11px;border-radius:999px}
+  .booked .note{font:500 11.5px 'Noto Sans SC';color:#A8917F;margin-top:11px;line-height:1.55}
+
+  .sech{display:flex;align-items:center;gap:8px;padding:24px 18px 12px}
+  .alerts-list{display:flex;flex-direction:column;gap:10px;padding:0 16px}
+  .alert{display:flex;gap:12px;padding:14px;background:#fff;border:1px solid var(--cline);border-radius:16px}
+  .alert .ic{flex:none;width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px}
+  .alert .at{font:800 14.5px 'Noto Sans SC';line-height:1.4}
+  .alert .ab{font:500 12.5px 'Noto Sans SC';color:var(--sub);margin-top:4px;line-height:1.6}
+
+  .daytabs{position:sticky;top:99px;z-index:20;background:rgba(246,238,230,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 14px 9px;border-bottom:1px solid var(--cline);display:flex;gap:7px;overflow-x:auto}
+  .daytab{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;min-width:50px;padding:8px;border-radius:13px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .daytab.on{border-color:var(--ac);background:var(--ac);color:#fff}
+  .daytab .d{font:800 15px 'Baloo 2';line-height:1}
+  .daytab .dt{font:600 9px 'Noto Sans SC';opacity:.85}
+  .daypanel{padding:14px 16px 4px}
+  .dayhd{display:flex;align-items:baseline;gap:9px;margin-bottom:4px}
+  .dayhd .wd{font:800 20px 'Baloo 2','Noto Sans SC';color:var(--ac)}
+  .dayhd .city{font:600 13px 'Noto Sans SC';color:var(--sub)}
+  .callout{display:flex;align-items:center;gap:9px;margin:10px 0;padding:11px 13px;border-radius:14px;font:600 12.5px 'Noto Sans SC';line-height:1.4}
+  .callout.hotel{background:#F4E7DC;border:1px solid #EAD6C9;color:#5C4A3A}
+  .callout.drive{background:#E4ECF8;border:1px solid #D3E0F2;color:#34568C}
+  .block{display:flex;gap:11px}
+  .block .time{flex:none;width:48px;text-align:right;font:700 13px 'Space Grotesk';color:var(--ac);padding-top:13px}
+  .block .ln{flex:1;min-width:0;border-left:2px solid #EAD6C9;padding:13px 0 16px 16px;position:relative}
+  .block .dot{position:absolute;left:-7px;top:17px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--ac)}
+  .block .bt{font:700 15px 'Noto Sans SC';line-height:1.4}
+  .block .note{font:500 12.5px 'Noto Sans SC';color:var(--sub);margin-top:7px;line-height:1.6}
+  .badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+  .bdg{font:700 10.5px 'Noto Sans SC';padding:3px 9px;border-radius:999px;white-space:nowrap}
+  .b-booked{background:#F7E7DE;color:#BC4B2B}.b-warn{background:#FBE3E0;color:#C0392B}.b-temp{background:#E4ECF8;color:#3E6FB0}
+  .b-free{background:#E6F1EB;color:#2E7D5B}.b-must{background:#FBEFD6;color:#B07A1E}.b-star{background:#F0EBE3;color:#8A7560}
+  .mapbtn{margin-top:10px;display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:11px;background:#fff;border:1.5px solid var(--ac);color:var(--ac);font:700 12px 'Noto Sans SC'}
+
+  .food-list{display:flex;flex-direction:column;gap:18px;padding:0 16px}
+  .fgroup .fhd{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .fgroup .fcity{font:800 15px 'Noto Sans SC'}
+  .fgroup .fwhen{font:600 10.5px 'Noto Sans SC';color:#A8917F;background:#F4E7DC;padding:3px 9px;border-radius:999px}
+  .fitems{display:flex;flex-direction:column;gap:8px}
+  .fitem{display:flex;align-items:center;gap:11px;padding:12px 13px;background:#fff;border:1px solid var(--cline);border-radius:15px}
+  .fitem .ic{flex:none;width:38px;height:38px;border-radius:11px;background:#FBF3EC;display:flex;align-items:center;justify-content:center;font-size:19px}
+  .fitem .fn{font:700 13.5px 'Noto Sans SC'}
+  .fitem .fd{font:500 11.5px 'Noto Sans SC';color:var(--sub);line-height:1.45}
+  .fitem .fm{flex:none;font:700 11px 'Noto Sans SC';color:var(--ac)}
+
+  .packbox{margin:0 16px;padding:6px 16px}
+  .packrow{display:flex;align-items:center;gap:12px;padding:12px 2px;background:none;border:none;border-bottom:1px solid #F3EADF;width:100%;cursor:pointer;text-align:left}
+  .packrow:last-child{border-bottom:none}
+  .cbox{flex:none;width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;font:800 14px 'Noto Sans SC';border:1.5px solid #CFC0AE;background:#fff;color:#fff}
+  .cbox.on{border-color:var(--ac);background:var(--ac)}
+  .plabel{flex:1;font:600 13.5px 'Noto Sans SC';line-height:1.4}
+  .plabel.on{color:#B7AC9C;text-decoration:line-through}
+
+  .footer{text-align:center;padding:26px 24px 36px}
+  .footer .a{font:700 12.5px 'Noto Sans SC';color:#5C4A3A}
+  .footer .b{font:500 11px 'Noto Sans SC';color:#A8917F;margin-top:6px;line-height:1.6}
+
+  @media(min-width:880px){
+    .frame{max-width:1040px}
+    .tx-body{display:grid;grid-template-columns:minmax(0,1fr) 332px;grid-template-areas:"over over" "alerts pack" "days pack" "food pack";column-gap:24px;padding:0 22px 12px;align-items:start}
+    .a-over{grid-area:over}.a-alerts{grid-area:alerts}.a-days{grid-area:days}.a-food{grid-area:food}
+    .a-pack{grid-area:pack;position:sticky;top:108px;align-self:start}
+    .fitems.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  }
+</style>
+</head>
+<body>
+<div class="screen"><div class="frame">
+
+  <div class="appbar">
+    <div class="row">
+      <div class="apptt"><span class="t">🤠 德州自驾</span><span class="s">7/1 – 7/6 · 2 人</span></div>
+      <span class="cd" id="cd">⏳ … 天后</span>
+    </div>
+    <div class="chipnav">
+      <a href="#alerts" class="on">⚠️ 必读</a>
+      <a href="#weather">🌡️ 天气</a>
+      <a href="#days">📅 行程</a>
+      <a href="#food">🍴 美食</a>
+      <a href="#pack">🎒 打包</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <span class="wm">🤠</span>
+    <h1>德州自驾 6 天 5 晚</h1>
+    <div class="sub">圣安东尼奥 · Hill Country · 奥斯汀 · 休斯顿 NASA</div>
+    <div class="hchips"><span>✈️ Des Moines</span><span>🌵 SA</span><span>🏞️ Hill Country</span><span>🎸 Austin</span><span>🚀 Houston</span></div>
+    <div class="stats">
+      <div class="st"><div class="v">7/1–6</div><div class="l">出行</div></div>
+      <div class="st"><div class="v">2</div><div class="l">人数</div></div>
+      <div class="st"><div class="v">750</div><div class="l">英里</div></div>
+      <div class="st"><div class="v">✅</div><div class="l">全已订</div></div>
+    </div>
+  </div>
+
+  <div class="tx-body">
+    <div class="a-over card booked">
+      <div style="font:800 14px 'Noto Sans SC';margin-bottom:10px">✅ 全部已预订</div>
+      <div class="bchips" id="bchips"></div>
+      <div class="note">🔒 确认号在你电脑「德州行程-更新版.md」私人文档 + 确认邮件里——不在这个公开网页上。</div>
+    </div>
+
+    <div id="alerts" class="a-alerts" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">⚠️ 出发前必读</span></div>
+      <div class="alerts-list" id="alerts-list"></div>
+    </div>
+
+    <div id="weather" class="a-weather" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">🌡️ 行程天气</span></div>
+      <div style="font:500 12px 'Noto Sans SC';color:#A8917F;padding:0 18px 12px">早一两天看手机逐时预报最准 · 单位 °C</div>
+      <div class="card" style="padding:2px 16px">
+        <div style="padding:10px 2px;border-bottom:1px solid var(--line)"><div style="display:flex;align-items:baseline;gap:8px"><span style="flex:1;font:700 13px 'Noto Sans SC'">周三 7/1 · 圣安东尼奥</span><span style="font:800 15px 'Noto Sans SC';color:#C0392B">34°</span><span style="font:600 12px 'Noto Sans SC';color:#A8917F">/ 24°</span></div><div style="font:500 12px 'Noto Sans SC';color:#6b5a4a;margin-top:3px">☀️ 晴热</div></div>
+        <div style="padding:10px 2px;border-bottom:1px solid var(--line)"><div style="display:flex;align-items:baseline;gap:8px"><span style="flex:1;font:700 13px 'Noto Sans SC'">周四 7/2 · Hill Country</span><span style="font:800 15px 'Noto Sans SC';color:#C0392B">35°</span><span style="font:600 12px 'Noto Sans SC';color:#A8917F">/ 22°</span></div><div style="font:500 12px 'Noto Sans SC';color:#6b5a4a;margin-top:3px">☀️ 晴 · 清晨爬巨石凉爽 ~26°</div></div>
+        <div style="padding:10px 2px;border-bottom:1px solid var(--line)"><div style="display:flex;align-items:baseline;gap:8px"><span style="flex:1;font:700 13px 'Noto Sans SC'">周五 7/3 · 奥斯汀</span><span style="font:800 15px 'Noto Sans SC';color:#C0392B">36°</span><span style="font:600 12px 'Noto Sans SC';color:#A8917F">/ 23°</span></div><div style="font:500 12px 'Noto Sans SC';color:#6b5a4a;margin-top:3px">☀️ 最热的一天</div></div>
+        <div style="padding:10px 2px;border-bottom:1px solid var(--line)"><div style="display:flex;align-items:baseline;gap:8px"><span style="flex:1;font:700 13px 'Noto Sans SC'">周六 7/4 · 奥斯汀 🎆</span><span style="font:800 15px 'Noto Sans SC';color:#C0392B">35°</span><span style="font:600 12px 'Noto Sans SC';color:#A8917F">/ 23°</span></div><div style="font:500 12px 'Noto Sans SC';color:#6b5a4a;margin-top:3px">☀️ 晴热 · 独立日</div></div>
+        <div style="padding:10px 2px;border-bottom:1px solid var(--line)"><div style="display:flex;align-items:baseline;gap:8px"><span style="flex:1;font:700 13px 'Noto Sans SC'">周日 7/5 · 休斯顿</span><span style="font:800 15px 'Noto Sans SC';color:#C0392B">33°</span><span style="font:600 12px 'Noto Sans SC';color:#A8917F">/ 25°</span></div><div style="font:500 12px 'Noto Sans SC';color:#6b5a4a;margin-top:3px">⛅ 闷湿 · 午后雷阵雨概率最高</div></div>
+        <div style="padding:10px 2px"><div style="display:flex;align-items:baseline;gap:8px"><span style="flex:1;font:700 13px 'Noto Sans SC'">周一 7/6 · 圣安东尼奥</span><span style="font:800 15px 'Noto Sans SC';color:#C0392B">34°</span><span style="font:600 12px 'Noto Sans SC';color:#A8917F">/ 24°</span></div><div style="font:500 12px 'Noto Sans SC';color:#6b5a4a;margin-top:3px">☀️ 晴热</div></div>
+      </div>
+      <div class="card" style="margin-top:10px;padding:14px 16px;font:500 13px 'Noto Sans SC';line-height:1.75;color:var(--ink)">
+        🥵 <b>体感更热：</b>加上湿度，正午可达 <b>38–41°C</b>，可能高温预警——多补水、正午进空调。<br>
+        🌧️ <b>降雨：</b>整体少雨；<b>休斯顿（周日）</b>最可能午后雷阵雨（NASA 室内不受影响，开车注意短时强降雨）。<br>
+        📱 <b>出发前看逐时预报：</b>① 周四清晨巨石有无雷暴；② 周日休斯顿雨何时下。
+      </div>
+    </div>
+
+    <div id="days" class="a-days" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">📅 每日行程</span></div>
+      <div class="daytabs" id="daytabs"></div>
+      <div class="daypanel" id="daypanel"></div>
+    </div>
+
+    <div id="food" class="a-food" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">🍴 美食候选</span></div>
+      <div style="font:500 12px 'Noto Sans SC';color:#A8917F;padding:0 18px 12px">按城市 · 自己挑</div>
+      <div class="food-list" id="food-list"></div>
+    </div>
+
+    <div id="pack" class="a-pack" style="scroll-margin-top:120px">
+      <div class="sech" style="justify-content:space-between"><span class="h2">🎒 打包清单</span><span class="gk" id="packcount" style="font-weight:700;font-size:12px;color:var(--ac)"></span></div>
+      <div style="font:500 12px 'Noto Sans SC';color:#A8917F;padding:0 18px 12px">勾选自动存本机，下次打开还在</div>
+      <div class="card packbox" id="packbox"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="a">为你定制 · 2026 年 7 月德州自驾 · 2 人 🤠</div>
+    <div class="b">时间 / 票务以官方确认为准，出行前再核对 · 监修 Luba 本猫 🐾</div>
+  </div>
+
+</div></div>
+
+<script>
+const M='https://www.google.com/maps/search/?api=1&query=';
+const START=new Date('2026-07-01T00:00:00');
+
+const BOOKED=['机票','4 段住宿','Enchanted Rock','Longhorn Cavern','Exotic Resort Zoo','NASA'];
+
+const ALERTS=[
+  {icon:'⏰',bar:'#BC4B2B',soft:'#F7E7DE',title:'周四 6:15 就要从 SA 出发！',body:'巨石是 6:30–8:30 入园窗口，必须 8:30 前到门口，别睡过头。'},
+  {icon:'🚀',bar:'#3E6FB0',soft:'#E4ECF8',title:'NASA 电车 12:40 定时、别迟到',body:'Apollo Mission Control 登月控制室；想看土星五号火箭要另搭 Rocket Park 电车。'},
+  {icon:'🎆',bar:'#C0392B',soft:'#FBE3E0',title:'7/4 奥斯汀独立日',body:'Vic Mathias Shores 8:30 音乐会 + 烟花；市区封路、早去、用 Uber。周六晚饭在 Round Rock（城北），早点吃、~6:45 前出发。'},
+  {icon:'🪪',bar:'#B07A1E',soft:'#FBEFD6',title:'巨石门票车牌要对上',body:'开租车的话改成租车车牌，或入园出示预约。'},
+];
+
+const DAYS=[
+  {n:'0',weekday:'周三',date:'7/1',city:'圣安东尼奥',hotel:'Wyndham Garden SA Airport（机场旁）',drive:'',blocks:[
+    {time:'21:06',title:'落地 SAT → 取租车 → 入住',badges:[],note:'隔壁 Walmart（8500 Jones Maltsberger，开到 23:00）买一箱水、电解质、驱蚊液、零食。确认明天巨石/溶洞预约。早睡——明早 6:15 出发。',map:''},
+  ]},
+  {n:'1',weekday:'周四',date:'7/2',city:'SA → 山乡',hotel:'The Retreat on the Hill（Horseshoe Bay）· 16:00 后入住',drive:'',blocks:[
+    {time:'06:15',title:'Enchanted Rock 爬巨石',badges:[['已订 · 6:30–8:30','booked'],['8:30 前必到','warn']],note:'车程约 1.5h（~7:45 到）。清晨爬 Summit Trail（往返约 1.3 英里花岗岩穹顶），~10 点下山。带足水 + 防晒 + 抓地鞋。',map:M+'Enchanted+Rock+State+Natural+Area'},
+    {time:'11:00',title:'Fredericksburg 德式午餐 🍑 + 品酒',badges:[],note:'猪排 / 香肠 / 德啤 + 7 月蜜桃；Main Street 步行品酒室，或 290 上 Becker / Grape Creek。指定司机。',map:M+'Main+Street+Fredericksburg+TX'},
+    {time:'15:30',title:'🦇 Longhorn Cavern 溶洞',badges:[['已订 · 4:00PM 团','booked'],['洞里约 20°C','temp']],note:'提前 30 分钟（3:30）到游客中心报到、强制安全讲解——错过就等下一场。带预约码、先上厕所（洞内没厕所）。防滑闭趾鞋；下 52 级石阶、约 90 分钟；洞内只许无味水。亮点：全黑体验、水晶、小蝙蝠！',map:M+'Longhorn+Cavern+State+Park'},
+    {time:'18:00',title:'入住 The Retreat on the Hill + 晚饭',badges:[],note:'溶洞 ~5:30 结束 → 约 25 分钟到 Horseshoe Bay 入住；Marble Falls 一带吃晚饭。',map:''},
+  ]},
+  {n:'2',weekday:'周五',date:'7/3',city:'Hill Country → Austin',hotel:'Aloft by Marriott Austin Downtown（今晚 + 明晚）',drive:'',blocks:[
+    {time:'08:15',title:'🦓 Exotic Resort Zoo（Johnson City）',badges:[['已订 · 导览拖拉机','booked']],note:'从 Horseshoe Bay 约 40 分钟。9 点开门就到，坐导览拖拉机、大桶 feed 喂动物，约 1–1.5h。带条小毛巾。',map:M+'The+Exotic+Resort+Zoo+Johnson+City'},
+    {time:'11:00',title:'开往奥斯汀 → 入住 + 午饭 🍖 BBQ',badges:[],note:'动物园约 10:30–11:00 玩完（含 petting zoo）→ 顺路 Salt Lick BBQ（Driftwood，约 45 分钟、家庭式大份、BYOB / 带现金）午饭 → 再进 Austin 入住。',map:M+'Salt+Lick+BBQ+Driftwood'},
+    {time:'14:00',title:'Texas State Capitol + 🧋 吃茶三千',badges:[['免费','free']],note:'逛粉色花岗岩圆顶州议会大厦（凉快）；吃茶三千 Chicha San Chen（6501 Airport Blvd，鲜茶拿铁）。',map:M+'Chicha+San+Chen+Austin+Airport+Blvd'},
+    {time:'18:00',title:'🇨🇳 晚餐 · 湘里人家 Hunan Bistro',badges:[['4.7★','star']],note:'10700 Anderson Mill Rd（西北区）。必点 辣椒皮蛋茄子 · 辣椒炒牛柳 · 酸菜鸭血 · 担担面。离 Mount Bonnell 约 20 分钟。',map:M+'Hunan+Bistro+Anderson+Mill+Austin'},
+    {time:'19:45',title:'Mount Bonnell 看日落',badges:[['免费','free']],note:'奥斯汀最高点，俯瞰 Lake Austin，日落出片。停车少、有砸车——贵重物随身。',map:M+'Mount+Bonnell+Covert+Park+Austin'},
+  ]},
+  {n:'3',weekday:'周六',date:'7/4',city:'SoCo + 韩餐 + 烟花',hotel:'Aloft Austin Downtown',drive:'',blocks:[
+    {time:'12:30',title:'🦆 午餐 · Bamboo House 北京烤鸭',badges:[['4.3★','star']],note:'7010 Easy Wind Dr · 经典北京烤鸭。＊周六两顿不想太满，午饭也可改 SoCo 轻食。',map:M+'Bamboo+House+Austin+Easy+Wind'},
+    {time:'13:00',title:'South Congress（SoCo）逛吃',badges:[['⭐ 必去','must']],note:'Allens Boots、Jos Coffee 绿墙、Two Hands brunch、Manana 咖啡；逛 alo / Hermès / Reformation / lululemon / Madewell。太热进 Bullock 博物馆。',map:M+'South+Congress+Avenue+Austin'},
+    {time:'17:00',title:'🇰🇷 早晚餐 · Ghama Zone 韩餐',badges:[['4.6★','star'],['~6:45 前出发','warn']],note:'118 E Main St, Round Rock（城北，约 30 分钟）。必点 部队锅加面 · 海鲜煎饼 · 酱蟹。早点吃回市区看烟花，避开封路。',map:M+'Ghama+Zone+Korean+Food+Round+Rock'},
+    {time:'20:00',title:'🦇 Congress 大桥蝙蝠',badges:[],note:'约 150 万只日落出洞。付费停车场 227½ S Congress Ave，走 1 分钟到桥底。🦟 湖边黄昏蚊子多，喷驱蚊液。',map:M+'Congress+Avenue+Bat+Bridge+Austin'},
+    {time:'20:30',title:'🎆 独立日烟花 @ Vic Mathias Shores',badges:[['免费','free']],note:'蝙蝠桥旁湖边：Austin Symphony 8:30 + 烟花，庆 250 周年。早占位、用 Uber。',map:M+'Vic+Mathias+Shores+Austin'},
+  ]},
+  {n:'4',weekday:'周日',date:'7/5',city:'Austin → Houston → SA',hotel:'Canopy by Hilton SA Riverwalk（河滨步道）',drive:'奥斯汀→休斯顿 ~3h；休斯顿→SA ~3.5h，两人轮流开。',blocks:[
+    {time:'08:00',title:'从 Aloft 退房出发去休斯顿',badges:[],note:'约 3h、11 点左右到，留缓冲（入园定时 12:00）。',map:''},
+    {time:'12:00',title:'Space Center Houston 🚀',badges:[['已订 · 12:00 入园','booked']],note:'12:40 Apollo Mission Control 电车（登月真实控制室，定时别迟到）。之后再搭 Rocket Park 电车看土星五号巨型火箭。逛展厅到 ~16:00。',map:M+'Space+Center+Houston'},
+    {time:'16:30',title:'🦞 晚饭 · Arco Seafood 东海酒家',badges:[],note:'9896 Bellaire · 粤式海鲜 + 全天点心 · 回 SA 顺路。🧋 Molly Tea（9889 Bellaire）+ 🍞 Le Kream 爆浆吐司（9393 Bellaire）打包路上吃。',map:M+'Arco+Seafood+Restaurant+Bellaire+Houston'},
+    {time:'18:00',title:'夜里开回圣安东尼奥',badges:[],note:'上 I-10 西，约 3.5h、~21:30 到，入住 Canopy（河滨步道）。轮流开、备咖啡。',map:''},
+  ]},
+  {n:'5',weekday:'周一',date:'7/6',city:'San Antonio',hotel:'',drive:'',blocks:[
+    {time:'09:00',title:'SA 核心打卡（酒店就在河滨步道）',badges:[],note:'The Alamo（免费）→ River Walk 坐船（约 $15）→ Pearl 珍珠区早午餐。',map:M+'The+Alamo+San+Antonio'},
+    {time:'11:00',title:'退房 → Mission San José + 午餐 Mi Tierra',badges:[],note:'UNESCO 遗产传教站（免费）；百年 Tex-Mex Mi Tierra。行李放车上。',map:M+'Mission+San+Jose+San+Antonio'},
+    {time:'16:30',title:'还车回 SAT，航班前 2 小时',badges:[],note:'19:08 起飞回 Des Moines，23:58 到家。🎉',map:''},
+  ]},
+];
+
+const FOOD=[
+  {icon:'🚀',city:'休斯顿',when:'周日晚 · Bellaire 中国城',items:[
+    {icon:'🦐',name:'Arco Seafood 东海酒家',desc:'广式海鲜 + 早茶一绝',map:M+'Arco+Seafood+Restaurant+Houston'},
+    {icon:'🍜',name:'金大碗 House of Bowls',desc:'港式：干炒牛河、花生酱多士',map:M+'House+of+Bowls+Houston'},
+    {icon:'🥟',name:'Lucky Bento V.I.P.',desc:'东北菜：酸菜猪肉、溜肥肠、地三鲜（9262 Bellaire）',map:M+'Lucky+Bento+VIP+9262+Bellaire+Houston'},
+    {icon:'🌶️',name:'湘知湘味',desc:'不踩雷的湘菜（9889 Bellaire）',map:M+'Hunan+Bistro+9889+Bellaire+Houston'},
+    {icon:'🧋',name:'Molly Tea + Le Kream',desc:'奶茶（也可喜茶）+ 爆浆吐司',map:M+'Molly+Tea+Bellaire+Houston'},
+  ]},
+  {icon:'🎸',city:'奥斯汀',when:'周五–六',items:[
+    {icon:'🦆',name:'Bamboo House',desc:'经典北京烤鸭 / 川菜（市区）',map:M+'Bamboo+House+Austin'},
+    {icon:'🌶️',name:'湘里人家',desc:'湘菜 4.7★（北 Austin · Anderson Mill）',map:M+'Hunan+Bistro+Anderson+Mill+Austin'},
+    {icon:'🦆',name:'Shanghai Chinese',desc:'粤菜：干炒牛河、牛腩煲、菠萝叉烧',map:M+'Shanghai+Chinese+Restaurant+Austin'},
+    {icon:'🇰🇷',name:'Ghama Zone',desc:'韩餐 4.6★（Round Rock）：部队锅、海鲜煎饼、酱蟹',map:M+'Ghama+Zone+Korean+Round+Rock'},
+    {icon:'🍖',name:'Texas BBQ',desc:'Salt Lick（农家乐）/ Franklin（排队长）',map:M+'Salt+Lick+BBQ+Driftwood'},
+    {icon:'🧋',name:'吃茶三千 Chicha San Chen',desc:'奶茶（6501 Airport Blvd）',map:M+'Chicha+San+Chen+Austin'},
+  ]},
+  {icon:'🌵',city:'圣安东尼奥 + 路上',when:'周一',items:[
+    {icon:'🌮',name:'Mi Tierra / 川味轩 / 功夫面馆',desc:'百年 Tex-Mex、Sichuan House、Kung Fu Noodle',map:M+'Mi+Tierra+San+Antonio'},
+    {icon:'🍔',name:'In-N-Out + Fredericksburg',desc:'三城都有 In-N-Out；Fredericksburg 德餐 + 7 月蜜桃',map:M+'In-N-Out+San+Antonio'},
+  ]},
+];
+
+const PACK=['水壶 + 大瓶水（每人每天 1 加仑）','电解质 / 盐丸','防晒霜 SPF50 + 宽檐帽 + 墨镜','抓地徒步鞋（爬巨石）','溶洞穿的薄外套（洞里约 20°C）','小毛巾（动物园喂动物）','驱蚊液（黄昏看蝙蝠 / 湖边 / 山乡）','充电宝 + 车载充电器','离线地图已下载','独立日：折叠椅 / 毯子','所有确认邮件 / 票（手机存好）','现金（Salt Lick / 部分小店）','信用卡 + 驾照','下载好 Uber（7/4 市区封路用）','租车后更新巨石门票车牌'];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+// countdown
+(function(){var d=Math.max(0,Math.ceil((START-new Date())/86400000));document.getElementById('cd').textContent=d>0?('⏳ '+d+' 天后'):'🎉 出发啦';})();
+
+// booked
+document.getElementById('bchips').innerHTML=BOOKED.map(b=>'<span>'+esc(b)+'</span>').join('');
+
+// alerts
+document.getElementById('alerts-list').innerHTML=ALERTS.map(a=>
+  '<div class="alert" style="box-shadow:inset 4px 0 0 '+a.bar+'"><span class="ic" style="background:'+a.soft+'">'+a.icon+'</span><div style="flex:1;min-width:0"><div class="at">'+esc(a.title)+'</div><div class="ab">'+esc(a.body)+'</div></div></div>').join('');
+
+// food
+document.getElementById('food-list').innerHTML=FOOD.map(g=>
+  '<div class="fgroup"><div class="fhd"><span style="font-size:16px">'+g.icon+'</span><span class="fcity">'+esc(g.city)+'</span><span class="fwhen">'+esc(g.when)+'</span></div><div class="fitems two">'+
+  g.items.map(it=>'<a class="fitem" href="'+it.map+'" target="_blank" rel="noopener"><span class="ic">'+it.icon+'</span><span style="flex:1;min-width:0"><div class="fn">'+esc(it.name)+'</div><div class="fd">'+esc(it.desc)+'</div></span><span class="fm">地图 ›</span></a>').join('')+
+  '</div></div>').join('');
+
+// days
+let sel=(function(){var i=Math.floor((new Date()-START)/86400000);return i>=0&&i<=5?i:0;})();
+function renderTabs(){
+  document.getElementById('daytabs').innerHTML=DAYS.map((d,i)=>
+    '<button class="daytab'+(i===sel?' on':'')+'" onclick="pick('+i+')"><span class="d">D'+d.n+'</span><span class="dt">'+d.date+'</span></button>').join('');
+}
+function renderDay(){
+  const d=DAYS[sel];
+  let h='<div class="dayhd"><span class="wd">'+d.weekday+' '+d.date+'</span><span class="city">'+esc(d.city)+'</span></div>';
+  if(d.hotel)h+='<div class="callout hotel"><span>🛏️</span><span>今晚住 · '+esc(d.hotel)+'</span></div>';
+  if(d.drive)h+='<div class="callout drive"><span>🚗</span><span>'+esc(d.drive)+'</span></div>';
+  h+='<div style="margin-top:8px">'+d.blocks.map(b=>{
+    let bd=(b.badges&&b.badges.length)?'<div class="badges">'+b.badges.map(x=>'<span class="bdg b-'+x[1]+'">'+esc(x[0])+'</span>').join('')+'</div>':'';
+    let mp=b.map?'<a class="mapbtn" href="'+b.map+'" target="_blank" rel="noopener">🧭 导航</a>':'';
+    return '<div class="block"><div class="time">'+b.time+'</div><div class="ln"><span class="dot"></span><div class="bt">'+esc(b.title)+'</div>'+bd+'<div class="note">'+esc(b.note)+'</div>'+mp+'</div></div>';
+  }).join('')+'</div>';
+  document.getElementById('daypanel').innerHTML=h;
+}
+function pick(i){sel=i;renderTabs();renderDay();}
+renderTabs();renderDay();
+
+// packing
+let checked=(function(){try{return JSON.parse(localStorage.getItem('texas-pack-v1')||'{}')}catch(e){return {}}})();
+function renderPack(){
+  document.getElementById('packbox').innerHTML=PACK.map((label,i)=>{
+    const id='p'+i,on=!!checked[id];
+    return '<button class="packrow" onclick="togglePack('+i+')"><span class="cbox'+(on?' on':'')+'">'+(on?'✓':'')+'</span><span class="plabel'+(on?' on':'')+'">'+esc(label)+'</span></button>';
+  }).join('');
+  const done=PACK.filter((_,i)=>!!checked['p'+i]).length;
+  document.getElementById('packcount').textContent=done+' / '+PACK.length;
+}
+function togglePack(i){const id='p'+i;checked[id]=!checked[id];try{localStorage.setItem('texas-pack-v1',JSON.stringify(checked))}catch(e){}renderPack();}
+renderPack();
+</script>
+</body>
+</html>

@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luba的IFS小课堂</title>
+<style>
+:root{
+  --bg:#FBF5EC;
+  --ink:#3D3329;
+  --ink-soft:#7A6E5F;
+  --card:#FFFFFF;
+  --accent:#E8853B;
+  --accent-deep:#C96A24;
+  --teal:#2F8F83;
+  --teal-soft:#E3F1EF;
+  --sand:#F4E9D9;
+  --lav:#EFE9F7;
+  --rose:#F9E8E3;
+  --line:#EADfCE;
+  --good:#3E9E6E;
+  --bad:#C9684A;
+  --shadow:0 4px 14px rgba(120,90,50,.10);
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:17px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+#app{max-width:860px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- 顶栏 ---------- */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(251,245,236,.92);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 4px 10px;border-bottom:1px solid var(--line);
+  margin-bottom:26px;
+}
+.topbar .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;cursor:pointer;user-select:none}
+.topbar .brand .cat-icon{width:34px;height:34px}
+.paw-progress{display:flex;gap:7px;align-items:center}
+.paw{
+  width:26px;height:26px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;background:var(--sand);
+  filter:grayscale(1) opacity(.45);
+  transition:all .4s ease;
+  cursor:pointer;
+}
+.paw.earned{filter:none;background:#FBE3CC;transform:scale(1.06)}
+.paw.earned.pop{animation:pawpop .6s ease}
+@keyframes pawpop{
+  0%{transform:scale(.4) rotate(-30deg)}
+  60%{transform:scale(1.45) rotate(12deg)}
+  100%{transform:scale(1.06) rotate(0)}
+}
+
+/* ---------- 屏幕切换 ---------- */
+.screen{display:none;animation:fadein .45s ease}
+.screen.active{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- 通用 ---------- */
+h1{font-size:30px;line-height:1.35;margin-bottom:6px}
+h2{font-size:22px;margin:38px 0 14px}
+h3{font-size:18px;margin:22px 0 10px}
+p{margin-bottom:12px}
+.kicker{
+  display:inline-block;font-size:13px;font-weight:700;letter-spacing:1px;
+  color:var(--accent-deep);background:#FBE9D7;border-radius:99px;
+  padding:3px 12px;margin-bottom:10px;
+}
+.muted{color:var(--ink-soft);font-size:15px}
+.en{font-size:.85em;color:var(--ink-soft);font-weight:500}
+.hl{background:linear-gradient(transparent 62%,#FBDDBA 62%);font-weight:600}
+.divider{border:none;border-top:1px dashed var(--line);margin:34px 0}
+
+.btn{
+  display:inline-block;border:none;cursor:pointer;
+  background:var(--accent);color:#fff;
+  font-size:16px;font-weight:600;font-family:inherit;
+  padding:11px 24px;border-radius:99px;
+  box-shadow:var(--shadow);
+  transition:transform .15s ease,background .2s;
+}
+.btn:hover{background:var(--accent-deep);transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--accent-deep);box-shadow:none;border:2px solid var(--accent)}
+.btn.ghost:hover{background:#FBE9D7}
+.btn.small{font-size:14px;padding:7px 16px}
+.btn:disabled{opacity:.45;cursor:default;transform:none}
+.navrow{display:flex;justify-content:space-between;gap:12px;margin-top:44px;flex-wrap:wrap}
+
+/* ---------- Luba 气泡 ---------- */
+.luba{display:flex;gap:14px;align-items:flex-start;margin:24px 0}
+.luba .cat-icon{width:58px;height:58px;flex-shrink:0;margin-top:2px}
+.bubble{
+  background:var(--card);border-radius:4px var(--radius) var(--radius) var(--radius);
+  padding:14px 18px;box-shadow:var(--shadow);
+  border:1px solid var(--line);
+  font-size:16px;
+}
+.bubble .who{font-size:12.5px;font-weight:700;color:var(--accent-deep);letter-spacing:.5px;margin-bottom:3px}
+.bubble p:last-child{margin-bottom:0}
+
+/* ---------- 卡片 ---------- */
+.panel{
+  background:var(--card);border-radius:var(--radius);
+  padding:22px 24px;box-shadow:var(--shadow);
+  border:1px solid var(--line);margin:18px 0;
+}
+.panel.tinted{background:var(--teal-soft);border-color:#D2E7E3}
+.panel.sand{background:var(--sand);border-color:var(--line)}
+
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:18px 0}
+
+/* 翻转卡 */
+.fcard{perspective:1000px;cursor:pointer;min-height:205px;outline:none}
+.fcard-inner{
+  position:relative;width:100%;height:100%;min-height:205px;
+  transition:transform .55s cubic-bezier(.4,.1,.2,1);
+  transform-style:preserve-3d;
+}
+.fcard.flipped .fcard-inner{transform:rotateY(180deg)}
+.fc-face{
+  position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:16px;padding:16px;display:flex;flex-direction:column;justify-content:center;
+  border:1px solid var(--line);
+}
+.fc-front{background:var(--card);box-shadow:var(--shadow);align-items:center;text-align:center;gap:8px}
+.fc-front .big{font-size:34px}
+.fc-front .name{font-weight:700;font-size:16.5px;line-height:1.4}
+.fc-front .tap{font-size:12px;color:var(--ink-soft)}
+.fc-back{background:var(--sand);transform:rotateY(180deg);font-size:14.5px;line-height:1.65;justify-content:flex-start;overflow:auto}
+.fc-back .quote{font-style:italic;color:var(--accent-deep);font-weight:600;margin-bottom:6px;font-size:14px}
+
+/* ---------- 内心声音 ---------- */
+.voices{display:flex;flex-direction:column;gap:12px;margin:16px 0}
+.voice{
+  display:none;align-self:flex-start;
+  background:var(--card);border:1px solid var(--line);border-radius:16px 16px 16px 4px;
+  padding:10px 16px;box-shadow:var(--shadow);max-width:88%;
+  animation:fadein .4s ease;
+}
+.voice.shown{display:block}
+.voice .vtag{font-size:12px;font-weight:700;color:var(--teal);display:block}
+.voice:nth-child(even){align-self:flex-end;border-radius:16px 16px 4px 16px}
+
+/* ---------- 测验 ---------- */
+.quiz{margin:18px 0}
+.qbox{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);margin-bottom:16px}
+.qbox .qtext{font-weight:700;margin-bottom:12px}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{
+  text-align:left;font-family:inherit;font-size:15.5px;cursor:pointer;
+  background:var(--bg);border:2px solid var(--line);border-radius:12px;
+  padding:10px 14px;transition:all .2s;line-height:1.55;
+}
+.opt:hover{border-color:var(--accent)}
+.opt.correct{border-color:var(--good);background:#EAF6EF}
+.opt.wrong{border-color:var(--bad);background:#FAEDE8;opacity:.85}
+.opt:disabled{cursor:default}
+.qfb{display:none;margin-top:12px;font-size:15px;border-radius:12px;padding:10px 14px}
+.qfb.show{display:block;animation:fadein .3s}
+.qfb.good{background:#EAF6EF;color:#2C7A52}
+.qfb.bad{background:#FAEDE8;color:#A85436}
+
+/* ---------- 分类游戏 ---------- */
+.sort-stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);text-align:center}
+.sort-scenario{font-size:18px;font-weight:600;line-height:1.7;min-height:84px;display:flex;align-items:center;justify-content:center;padding:6px 8px}
+.sort-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.sort-btn{
+  font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;
+  border:2px solid var(--line);background:var(--bg);border-radius:99px;
+  padding:9px 18px;transition:all .2s;
+}
+.sort-btn:hover{border-color:var(--accent);transform:translateY(-2px)}
+.sort-fb{min-height:56px;margin-top:14px;font-size:15px;color:var(--ink-soft)}
+.sort-fb .yes{color:var(--good);font-weight:700}
+.sort-fb .no{color:var(--bad);font-weight:700}
+.sort-meta{font-size:13.5px;color:var(--ink-soft);margin-top:10px}
+
+/* ---------- 8C ---------- */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:18px 0}
+.ccard{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:14px 16px;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s;
+}
+.ccard:hover{transform:translateY(-3px)}
+.ccard .chead{display:flex;align-items:center;gap:8px;font-weight:700}
+.ccard .cbody{display:none;font-size:14px;color:var(--ink-soft);margin-top:8px;line-height:1.6}
+.ccard.open .cbody{display:block;animation:fadein .3s}
+.ccheck-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.ccheck{
+  display:flex;align-items:center;gap:6px;
+  background:var(--card);border:1.5px solid var(--line);border-radius:99px;
+  padding:6px 14px;font-size:14.5px;cursor:pointer;user-select:none;transition:all .2s;
+}
+.ccheck:has(input:checked){background:var(--teal-soft);border-color:var(--teal);font-weight:600}
+.ccheck input{accent-color:var(--teal)}
+
+/* ---------- 6F 模拟器 ---------- */
+.sim{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.sim-steps{display:flex;gap:5px;margin-bottom:18px;flex-wrap:wrap}
+.sim-step-dot{
+  font-size:12.5px;font-weight:700;border-radius:99px;padding:4px 11px;
+  background:var(--sand);color:var(--ink-soft);
+}
+.sim-step-dot.now{background:var(--accent);color:#fff}
+.sim-step-dot.done{background:#EAF6EF;color:var(--good)}
+.sim-title{font-weight:700;font-size:18px;margin-bottom:8px}
+.sim-body{min-height:60px;margin-bottom:14px}
+.sim-part-line{
+  background:var(--lav);border-radius:14px 14px 14px 4px;padding:10px 14px;margin:10px 0;
+  font-size:15.5px;animation:fadein .4s;
+}
+.sim-part-line .who{font-size:12px;font-weight:700;color:#7A63A8;display:block}
+.sim-opts{display:flex;flex-direction:column;gap:9px}
+.sim-fb{display:none;margin-top:12px;background:var(--teal-soft);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.sim-fb.show{display:block;animation:fadein .3s}
+
+/* ---------- 前后对比开关 ---------- */
+.burden-wrap{margin:20px 0}
+.burden-toggle{display:flex;justify-content:center;gap:0;margin-bottom:18px}
+.bt-opt{
+  font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;
+  border:2px solid var(--accent);background:transparent;color:var(--accent-deep);
+  padding:9px 22px;transition:all .25s;
+}
+.bt-opt:first-child{border-radius:99px 0 0 99px;border-right-width:1px}
+.bt-opt:last-child{border-radius:0 99px 99px 0;border-left-width:1px}
+.bt-opt.on{background:var(--accent);color:#fff}
+.burden-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.bcol{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.bcol h4{font-size:16px;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.bcol ul{list-style:none}
+.bcol li{font-size:14.5px;padding:5px 0 5px 22px;position:relative;color:var(--ink-soft);line-height:1.55}
+.bcol li::before{content:"·";position:absolute;left:8px;color:var(--accent);font-weight:900}
+.bcol.healed li::before{content:"✓";color:var(--good);font-size:12px;left:4px;top:9px}
+
+/* ---------- 时间线 ---------- */
+.timeline{margin:20px 0;padding-left:26px;border-left:3px solid #F0D9BC}
+.tl-item{position:relative;margin-bottom:18px}
+.tl-item::before{
+  content:attr(data-n);position:absolute;left:-41px;top:0;
+  width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;
+  font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;
+}
+.tl-item h4{font-size:16px;margin-bottom:3px}
+.tl-item p{font-size:14.5px;color:var(--ink-soft);margin:0}
+
+/* ---------- 折叠 ---------- */
+details{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:14px 18px;margin:10px 0;box-shadow:var(--shadow);
+}
+details summary{cursor:pointer;font-weight:700;font-size:15.5px;list-style:none;display:flex;align-items:center;gap:8px}
+details summary::before{content:"▸";color:var(--accent);transition:transform .25s}
+details[open] summary::before{transform:rotate(90deg)}
+details .dbody{margin-top:10px;font-size:15px;color:var(--ink-soft)}
+details .dbody p{margin-bottom:8px}
+details .dbody ol,details .dbody ul{padding-left:22px;margin-bottom:8px}
+details .dbody li{margin-bottom:6px}
+
+/* ---------- 对照角 ---------- */
+.duizhao{
+  border:2px dashed var(--teal);border-radius:var(--radius);
+  background:var(--teal-soft);padding:20px 24px;margin:30px 0;
+}
+.duizhao .dz-tag{
+  display:inline-block;font-size:13px;font-weight:800;letter-spacing:.5px;
+  color:#fff;background:var(--teal);border-radius:99px;padding:3px 13px;margin-bottom:10px;
+}
+.duizhao p{font-size:15.5px}
+.duizhao .ask{
+  margin-top:12px;background:rgba(255,255,255,.75);border-radius:12px;
+  padding:10px 14px;font-size:14.5px;
+}
+.duizhao .ask b{color:var(--teal)}
+
+/* ---------- 小贴士 ---------- */
+.note{
+  display:flex;gap:10px;background:var(--rose);border-radius:14px;
+  padding:12px 16px;font-size:14.5px;color:#8A5444;margin:16px 0;line-height:1.6;
+}
+
+/* ---------- 目录卡 ---------- */
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:22px 0}
+.toc-card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:18px;cursor:pointer;box-shadow:var(--shadow);
+  transition:transform .15s ease;position:relative;
+}
+.toc-card:hover{transform:translateY(-4px)}
+.toc-card .tnum{font-size:12.5px;font-weight:800;color:var(--accent-deep);letter-spacing:1px}
+.toc-card h3{margin:4px 0 6px;font-size:17px}
+.toc-card p{font-size:13.5px;color:var(--ink-soft);margin:0}
+.toc-card .tdone{position:absolute;top:14px;right:14px;font-size:18px;display:none}
+.toc-card.done .tdone{display:block}
+.toc-card .ttime{font-size:12px;color:var(--ink-soft);margin-top:8px;display:block}
+
+/* ---------- 毕业 ---------- */
+.grad-hero{text-align:center;padding:30px 10px}
+.grad-hero .cat-icon{width:110px;height:110px}
+.badge-row{display:flex;justify-content:center;gap:10px;font-size:26px;margin:18px 0}
+.confetti{font-size:30px;letter-spacing:6px}
+
+footer{
+  margin-top:60px;border-top:1px solid var(--line);padding-top:18px;
+  font-size:13px;color:var(--ink-soft);line-height:1.7;
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  h1{font-size:25px}
+  .topbar .brand span{display:none}
+}
+</style>
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="cat" viewBox="0 0 100 100">
+    <path d="M22 38 L14 12 L36 24 Z" fill="#8A7258"/>
+    <path d="M78 38 L86 12 L64 24 Z" fill="#8A7258"/>
+    <path d="M24 36 L18 18 L34 27 Z" fill="#E9BFA0"/>
+    <path d="M76 36 L82 18 L66 27 Z" fill="#E9BFA0"/>
+    <ellipse cx="50" cy="58" rx="34" ry="31" fill="#A98E6C"/>
+    <path d="M40 30 Q41 38 39 43" stroke="#6E573E" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <path d="M50 28 Q50 36 50 42" stroke="#6E573E" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <path d="M60 30 Q59 38 61 43" stroke="#6E573E" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <path d="M19 46 Q25 47 29 45" stroke="#6E573E" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M81 46 Q75 47 71 45" stroke="#6E573E" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="50" cy="68" rx="19" ry="13" fill="#F2E7D3"/>
+    <circle cx="38" cy="52" r="5" fill="#6F8F4A"/>
+    <circle cx="62" cy="52" r="5" fill="#6F8F4A"/>
+    <circle cx="38" cy="52" r="2.6" fill="#2C2418"/>
+    <circle cx="62" cy="52" r="2.6" fill="#2C2418"/>
+    <circle cx="39.4" cy="50.6" r="1.3" fill="#fff"/>
+    <circle cx="63.4" cy="50.6" r="1.3" fill="#fff"/>
+    <path d="M50 59 L47 63 L53 63 Z" fill="#D98A66"/>
+    <path d="M46 65 Q50 69 54 65" stroke="#3D3329" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <line x1="12" y1="56" x2="30" y2="58" stroke="#7A6248" stroke-width="1.6" stroke-linecap="round"/>
+    <line x1="12" y1="64" x2="30" y2="62" stroke="#7A6248" stroke-width="1.6" stroke-linecap="round"/>
+    <line x1="88" y1="56" x2="70" y2="58" stroke="#7A6248" stroke-width="1.6" stroke-linecap="round"/>
+    <line x1="88" y1="64" x2="70" y2="62" stroke="#7A6248" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<div id="app">
+
+<header class="topbar">
+  <div class="brand" data-go="home">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <span>Luba的IFS小课堂</span>
+  </div>
+  <nav class="paw-progress" id="pawbar" title="每完成一个session,点亮一个爪印"></nav>
+</header>
+
+<main>
+
+<!-- ============ 首页 ============ -->
+<section class="screen active" id="home">
+  <span class="kicker">INTERNAL FAMILY SYSTEMS · 内在家庭系统</span>
+  <h1>欢迎来到 Luba 的 IFS 小课堂</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>嗨,我是Luba。<span class="muted">(已按狸花猫规格重绘;如仍与本猫不符,以本猫为准。)</span></p>
+      <p>这门小课基于一本28页的IFS入门手册。我把它拆成了<b>6个小关卡</b>——概念都是原书的,只是变得能玩了。每关5~8分钟,无聊了随时关掉,我不记仇。</p>
+    </div>
+  </div>
+
+  <div class="panel sand">
+    <p style="margin:0"><b>玩法:</b>顺着1→6玩体验最好,但你想跳着玩也完全可以——这里没有"必须"。完成一关的小挑战,顶栏会点亮一个爪印🐾。集齐6个,有毕业礼。</p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-card" data-go="s1" data-s="s1">
+      <span class="tdone">🐾</span>
+      <span class="tnum">SESSION 1</span>
+      <h3>你内心住着一车人</h3>
+      <p>心智多元性 · 巴士比喻 · "所有parts都是好的"</p>
+      <span class="ttime">⏱ 约6分钟 · 含小测验</span>
+    </div>
+    <div class="toc-card" data-go="s2" data-s="s2">
+      <span class="tdone">🐾</span>
+      <span class="tnum">SESSION 2</span>
+      <h3>乘客图鉴:三种Parts</h3>
+      <p>Managers · Firefighters · Exiles · 分类小游戏</p>
+      <span class="ttime">⏱ 约8分钟 · 含小游戏</span>
+    </div>
+    <div class="toc-card" data-go="s3" data-s="s3">
+      <span class="tdone">🐾</span>
+      <span class="tnum">SESSION 3</span>
+      <h3>司机本人:Self 和 8C</h3>
+      <p>那个坏不掉的"你" · 8C互动卡 · 上头与下头</p>
+      <span class="ttime">⏱ 约6分钟 · 含小测验</span>
+    </div>
+    <div class="toc-card" data-go="s4" data-s="s4">
+      <span class="tdone">🐾</span>
+      <span class="tnum">SESSION 4</span>
+      <h3>和Part搭话:6F心法</h3>
+      <p>Find到Fear六步 · 模拟一次真实对话</p>
+      <span class="ttime">⏱ 约8分钟 · 含模拟器</span>
+    </div>
+    <div class="toc-card" data-go="s5" data-s="s5">
+      <span class="tdone">🐾</span>
+      <span class="tnum">SESSION 5</span>
+      <h3>卸下行李:Unburdening</h3>
+      <p>担子不是part本身 · 治愈前后对比 · 终点是什么</p>
+      <span class="ttime">⏱ 约7分钟 · 含小测验</span>
+    </div>
+    <div class="toc-card" data-go="s6" data-s="s6">
+      <span class="tdone">🐾</span>
+      <span class="tnum">SESSION 6</span>
+      <h3>练习工具箱 & 毕业</h3>
+      <p>4个可上手的练习 · 日常Self-leadership · 领证</p>
+      <span class="ttime">⏱ 自定 · 毕业典礼</span>
+    </div>
+  </div>
+
+  <div class="panel tinted" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><p style="margin:0"><b>🎓 基础篇通关了?</b><span class="muted" style="font-size:14px"> 下一层:极化、假司机、保护者谈判、legacy burdens……</span></p><a class="btn ghost" style="text-decoration:none" href="advanced.html">进阶篇 →</a></div>
+
+  <div class="note">🌱 这是一份<b>学习工具</b>,不是治疗,也替代不了therapist。所有自我对照都只是供你验证的猜想,不是结论。</div>
+</section>
+
+<!-- ============ SESSION 1 ============ -->
+<section class="screen" id="s1">
+  <span class="kicker">SESSION 1 · 约6分钟</span>
+  <h1>你内心住着一车人</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>先做个小实验。下面是一个很常见的场景,点按钮,听听你心里大概会有谁发言。</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <p><b>场景:</b>周五晚上9点,你瘫在沙发上。今天的事没做完,但你真的累了。</p>
+    <div class="voices" id="voices">
+      <div class="voice"><span class="vtag">声音 A</span>"现在起来再干一小时,明天就轻松了。起来。"</div>
+      <div class="voice"><span class="vtag">声音 B</span>"别听它的。躺着。天塌下来也先躺着。"</div>
+      <div class="voice"><span class="vtag">声音 C</span>"你看你,又这样。别人都在进步。"</div>
+      <div class="voice"><span class="vtag">声音 D</span>"……要不点个吃的?或者刷会儿手机?总之换个频道。"</div>
+    </div>
+    <button class="btn small" id="voiceBtn">▶ 听听都有谁在说话</button>
+    <div id="voiceReveal" style="display:none;margin-top:16px;animation:fadein .4s">
+      <p><span class="hl">刚才发言的,不是"你想法太乱"——是四个不同的部分(parts),每一个都觉得自己在帮你。</span></p>
+      <p class="muted">这就是IFS的起点:吵闹不是故障,是会议室里坐了不止一个人。</p>
+    </div>
+  </div>
+
+  <h2>三个地基概念</h2>
+  <p class="muted">点卡片翻面 ↓</p>
+  <div class="cards-grid">
+    <div class="fcard" tabindex="0">
+      <div class="fcard-inner">
+        <div class="fc-face fc-front"><span class="big">🧩</span><span class="name">心智多元性<br><span class="en">Multiplicity of Mind</span></span><span class="tap">点我翻面</span></div>
+        <div class="fc-face fc-back">心由很多个"子人格"组成,各有各的视角、记忆、立场。这是<b>出厂设置</b>,不是故障——IFS创始人Richard Schwartz认为这是人类标配,每个人都这样。</div>
+      </div>
+    </div>
+    <div class="fcard" tabindex="0">
+      <div class="fcard-inner">
+        <div class="fc-face fc-front"><span class="big">💛</span><span class="name">所有Parts都是好的<br><span class="en">All Parts Are Good</span></span><span class="tap">点我翻面</span></div>
+        <div class="fc-face fc-back">每个part的<b>动机都是保护你</b>,哪怕方法离谱。像猫把猎物叼到你枕头上——礼物很糟糕,心意是真的。是经历把它们逼成了极端的样子。</div>
+      </div>
+    </div>
+    <div class="fcard" tabindex="0">
+      <div class="fcard-inner">
+        <div class="fc-face fc-front"><span class="big">🚫🏷️</span><span class="name">不贴病理标签<br><span class="en">Non-pathologizing</span></span><span class="tap">点我翻面</span></div>
+        <div class="fc-face fc-back">IFS不把任何part叫"坏的""有病的"。问题永远不是"你怎么回事",而是<b>"它在保护什么"</b>。连最麻烦的行为背后,都是一个想帮忙的部分。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>巴士比喻 🚌</h2>
+  <div class="panel tinted">
+    <p>IFS把人想成一辆巴士:</p>
+    <p>🚌 <b>Self(自性)是司机</b>——天生会开车,稳得很。<br>
+    🧑‍🤝‍🧑 <b>Parts是乘客</b>——可以提意见、可以吵,但路线最好由司机定。</p>
+    <p>问题出在:某个乘客觉得"前方危险!"的时候,会<b>冲上来抢方向盘</b>。这时你感受到的就是情绪上头、想法停不下来、行为不像自己。IFS的全部工作,简单说就一句话:<span class="hl">请乘客回座位,让司机开车</span>——乘客不用下车,一个都不用。</p>
+  </div>
+
+  <h2>过关小测 🐾</h2>
+  <div class="quiz" data-quiz="s1"></div>
+
+  <div class="duizhao dz-locked">
+    <span class="dz-tag">🔍 对照角</span>
+    <p>这一关的概念,让你想到自己身上的什么?在心里(或纸上)记一笔,带去和therapist聊——连线由你来画,别人猜的都不算数。</p>
+    <div class="dz-lock">🔒 <input type="password" class="dz-pass" placeholder="课程主人的口令"><button class="dz-unlock">解锁专属内容</button><span class="dz-err"></span></div>
+  </div>
+
+  <div class="navrow">
+    <button class="btn ghost" data-go="home">← 回目录</button>
+    <button class="btn" data-go="s2">下一关:乘客图鉴 →</button>
+  </div>
+</section>
+
+<!-- ============ SESSION 2 ============ -->
+<section class="screen" id="s2">
+  <span class="kicker">SESSION 2 · 约8分钟</span>
+  <h1>乘客图鉴:三种Parts</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>认乘客环节。IFS把parts分三大类。<b>不用背</b>,认个脸熟就行——反正它们天天来。我用猫来打比方,毕竟我最懂猫。</p>
+    </div>
+  </div>
+
+  <div class="cards-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">🗂 管理员 <span class="en">Managers</span></h3>
+      <p class="muted" style="font-size:14.5px"><b>事前预防型保安。</b>像一只每天巡逻全屋、逐扇检查门窗的猫。通过控制一切,确保痛苦没机会冒头。</p>
+      <p style="font-size:14px;color:var(--accent-deep);font-style:italic;margin:0">"只要我安排好一切,坏事就不会发生。"</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">🧯 消防员 <span class="en">Firefighters</span></h3>
+      <p class="muted" style="font-size:14.5px"><b>事后灭火型。</b>像被踩到尾巴的猫——炸毛、打翻东西、夺路狂奔。痛苦一旦冒头,不惜代价让它立刻停下。</p>
+      <p style="font-size:14px;color:var(--accent-deep);font-style:italic;margin:0">"现在!立刻!别让我感觉到它!"</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">🛋 被放逐者 <span class="en">Exiles</span></h3>
+      <p class="muted" style="font-size:14.5px"><b>背着旧伤的小孩。</b>像躲在床底最深处的小猫——不是不存在,是被藏起来了。它们背着的痛太重,其他parts怕你被淹没,把它们关在意识外面。</p>
+      <p style="font-size:14px;color:var(--accent-deep);font-style:italic;margin:0">"……(很小声)还有人记得我吗?"</p>
+    </div>
+  </div>
+
+  <div class="panel tinted">
+    <p style="margin:0"><b>一个关键联动:</b>管理员和消防员的目标其实一样——别让exile的痛冒出来。只是一个上早班(预防),一个上晚班(救火)。所以很多人白天被管理员推着拼命跑,晚上被消防员接管去麻木——<span class="hl">不是你矛盾,是两班倒</span>。</p>
+  </div>
+
+  <h2>图鉴 · 点卡片翻面认人</h2>
+
+  <h3>🗂 常见的管理员(7种)</h3>
+  <div class="cards-grid" id="mgr-cards"></div>
+
+  <h3>🧯 常见的消防员(6种)</h3>
+  <div class="cards-grid" id="ff-cards"></div>
+  <div class="note">💡 自伤型那张卡,手册里也是如实列出的。如果它对你来说很熟悉,这部分工作请一定和therapist一起做,不适合自己单练。如果在美国遇到危机时刻,可拨打或短信 988。</div>
+
+  <h3>🛋 常见的被放逐者(6种)</h3>
+  <div class="cards-grid" id="ex-cards"></div>
+
+  <h2>分类小游戏:这是谁在干活?🎮</h2>
+  <p class="muted">8个日常场景,判断是哪类part出勤。答错也没关系——分类不是目的,认出来才是。</p>
+  <div class="sort-stage" id="sortgame"></div>
+
+  <div class="duizhao dz-locked">
+    <span class="dz-tag">🔍 对照角</span>
+    <p>这一关的概念,让你想到自己身上的什么?在心里(或纸上)记一笔,带去和therapist聊——连线由你来画,别人猜的都不算数。</p>
+    <div class="dz-lock">🔒 <input type="password" class="dz-pass" placeholder="课程主人的口令"><button class="dz-unlock">解锁专属内容</button><span class="dz-err"></span></div>
+  </div>
+
+  <div class="navrow">
+    <button class="btn ghost" data-go="s1">← 上一关</button>
+    <button class="btn" data-go="s3">下一关:司机本人 →</button>
+  </div>
+</section>
+<!-- ============ SESSION 3 ============ -->
+<section class="screen" id="s3">
+  <span class="kicker">SESSION 3 · 约6分钟</span>
+  <h1>司机本人:Self 和 8C</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>认识完乘客,该认识司机了。这一关有IFS整个体系里<b>最大胆的一个主张</b>,先说结论:司机从来没坏过。</p>
+    </div>
+  </div>
+
+  <div class="cards-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">Self 是什么</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">Self(自性)不是parts中的一个,而是当parts都安静下来、退后一步时,<b>剩下的那个"你"</b>——你的核心,不背负担、不演角色。</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">坏不掉,丢不了</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">IFS主张:<b>Self不会被任何经历损坏或摧毁</b>。它不需要修复、不需要培养,它只是会被挡住——像太阳被云挡住。云再厚,也不等于天空坏了。</p>
+    </div>
+    <div class="panel" style="margin:0">
+      <h3 style="margin-top:0">Self-leadership</h3>
+      <p class="muted" style="font-size:14.5px;margin:0">不是开除乘客,不是消音,而是<b>司机回到驾驶座</b>:能听见每个part的担心,但不被它们淹没。乘客全在车上,路线司机定。</p>
+    </div>
+  </div>
+
+  <h2>8C:司机在场的八个迹象</h2>
+  <p class="muted">当你处在Self里,会带着这八种质感。点开看每一个 ↓</p>
+  <div class="cgrid" id="cgrid"></div>
+
+  <div class="panel sand">
+    <h3 style="margin-top:0">📋 今日8C点名(可选小练习)</h3>
+    <p class="muted" style="font-size:14.5px">今天哪几个C出现过——哪怕只有10秒?勾一下。这不是考核,只是练习"注意到它们其实常来"。</p>
+    <div class="ccheck-row" id="ccheckrow"></div>
+  </div>
+
+  <h2>上头与下头:Blending</h2>
+  <div class="panel tinted">
+    <p>某个part冲上来抢方向盘、把你整个"穿上"的状态,IFS叫<b>blending(融合)</b>。上头时你不会觉得"有个部分在生气",你会觉得"我=愤怒本身"。</p>
+    <p>往回退的第一步小到不可思议——换一句话:</p>
+    <p>❌ "我焦虑死了。"<br>✅ <span class="hl">"我注意到,我有一个部分很焦虑。"</span></p>
+    <p style="margin:0" class="muted">这句话不是文字游戏:说出口的瞬间,"观察者"和"焦虑"分开了一条缝——那条缝里站着的就是Self。这个动作叫<b>unblending</b>,Session 4会正式用到它。</p>
+  </div>
+
+  <h2>过关小测 🐾</h2>
+  <div class="quiz" data-quiz="s3"></div>
+
+  <div class="duizhao dz-locked">
+    <span class="dz-tag">🔍 对照角</span>
+    <p>这一关的概念,让你想到自己身上的什么?在心里(或纸上)记一笔,带去和therapist聊——连线由你来画,别人猜的都不算数。</p>
+    <div class="dz-lock">🔒 <input type="password" class="dz-pass" placeholder="课程主人的口令"><button class="dz-unlock">解锁专属内容</button><span class="dz-err"></span></div>
+  </div>
+
+  <div class="navrow">
+    <button class="btn ghost" data-go="s2">← 上一关</button>
+    <button class="btn" data-go="s4">下一关:和Part搭话 →</button>
+  </div>
+</section>
+
+<!-- ============ SESSION 4 ============ -->
+<section class="screen" id="s4">
+  <span class="kicker">SESSION 4 · 约8分钟</span>
+  <h1>和Part搭话:6F心法</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>理论讲完了,这关学<b>具体怎么聊</b>。IFS的标准流程叫6F——六个步骤,全部以F开头(英语使用者的执念)。先看地图,然后我们真的去聊一次。</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item" data-n="1"><h4>Find 找到</h4><p>问自己:"现在谁最需要我的注意力?" 在身体里或周围找到这个part——它常有身体位置(胸口的紧、胃里的沉)。</p></div>
+    <div class="tl-item" data-n="2"><h4>Focus 聚焦</h4><p>把注意力轻轻放在它身上,别催。就像让猫先闻闻你的手。</p></div>
+    <div class="tl-item" data-n="3"><h4>Flesh out 描摹</h4><p>让它具体起来:它什么样子?多大年纪?在你身体哪里?可以给它起个名字。</p></div>
+    <div class="tl-item" data-n="4"><h4>Feel toward 检查你对它的感觉 ⭐</h4><p>全流程最关键的一步,下面单独讲。</p></div>
+    <div class="tl-item" data-n="5"><h4>beFriend 交朋友</h4><p>用开放式问题了解它、感谢它的辛苦。目标不是改造它,是让它感到被看见。</p></div>
+    <div class="tl-item" data-n="6"><h4>Fear 问它的恐惧</h4><p>"你担心如果你不做这份工作,会发生什么?"——答案往往就是它拼命工作的原因。</p></div>
+  </div>
+
+  <div class="panel tinted">
+    <h3 style="margin-top:0">⭐ 第4步为什么是命门</h3>
+    <p>问自己:"<b>我对这个part是什么感觉?</b>"</p>
+    <p>· 如果答案是好奇、心疼、想了解——说明Self在场,继续。<br>
+    · 如果答案是"烦死它了""想让它消失"——<span class="hl">恭喜,你抓到了第二个part</span>(一个讨厌前者的part)。这不是失败,是情报。请这位也退后一小步,再回头看。</p>
+    <p class="muted" style="margin:0">"对part的反感"本身也是part——这是IFS最容易让人恍然大悟的一招。</p>
+  </div>
+
+  <h2>实战模拟器 🎮</h2>
+  <p class="muted">对象是一个很普遍的part:"发邮件前要反复检查的部分"。你来选回应,选"错"了也有收获——很多反馈就藏在歪打里。</p>
+  <div class="sim" id="sixfsim"></div>
+
+  <h2>描摹阶段的问题库</h2>
+  <p class="muted">手册里给了7类可以问part的问题,收藏备用 ↓</p>
+  <details><summary>🌱 起源 Origins</summary><div class="dbody"><p>"你是什么时候成为我的一部分的?能给我看看/讲讲你刚上岗的时候吗?"</p></div></details>
+  <details><summary>🎯 目的 Purpose</summary><div class="dbody"><p>"你在我的系统里负责什么?你想达成什么,或者防止什么?"</p></div></details>
+  <details><summary>😟 担忧 Concerns</summary><div class="dbody"><p>"你在担心什么?如果你不做这份工作,你怕会发生什么?"</p></div></details>
+  <details><summary>🧭 信念 Beliefs</summary><div class="dbody"><p>"关于我、别人、这个世界,你相信什么?"</p></div></details>
+  <details><summary>✨ 愿望 Desires</summary><div class="dbody"><p>"你希望什么?你想让我明白或知道什么?"</p></div></details>
+  <details><summary>💧 感受 Feelings</summary><div class="dbody"><p>"你背着哪些情绪?对你一直扮演的这个角色,你自己感觉如何?"</p></div></details>
+  <details><summary>🕸 与其他parts的关系 Relationships</summary><div class="dbody"><p>"你和我的其他部分相处得怎样?有没有你在配合的、冲突的、或者保护着的part?"</p></div></details>
+
+  <div class="panel sand">
+    <h3 style="margin-top:0">两种相处模式</h3>
+    <p style="margin:0"><b>见证 Witnessing</b>:只是不带评判地看着它、承认它的存在,不打算改变它。<br><b>对话 Dialoguing</b>:在见证基础上展开双向交流——邀请它说话、开放式提问、共情回应、道谢。</p>
+  </div>
+
+  <div class="note">⚠️ 一个重要的刹车:如果对话中突然涌上很大的情绪、很小很早的记忆——可能是exile探头了。<b>不硬上</b>。记下来,带去session和therapist一起。这不是胆小,这正是IFS的标准流程:先取得保护者们的允许,再靠近它们保护的小孩。</div>
+
+  <div class="duizhao dz-locked">
+    <span class="dz-tag">🔍 对照角</span>
+    <p>这一关的概念,让你想到自己身上的什么?在心里(或纸上)记一笔,带去和therapist聊——连线由你来画,别人猜的都不算数。</p>
+    <div class="dz-lock">🔒 <input type="password" class="dz-pass" placeholder="课程主人的口令"><button class="dz-unlock">解锁专属内容</button><span class="dz-err"></span></div>
+  </div>
+
+  <div class="navrow">
+    <button class="btn ghost" data-go="s3">← 上一关</button>
+    <button class="btn" data-go="s5">下一关:卸下行李 →</button>
+  </div>
+</section>
+<!-- ============ SESSION 5 ============ -->
+<section class="screen" id="s5">
+  <span class="kicker">SESSION 5 · 约7分钟</span>
+  <h1>卸下行李:Unburdening</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>这一关讲IFS的"治愈"到底指什么。先记住一个画面:<b>part不是它背的那个包</b>。</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <p><b>担子(Burden)</b>= part一直背着的极端情绪、信念、记忆。比如"我不够好""出错=完蛋"——那不是part的本性,是它在某段经历里<b>捡起来</b>的东西。</p>
+    <p style="margin:0">捡起来的东西,就可以放下。这就是<b>unburdening(卸担)</b>:part放下负担后不会消失,而是<span class="hl">换一份它本来就想干的工作</span>。批评你的部分,卸担后可能变成清晰的判断力;疯狂灭火的消防员,可能变成幽默感和冒险精神。</p>
+  </div>
+
+  <h2>切换看看:同一套系统,背担子前后</h2>
+  <div class="burden-wrap">
+    <div class="burden-toggle">
+      <button class="bt-opt on" id="btBefore">😮‍💨 背着担子</button>
+      <button class="bt-opt" id="btAfter">🌤 卸下之后</button>
+    </div>
+    <div class="burden-cols" id="burdenCols"></div>
+  </div>
+  <p class="muted" style="text-align:center">来回切几次,感受一下:每一行都是同一个part,没人被开除。</p>
+
+  <h2>卸担的7步(地图,不是教程)</h2>
+  <div class="note">🤝 这是IFS的"深水区",标准做法是<b>和therapist一起走</b>——因为需要先取得保护者的允许,节奏错了exile会被吓回去。这里给你地图,是为了你坐在咨询室里时,知道自己走到了哪一步。</div>
+  <div class="timeline">
+    <div class="tl-item" data-n="1"><h4>连接</h4><p>在managers和firefighters点头放行之后,才开始接近exile。</p></div>
+    <div class="tl-item" data-n="2"><h4>见证它的故事</h4><p>邀请exile讲讲/给你看它的记忆。</p></div>
+    <div class="tl-item" data-n="3"><h4>在场,但不淹没</h4><p>从Self的位置陪着它的情绪,感同身受但不被卷走。</p></div>
+    <div class="tl-item" data-n="4"><h4>必要时unblend</h4><p>"我注意到一个部分感到强烈的羞耻——但那不是我的全部。"</p></div>
+    <div class="tl-item" data-n="5"><h4>慈悲地见证</h4><p>"我看到你有多痛了。我在这儿。"——光是这一步,就已经在治愈。</p></div>
+    <div class="tl-item" data-n="6"><h4>卸下担子</h4><p>当exile信任你了,问它愿不愿意放下。常见方式:回到那段记忆里,给当时的小孩当时缺席的支持。</p></div>
+    <div class="tl-item" data-n="7"><h4>确认与整合</h4><p>问问它现在感觉如何(常见回答:轻了)。腾出手的它,会自己找到新角色——比如负责快乐。</p></div>
+  </div>
+
+  <h2>所以,IFS的终点长什么样?</h2>
+  <div class="cards-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
+    <div class="panel" style="margin:0"><h3 style="margin-top:0">🚌 Self-leadership</h3><p class="muted" style="font-size:14.5px;margin:0">Self坐在驾驶座。parts不被消音,它们的担心被听见,但方向盘在司机手里。</p></div>
+    <div class="panel" style="margin:0"><h3 style="margin-top:0">🤝 Integration 整合</h3><p class="muted" style="font-size:14.5px;margin:0">原本对立、孤立的parts(比如"再干一小时"和"躺平别动")学会合作,谁也不用吞并谁。</p></div>
+    <div class="panel" style="margin:0"><h3 style="margin-top:0">⚖️ Balance 平衡</h3><p class="muted" style="font-size:14.5px;margin:0">每个part做它本来的工作,不过度:管理员不暴政,消防员不轰炸,exile不被关禁闭。</p></div>
+  </div>
+
+  <h2>过关小测 🐾</h2>
+  <div class="quiz" data-quiz="s5"></div>
+
+  <div class="duizhao dz-locked">
+    <span class="dz-tag">🔍 对照角</span>
+    <p>这一关的概念,让你想到自己身上的什么?在心里(或纸上)记一笔,带去和therapist聊——连线由你来画,别人猜的都不算数。</p>
+    <div class="dz-lock">🔒 <input type="password" class="dz-pass" placeholder="课程主人的口令"><button class="dz-unlock">解锁专属内容</button><span class="dz-err"></span></div>
+  </div>
+
+  <div class="navrow">
+    <button class="btn ghost" data-go="s4">← 上一关</button>
+    <button class="btn" data-go="s6">最后一关:工具箱 →</button>
+  </div>
+</section>
+
+<!-- ============ SESSION 6 ============ -->
+<section class="screen" id="s6">
+  <span class="kicker">SESSION 6 · 时间自定</span>
+  <h1>练习工具箱 & 毕业</h1>
+
+  <div class="luba">
+    <svg class="cat-icon"><use href="#cat"/></svg>
+    <div class="bubble">
+      <span class="who">LUBA</span>
+      <p>最后一关不考试。手册附了4个练习,我按"能不能自己上手"给你标好了。<b>把4个都点开看过</b>,就算毕业。(只是看,不强制练——看完你就知道哪个适合现在的你。)</p>
+    </div>
+  </div>
+
+  <details class="ex-card" data-ex="1"><summary>🙌 全员欢迎 All Parts Are Welcome <span style="font-weight:400;font-size:13px;color:var(--good)">· 适合自己做 · 约5分钟</span></summary>
+    <div class="dbody">
+      <p>目的:开一次"全员到齐"的点名会,让parts知道你在听。</p>
+      <ol>
+        <li>注意力向内,说(出声或心里):"我想帮助任何需要帮助的部分,但首先,我需要认识你们所有人。"</li>
+        <li>接着说:"如果你们把我淹没,我就没法帮你们了。"</li>
+        <li>然后邀请:"请和我待在一起,而不是接管我。准备好了就告诉我你是谁,我会记下来。"</li>
+        <li>把浮现的东西记下来——想法、情绪、身体感觉都算。</li>
+      </ol>
+      <p class="muted">小抄:浮现的东西可能很平常("肩膀好紧""有点烦")。都算数,都记。</p>
+    </div>
+  </details>
+
+  <details class="ex-card" data-ex="2"><summary>🔍 6F自助轻量版 <span style="font-weight:400;font-size:13px;color:var(--good)">· 适合自己做 · 约10分钟</span></summary>
+    <div class="dbody">
+      <p>目的:对一个不太烫手的part,完整走一遍Session 4学的六步。</p>
+      <ol>
+        <li><b>Find</b>:问"现在谁最需要我的注意力?"——在身体里找它。</li>
+        <li><b>Focus</b>:注意力放上去,不催。</li>
+        <li><b>Flesh out</b>:它什么样?能看到或感觉到什么?</li>
+        <li><b>Feel toward</b>:检查你对它的感觉。不是好奇/友善的话,请那位先退后。</li>
+        <li><b>beFriend</b>:用问题库里的问题认识它。</li>
+        <li><b>Fear</b>:问它怕什么、它希望给你什么、它停下来的话会发生什么。</li>
+      </ol>
+      <p class="muted">第一次选难度低的part练手,比如"觉得这个练习有点傻的那个部分"——它现在大概就在。</p>
+    </div>
+  </details>
+
+  <details class="ex-card" data-ex="3"><summary>🛤 Self之路 The Path of Self <span style="font-weight:400;font-size:13px;color:var(--accent-deep)">· 想象练习 · 状态好时做</span></summary>
+    <div class="dbody">
+      <p>目的:体验一次"parts都退后时,纯粹的Self是什么感觉"。</p>
+      <ol>
+        <li>舒服地坐好,缓慢深呼吸。</li>
+        <li>想象你和你的parts在一条小路的起点碰头。请它们在原地等你,你独自走一段。</li>
+        <li>注意它们的反应——有的会怕、有的不想让你走。<b>不勉强:它们今天不放行,就改天</b>。这不是失败,是信息。</li>
+        <li>如果可以出发:走着走着发现自己还在"想事情"或"旁观自己",说明有part跟来了——温和地请它回去等。可以重复多次。</li>
+        <li>越走越轻,走向没有念头的纯粹觉知。可能出现:清晰、安适、信心。</li>
+        <li>把这种能量请进身体,停留感受一会儿。</li>
+        <li>准备好了,深呼吸,回到房间。</li>
+      </ol>
+      <p class="muted">手册建议定期重复,并试着在日常里回忆这种感觉。</p>
+    </div>
+  </details>
+
+  <details class="ex-card" data-ex="4"><summary>🚒 消防演习 The Fire Drill <span style="font-weight:400;font-size:13px;color:var(--bad)">· 建议先和therapist聊过再做</span></summary>
+    <div class="dbody">
+      <p>目的:在安全的想象设置里,观察你的保护者如何启动。<b>因为要主动想象一个触发你的人,建议把它留到和therapist讨论之后</b>,或在session里做。</p>
+      <ol>
+        <li>想象一个会触发你愤怒/悲伤的人,把ta放进一个出不来的房间。</li>
+        <li>你在单面镜后观察:你看得见ta,ta看不见你。</li>
+        <li>让ta做/说那些让你难受的事。</li>
+        <li>观察你的身体和念头:肌肉、心跳、呼吸、情绪——这就是你的protector启动的样子。</li>
+        <li>透过protector的眼睛看ta,然后向protector保证:你不会进那个房间,你现在是安全的,它可以stand down。</li>
+        <li>看它愿不愿意把它的能量从你身上分开、带走。</li>
+        <li>重新检查自己:身体有什么变化?镜子里那个人现在看起来如何?</li>
+        <li>问protector:能开始信任你吗?不能的话,为什么?最后谢谢它一直以来的保护。</li>
+        <li>深呼吸,回到房间。</li>
+      </ol>
+    </div>
+  </details>
+
+  <h2>日常Self-leadership菜单</h2>
+  <p class="muted">手册里的日常保养建议,小份的:</p>
+  <div class="cards-grid" style="grid-template-columns:repeat(auto-fill,minmax(195px,1fr))">
+    <div class="panel" style="margin:0;padding:16px"><b>🧘 正念</b><p class="muted" style="font-size:13.5px;margin:6px 0 0">呼吸、身体扫描、冥想——练的是Self的"在场"肌肉。</p></div>
+    <div class="panel" style="margin:0;padding:16px"><b>🛁 自我照顾</b><p class="muted" style="font-size:13.5px;margin:6px 0 0">吃好睡好动一动。司机休息好,才开得稳。</p></div>
+    <div class="panel" style="margin:0;padding:16px"><b>💬 肯定语</b><p class="muted" style="font-size:13.5px;margin:6px 0 0">"我有能力理解我的parts。"——说给乘客们听的广播。</p></div>
+    <div class="panel" style="margin:0;padding:16px"><b>🌄 可视化</b><p class="muted" style="font-size:13.5px;margin:6px 0 0">想象Self作为一个慈悲的领队,和parts在安全的地方见面。</p></div>
+    <div class="panel" style="margin:0;padding:16px"><b>🤝 专业陪伴</b><p class="muted" style="font-size:13.5px;margin:6px 0 0">IFS therapist就是带路人。你已经在安排了——进度领先。</p></div>
+  </div>
+
+  <hr class="divider">
+
+  <div id="gradLocked" class="panel sand" style="text-align:center">
+    <p style="margin:0">🔒 毕业条件:点亮全部6个爪印。<br><span class="muted" style="font-size:14px">差哪关补哪关,或者——直接去玩,爪印自己会亮。</span></p>
+    <p id="gradHint" class="muted" style="font-size:14px;margin:8px 0 0"></p>
+  </div>
+
+  <div id="gradOpen" style="display:none">
+    <div class="grad-hero">
+      <div class="confetti">🎉 🐾 🎓 🐾 🎉</div>
+      <svg class="cat-icon"><use href="#cat"/></svg>
+      <h1 style="margin-top:10px">毕业快乐!</h1>
+      <div class="badge-row">🐾🐾🐾🐾🐾🐾</div>
+      <div class="panel" style="text-align:left">
+        <p><b>你现在认识了:</b>多元心智 · 三类parts(Managers/Firefighters/Exiles)· Self和8C · blending与unblending · 6F对话法 · burdens和unburdening · IFS的终点(Self-leadership/整合/平衡)。</p>
+        <p>下一步不是"学更多",是带着好奇心去见你的parts——以及把你的猜想带去和therapist对答案;如果你在做IFS取向的咨询,这套语言可以直接共用。</p>
+        <p class="muted" style="margin:0">Luba监修声明:本猫对IFS的全部理解是"饭点的我=一个非常坚定的part"。但她说这套课有效,而她从不说客套话。</p>
+      </div>
+      <button class="btn" data-go="home">回目录,随时重玩 🐾</button>
+    </div>
+  </div>
+
+  <div class="navrow">
+    <button class="btn ghost" data-go="s5">← 上一关</button>
+    <button class="btn ghost" data-go="home">回目录</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>📖 内容依据:一份《Internal Family Systems》入门手册(28页),IFS模型由 Richard Schwartz 创立。本页面是学习工具,不是治疗,不替代专业意见。练习中如感到被淹没,停下来就是正确操作——这本身就是IFS教的事。美国境内如遇心理危机,可拨打/短信 <b>988</b>。</p>
+  <p style="margin-top:6px">🐾 进度只保存在你自己的电脑里(浏览器本地),没有任何数据被上传。</p>
+</footer>
+
+</div>
+<script>
+(function(){
+"use strict";
+var $ = function(s){ return document.querySelector(s); };
+var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+/* ---------- 状态存取 ---------- */
+var KEY = "luba_ifs_v1";
+var state = { badges:{}, cchecks:{}, exOpened:{} };
+try {
+  var raw = localStorage.getItem(KEY);
+  if (raw) { var p = JSON.parse(raw); if (p && typeof p === "object") state = Object.assign(state, p); }
+} catch(e){}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+var SESSIONS = ["s1","s2","s3","s4","s5","s6"];
+
+/* ---------- 顶栏爪印 ---------- */
+function renderPaws(popKey){
+  var bar = $("#pawbar");
+  bar.innerHTML = "";
+  SESSIONS.forEach(function(s, i){
+    var d = document.createElement("div");
+    d.className = "paw" + (state.badges[s] ? " earned" : "") + (s === popKey ? " pop" : "");
+    d.textContent = "🐾";
+    d.title = "Session " + (i+1) + (state.badges[s] ? " · 已点亮" : " · 未点亮");
+    d.addEventListener("click", function(){ go(s); });
+    bar.appendChild(d);
+  });
+  $$(".toc-card").forEach(function(c){
+    c.classList.toggle("done", !!state.badges[c.getAttribute("data-s")]);
+  });
+}
+
+/* ---------- 小吐司 ---------- */
+function toast(msg){
+  var t = document.createElement("div");
+  t.textContent = msg;
+  t.style.cssText = "position:fixed;left:50%;bottom:34px;transform:translateX(-50%);background:#3D3329;color:#fff;padding:11px 22px;border-radius:99px;font-size:15px;z-index:99;box-shadow:0 6px 20px rgba(0,0,0,.25);animation:fadein .3s ease;";
+  document.body.appendChild(t);
+  setTimeout(function(){ t.style.opacity = "0"; t.style.transition = "opacity .5s"; }, 2200);
+  setTimeout(function(){ t.remove(); }, 2800);
+}
+
+function award(s){
+  if (state.badges[s]) return;
+  state.badges[s] = true;
+  save();
+  renderPaws(s);
+  var n = SESSIONS.filter(function(k){ return state.badges[k]; }).length;
+  toast(n === 6 ? "🐾 第6个爪印!去Session 6领毕业证 🎓" : "🐾 爪印 +1!(" + n + "/6)");
+  checkGrad();
+}
+
+/* ---------- 路由 ---------- */
+function go(id){
+  $$(".screen").forEach(function(sc){ sc.classList.remove("active"); });
+  var el = document.getElementById(id);
+  if (el) el.classList.add("active");
+  window.scrollTo({top:0});
+  if (id === "s6") checkGrad();
+}
+document.addEventListener("click", function(ev){
+  var t = ev.target.closest("[data-go]");
+  if (t) go(t.getAttribute("data-go"));
+});
+
+/* ---------- 翻转卡(事件委托) ---------- */
+document.addEventListener("click", function(ev){
+  var c = ev.target.closest(".fcard");
+  if (c) c.classList.toggle("flipped");
+});
+document.addEventListener("keydown", function(ev){
+  if (ev.key === "Enter" && document.activeElement && document.activeElement.classList.contains("fcard")) {
+    document.activeElement.classList.toggle("flipped");
+  }
+});
+
+/* ---------- S1 内心的声音 ---------- */
+(function(){
+  var btn = $("#voiceBtn");
+  if (!btn) return;
+  var i = 0;
+  var voices = $$("#voices .voice");
+  btn.addEventListener("click", function(){
+    if (i < voices.length) {
+      voices[i].classList.add("shown");
+      i++;
+      btn.textContent = i < voices.length ? "▶ 还有谁?(" + i + "/" + voices.length + ")" : "…原来是这几位";
+    }
+    if (i >= voices.length) {
+      setTimeout(function(){
+        $("#voiceReveal").style.display = "block";
+        btn.style.display = "none";
+      }, 600);
+    }
+  });
+})();
+
+/* ---------- 图鉴数据 ---------- */
+var MGR = [
+  {e:"🤗", n:"讨好者 Pleaser", q:"「都听你们的,别吵架就行。」", d:"努力让所有人开心、避免冲突——哪怕要同意自己并不同意的事,做自己不想做的事。"},
+  {e:"📣", n:"批评家 Critic", q:"「我先骂你,免得别人骂你。」", d:"用持续的自我批评鞭策你进步、防止犯错。带着强批评家的人,常觉得自己怎么做都不够好。"},
+  {e:"🫶", n:"照顾者 Caretaker", q:"「我先照顾好所有人——除了你。」", d:"把别人的需要排在你前面,用照顾换平静。代价通常是你自己的需要一直被欠着。"},
+  {e:"🗓", n:"计划狂 Planner", q:"「Plan B到Plan F都做好了。」", d:"永远在想下一步,为每种可能做预案。副作用:大量时间花在对未来的担忧上。"},
+  {e:"💯", n:"完美主义者 Perfectionist", q:"「再改一版。就一版。」", d:"用极高甚至不可能的标准,防止批评、失败、被拒。改到第14版还不满意,就是它在值班。"},
+  {e:"💼", n:"工作狂 Workaholic", q:"「停下来?停下来你会听见心里的声音。」", d:"让你一直忙、忙到没空感觉。常牺牲关系和自我照顾,防的是「不够好」的感觉冒出来。"},
+  {e:"🎮", n:"控制者 Controller", q:"「一切尽在掌握(必须)。」", d:"控制环境、行程、甚至身边人的行为,确保一切可预测、不出岔子。"}
+];
+var FF = [
+  {e:"👉", n:"怪罪型 Blaming", q:"「都是他们的错!」", d:"把不舒服往外推:指责别人,免得自己疼。比如感觉自己不够好时,先怪同事不给力。"},
+  {e:"🛍", n:"冲动型 Impulsive", q:"「买它!去做!别想!」", d:"用冲动行为转移注意力:冲动购物、莽撞冒险。难受的当晚就血拼,是它的经典操作。"},
+  {e:"🩹", n:"自伤型 Self-Harming", q:"(这张卡请轻拿轻放)", d:"用身体的痛盖过心里的痛。如果这张卡对你来说很熟悉,请和therapist一起工作,不要自己练。美国危机支持:拨打/短信988。"},
+  {e:"🌫", n:"解离型 Dissociative", q:"「人在,魂已登出。」", d:"太疼的时候直接断开连接——感觉不到身体,周围像隔了一层玻璃。"},
+  {e:"🌋", n:"暴怒型 Rageful", q:"「生气,比受伤安全。」", d:"用愤怒挡住脆弱。被批评或被拒的瞬间突然炸毛,往往是它在护驾。"},
+  {e:"🍦", n:"成瘾型 Addictive", q:"「再来一点,就不疼了。」", d:"用让人上头的东西麻痹疼痛:酒、刷不完的屏、停不下来的吃。它不是馋,是在灭火。"}
+];
+var EX = [
+  {e:"👻", n:"隐形的 Invisible", q:"「反正没人听。」", d:"觉得自己不被看见、不被听见,难以表达自己。常来自想法和感受一再被无视的经历。"},
+  {e:"🚪", n:"被抛弃的 Abandoned", q:"「别走。」", d:"背着被丢下的恐惧和强烈的孤独。常来自早年被独自留下、无人支持的经历。"},
+  {e:"🍂", n:"被忽视的 Neglected", q:"「我的需要不重要。」", d:"长期觉得空着、被略过、不满足。常来自需要总是得不到回应的日子。"},
+  {e:"🪨", n:"无价值的 Worthless", q:"「我不够好。」", d:"背着「我根本不行」的信念。常来自被批评、被比较、被定义为失败的经历。"},
+  {e:"🫥", n:"羞耻的 Shamed", q:"「我有问题,别让人发现。」", d:"觉得自己深处有缺陷、不配被爱和快乐。常来自被羞辱、被当众难堪的经历。"},
+  {e:"⛈", n:"受创的 Traumatized", q:"「那件事还没过去。」", d:"保管着创伤记忆和当时的恐惧、无助。遇到提醒物会反应很大——哪怕已经不记得原事件。"}
+];
+function fcardHTML(it){
+  return '<div class="fcard" tabindex="0"><div class="fcard-inner">' +
+    '<div class="fc-face fc-front"><span class="big">' + it.e + '</span><span class="name">' + it.n + '</span><span class="tap">点我翻面</span></div>' +
+    '<div class="fc-face fc-back"><div class="quote">' + it.q + '</div>' + it.d + '</div>' +
+    '</div></div>';
+}
+function fillGrid(id, arr){
+  var el = document.getElementById(id);
+  if (el) el.innerHTML = arr.map(fcardHTML).join("");
+}
+fillGrid("mgr-cards", MGR);
+fillGrid("ff-cards", FF);
+fillGrid("ex-cards", EX);
+
+/* ---------- 测验引擎 ---------- */
+var QUIZZES = {
+  s1: [
+    { q:"心里同时出现好几个互相打架的声音,IFS认为这说明:",
+      opts:[
+        {t:"想太多了,需要清空大脑", ok:false, fb:"IFS反而觉得「清空」既不可能也没必要——会议室本来就坐了一车人。再试试?"},
+        {t:"这是人类心智的出厂设置", ok:true, fb:"对!多元心智(multiplicity)是常态,不是故障。吵,说明大家都在认真上班。"},
+        {t:"性格出了问题的征兆", ok:false, fb:"恰恰相反——IFS连「有问题」这种标签都不发(non-pathologizing)。再试试?"}
+      ]},
+    { q:"某个part的行为很极端(比如没完没了的自我批评),IFS的理解是:",
+      opts:[
+        {t:"它是内部敌人,要打败它", ok:false, fb:"IFS里没有敌人。而且越打,它越觉得你需要被盯紧。再试试?"},
+        {t:"它在用很笨的方式保护你", ok:true, fb:"对!方法可能离谱,动机都是保护——像猫把死蝉放你枕头上,礼物糟糕,心意是真的。"},
+        {t:"它是缺陷,得切除", ok:false, fb:"IFS不切除任何部分——也切不掉,它们都是你。再试试?"}
+      ]}
+  ],
+  s3: [
+    { q:"按IFS的说法,经历了很糟糕的事之后,一个人的Self会:",
+      opts:[
+        {t:"受损,需要花很多年修复", ok:false, fb:"IFS的主张正相反:Self坏不掉、丢不了。被挡住≠坏掉。再试试?"},
+        {t:"完好无损,只是可能被parts挡住了", ok:true, fb:"对!云可以很厚,但天空没坏。"},
+        {t:"被替换成一个新的Self", ok:false, fb:"Self没有备件,也不需要——一直是原装的那个。再试试?"}
+      ]},
+    { q:"「我焦虑死了」和「我注意到我的一个部分很焦虑」,区别是:",
+      opts:[
+        {t:"只是说法不同,没实际区别", ok:false, fb:"亲自试一遍再说😼 第二句会在你和情绪之间裂开一条缝。再试试?"},
+        {t:"第二句把「观察者」和「情绪」分开了一条缝", ok:true, fb:"对!那条缝里站着的就是Self。这个动作叫unblending。"},
+        {t:"第二句是在逃避情绪", ok:false, fb:"不是逃避——拉开一点点距离,反而才能真的听它说话。再试试?"}
+      ]},
+    { q:"Self-leadership 的意思是:",
+      opts:[
+        {t:"把负面的parts都赶下车", ok:false, fb:"没有人需要下车,一个都不用。再试试?"},
+        {t:"司机开车,乘客都在,意见被听见", ok:true, fb:"对!听得见每个担心,但方向盘在司机手里。"},
+        {t:"永远保持冷静,不再有情绪", ok:false, fb:"Self-leadership不是情绪静音模式——8C里还有courage的位置呢。再试试?"}
+      ]}
+  ],
+  s5: [
+    { q:"Unburdening(卸担)之后,那个part会:",
+      opts:[
+        {t:"消失,系统更清净", ok:false, fb:"不消失。IFS里没有删除键。再试试?"},
+        {t:"放下担子,换一份它本来想干的工作", ok:true, fb:"对!比如批评者卸担后,可能变成清晰的判断力。"},
+        {t:"被一个更健康的part替换掉", ok:false, fb:"不换人,还是它——只是不背那个包了。再试试?"}
+      ]},
+    { q:"接近exile、做卸担工作的标准方式是:",
+      opts:[
+        {t:"自己在家硬上,效率高", ok:false, fb:"节奏错了exile会被吓回去,protectors也会拉警报。这段路标配带路人。再试试?"},
+        {t:"和therapist一起,先取得保护者们的允许", ok:true, fb:"对!先过managers和firefighters这一关,是IFS的规矩。"},
+        {t:"等exile自己出来", ok:false, fb:"它们被放逐太久,一般不会自己出来——需要在安全的时候被邀请。再试试?"}
+      ]},
+    { q:"IFS的最终目标是:",
+      opts:[
+        {t:"只留下Self,parts越少越好", ok:false, fb:"parts不是越少越好——IFS的愿景是全员都在。再试试?"},
+        {t:"Self领队,全员都在,各司其职", ok:true, fb:"对!Self-leadership+整合+平衡,一个都不开除。"},
+        {t:"从此再也不会被触发", ok:false, fb:"还是会被触发——只是触发之后,司机能更快回到驾驶座。再试试?"}
+      ]}
+  ]
+};
+$$(".quiz").forEach(function(qz){
+  var key = qz.getAttribute("data-quiz");
+  var data = QUIZZES[key];
+  if (!data) return;
+  var solved = data.map(function(){ return false; });
+  data.forEach(function(item, qi){
+    var box = document.createElement("div");
+    box.className = "qbox";
+    var qt = document.createElement("div");
+    qt.className = "qtext";
+    qt.textContent = "Q" + (qi+1) + ". " + item.q;
+    box.appendChild(qt);
+    var opts = document.createElement("div");
+    opts.className = "opts";
+    var fb = document.createElement("div");
+    fb.className = "qfb";
+    item.opts.forEach(function(o){
+      var b = document.createElement("button");
+      b.className = "opt";
+      b.textContent = o.t;
+      b.addEventListener("click", function(){
+        if (solved[qi]) return;
+        fb.classList.add("show");
+        if (o.ok) {
+          b.classList.add("correct");
+          fb.classList.remove("bad"); fb.classList.add("good");
+          fb.textContent = "✓ " + o.fb;
+          solved[qi] = true;
+          opts.querySelectorAll(".opt").forEach(function(x){ x.disabled = true; });
+          if (solved.every(function(x){ return x; })) {
+            setTimeout(function(){ award(key); }, 350);
+          }
+        } else {
+          b.classList.add("wrong");
+          b.disabled = true;
+          fb.classList.remove("good"); fb.classList.add("bad");
+          fb.textContent = "✗ " + o.fb;
+        }
+      });
+      opts.appendChild(b);
+    });
+    box.appendChild(opts);
+    box.appendChild(fb);
+    qz.appendChild(box);
+  });
+});
+
+/* ---------- S2 分类游戏 ---------- */
+(function(){
+  var stage = $("#sortgame");
+  if (!stage) return;
+  var ROUNDS = [
+    {t:"演讲前夜,把PPT改到第14版,还觉得不行。", a:"M", fb:"完美主义者(Manager)在加班——它防的是「被批评」的那一刻。"},
+    {t:"跟人吵完架,立刻打开购物APP,下单三件不需要的东西。", a:"F", fb:"冲动型消防员的标准灭火操作:用「买」盖住「疼」。"},
+    {t:"心里有个角落,一被提到小学当众出丑的事就缩起来。", a:"E", fb:"那是一个exile——背着旧羞耻的小孩,在床底待了很多年。"},
+    {t:"明明累瘫了,朋友约饭还是秒回「好呀好呀!」", a:"M", fb:"讨好者(Manager)值班中:先保住关系和气氛,累不累以后再说。"},
+    {t:"被领导轻轻点了一句,瞬间炸毛,音量翻倍。", a:"F", fb:"暴怒型消防员出动:生气,比承认受伤安全多了。"},
+    {t:"有种沉沉的感觉总在水面下:「我好像就是不配。」", a:"E", fb:"无价值感的exile。它不吵,但一直在。"},
+    {t:"旅行前两周,做好了精确到小时的行程表,含雨天备案。", a:"M", fb:"计划狂(Manager):用「万无一失」换「不被意外击中」。"},
+    {t:"难过的晚上刷短视频到凌晨三点,什么也没感觉到。", a:"F", fb:"解离/成瘾系消防员:把频道换走,让你感觉不到疼。"}
+  ];
+  var LABEL = { M:"🗂 管理员", F:"🧯 消防员", E:"🛋 被放逐者" };
+  var idx = 0, score = 0;
+  function render(){
+    if (idx >= ROUNDS.length) {
+      stage.innerHTML =
+        '<p style="font-size:38px;margin-bottom:6px">🎮🐾</p>' +
+        '<p class="sort-scenario" style="min-height:0">完成!答对 ' + score + ' / ' + ROUNDS.length + '</p>' +
+        '<p class="muted" style="margin-top:8px">分类从来不是重点。重点是下次它们出现时,你能认出:「哦,是你呀。」</p>' +
+        '<button class="btn small ghost" id="sortReplay" style="margin-top:10px">再玩一遍</button>';
+      $("#sortReplay").addEventListener("click", function(){ idx = 0; score = 0; render(); });
+      award("s2");
+      return;
+    }
+    var r = ROUNDS[idx];
+    stage.innerHTML =
+      '<div class="sort-meta">第 ' + (idx+1) + ' / ' + ROUNDS.length + ' 题 · 已答对 ' + score + '</div>' +
+      '<div class="sort-scenario">"' + r.t + '"</div>' +
+      '<div class="sort-btns">' +
+        ["M","F","E"].map(function(k){ return '<button class="sort-btn" data-k="' + k + '">' + LABEL[k] + '</button>'; }).join("") +
+      '</div>' +
+      '<div class="sort-fb" id="sortFb"></div>';
+    stage.querySelectorAll(".sort-btn").forEach(function(b){
+      b.addEventListener("click", function(){
+        var right = b.getAttribute("data-k") === r.a;
+        if (right) score++;
+        var fbEl = $("#sortFb");
+        fbEl.innerHTML = (right ? '<span class="yes">✓ 答对了!</span> ' : '<span class="no">✗ 是 ' + LABEL[r.a] + '。</span> ') + r.fb +
+          '<br><button class="btn small" id="sortNext" style="margin-top:10px">' + (idx === ROUNDS.length-1 ? "看结果 →" : "下一题 →") + '</button>';
+        stage.querySelectorAll(".sort-btn").forEach(function(x){ x.disabled = true; x.style.opacity = ".5"; });
+        $("#sortNext").addEventListener("click", function(){ idx++; render(); });
+      });
+    });
+  }
+  render();
+})();
+
+/* ---------- S3 8C ---------- */
+(function(){
+  var grid = $("#cgrid");
+  if (!grid) return;
+  var CS = [
+    {e:"💗", n:"Compassion 慈悲", d:"对自己和别人的痛,都能软下来。对自己的错多一分理解,对别人的难多一分耐心。"},
+    {e:"🔭", n:"Curiosity 好奇", d:"不带评判地想了解:「它为什么这样?」——对parts用这个,效果拔群。"},
+    {e:"🌊", n:"Calm 平静", d:"风浪里也在的那种稳。压力下不被卷走,难的场合也能稳住。"},
+    {e:"⛰", n:"Confidence 信心", d:"「我应付得来」的底气,也包括敢于表达自己。"},
+    {e:"🔍", n:"Clarity 清晰", d:"看得清自己的模式,也看得懂别人的视角,脑子不糊。"},
+    {e:"🦁", n:"Courage 勇气", d:"敢面对怕的事:难的对话、旧的伤、关系里的冲突。"},
+    {e:"🎨", n:"Creativity 创造力", d:"冒出新点子、新解法、新表达——困住的时候,它来开窗。"},
+    {e:"🕸", n:"Connectedness 联结", d:"和人、和世界连着的感觉;属于某个更大东西的感觉。"}
+  ];
+  grid.innerHTML = CS.map(function(c){
+    return '<div class="ccard"><div class="chead"><span>' + c.e + '</span><span>' + c.n + '</span></div><div class="cbody">' + c.d + '</div></div>';
+  }).join("");
+  grid.querySelectorAll(".ccard").forEach(function(c){
+    c.addEventListener("click", function(){ c.classList.toggle("open"); });
+  });
+  var row = $("#ccheckrow");
+  row.innerHTML = CS.map(function(c, i){
+    return '<label class="ccheck"><input type="checkbox" data-i="' + i + '"><span>' + c.e + " " + c.n.split(" ")[0] + '</span></label>';
+  }).join("");
+  row.querySelectorAll("input").forEach(function(inp){
+    var i = inp.getAttribute("data-i");
+    inp.checked = !!state.cchecks[i];
+    inp.addEventListener("change", function(){
+      state.cchecks[i] = inp.checked;
+      save();
+      if (inp.checked) toast("记下了。它来过,就值得被注意到 ✨");
+    });
+  });
+})();
+
+/* ---------- S4 6F 模拟器 ---------- */
+(function(){
+  var sim = $("#sixfsim");
+  if (!sim) return;
+  var STEPS = [
+    { tag:"1 Find", title:"找到它",
+      narr:"场景:明天要发一封重要邮件。你注意到,有个部分已经开始让你反复打开草稿检查了。先找到它——它在你身体的哪儿?",
+      opts:[
+        {t:"肩膀和后颈,绷着的", fb:"很常见的位置。parts经常住在身体里——你感觉它在哪,它就在哪,没有标准答案。"},
+        {t:"胃里,沉沉的", fb:"嗯,胃是parts的热门住址。你感觉它在哪,它就在哪——没有标准答案。"},
+        {t:"喉咙口,有点堵", fb:"也很典型。位置不重要,重要的是:你刚刚完成了Find——它从「背景噪音」变成了「一个可以面对的对象」。"}
+      ]},
+    { tag:"2 Focus", title:"聚焦",
+      narr:"把注意力放到它那里,像让猫先闻闻你的手。它似乎动了一下。你打算:",
+      opts:[
+        {t:"安静地陪着,等它适应", fb:"好选择。「不催」是focus的全部秘诀。"},
+        {t:"直接问:你到底为什么这么紧张?", fb:"问得有点急——它缩了一下。没关系,退半步再等等。(发现自己急了,这本身就是收获)"},
+        {t:"在心里说:我看到你了", fb:"它的紧绷松了一点点。「被看见」对parts来说是大事。"}
+      ]},
+    { tag:"3 Flesh out", title:"描摹",
+      narr:"它慢慢有了轮廓。看看它:它什么样?大概多大?",
+      opts:[
+        {t:"一个拿着检查清单的小学生", fb:"可以。很多人的检查类part出乎意料地年轻——这往往是线索。"},
+        {t:"一个穿正装、表情严肃的小大人", fb:"可以。形象没有对错,它呈现什么就是什么。想的话,可以给它起个名字,比如「清单君」。"},
+        {t:"看不清形状,只有一团紧绷", fb:"完全OK——有人看到画面,有人只有身体感觉。模糊不影响后面的对话。"}
+      ]},
+    { tag:"4 Feel toward", title:"检查你对它的感觉 ⭐",
+      narr:"关键一步。此刻,你对这个反复检查的部分,是什么感觉?(诚实回答)",
+      opts:[
+        {t:"有点好奇,想知道它的故事", fb:"好奇=Self在线。绿灯,继续。"},
+        {t:"说实话,烦死它了", fb:"诚实加分!但注意:「烦」是另一个part在说话——一个受够了检查的部分。请它先退后一步……好,它退了。现在再看那个检查的部分——是不是稍微顺眼了一点?"},
+        {t:"想让它直接消失", fb:"理解。不过「想让它消失」也是某个part的声音。IFS的做法:请这位也稍微退后……退后之后,好奇心通常会自己冒出来。现在可以继续了。"}
+      ]},
+    { tag:"5 beFriend", title:"交朋友",
+      narr:"你问它:「你在担心什么呢?」它小声说:",
+      partSays:"「如果发出去的东西有错……他们就会觉得你不行。」",
+      opts:[
+        {t:"对它说:原来你不是想折磨我,你是在保护我", fb:"它愣了一下。这份工作它干了很多年,第一次有人这么说。"},
+        {t:"对它说:谢谢你一直帮我盯着质量", fb:"它好像挺直了一点。被感谢对它来说很陌生,但显然受用。"}
+      ]},
+    { tag:"6 Fear", title:"问它的恐惧",
+      narr:"最后一问:「如果你不检查了,你怕会发生什么?」它说:",
+      partSays:"「你会被批评。然后……你会很难受。我见过你那样,我不想再见到。」",
+      opts:[
+        {t:"谢谢你告诉我。今天先到这儿,改天继续聊", fb:"完美收尾。第一次对话不需要解决任何问题——它被听见了,这就够了。"},
+        {t:"我听到了。那个「很难受」,以后我会和therapist一起去照顾", fb:"它点了点头。注意到了吗?它怕的其实是某个更深的痛——保护者背后,常常站着一个被保护的小孩。这条线索值得带去session。"}
+      ]}
+  ];
+  var st = 0;
+  function dots(){
+    return '<div class="sim-steps">' + STEPS.map(function(s, i){
+      var cls = i < st ? "done" : (i === st ? "now" : "");
+      return '<span class="sim-step-dot ' + cls + '">' + s.tag + '</span>';
+    }).join("") + '</div>';
+  }
+  function render(){
+    if (st >= STEPS.length) {
+      sim.innerHTML = dots() +
+        '<div style="text-align:center;padding:10px 0">' +
+        '<p style="font-size:36px;margin-bottom:4px">🎉🐾</p>' +
+        '<p><b>你完成了第一次6F对话(模拟版)。</b></p>' +
+        '<p class="muted">真实做的时候,手感会不一样——更慢、更模糊、有时聊不下去。都正常。模拟器随时可以重玩。</p>' +
+        '<button class="btn small ghost" id="simReplay">再走一遍</button></div>';
+      $("#simReplay").addEventListener("click", function(){ st = 0; render(); });
+      award("s4");
+      return;
+    }
+    var s = STEPS[st];
+    sim.innerHTML = dots() +
+      '<div class="sim-title">' + s.title + '</div>' +
+      '<div class="sim-body"><p>' + s.narr + '</p>' +
+      (s.partSays ? '<div class="sim-part-line"><span class="who">那个部分</span>' + s.partSays + '</div>' : "") +
+      '</div>' +
+      '<div class="sim-opts">' + s.opts.map(function(o, i){ return '<button class="opt" data-i="' + i + '">' + o.t + '</button>'; }).join("") + '</div>' +
+      '<div class="sim-fb" id="simFb"></div>';
+    sim.querySelectorAll(".opt").forEach(function(b){
+      b.addEventListener("click", function(){
+        var o = s.opts[b.getAttribute("data-i")];
+        sim.querySelectorAll(".opt").forEach(function(x){ x.disabled = true; if (x !== b) x.style.opacity = ".45"; });
+        b.style.borderColor = "var(--teal)";
+        var fb = $("#simFb");
+        fb.innerHTML = o.fb + '<br><button class="btn small" id="simNext" style="margin-top:10px">' + (st === STEPS.length-1 ? "结束对话 →" : "下一步 →") + '</button>';
+        fb.classList.add("show");
+        $("#simNext").addEventListener("click", function(){ st++; render(); });
+      });
+    });
+  }
+  render();
+})();
+
+/* ---------- S5 前后对比 ---------- */
+(function(){
+  var cols = $("#burdenCols");
+  if (!cols) return;
+  var DATA = {
+    before: [
+      {h:"🗂 Managers", items:["监工模式:用忙、用控制、用分析,死死压住exiles","内在批评、评判、盯人","完美主义、过度计划、讨好、过度照顾"]},
+      {h:"🧯 Firefighters", items:["用麻木、分心、逃离,扑灭刚冒头的痛","刷到失忆、吃到撑、突然暴怒、各种成瘾","把人推开、把自己隔离起来"]},
+      {h:"🛋 Exiles", items:["背着旧伤的内在小孩","装着恐惧、羞耻、无望、不安全感","被锁在意识外面,偶尔从门缝里漏出来"]}
+    ],
+    after: [
+      {h:"🗂 Managers", items:["把日常打理得井井有条的可靠队友","对内像个温柔养育的家长","清晰、自信、会协作的领队"]},
+      {h:"🧯 Firefighters", items:["压力来了会好好说,不用炸","用真正有效的长期安抚方式","贡献冒险、幽默、热情和好玩"]},
+      {h:"🛋 Exiles", items:["那个敏感的小孩本来的样子","好玩、好奇、自发、温暖、信任","知道Self会照顾好它们"]}
+    ]
+  };
+  var mode = "before";
+  function render(){
+    cols.innerHTML = DATA[mode].map(function(c){
+      return '<div class="bcol' + (mode === "after" ? " healed" : "") + '"><h4>' + c.h + '</h4><ul>' +
+        c.items.map(function(i){ return "<li>" + i + "</li>"; }).join("") + '</ul></div>';
+    }).join("");
+    $("#btBefore").classList.toggle("on", mode === "before");
+    $("#btAfter").classList.toggle("on", mode === "after");
+  }
+  $("#btBefore").addEventListener("click", function(){ mode = "before"; render(); });
+  $("#btAfter").addEventListener("click", function(){ mode = "after"; render(); });
+  render();
+})();
+
+/* ---------- S6 练习卡 + 毕业 ---------- */
+$$(".ex-card").forEach(function(d){
+  d.addEventListener("toggle", function(){
+    if (d.open) {
+      state.exOpened[d.getAttribute("data-ex")] = true;
+      save();
+      if (["1","2","3","4"].every(function(k){ return state.exOpened[k]; })) award("s6");
+    }
+  });
+});
+function checkGrad(){
+  var locked = $("#gradLocked"), open = $("#gradOpen");
+  if (!locked || !open) return;
+  var missing = SESSIONS.filter(function(s){ return !state.badges[s]; });
+  if (missing.length === 0) {
+    locked.style.display = "none";
+    open.style.display = "block";
+  } else {
+    locked.style.display = "block";
+    open.style.display = "none";
+    var names = {s1:"1", s2:"2", s3:"3", s4:"4", s5:"5", s6:"6(看完这页的4个练习)"};
+    $("#gradHint").textContent = "还差:Session " + missing.map(function(s){ return names[s]; }).join("、");
+  }
+}
+
+/* ---------- 启动 ---------- */
+renderPaws();
+checkGrad();
+})();
+</script>
+<style>
+.dz-lock{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:14px;color:var(--ink-soft)}
+.dz-pass{font-family:inherit;font-size:14px;padding:7px 12px;border:1.5px solid var(--line);border-radius:99px;outline:none;width:170px}
+.dz-pass:focus{border-color:var(--teal)}
+.dz-unlock{font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;border:none;background:var(--teal);color:#fff;border-radius:99px;padding:7px 14px}
+.dz-err{color:var(--bad);font-size:13px}
+</style>
+<script>
+(function(){
+"use strict";
+var SALT="AhhUbqBdXQ9ckswYWqLBFw==";
+var ENC=[{"iv": "Asy//But/YAwbGN5", "ct": "xWKxfScvIAqCPq8ysTw9DbXPu4rpWLu2sglovxcex2aNJD3LkWbRGd59ji//acSvMgSMiQu3QeSn5U/Fitio5vosHVU03usZACpMZAHIKwe2DhjlOUkfhZmN7RBekS/Du0f0rvYukKlIzVreMh6elZPcdKprXYnxoPVfeaKlYl81hN3lbNRvvCwxvUAWO1SquX0B62r9qs8sFXyX2dcXnPH+uJcb+h850JCnZ6TLb1l1o5vTGuBZTKP700Hfmr5+QXMnXkxjlvMuAYBzhRSkXTZxleNwbdKWAiQaEBJtLBX38aEKVY3U/LQdoK7/hIl1AUu3omuY2B1IwRhhqMppGwoZ2Zqy0JUauv7t1GUJ5ULxyNCRSRpaiOoPeC1aE/7DuFJ3JSq6ejNRWokCi5/ORf+VrZ769ZIKyymKgufiviuZAT6ljIvQTo8WEtkHLdhon2x5VsrRM+OSL/jYBRRhu5lAj52qgzqvn98f//YNuwODMJAlCcH+/ilEOOThqQXEor9e4dFK1ogtCrHPesYFr+oXWGyH59d8p0Qvn1F10GxnUrp5lVD1TDAKX7jZQOj21cmtRKUJ8Rg0UaQ2d1FqJDPmrroHhFINUlPnyuS1DTiN+3x5dRoIgD16Ufk9GmO/fs+vppoBum5JDaGM+Z8ZgPdv4LQDUnlDzgoFS4nhJZUNDBO14Qbf/gIzgyxgHbhYtG0enutqSpSJaj6fbhy8BD7/NCrCIlNHTwKvTBWSlJw5fqKU9n7dPy8Tzzggh6pl09dGMazDgSGgn5HqYUdo3N1XXh4RK+bg84owTwjGfZzYCImUEk4RwAviHaff1otoHnMwhlSojXcQVmaJwND/CW/5ZbzjhX+wUEdsMxtB3lQktJlpsrRt+o00"}, {"iv": "RdeZ4u5/476d80Ls", "ct": "AcWRgYPFL9LyfMxRZm3p/+/eUf3lbbvI7Aen2D1nL7e5suqKrYbKdbnCQ152ZUIChy1ehFwipKyIyngzJwCoiHwXLXXQJRI/jvjB7ldUVykYeAyj+ESbATHuWYSFuGz185/itxpgiSEsRmNacHez5hH0gbhrcpEDwfG9B5egv0Xa504EAVKKl42ktY5XIegQyhS9UwtdtUs7HDlBuMxI3lTDWXnArXi0mUwG4GrEJ7hXwSMfqBSVVZwstt1mHow1Tfocu9a5PUpouleEBNSdGmjiYnaV+zOnIRO8SJ9VsQJ5UwcPX+dYfzWsmMgSOu/9GjNU6iPSIhb/jifKhiqwrqW94F3NHkofCyOAqHhhxu4Gf6bqEcJ3scOIMMqo8BxXfabukt59F76YwK3AZAHrcol0/4vDU+ugiJWKnaQmdw1tG02efUnuj0QrjInzNHMIMaEMJSGj6hwidhYN818+0D5nWSAUkn0/J/tThylIXbUTTsUc3T7dzPw5Xpjpgr3eF9EYticoEv2TzhV9cU9521BfK3roahMsYVuvphw40AxNGOpBOXJ1wxbfGQcZYqlOmJFzhIS7YmsU7tzNY9ythFoA8O9G260E9ArDDFYM382fpb6K0UH8Wu7aqQgsh5+r6K2ZyUTqNj2G7o22zblJBUSvCVwuu21wLHglzkdV7/MpXVqOeg2gHyiqvqe5SZaHyO1jbboVC5S8Vl2UNTirYw1CP+mQM2mFkxbE1VVSjvxENVTGZ5InpfcUXjGaNlxlWG3vbbOr2Ys58TCY7NV/xGqLTwa6N1ih2RHMySE3CtLEHfHSakgfwbulnuHLGskmVoYmmiq2HM4/UGF7MJHNBRIcAU22Gj9cFBcVFaWkivg+b+c+neqAjQNQ/bg04XeuZn8LpCMHHPvofMsKhTHlBQhL5YUuAV/tHawkb5reTN/DOE0LBTbtWttX9Ei5kWku+7a+k3XDUZQ42EzXxB2tJo3EndD3GgcqOOyv+ro6iiNKif0jXoI5CFUx/3lHTD8PS6zobLD5AMLLzj8Tvi00JJGcUTpD7GwC2h3LRxAREVkSdEV89MidIZtL9XN4PWZskLOHn0Y8k0xxnn8PpwDLGv48a7SHN4tqD3cVd7xeSHh2K7+1WH6tnxi2SGr99OI0Bb6DzfAI5Ismx4alj7katFgXkcnem7J4+2zGT5zl70s+3kYPSh1f1EBDpsMfBYLVfcRYDNzRpQYQZvFYbjNN8DeXeypEcEOWRnlW7bAOrQdcSKJqF8g1BzFBFG0Cauq3ZMORHmcu7x5FtZdxdRhCAloIKKzgZ7u5TGU="}, {"iv": "b9nNhcEK+uVwirlL", "ct": "wrlVkfssRWuYmhsXvsFP0Xw222RH7WtpAfPvFKOWysppGzdXDeKARcS5+hNW6tt5Xe93bS6HL9O02p+iuyUZJwuF9TE3pJjNG3ZFuUA51RAZaNqBBbfbTyd8Ad/+yWa/CjhaXg11KMw3s17O1p97It+PuwyNfWx1brtBFCKJcTaFF566OZgEf9OoIrFU0nxJYV5CU6MXP/FWcW1d4a/Fia5LPINhSIsKnmHj6MyBoIjg2HMxX55Wuu4soOOOkBFFfUBsvxo3KEISx0DYZu5p2/FLeW9Mp3lVCMzfD88yFN1UFxyJOgAkzO0TUIxmfGOBPC7nPUViHRwu2iRtAxkN6VVxKclgIQE7zMolaMiP8B+xEaFuqDPdpM8atiRauNc8r9BE5ZjaW5hG6hDHWPnDUwdqoHc+O++kp0Lu5XPke3SOzZ9s/a3lghQ6l743a5hgYs2VLUoNSXjC5mO8AXL/g8dK8xrjycoUJ8jnqT3U3Uf5mozydtruUse3w0PB2b6WE8KpqjRyQurGkeF/RHFMn7lQQOtFMLjdtOJhwaIFdHd+TYxPyvs+hsO0KPipJ/vTNlP7Y49IGO7cvAMET52XuXXZNGeXo1qq/OQ2Qc67Co+FKKXsv8DK9yqefQcKw4HXIr/c+iTCgAtqrsFRhZl+j3N85reIhqfNF7M5jLtPQljlgjObg73VvCTW299bJkzdnaOc0tBNsukqvFGflyy6EhU8ZrA5bOct5ORGfRu9ml2jhJIGSud6SWIe3Nv4+CU9izc2bgamKIqaY4GRr5c//A+FTDwK0VVfeWCwYsSEAVJ0g+dZlPmq3DpzfXGVgntAlzg6yxSsdHe9HFHjyXJPhQ5d8ECDFPB/ffIBKCmJIVQNdSKOHYTsJQzKSh1hOaswmqrE8QyKl3VS6Rj4P9WUDwdY/PlnoglusJuBpOHfF6TaaApMrFD/6WbVazhiv10g6hfZzqtFmSocTsBDGOujq2QWzfJw+YNfw58WIHIJ2DZqJlpoaao4egfSqREWJd3sPVv/+9bog0eksnLL7TxqgIlqQnevFRLa94rXO5xJM3PMXqVtIIsfy8t6YOj93dIbDbTTNzS0QlOOAXUxs6AE4LpvuTHAxl4Y20UfqwWhas1D3VLQKHa64K7mkoUalbsZ0Wc578qkWz+VjKE6SUUmZINQNEzuDX8O5JLYb7QYPIL13RtJIuH2ss7VQxMfGKsu1tIoS4ZPTVehqg3IzczZ+V0OdUam6U3HNVLOoeX0vOGQ/TaR2Zr9EPmE0ZfLEik8Ps8ZUoCCyUHKIbQ0q/4VdA/U9WdXiy1cbIfAEMaGMk0P+GCc+rUjBsvp8CTeoQXZhASvRVz57dJhAclSGIW0R0USLQoSuuQ4RgTx91ior5fOJrGHlJ63qUA0qh5g+oWzAQxihDaJnq3yXeNgR+UzxlmPCRKnnGHfexktVfzhcCQ0sMrJRAYqgXtqUgDm9QEYuWYXSwD2"}, {"iv": "5UBHqNt9NRTnLtk8", "ct": "vGcyMXdDrJ8E8jgjf1UICAP52MNZiOzB0lHegIegfrhB6wSfe7ZCy9sbrF/RebSB0EhmXGx5WNrMTMqHTtKf+XtVByHVWSm3RKkWdUCYPkfpwLjkhPiHuNyBSQJTqGa0Nb7zFsuWIWpke3Xf6ANTVWzc08mEGty2YKN0HQerxnn3sTnC+il9eg7VYp2BFKQHWBq5XcN0pFSeXW5q2if6wvPtFegWs9/P0J2Bb/6mbeHjApPUZ2CAu8DoYO3DmOTzfRhaDcGh2HQLOxmwiIDX4GBYm2y3H2KWlGJkkI3x4uXrd7X3tHtUtLyGonU4AAaYqXLdwbHGferCKm93jrKmVed8NxF7LElVvibSOeAb/Ys8t7U2nfDyYPufXqo+q4oVSpdDV9W0321vLHSj997O1z4h6CC8P/ySIxSEaAnUrXzhyTYoaJK8EBaQG3g0HzToBRpo68AO81rqbYTxLQ6CDH1PSYbyz2PhVzl8GxTfl1sO5TUVvcDzwNmcdDxI0mWGb+rIdMqthJP6o6g5llyetqdbCXSUN3w8sOF75zXxlr79PJXoBTUePSI/Qvc3CXUAE7ww20e8nTkXEfc1gT/dMApjYPqdZzd5dYyCaZ5A/2NqJ6/yNjWf8COYzD5OmS9iT/6XjElSMZFn3Vn5ug0JZPlPBWh/x7Y4LkpWXl1AbSNIETgyqiG9Wau/PwDWLGO6tXuBu8pX0E9PHMB8GwM9Uw=="}, {"iv": "Sn0I62NjgxHDWDqi", "ct": "MZ+6MlSAGH3BaJ2FOFOgrNENfZSBu1cS+HCCGQ/BuYUOo4a88YP1ttFKtdt+nxMVCwdKJ1bx2Vna18F62GlBlDpc4ONvw038R3RSBM4dgYEjZlw1ernLcPNxgkH72JJKn98MsSK08dj+EwNT1PBLXqqIWVIJR9+cwlqszhi8tlCNzAqe1jGZEtPWNOX/R1Gsue/eFKnEQVxiJum/Dj4FRxQs892CxlcBCxtMEWO+qZLBl5y7efBJg6AuFV+QARCUQ4GaDASRx3aBAg+uYNgMk1SM/3kPVJzyM5yM30Z67x1nLLUann+0j8shvu/51GDkqTINM9BXCyrjgc4rtU3sZvjkxx2Y3hrRKSN2hq71GzgI58BJEg4SzIg7hicjiFTNKQwjdtlW6yLjzceOUhp8Cdg6wGmWaI64jePxFHUlt1Yl57m8iu3aYOQ8P3qOYKxbwhSK5fevW7qGFJSCkfoYH2QiVA+H+ZSZVn5yL/3PDMl39+DOLB0XbRwY8gB0+vD2z+4co5SenFR3W72k2Q3bvvlsrsXKavpmyZaCCh4QUoFmCwVGfND0bBsJV4ZIeqhEEQbLg8lE9IEc0Yc5W/MWpfwcw7VO2ONX5BEFC6V96vwM3dn2Yt4TGZ8Tz53ufsu1MFTSvEspFiG20mRzd3h7RC8C4Hv9rEBce+JtXNgtRlBXghaI4AWFs5FeWJZZRCXzgt2a7cTjwWPBX+XSBza11GpvXOlLuoaSPeT1AI/3hAQ19G+LrZfnsUE8qoMArRqcvdndlk/bkO25bN+HyGZxVWHbt+xcDvpAlkD8XdZXcrLxewy8YZ6jkCFGmECcq3gIvvLPZwfQ7w8RrjFes3mljriDlXYCKqd79EGU5mR5j6cAvfIa8E/1jpcMDrABbkq9YvT3doFMhBxt+6TktaFGJQgUycJ1WOPFRyCSh+SKANZCaAAkM9Vwceeih+mGRrqRCrkrhId/ZZt0Qu8IU7hNofEFp+fQ7Wb3vBTxiMZS8SKrsmju/GW0F3w4W4iGX18h9ku820fV"}];
+function b64d(s){return Uint8Array.from(atob(s),function(c){return c.charCodeAt(0);});}
+function deriveKey(pass){
+  var te=new TextEncoder();
+  return crypto.subtle.importKey("raw",te.encode(pass),"PBKDF2",false,["deriveKey"]).then(function(km){
+    return crypto.subtle.deriveKey({name:"PBKDF2",salt:b64d(SALT),iterations:150000,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["decrypt"]);
+  });
+}
+function tryUnlock(pass){
+  return deriveKey(pass).then(function(key){
+    return Promise.all(ENC.map(function(b){
+      return crypto.subtle.decrypt({name:"AES-GCM",iv:b64d(b.iv)},key,b64d(b.ct));
+    }));
+  }).then(function(bufs){
+    var td=new TextDecoder();
+    return bufs.map(function(b){return td.decode(b);});
+  }).catch(function(){return null;});
+}
+function swap(htmls){
+  var locked=document.querySelectorAll(".dz-locked");
+  for(var i=0;i<locked.length&&i<htmls.length;i++){
+    var wrap=document.createElement("div");
+    wrap.innerHTML=htmls[i];
+    locked[i].replaceWith(wrap.firstElementChild);
+  }
+}
+function attempt(pass,errEl){
+  tryUnlock(pass).then(function(res){
+    if(res){
+      try{localStorage.setItem("luba_ifs_pass",pass);}catch(e){}
+      swap(res);
+    }else if(errEl){
+      errEl.textContent="口令不对,再试试?";
+    }
+  });
+}
+document.addEventListener("click",function(ev){
+  if(ev.target.classList && ev.target.classList.contains("dz-unlock")){
+    var box=ev.target.closest(".dz-lock");
+    attempt(box.querySelector(".dz-pass").value.trim(),box.querySelector(".dz-err"));
+  }
+});
+document.addEventListener("keydown",function(ev){
+  if(ev.key==="Enter"&&ev.target.classList&&ev.target.classList.contains("dz-pass")){
+    var box=ev.target.closest(".dz-lock");
+    attempt(ev.target.value.trim(),box.querySelector(".dz-err"));
+  }
+});
+try{
+  var saved=localStorage.getItem("luba_ifs_pass");
+  if(saved&&window.crypto&&crypto.subtle){
+    tryUnlock(saved).then(function(res){
+      if(res)swap(res);
+      else{try{localStorage.removeItem("luba_ifs_pass");}catch(e){}}
+    });
+  }
+}catch(e){}
+})();
+</script>
+</body>
+</html>

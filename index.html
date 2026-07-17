@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Yixuan 的小网页合集</title>
+<meta name="description" content="Yixuan 和 Claude 一起做的小东西的家：旅行攻略、股票课、心理小课。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+  :root{
+    --bg:#E8DBCC; --frame:#F3EDE3; --soft-card:#FBF7F0; --white:#fff;
+    --ink:#2A2520; --muted:#8A8178; --line:#E7DFD2;
+    --paw:#E0613C; --rust:#BC4B2B; --rust-soft:#F7E7DE;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  ::-webkit-scrollbar{height:5px;width:5px}
+  ::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:9px}
+
+  .page{max-width:1100px;margin:0 auto;padding:30px 18px 64px}
+  @media(min-width:880px){.page{padding:44px 28px 72px}}
+
+  .top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
+  .brand{display:flex;align-items:center;gap:13px;min-width:0}
+  .paw{flex:none;width:48px;height:48px;border-radius:50%;background:var(--paw);color:#fff;display:flex;align-items:center;justify-content:center;font-size:23px;box-shadow:0 6px 16px rgba(224,97,60,.3)}
+  @media(min-width:880px){.paw{width:54px;height:54px;font-size:26px}}
+  .brand .t{font:800 21px/1.05 'Baloo 2','Noto Sans SC';color:var(--ink)}
+  @media(min-width:880px){.brand .t{font-size:27px}}
+  .brand .s{font:500 12.5px 'Noto Sans SC';color:var(--muted);margin-top:2px}
+  .links{display:flex;gap:9px;flex:none}
+  .links a{font:600 12px 'Space Grotesk';color:var(--muted);border:1px solid var(--line);background:#fff;padding:8px 13px;border-radius:11px;transition:.2s}
+  .links a:hover{color:var(--rust);border-color:var(--rust)}
+  @media(max-width:560px){.links{display:none}}
+
+  .hero{display:flex;align-items:center;gap:18px;padding:22px 22px;border-radius:24px;background:var(--soft-card);border:1px solid var(--line);position:relative;overflow:hidden;margin-bottom:26px;box-shadow:inset 6px 0 0 var(--rust);transition:.25s}
+  .hero:hover{transform:translateY(-2px);box-shadow:inset 6px 0 0 var(--rust),0 14px 34px rgba(42,37,32,.10)}
+  .hero .wm{position:absolute;right:18px;top:-26px;font-size:130px;opacity:.10;pointer-events:none}
+  @media(min-width:880px){.hero{gap:24px;padding:26px 30px}.hero .wm{font-size:150px;right:34px}}
+  .hero .tile{flex:none;width:60px;height:60px;border-radius:18px;background:var(--rust-soft);display:flex;align-items:center;justify-content:center;font-size:31px}
+  @media(min-width:880px){.hero .tile{width:74px;height:74px;border-radius:20px;font-size:38px}}
+  .hero .mid{flex:1;min-width:0;position:relative}
+  .hero .kick{font:700 11px 'Space Grotesk';letter-spacing:.14em;color:var(--rust);text-transform:uppercase}
+  .hero .h{font:800 23px 'Baloo 2','Noto Sans SC';color:var(--ink);margin-top:5px}
+  @media(min-width:880px){.hero .h{font-size:28px}}
+  .hero .m{font:500 13px 'Noto Sans SC';color:var(--muted);margin-top:3px}
+  .hero .right{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+  @media(max-width:680px){.hero .right{display:none}}
+  .hero .countdown{font:700 13px 'Space Grotesk';color:var(--ink);background:#fff;border:1px solid var(--line);padding:8px 14px;border-radius:999px;white-space:nowrap}
+  .hero .go{font:700 15px 'Noto Sans SC';color:#fff;background:var(--rust);padding:13px 24px;border-radius:14px;box-shadow:0 8px 18px rgba(188,75,43,.3);white-space:nowrap}
+
+  .main{display:grid;grid-template-columns:1fr;gap:26px}
+  @media(min-width:880px){.main{grid-template-columns:1.5fr 1fr;gap:28px;align-items:start}}
+
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:13px}
+  .sec-head .h{font:800 17px 'Baloo 2','Noto Sans SC';color:var(--ink)}
+  .sec-head .n{font:700 10.5px 'Space Grotesk';letter-spacing:.08em;color:var(--muted)}
+
+  .trips{display:grid;grid-template-columns:1fr;gap:11px}
+  @media(min-width:560px){.trips{grid-template-columns:1fr 1fr;gap:12px}}
+  .side{display:flex;flex-direction:column;gap:22px}
+  .col{display:flex;flex-direction:column;gap:10px}
+
+  .card{display:flex;align-items:center;gap:13px;padding:15px 15px 15px 17px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:inset 5px 0 0 var(--c,var(--rust)),0 1px 2px rgba(42,37,32,.06);transition:.22s}
+  .card:hover{transform:translateY(-3px);box-shadow:inset 5px 0 0 var(--c,var(--rust)),0 12px 26px rgba(42,37,32,.10)}
+  .card .tile{flex:none;width:46px;height:46px;border-radius:14px;background:var(--soft,#eee);display:flex;align-items:center;justify-content:center;font-size:23px}
+  .card .ct{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+  .card .ct .ti{font:700 15px 'Noto Sans SC';color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .card .ct .me{font:500 11.5px 'Noto Sans SC';color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .badge{flex:none;padding:4px 9px;border-radius:999px;font:700 10.5px 'Space Grotesk';white-space:nowrap}
+  .chev{flex:none;font-size:18px;color:var(--c)}
+
+  .portfolio{display:flex;align-items:center;gap:12px;padding:14px;background:var(--ink);border-radius:16px;transition:.22s}
+  .portfolio:hover{transform:translateY(-2px)}
+  .portfolio .tile{flex:none;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:21px}
+  .portfolio .ti{font:700 14px 'Noto Sans SC';color:#fff}
+  .portfolio .me{font:500 11.5px 'Space Grotesk';color:#B9B2A8;margin-top:2px}
+
+  .foot{text-align:center;padding-top:40px}
+  .foot .a{font:600 12px 'Noto Sans SC';color:var(--muted)}
+  .foot .b{font:500 10.5px 'Space Grotesk';color:var(--muted);opacity:.7;margin-top:4px}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="top">
+    <div class="brand">
+      <span class="paw">🐾</span>
+      <div>
+        <div class="t">Yixuan 的小网页合集</div>
+        <div class="s">和 Claude 一起做的小东西的家 · 14 个 · 更新于 07/16</div>
+      </div>
+    </div>
+    <div class="links">
+      <a href="https://github.com/yi-xuan-97/Claude" target="_blank" rel="noopener">repo</a>
+      <a href="https://github.com/yi-xuan-97" target="_blank" rel="noopener">github</a>
+    </div>
+  </header>
+
+  <div id="heroSlot"></div>
+
+  <div class="main">
+    <section>
+      <div class="sec-head"><span class="h">🗺️ 旅行攻略</span><span class="n">5 TRIPS</span></div>
+      <div class="trips" id="tripsGrid"></div>
+    </section>
+
+    <aside class="side">
+      <section>
+        <div class="sec-head"><span class="h">📈 股票学习</span><span class="n">2</span></div>
+        <div class="col">
+          <a class="card" href="%E6%88%91%E7%9A%84%E8%82%A1%E7%A5%A8%E4%BA%92%E5%8A%A8%E8%AF%BE.html" style="--c:#C0892E;--soft:#F7ECD6">
+            <span class="tile">📈</span>
+            <span class="ct"><span class="ti">股票互动课 · 入门</span><span class="me">28 天 · 每天 6 min</span></span>
+            <span class="chev">›</span>
+          </a>
+          <a class="card" href="%E6%88%91%E7%9A%84%E8%82%A1%E7%A5%A8%E8%BF%9B%E9%98%B6%E8%AF%BE.html" style="--c:#94701F;--soft:#F0E7CF">
+            <span class="tile">📊</span>
+            <span class="ct"><span class="ti">股票进阶课 · 基本面</span><span class="me">28 天 · 进阶</span></span>
+            <span class="chev">›</span>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head"><span class="h">🐾 心理小课</span><span class="n">IFS</span></div>
+        <div class="col">
+          <a class="card" href="ifs.html" style="--c:#7A5EC4;--soft:#ECE7F8">
+            <span class="tile">🐾</span>
+            <span class="ct"><span class="ti">Luba 的 IFS 小课堂</span><span class="me">6 关 · 每关 5–8 min</span></span>
+            <span class="chev">›</span>
+          </a>
+          <a class="card" href="advanced.html" style="--c:#5647A8;--soft:#E6E3F5">
+            <span class="tile">🌀</span>
+            <span class="ct"><span class="ti">IFS 进阶篇</span><span class="me">极化 · 保护者谈判</span></span>
+            <span class="chev">›</span>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head"><span class="h">🍚 一日三餐</span><span class="n">FOOD</span></div>
+        <div class="col">
+          <a class="card" href="eat/" style="--c:#4B7A4A;--soft:#E3F0E2">
+            <span class="tile">🍚</span>
+            <span class="ct"><span class="ti">我的一周吃什么</span><span class="me">4 周中餐 · 可勾选购物清单</span></span>
+            <span class="badge" style="background:#4B7A4A;color:#fff">NEW</span>
+          </a>
+        </div>
+      </section>
+
+      <a class="portfolio" href="https://yixuan-feng.vercel.app/" target="_blank" rel="noopener">
+        <span class="tile">👋</span>
+        <span><span class="ti">站外 · Portfolio</span><div class="me">yixuan-feng.vercel.app ↗</div></span>
+      </a>
+    </aside>
+  </div>
+
+  <footer class="foot">
+    <div class="a">监修 · Luba 本猫 🐾</div>
+    <div class="b">GitHub Pages · Built with Claude 🤍</div>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var TRIPS=[
+    {href:'texas.html',emoji:'🤠',title:'德州自驾 6 天',desc:'San Antonio · Hill Country · Austin · NASA · 独立日烟花',sub:'07/01–07/06 · Austin · NASA',start:'2026-07-01',end:'2026-07-06',c:'#BC4B2B',soft:'#F6E6DD'},
+    {href:'oregon.html',emoji:'🌲',title:'Oregon Cascades 环线',desc:'Portland · 胡德山 · McKenzie 瀑布 · 火山口湖 · 8 站',sub:'09/04–09/08 · 8 站',start:'2026-09-04',end:'2026-09-08',c:'#2E7D5B',soft:'#E2F0E8'},
+    {href:'orlando.html',emoji:'🎄',title:'圣诞奥兰多 5 天',desc:'环球影城 · 迪士尼 · 海牛 · 圣诞',sub:'12/22–12/28 · 环球+海牛',start:'2026-12-22',end:'2026-12-28',c:'#C0395E',soft:'#FAE3EB'},
+    {href:'orlando-parks.html',emoji:'🗺️',title:'奥兰多各园动线',desc:'逐时冲刺 · 配 orlando',sub:'配套 · 逐时动线',start:'2026-12-22',end:'2026-12-28',c:'#1F8A8A',soft:'#DCF0EF',companion:true},
+    {href:'colorado.html',emoji:'🏔️',title:'Colorado 6 天',desc:'Pikes Peak · 温泉 · 落基山',sub:'Pikes Peak · San Juans · 温泉',someday:true,start:'2026-06-19',end:'2026-06-24',c:'#3E6FB0',soft:'#E4ECF8'},
+    {href:'rapid-city.html',emoji:'🗿',title:'Rapid City 三日',desc:'Black Hills U 形 + Badlands 单向穿越 · 零折返',sub:'05/22–05/25 · Rushmore + Badlands',start:'2026-05-22',end:'2026-05-25',c:'#B07A1E',soft:'#F3E7CE'},
+    {href:'la.html',emoji:'🌴',title:'LA 七日',desc:'Ktown · 感恩节迪士尼 · 环球 · Joshua Tree',sub:'11/26–12/02 · Ktown+迪士尼+环球',start:'2025-11-26',end:'2025-12-02',c:'#8250B5',soft:'#EEE6F6'},
+    {href:'alaska.html',emoji:'🧊',title:'Alaska 冰川',desc:'Matanuska 冰川徒步 + Kenai Fjords 游船',sub:'07/03–07/05 · Matanuska + Kenai',start:'2025-07-03',end:'2025-07-05',c:'#2E86A0',soft:'#DBEDF2'},
+    {href:'maine.html',emoji:'🦞',title:'Maine 缅因 5 天',desc:'Portland 灯塔+龙虾 · Acadia · 穹顶看银河',sub:'08/27–09/01 · Portland + Acadia',start:'2025-08-27',end:'2025-09-01',c:'#1F5674',soft:'#DCEAF2'}
+  ];
+  var now=new Date();
+  TRIPS.forEach(function(t){
+    t._s=new Date(t.start+'T00:00:00'); t._e=new Date(t.end+'T23:59:59');
+    t._rank=t.someday?1.5:((t._e<now)?2:((t._s>now)?1:0));
+  });
+  TRIPS.sort(function(a,b){
+    if(a._rank!==b._rank) return a._rank-b._rank;
+    var av=(a._rank===2)?-a._e.getTime():a._s.getTime();
+    var bv=(b._rank===2)?-b._e.getTime():b._s.getTime();
+    if(av!==bv) return av-bv;
+    return (a.companion?1:0)-(b.companion?1:0);
+  });
+  var hero=TRIPS.filter(function(t){return !t.companion && !t.someday;})[0];
+  var rest=TRIPS.filter(function(t){return t!==hero;});
+  function pad(n){return (n<10?'0':'')+n;}
+  function md(d){return (d.getMonth()+1)+'/'+pad(d.getDate());}
+  function daysTo(d){return Math.ceil((d-now)/86400000);}
+  var hk,hc;
+  if(hero._rank===0){hk='旅行中 · On the trip';hc='🎉 出发啦!';}
+  else if(hero._rank===1){hk='出发在即 · Next trip';hc='⏳ '+daysTo(hero._s)+' 天后 · '+md(hero._s)+' 出发';}
+  else {hk='最近一趟 · Latest';hc='已结束 · '+md(hero._e);}
+  document.getElementById('heroSlot').innerHTML=
+    '<a class="hero" href="'+hero.href+'" style="--rust:'+hero.c+';--rust-soft:'+hero.soft+'">'+
+    '<span class="wm">'+hero.emoji+'</span><span class="tile">'+hero.emoji+'</span>'+
+    '<div class="mid"><div class="kick">'+hk+'</div><div class="h">'+hero.title+'</div><div class="m">'+hero.desc+'</div></div>'+
+    '<div class="right"><span class="countdown">'+hc+'</span><span class="go">打开攻略 →</span></div></a>';
+  function badge(t){
+    if(t.companion) return {t:'配套',bg:t.soft,fg:t.c};
+    if(t.someday) return {t:'想去',bg:t.soft,fg:t.c};
+    if(t._rank===0) return {t:'进行中',bg:t.c,fg:'#fff'};
+    if(t._rank===1){var d=daysTo(t._s);return {t:(d<=99?d+' 天后':(t._s.getMonth()+1)+' 月'),bg:t.soft,fg:t.c};}
+    return {t:'已走过',bg:'#EEEBE4',fg:'#9a978f'};
+  }
+  document.getElementById('tripsGrid').innerHTML=rest.map(function(t){
+    var b=badge(t);
+    return '<a class="card" href="'+t.href+'"'+(t.ext?' target="_blank" rel="noopener"':'')+' style="--c:'+t.c+';--soft:'+t.soft+'">'+
+      '<span class="tile">'+t.emoji+'</span>'+
+      '<span class="ct"><span class="ti">'+t.title+'</span><span class="me">'+t.sub+'</span></span>'+
+      '<span class="badge" style="background:'+b.bg+';color:'+b.fg+'">'+b.t+'</span></a>';
+  }).join('');
+  var tn=document.querySelector('.sec-head .n'); if(tn) tn.textContent=TRIPS.length+' TRIPS';
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>🧊 Alaska 冰川 · Yixuan</title>
+<meta name="description" content="阿拉斯加：Matanuska 冰川徒步 + Kenai Fjords 冰川野生动物游船。Anchorage · Seward。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+  :root{--ac:#2E86A0;--screen:#D6E9EF;--frame:#EDF5F7;--ink:#12323C;--sub:#5C7C86;--soft:#DBEDF2;--line:#CFE3E8;--cline:#D9EAEE}
+  html{scroll-behavior:smooth}
+  body{background:var(--screen);font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}button{font-family:inherit}
+  ::-webkit-scrollbar{height:5px;width:5px}::-webkit-scrollbar-thumb{background:rgba(46,134,160,.32);border-radius:9px}
+  .screen{min-height:100vh;display:flex;justify-content:center}
+  .frame{width:100%;max-width:480px;background:var(--frame);min-height:100vh;position:relative;box-shadow:0 0 60px rgba(10,45,55,.10)}
+  .appbar{position:sticky;top:0;z-index:30;background:rgba(237,245,247,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .appbar .row{display:flex;align-items:center;gap:10px;padding:9px 12px}
+  .back{flex:none;width:36px;height:36px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ac)}
+  .apptt{flex:1;min-width:0;display:flex;flex-direction:column}
+  .apptt .t{font:800 15px 'Baloo 2','Noto Sans SC';line-height:1.1}
+  .apptt .s{font:600 10.5px 'Space Grotesk';color:#6E9098}
+  .cd{flex:none;font:700 11px 'Space Grotesk';color:#fff;background:var(--ac);padding:6px 11px;border-radius:999px;white-space:nowrap}
+  .chipnav{display:flex;gap:7px;padding:0 12px 9px;overflow-x:auto}
+  .chipnav a{flex:none;font:700 12px 'Noto Sans SC';color:var(--ink);background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+  .chipnav a.on{color:var(--ac);background:var(--soft);border-color:transparent}
+  .hero{position:relative;color:#fff;overflow:hidden;background:#1B5566}
+  .hero .bg{position:absolute;inset:0;background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Matanuska_Glacier_2.jpg/1280px-Matanuska_Glacier_2.jpg);background-size:cover;background-position:center;opacity:.45}
+  .hero .ov{position:absolute;inset:0;background:linear-gradient(165deg,rgba(46,134,160,.66) 0%,rgba(18,50,60,.92) 100%)}
+  .hero .in{position:relative;padding:22px 20px 24px}
+  .hero h1{font:800 26px 'Baloo 2','Noto Sans SC';line-height:1.12}
+  .hero .sub{font:500 12.5px 'Noto Sans SC';color:rgba(255,255,255,.9);margin-top:6px}
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .hchips span{font:600 11px 'Noto Sans SC';background:rgba(255,255,255,.18);padding:5px 10px;border-radius:999px}
+  .stats{display:flex;gap:8px;margin-top:16px}
+  .stats .st{flex:1;background:rgba(255,255,255,.16);border-radius:13px;padding:10px 6px;text-align:center}
+  .stats .st .v{font:800 14px 'Space Grotesk'}.stats .st .l{font:600 10px 'Noto Sans SC';color:rgba(255,255,255,.82);margin-top:2px}
+  .h2{font:800 19px 'Baloo 2','Noto Sans SC';color:var(--ink)}
+  .sech{display:flex;align-items:center;gap:8px;padding:22px 18px 10px}
+  .card{background:#fff;border:1px solid var(--cline);border-radius:18px}
+  .over{margin:16px 16px 0;padding:6px 16px}
+  .orow{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #E8F1F3}
+  .orow:last-child{border-bottom:none}
+  .orow .k{flex:none;font-size:17px;width:24px;text-align:center}
+  .orow .lab{flex:none;width:52px;font:700 12px 'Noto Sans SC';color:var(--ac)}
+  .orow .v{flex:1;font:500 12.5px 'Noto Sans SC';color:#33555E;line-height:1.5}
+  .daytabs{padding:10px 14px 12px;display:flex;gap:7px;overflow-x:auto}
+  .daytab{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;min-width:78px;padding:8px 12px;border-radius:13px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .daytab.on{border-color:var(--ac);background:var(--ac);color:#fff}
+  .daytab .d{font:800 13px 'Baloo 2','Noto Sans SC';line-height:1}.daytab .dt{font:600 9px 'Noto Sans SC';opacity:.85}
+  .daypanel{padding:4px 16px 4px}
+  .dwd{font:800 19px 'Baloo 2','Noto Sans SC';color:var(--ac)}
+  .dttl{font:700 14px 'Noto Sans SC';margin-top:2px;color:#33555E}
+  .block{display:flex;gap:11px}
+  .block .time{flex:none;width:56px;text-align:right;font:700 11.5px 'Space Grotesk';color:var(--ac);padding-top:13px;line-height:1.3}
+  .block .ln{flex:1;min-width:0;border-left:2px solid #CFE3E8;padding:13px 0 16px 16px;position:relative}
+  .block .dot{position:absolute;left:-7px;top:17px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--ac)}
+  .block .bt{font:700 14.5px 'Noto Sans SC';line-height:1.4}
+  .block .meta{display:inline-flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+  .block .meta span{font:700 10px 'Space Grotesk';padding:3px 8px;border-radius:999px;background:#DDECF0;color:#2E6C80;white-space:nowrap}
+  .block .note{font:500 12.5px 'Noto Sans SC';color:var(--sub);margin-top:7px;line-height:1.65}
+  .block .note b{color:#33555E}
+  .mapbtn{margin-top:9px;display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:11px;background:#fff;border:1.5px solid var(--ac);color:var(--ac);font:700 11.5px 'Noto Sans SC'}
+  .book{margin:12px 16px 0;padding:15px;background:#fff;border:1px solid var(--cline);border-radius:18px;box-shadow:inset 4px 0 0 var(--ac)}
+  .book .bt{font:800 13.5px 'Noto Sans SC';color:#12323C;margin-bottom:6px}
+  .book .br{font:500 12px 'Noto Sans SC';color:#4A6C74;line-height:1.7}
+  .book .br b{color:#12323C}
+  .footer{text-align:center;padding:26px 24px 36px}
+  .footer .a{font:700 12.5px 'Noto Sans SC';color:#33555E}
+  .footer .b{font:500 11px 'Noto Sans SC';color:#6E9098;margin-top:6px;line-height:1.6}
+  @media(min-width:880px){
+    .frame{max-width:1040px}
+    .ak-body{display:grid;grid-template-columns:minmax(0,1fr) 332px;grid-template-areas:"over over" "days book";column-gap:24px;padding:0 22px 12px;align-items:start}
+    .a-over{grid-area:over}.a-days{grid-area:days}.a-book{grid-area:book;position:sticky;top:20px;align-self:start}
+  }
+</style>
+</head>
+<body>
+<div class="screen"><div class="frame">
+
+  <div class="appbar">
+    <div class="row">
+      <a class="back" href="index.html">←</a>
+      <div class="apptt"><span class="t">🧊 Alaska 冰川</span><span class="s">7/3 – 7/5 · 2025</span></div>
+      <span class="cd" id="cd">🏁 已走过</span>
+    </div>
+    <div class="chipnav">
+      <a href="#over" class="on">🧭 概览</a><a href="#days">📅 行程</a><a href="#book">🎟️ 预订</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="bg"></div><div class="ov"></div>
+    <div class="in">
+      <h1>Alaska 冰川之旅</h1>
+      <div class="sub">Matanuska 冰川徒步 + Kenai Fjords 冰川野生动物游船 · Anchorage · Seward</div>
+      <div class="hchips"><span>🧊 Matanuska 冰川</span><span>🚢 Kenai Fjords</span><span>🐋 鲸鱼野生动物</span></div>
+      <div class="stats">
+        <div class="st"><div class="v">7/3–5</div><div class="l">出行</div></div>
+        <div class="st"><div class="v">2</div><div class="l">人</div></div>
+        <div class="st"><div class="v">2</div><div class="l">大活动</div></div>
+        <div class="st"><div class="v">2025</div><div class="l">已走过</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ak-body">
+    <div id="over" class="a-over" style="scroll-margin-top:120px">
+      <div class="card over">
+        <div class="orow"><span class="k">✈️</span><span class="lab">去程</span><span class="v">周三夜航到 Anchorage · 7/3 上午 10:00 从 Anchorage 出发</span></div>
+        <div class="orow"><span class="k">✈️</span><span class="lab">返程</span><span class="v">周六 10:35 PM → 周日 7:00 AM 到家（红眼）</span></div>
+        <div class="orow"><span class="k">🏨</span><span class="lab">酒店</span><span class="v">Hotel Indigo（Anchorage）</span></div>
+        <div class="orow"><span class="k">🚗</span><span class="lab">自驾</span><span class="v">Anchorage ↔ Matanuska 各约 2h（Glenn Hwy）· Anchorage → Seward 约 2.5h</span></div>
+      </div>
+    </div>
+
+    <div id="days" class="a-days" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">📅 每日行程</span></div>
+      <div class="daytabs" id="daytabs"></div>
+      <div class="daypanel" id="daypanel"></div>
+    </div>
+
+    <div id="book" class="a-book" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">🎟️ 预订确认</span></div>
+      <div class="book">
+        <div class="bt">🧊 Matanuska Glacier Tours</div>
+        <div class="br"><b>7/3/2025 · 1:00 PM</b>（提前 30 分钟到）· 2 人 · $150<br>GPS：66500 S Glacier Park Rd（Mile 102, Glenn Hwy）<br>预约名：Erica · glacier-tours.com</div>
+      </div>
+      <div class="book" style="margin-top:10px">
+        <div class="bt">🚢 Kenai Fjords 冰川游船</div>
+        <div class="br"><b>7/4 · 6 小时 Glacier &amp; Wildlife Cruise</b> · $250<br>Kenai Fjords National Park · 从 Seward 出发</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="a">为你定制 · Alaska 冰川之旅 🧊🚢</div>
+    <div class="b">按你的预订整理 · 出行前再核对船班与天气 · 监修 Luba 本猫 🐾</div>
+  </div>
+
+</div></div>
+
+<script>
+const M='https://www.google.com/maps/search/?api=1&query=';
+const START=new Date('2025-07-03T00:00:00');
+
+const DAYS=[
+  {wd:'周四 7/3',short:'7/3',dd:'Matanuska 冰川',title:'冰川徒步',blocks:[
+    {time:'10:00 AM',title:'Anchorage 出发（Glenn Hwy 东北）',meta:['约 2h'],note:'沿 Glenn Highway 风景线开往 Mile 102 的冰川。',map:''},
+    {time:'1:00 PM',title:'🧊 Matanuska Glacier 冰川徒步',meta:['已订 · $150','提前 30 min 到'],note:'阿拉斯加最大的可开车抵达冰川。跟向导上冰、穿冰爪走蓝冰。GPS <b>66500 S Glacier Park Rd</b>（Mile 102, Glenn Hwy）· 预约名 Erica。',map:M+'Matanuska+Glacier+Park+Alaska'},
+    {time:'下午',title:'开 2h 回 Anchorage 或直接南下 Seward',meta:['约 2h'],note:'看第二天船班时间决定当晚住 Anchorage 还是 Seward。',map:''},
+  ]},
+  {wd:'周五 7/4',short:'7/4',dd:'Kenai Fjords',title:'冰川 + 野生动物游船',blocks:[
+    {time:'上午',title:'到 Seward 上船',meta:['Seward'],note:'Kenai Fjords National Park 游船码头。建议早点到取票。',map:M+'Seward+Alaska+Harbor'},
+    {time:'全天',title:'🚢 6 小时 Glacier & Wildlife Cruise',meta:['已订 · $250','6 小时'],note:'开进峡湾看潮汐冰川崩解入海；沿途常见<b>座头鲸 / 虎鲸 / 海獭 / 海狮 / 海鸟</b>。船上含午餐，带够保暖衣 + 防风外套。',map:M+'Kenai+Fjords+National+Park+Cruise+Seward'},
+    {time:'傍晚',title:'回 Anchorage',meta:['约 2.5h'],note:'',map:''},
+  ]},
+  {wd:'周六',short:'周六',dd:'返程',title:'Anchorage + 红眼回家',blocks:[
+    {time:'白天',title:'Anchorage 逛 + Dim Sum',meta:[],note:'市区走走、吃点中餐（Dim Sum），把行李收好。',map:M+'Anchorage+Alaska+Downtown'},
+    {time:'10:35 PM',title:'✈️ 红眼回家 🏠',meta:['→ 周日 7:00 AM'],note:'',map:''},
+  ]},
+];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+(function(){var d=Math.ceil((START-new Date())/86400000);document.getElementById('cd').textContent=d>0?('⏳ '+d+' 天后'):'🏁 已走过';})();
+
+let sel=0;
+function renderTabs(){document.getElementById('daytabs').innerHTML=DAYS.map((d,i)=>'<button class="daytab'+(i===sel?' on':'')+'" onclick="pick('+i+')"><span class="d">'+d.short+'</span><span class="dt">'+d.dd+'</span></button>').join('');}
+function renderDay(){
+  const d=DAYS[sel];
+  let h='<div class="dwd">'+d.wd+'</div><div class="dttl">'+esc(d.title)+'</div><div style="margin-top:10px">';
+  h+=d.blocks.map(b=>{
+    let mt=(b.meta&&b.meta.length)?'<div class="meta">'+b.meta.map(m=>'<span>'+esc(m)+'</span>').join('')+'</div>':'';
+    let nt=b.note?'<div class="note">'+b.note+'</div>':'';
+    let mp=b.map?'<a class="mapbtn" href="'+b.map+'" target="_blank" rel="noopener">🧭 地图</a>':'';
+    return '<div class="block"><div class="time">'+esc(b.time)+'</div><div class="ln"><span class="dot"></span><div class="bt">'+esc(b.title)+'</div>'+mt+nt+mp+'</div></div>';
+  }).join('')+'</div>';
+  document.getElementById('daypanel').innerHTML=h;
+}
+function pick(i){sel=i;renderTabs();renderDay();}
+renderTabs();renderDay();
+</script>
+</body>
+</html>

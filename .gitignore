@@ -1,0 +1,46 @@
+# ===== macOS 系统噪音 =====
+.DS_Store
+**/.DS_Store
+
+# ===== Python 虚拟环境 / 字节码(体积大,绝不提交)=====
+.venv/
+**/.venv/
+venv/
+env/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+
+# ===== 日志 / 运行时生成物 =====
+*.log
+stackchan/xiaoke-drawer/drawer.log
+
+# ===== 个人/隐私数据(含住址等,勿公开)=====
+# 小克记忆库含家庭住址等个人信息 —— 如需保留请自行取消忽略
+stackchan/xiaoke-drawer/drawer_index.json
+
+# ===== 本机专属配置(绝对路径,换机无意义)=====
+stackchan/xiaoke-drawer/com.xiaoke.drawer.plist
+
+# ===== Claude 用量徽章:整个工具文件夹(自成独立项目)=====
+/claude-usage-badge
+# 徽章内部的调试草稿 & 抓取的用量数据(双重保险)
+claude-usage-badge/_diag*
+claude-usage-badge/*_out.txt
+
+# ===== 本地运行时缓存(只应存在于 ~/.cache,列此防误放)=====
+claude-usage-official.json
+claude-usage-badge-cal.json
+*.anchor
+
+# ===== 编辑器 / 临时文件 =====
+*.swp
+*~
+.idea/
+.vscode/
+.DS_Store
+/claude-usage-badge
+
+# stackchan 已拆成独立仓 xiaoke-brain(2026-07-12)
+/stackchan/

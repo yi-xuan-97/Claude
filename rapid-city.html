@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>🗿 Rapid City 三日行程 · Yixuan</title>
+<meta name="description" content="Rapid City 三日：Black Hills 逆时针 U 形 + Badlands 由东向西单向穿越。零折返，含喂驴、日落、吃饭坑提醒。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+  :root{--ac:#B07A1E;--screen:#EBDFC6;--frame:#F7F0E1;--ink:#3A2E18;--sub:#8A7A5A;--soft:#F3E7CE;--line:#E7DABE;--cline:#EADDC4}
+  html{scroll-behavior:smooth}
+  body{background:var(--screen);font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}button{font-family:inherit}
+  ::-webkit-scrollbar{height:5px;width:5px}::-webkit-scrollbar-thumb{background:rgba(176,122,30,.32);border-radius:9px}
+  .screen{min-height:100vh;display:flex;justify-content:center}
+  .frame{width:100%;max-width:480px;background:var(--frame);min-height:100vh;position:relative;box-shadow:0 0 60px rgba(60,45,15,.10)}
+  .appbar{position:sticky;top:0;z-index:30;background:rgba(247,240,225,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .appbar .row{display:flex;align-items:center;gap:10px;padding:9px 12px}
+  .back{flex:none;width:36px;height:36px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ac)}
+  .apptt{flex:1;min-width:0;display:flex;flex-direction:column}
+  .apptt .t{font:800 15px 'Baloo 2','Noto Sans SC';line-height:1.1}
+  .apptt .s{font:600 10.5px 'Space Grotesk';color:#A08A5E}
+  .cd{flex:none;font:700 11px 'Space Grotesk';color:#fff;background:var(--ac);padding:6px 11px;border-radius:999px;white-space:nowrap}
+  .chipnav{display:flex;gap:7px;padding:0 12px 9px;overflow-x:auto}
+  .chipnav a{flex:none;font:700 12px 'Noto Sans SC';color:var(--ink);background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+  .chipnav a.on{color:var(--ac);background:var(--soft);border-color:transparent}
+  .hero{background:linear-gradient(160deg,#C0902E 0%,#8A6414 100%);color:#fff;padding:22px 20px 24px;position:relative;overflow:hidden}
+  .hero .wm{position:absolute;right:-14px;top:-22px;font-size:124px;opacity:.15;pointer-events:none}
+  .hero h1{font:800 26px 'Baloo 2','Noto Sans SC';line-height:1.12;position:relative}
+  .hero .sub{font:500 12.5px 'Noto Sans SC';color:rgba(255,255,255,.9);margin-top:6px;position:relative}
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;position:relative}
+  .hchips span{font:600 11px 'Noto Sans SC';background:rgba(255,255,255,.16);padding:5px 10px;border-radius:999px}
+  .stats{display:flex;gap:8px;margin-top:16px;position:relative}
+  .stats .st{flex:1;background:rgba(255,255,255,.14);border-radius:13px;padding:10px 6px;text-align:center}
+  .stats .st .v{font:800 14px 'Space Grotesk'}.stats .st .l{font:600 10px 'Noto Sans SC';color:rgba(255,255,255,.82);margin-top:2px}
+  .h2{font:800 19px 'Baloo 2','Noto Sans SC';color:var(--ink)}
+  .sech{display:flex;align-items:center;gap:8px;padding:22px 18px 10px}
+  .card{background:#fff;border:1px solid var(--cline);border-radius:18px}
+  .over{margin:16px 16px 0;padding:6px 16px}
+  .orow{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #F1E7D2}
+  .orow:last-child{border-bottom:none}
+  .orow .k{flex:none;font-size:17px;width:24px;text-align:center}
+  .orow .lab{flex:none;width:52px;font:700 12px 'Noto Sans SC';color:var(--ac)}
+  .orow .v{flex:1;font:500 12.5px 'Noto Sans SC';color:#5C4E30;line-height:1.5}
+  .fixbox{margin:12px 16px 0;padding:14px 15px;background:#FCF3DE;border:1px solid #EDDCB2;border-radius:16px}
+  .fixbox .t{font:800 13px 'Noto Sans SC';color:#7A5A14;margin-bottom:6px}
+  .fixbox .b{font:500 12px 'Noto Sans SC';color:#8A6A2A;line-height:1.65}
+  .fixbox b{color:#7A5A14}
+  .daytabs{position:sticky;top:99px;z-index:20;background:rgba(247,240,225,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 14px 9px;border-bottom:1px solid var(--cline);display:flex;gap:7px;overflow-x:auto}
+  .daytab{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;min-width:66px;padding:8px 10px;border-radius:13px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .daytab.on{border-color:var(--ac);background:var(--ac);color:#fff}
+  .daytab .d{font:800 13px 'Baloo 2','Noto Sans SC';line-height:1}.daytab .dt{font:600 9px 'Noto Sans SC';opacity:.85}
+  .daypanel{padding:14px 16px 4px}
+  .dwd{font:800 19px 'Baloo 2','Noto Sans SC';color:var(--ac)}
+  .dttl{font:700 14px 'Noto Sans SC';margin-top:2px;color:#5C4E30}
+  .block{display:flex;gap:11px}
+  .block .time{flex:none;width:58px;text-align:right;font:700 11.5px 'Space Grotesk';color:var(--ac);padding-top:13px;line-height:1.3}
+  .block .ln{flex:1;min-width:0;border-left:2px solid #E7DABE;padding:13px 0 16px 16px;position:relative}
+  .block .dot{position:absolute;left:-7px;top:17px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--ac)}
+  .block .bt{font:700 14.5px 'Noto Sans SC';line-height:1.4}
+  .block .meta{display:inline-flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+  .block .meta span{font:700 10px 'Space Grotesk';padding:3px 8px;border-radius:999px;background:#F0E6CE;color:#8A6A2A;white-space:nowrap}
+  .block .note{font:500 12.5px 'Noto Sans SC';color:var(--sub);margin-top:7px;line-height:1.65}
+  .block .note b{color:#5C4E30}
+  .tips{display:flex;flex-direction:column;gap:10px;padding:0 16px}
+  .tip{padding:14px;background:#fff;border:1px solid var(--cline);border-radius:16px;box-shadow:inset 4px 0 0 var(--tc,#B07A1E)}
+  .tip .tt{font:800 13.5px 'Noto Sans SC';color:#3A2E18}
+  .tip .tb{font:500 12px 'Noto Sans SC';color:#6A5A38;margin-top:6px;line-height:1.7}
+  .tip .tb b{color:#3A2E18}
+  .cam{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}
+  .cam .c{padding:10px 12px;background:#F7F0E1;border:1px solid #EADDC4;border-radius:12px;font:500 11.5px 'Noto Sans SC';color:#6A5A38;line-height:1.6}
+  .cam .c b{color:#3A2E18}
+  .footer{text-align:center;padding:26px 24px 36px}
+  .footer .a{font:700 12.5px 'Noto Sans SC';color:#5C4E30}
+  .footer .b{font:500 11px 'Noto Sans SC';color:#A08A5E;margin-top:6px;line-height:1.6}
+  @media(min-width:880px){
+    .frame{max-width:1040px}
+    .rc-body{display:grid;grid-template-columns:minmax(0,1fr) 332px;grid-template-areas:"over over" "days tips" ;column-gap:24px;padding:0 22px 12px;align-items:start}
+    .a-over{grid-area:over}.a-days{grid-area:days}.a-tips{grid-area:tips;position:sticky;top:108px;align-self:start}
+  }
+</style>
+</head>
+<body>
+<div class="screen"><div class="frame">
+
+  <div class="appbar">
+    <div class="row">
+      <a class="back" href="index.html">←</a>
+      <div class="apptt"><span class="t">🗿 Rapid City</span><span class="s">5/22 – 25 · Memorial Day</span></div>
+      <span class="cd" id="cd">🏁 已走过</span>
+    </div>
+    <div class="chipnav">
+      <a href="#over" class="on">🧭 概览</a><a href="#days">📅 行程</a><a href="#tips">💡 提醒</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <span class="wm">🗿</span>
+    <h1>Rapid City 三日行程</h1>
+    <div class="sub">Black Hills 逆时针 U 形 + Badlands 由东向西单向穿越 · 零折返</div>
+    <div class="hchips"><span>🗿 Mt Rushmore</span><span>🫏 Custer 喂驴</span><span>🌅 Badlands 日落</span><span>☕ Wall Drug</span></div>
+    <div class="stats">
+      <div class="st"><div class="v">5/22–25</div><div class="l">出行</div></div>
+      <div class="st"><div class="v">3</div><div class="l">整天</div></div>
+      <div class="st"><div class="v">Elevation</div><div class="l">酒店 3 晚</div></div>
+      <div class="st"><div class="v">✓</div><div class="l">最终版</div></div>
+    </div>
+  </div>
+
+  <div class="rc-body">
+    <div id="over" class="a-over" style="scroll-margin-top:120px">
+      <div class="card over">
+        <div class="orow"><span class="k">✈️</span><span class="lab">去程</span><span class="v">周五 5/22 · DSM 1:35 PM → RAP 7:13 PM（经 Denver）</span></div>
+        <div class="orow"><span class="k">✈️</span><span class="lab">返程</span><span class="v">周一 5/25 · RAP 1:35 PM → DSM 9:45 PM（经 ORD）</span></div>
+        <div class="orow"><span class="k">🏨</span><span class="lab">酒店</span><span class="v">Elevation Inn &amp; Suites · 950 North St（三晚）</span></div>
+        <div class="orow"><span class="k">🚗</span><span class="lab">还车</span><span class="v">周一 12:30 PM 前 · 机场加满油（不加满 $9.99/gal）</span></div>
+        <div class="orow"><span class="k">😴</span><span class="lab">作息</span><span class="v">7:00 AM 起 · 10:30 PM 睡</span></div>
+      </div>
+      <div class="fixbox">
+        <div class="t">⚠️ 这版修正了什么（和之前版本的区别）</div>
+        <div class="b">• 周六重排为「逆时针 U 形」：先扎到最南端，再把 Needles Highway 当成往西北的上升通道，不再爬到北边又掉头。<br>• 周日改为由东向西单向穿越：东端吃完饭再一路向西，不回头（省 35–40 分钟白开）。<br>• 吃饭地点有坑：详见下方「提醒」。</div>
+      </div>
+    </div>
+
+    <div id="days" class="a-days" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">📅 每日行程</span></div>
+      <div class="daytabs" id="daytabs"></div>
+      <div class="daypanel" id="daypanel"></div>
+    </div>
+
+    <div id="tips" class="a-tips" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">💡 提醒 &amp; 贴士</span></div>
+      <div class="tips">
+        <div class="tip" style="--tc:#C0392B"><div class="tt">🍔 吃饭的坑（重要）</div><div class="tb">原计划的 <b>Black Hills Burger and Bun</b> 现在叫 <b>Black Hills Burger &amp; Pizza Co.</b>：周日、周一闭店；周六只开午市 <b>11:00 AM–2:30 PM</b> → 周六晚饭吃不到！要么把它当周六午饭，要么在 Custer 镇换一家晚上营业的。</div></div>
+        <div class="tip" style="--tc:#B07A1E"><div class="tt">🫏 喂驴小贴士</div><div class="tb">Wildlife Loop 的驴是当年载客上山的驴的后代，已野化但完全不怕人，会主动凑到车窗讨食。<b>手掌摊平喂，别用手指捏</b>（容易被叼到）；可摇窗喂但别整个人探出去；有小驹别去摸（母驴护崽）。</div></div>
+        <div class="tip" style="--tc:#3E6FB0"><div class="tt">⚠️ 周日提醒</div><div class="tb">• Sage Creek Rim Road 是 gravel，暴雨后可能关闭 · 出发前查 <b>(605) 433-5361</b><br>• Badlands 西半段基本无手机信号 · 提前下离线地图<br>• 5/24 日落 8:21 PM · 中午无遮挡暴晒，多带水 + 防晒 + 帽子</div></div>
+        <div class="tip" style="--tc:#2E7D5B"><div class="tt">🧭 周六为什么这么排（纬度逻辑）</div><div class="tb">酒店(44.09) → Mt Rushmore(43.88) → 一路往南扎到最底：Wildlife Loop + Mt Coolidge(43.72–43.74) → 再把 Needles Highway 当上升通道往西北到 Sylvan Lake(43.85) → Custer 镇(43.77) 吃饭 → 回酒店。<b>一次解决，不折返。</b></div></div>
+        <div class="tip" style="--tc:#6A57B0"><div class="tt">📸 两机分工</div><div class="cam">
+          <div class="c"><b>vivo 长焦</b> → 野牛 / 犬鼠 / 总统脸细节 / Iron Mt 隧道框 Rushmore / Needles 尖针 / Pinnacles 日落大场景</div>
+          <div class="c"><b>iPhone 16 Pro</b> → 自拍 / 合影 / 食物 / Vlog / 喂驴（动作快）/ 过窄隧道紧张瞬间</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="a">为你定制 · Rapid City 三日 · Black Hills + Badlands 🗿</div>
+    <div class="b">✓ 最终版 · 按真实坐标排序 · 零折返 · 监修 Luba 本猫 🐾</div>
+  </div>
+
+</div></div>
+
+<script>
+const START=new Date('2026-05-22T00:00:00');
+
+const DAYS=[
+  {wd:'周五 5/22',short:'5/22',dd:'抵达',title:'落地 + City of Presidents',blocks:[
+    {time:'7:13 PM',title:'落地 RAP · 取行李 + 取车',meta:[],note:'Memorial Day 周末租车柜台可能慢，留点耐心。'},
+    {time:'8:00 PM',title:'到 Elevation Inn check-in',meta:['机场 15 min'],note:'放行李，稍作休整。'},
+    {time:'8:15 PM',title:'顺路超市买胡萝卜 🥕',meta:[],note:'明天 Wildlife Loop 喂驴用，先备好。'},
+    {time:'8:30 PM',title:'Downtown 晚饭 + City of Presidents 铜像散步',meta:[],note:'45 尊总统铜像散落在街角，边走边逛。'},
+    {time:'10:30 PM',title:'睡觉 😴',meta:[],note:'早睡，明天 8:00 出发。'},
+  ]},
+  {wd:'周六 5/23',short:'5/23',dd:'Black Hills U 形',title:'从北扎到南，再兜回西北 · 零折返',blocks:[
+    {time:'8:00 AM',title:'Elevation Inn 出发',meta:['35 min · 24 mi','44.09'],note:''},
+    {time:'8:35–9:30',title:'🗿 Mt Rushmore',meta:['43.88'],note:'Avenue of Flags + Presidential Trail 简走。早上人少光线好，55 分钟够。'},
+    {time:'9:30–10:30',title:'🛣️ Iron Mountain Road 南下',meta:['60 min · 17 mi'],note:'三隧道框 Rushmore + pigtail 螺旋桥。限速 15–25 mph，慢慢开。'},
+    {time:'10:30 AM',title:'进 Custer State Park（State Game Lodge 一带）',meta:['43.76'],note:'在此付入园费 $25/车。'},
+    {time:'10:30–12:30',title:'🫏🥕 Wildlife Loop Road 往南兜（18 mi）',meta:['1.5–2 hr','43.72'],note:'<b>喂驴就在这段！</b>看到前面停一排车 = 遇上驴群了。顺便看野牛 + Bison Center。'},
+    {time:'12:30–1:15',title:'🏔️ Mount Coolidge Lookout',meta:['15 min','43.74'],note:'就在 Blue Bell 旁边，顺路上去。1.2 mi gravel 上山，山顶 360° 看 Rushmore / Crazy Horse / Needles / Badlands。'},
+    {time:'1:15–2:30',title:'🪡 Needles Highway 往西北爬',meta:['60 min · 14 mi'],note:'Cathedral Spires 尖针 + Needles Eye Tunnel（8 尺窄）。这条路就是南北连接线，顺势就上去了。'},
+    {time:'2:30–3:15',title:'🪨 Sylvan Lake',meta:['43.85'],note:'环湖半圈走到大石头那边（1 mi 平路）。上厕所 + Lodge 补给。'},
+    {time:'3:15–5:00',title:'Custer 镇 · 主街散步 + 晚饭',meta:['15 min · 7 mi','43.77'],note:'⚠️ 餐厅见「提醒」里的吃饭坑。'},
+    {time:'5:00–5:55',title:'回 Rapid City（US-16 东北）',meta:['55 min · 41 mi','44.09'],note:''},
+    {time:'10:30 PM',title:'睡觉 😴',meta:[],note:''},
+  ]},
+  {wd:'周日 5/24',short:'5/24',dd:'Badlands 由东向西',title:'单向穿越，不回头',blocks:[
+    {time:'7:45–8:40',title:'Rapid City → Wall（I-90 东）',meta:['55 min · 56 mi'],note:'早餐外带上车。'},
+    {time:'8:40–9:25',title:'☕ Wall Drug',meta:[],note:'5¢ 咖啡 + donut + 巨型恐龙合照。45 分钟够，别陷进去。'},
+    {time:'9:35–10:00',title:'🚀 Minuteman Missile Delta-09 导弹井',meta:['10 min · 6 mi'],note:'免费 · 9 AM 开门 · 玻璃罩看下去 + 扫码听讲解。'},
+    {time:'10:00–10:30',title:'进 Badlands NE Entrance（Exit 131 → SD-240 南）',meta:['30 min · 25 mi'],note:'入园费 $30/车。'},
+    {time:'10:45–12:00',title:'🚶 Window Trail + Door Trail',meta:['同一停车场'],note:'0.25 mi + 0.75 mi，两条约 1 hr 15 min。<b>⚠️ Door Trail 后段无 boardwalk，跟着木桩走。⚠️ 响尾蛇 5 月活跃，穿运动鞋、不离主步道。</b>'},
+    {time:'12:10–1:15',title:'🌮 午饭 · Cedar Pass Lodge',meta:['5 min · 2 mi'],note:'招牌 Sioux Indian Taco（自家炸 fry bread + buffalo）。<b>园内唯一餐厅——错过就要开回 Wall。</b>顺便在 Ben Reifel VC 上厕所 + 看化石实验室。'},
+    {time:'1:15–3:30',title:'沿 Loop Road 一路向西（单向不回头）',meta:['~2.5 hr · 28 mi'],note:'挑这几个 overlook 停：Panorama Point → Burns Basin → Yellow Mounds → Conata Basin → Ancient Hunters。'},
+    {time:'3:45–4:30',title:'🐿️ Roberts Prairie Dog Town',meta:['15 min · 5 mi'],note:'转上 Sage Creek Rim Road（gravel，来回 9 mi）。沿途可能遇野牛挡路，路边看就好，禁入 colony。'},
+    {time:'4:45–7:30',title:'到 Pinnacles Overlook · 走短 rim trail',meta:['15 min'],note:'6:30 PM 后光线变软，7:30 PM 进 golden hour。黄昏时 bighorn sheep 常在附近出现。'},
+    {time:'7:30–8:21',title:'🌅 Pinnacles Overlook 日落（本日最出片）',meta:[],note:'vivo 风光氛围主战，iPhone 0.5x 备份。'},
+    {time:'8:25–9:40',title:'日落结束立即上车 · 回酒店',meta:['75 min · 65 mi'],note:'出 Pinnacles → SD-240 北 → Exit 110 → I-90 西。<b>⚠️ 开放牧区，鹿/羚羊上路概率高，两人轮换、降速。</b>'},
+    {time:'10:30 PM',title:'睡觉 😴',meta:[],note:''},
+  ]},
+  {wd:'周一 5/25',short:'5/25',dd:'返程',title:'慢悠悠返程',blocks:[
+    {time:'7:30–9:00',title:'早餐 + 收行李 + 退房',meta:[],note:''},
+    {time:'9:00–10:30',title:'🦕 Dinosaur Park + 市区散步',meta:['免费'],note:'1936 年 WPA 山顶恐龙雕塑（30 min）+ Main Street Square / Art Alley / 总统铜像街。'},
+    {time:'10:30–11:30',title:'SD Air & Space Museum',meta:['机场旁 · 免费'],note:'顺路，强推。'},
+    {time:'11:30 AM',title:'⛽ 机场附近加满油',meta:[],note:'还车不加满 $9.99/gal。'},
+    {time:'11:50 AM',title:'还车 + 走 TSA',meta:[],note:''},
+    {time:'1:35 PM',title:'✈️ 起飞回家 🏠',meta:[],note:''},
+  ]},
+];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+(function(){var d=Math.ceil((START-new Date())/86400000);document.getElementById('cd').textContent=d>0?('⏳ '+d+' 天后'):'🏁 已走过';})();
+
+let sel=0;
+function renderTabs(){document.getElementById('daytabs').innerHTML=DAYS.map((d,i)=>'<button class="daytab'+(i===sel?' on':'')+'" onclick="pick('+i+')"><span class="d">'+d.short+'</span><span class="dt">'+d.dd+'</span></button>').join('');}
+function renderDay(){
+  const d=DAYS[sel];
+  let h='<div class="dwd">'+d.wd+'</div><div class="dttl">'+esc(d.title)+'</div><div style="margin-top:10px">';
+  h+=d.blocks.map(b=>{
+    let mt=(b.meta&&b.meta.length)?'<div class="meta">'+b.meta.map(m=>'<span>'+esc(m)+'</span>').join('')+'</div>':'';
+    let nt=b.note?'<div class="note">'+b.note+'</div>':'';
+    return '<div class="block"><div class="time">'+esc(b.time)+'</div><div class="ln"><span class="dot"></span><div class="bt">'+esc(b.title)+'</div>'+mt+nt+'</div></div>';
+  }).join('')+'</div>';
+  document.getElementById('daypanel').innerHTML=h;
+}
+function pick(i){sel=i;renderTabs();renderDay();}
+renderTabs();renderDay();
+</script>
+</body>
+</html>

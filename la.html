@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>🌴 LA 七日 · Yixuan</title>
+<meta name="description" content="洛杉矶 7 天：Ktown 美食 · 感恩节迪士尼 · Black Friday · Santa Monica · Joshua Tree 星空 · 环球影城。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+  :root{--ac:#8250B5;--screen:#E7DFF2;--frame:#F5F0FA;--ink:#2E2438;--sub:#7A6E88;--soft:#EEE6F6;--line:#E2D6EF;--cline:#E7DCF3}
+  html{scroll-behavior:smooth}
+  body{background:var(--screen);font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}button{font-family:inherit}
+  ::-webkit-scrollbar{height:5px;width:5px}::-webkit-scrollbar-thumb{background:rgba(130,80,181,.32);border-radius:9px}
+  .screen{min-height:100vh;display:flex;justify-content:center}
+  .frame{width:100%;max-width:480px;background:var(--frame);min-height:100vh;position:relative;box-shadow:0 0 60px rgba(40,20,60,.10)}
+  .appbar{position:sticky;top:0;z-index:30;background:rgba(245,240,250,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .appbar .row{display:flex;align-items:center;gap:10px;padding:9px 12px}
+  .back{flex:none;width:36px;height:36px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ac)}
+  .apptt{flex:1;min-width:0;display:flex;flex-direction:column}
+  .apptt .t{font:800 15px 'Baloo 2','Noto Sans SC';line-height:1.1}
+  .apptt .s{font:600 10.5px 'Space Grotesk';color:#9585A6}
+  .cd{flex:none;font:700 11px 'Space Grotesk';color:#fff;background:var(--ac);padding:6px 11px;border-radius:999px;white-space:nowrap}
+  .chipnav{display:flex;gap:7px;padding:0 12px 9px;overflow-x:auto}
+  .chipnav a{flex:none;font:700 12px 'Noto Sans SC';color:var(--ink);background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+  .chipnav a.on{color:var(--ac);background:var(--soft);border-color:transparent}
+  .hero{background:linear-gradient(160deg,#9260C0 0%,#6E45A0 100%);color:#fff;padding:22px 20px 24px;position:relative;overflow:hidden}
+  .hero .wm{position:absolute;right:-14px;top:-22px;font-size:124px;opacity:.16;pointer-events:none}
+  .hero h1{font:800 26px 'Baloo 2','Noto Sans SC';line-height:1.12;position:relative}
+  .hero .sub{font:500 12.5px 'Noto Sans SC';color:rgba(255,255,255,.9);margin-top:6px;position:relative}
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;position:relative}
+  .hchips span{font:600 11px 'Noto Sans SC';background:rgba(255,255,255,.17);padding:5px 10px;border-radius:999px}
+  .stats{display:flex;gap:8px;margin-top:16px;position:relative}
+  .stats .st{flex:1;background:rgba(255,255,255,.15);border-radius:13px;padding:10px 6px;text-align:center}
+  .stats .st .v{font:800 14px 'Space Grotesk'}.stats .st .l{font:600 10px 'Noto Sans SC';color:rgba(255,255,255,.82);margin-top:2px}
+  .h2{font:800 19px 'Baloo 2','Noto Sans SC';color:var(--ink)}
+  .sech{display:flex;align-items:center;gap:8px;padding:22px 18px 10px}
+  .card{background:#fff;border:1px solid var(--cline);border-radius:18px}
+  .over{margin:16px 16px 0;padding:6px 16px}
+  .orow{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #F0E9F7}
+  .orow:last-child{border-bottom:none}
+  .orow .k{flex:none;font-size:17px;width:24px;text-align:center}
+  .orow .lab{flex:none;width:52px;font:700 12px 'Noto Sans SC';color:var(--ac)}
+  .orow .v{flex:1;font:500 12.5px 'Noto Sans SC';color:#544862;line-height:1.5}
+  .daytabs{position:sticky;top:99px;z-index:20;background:rgba(245,240,250,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 14px 9px;border-bottom:1px solid var(--cline);display:flex;gap:7px;overflow-x:auto}
+  .daytab{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;min-width:62px;padding:8px;border-radius:13px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .daytab.on{border-color:var(--ac);background:var(--ac);color:#fff}
+  .daytab .d{font:800 13px 'Baloo 2','Noto Sans SC';line-height:1}.daytab .dt{font:600 9px 'Noto Sans SC';opacity:.85}
+  .daypanel{padding:14px 16px 4px}
+  .dwd{font:800 19px 'Baloo 2','Noto Sans SC';color:var(--ac)}
+  .dttl{font:700 14px 'Noto Sans SC';margin-top:2px;color:#544862}
+  .block{display:flex;gap:11px}
+  .block .time{flex:none;width:50px;text-align:right;font:700 11.5px 'Space Grotesk';color:var(--ac);padding-top:13px;line-height:1.3}
+  .block .ln{flex:1;min-width:0;border-left:2px solid #E2D6EF;padding:13px 0 16px 16px;position:relative}
+  .block .dot{position:absolute;left:-7px;top:17px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--ac)}
+  .block .bt{font:700 14.5px 'Noto Sans SC';line-height:1.4}
+  .block .note{font:500 12.5px 'Noto Sans SC';color:var(--sub);margin-top:6px;line-height:1.6}
+  .block .note b{color:#544862}
+  .mapbtn{margin-top:9px;display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:11px;background:#fff;border:1.5px solid var(--ac);color:var(--ac);font:700 11.5px 'Noto Sans SC'}
+  .plan{margin:0 16px 12px;padding:15px;background:#fff;border:1px solid var(--cline);border-radius:18px;box-shadow:inset 4px 0 0 var(--pc,#8250B5)}
+  .plan .pt{font:800 15px 'Baloo 2','Noto Sans SC';color:#2E2438;margin-bottom:4px}
+  .plan .ps{font:600 11px 'Space Grotesk';color:#9585A6;margin-bottom:9px}
+  .plan ol{margin:0;padding-left:18px}
+  .plan li{font:500 12.5px 'Noto Sans SC';color:#544862;line-height:1.6;margin-bottom:5px}
+  .plan li b{color:#2E2438}
+  .footer{text-align:center;padding:26px 24px 36px}
+  .footer .a{font:700 12.5px 'Noto Sans SC';color:#544862}
+  .footer .b{font:500 11px 'Noto Sans SC';color:#9585A6;margin-top:6px;line-height:1.6}
+  .footer .b a{color:var(--ac);border-bottom:1px solid var(--line)}
+  @media(min-width:880px){
+    .frame{max-width:1040px}
+    .la-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;grid-template-areas:"over over" "days plans";column-gap:24px;padding:0 22px 12px;align-items:start}
+    .a-over{grid-area:over}.a-days{grid-area:days}.a-plans{grid-area:plans;position:sticky;top:108px;align-self:start}
+  }
+</style>
+</head>
+<body>
+<div class="screen"><div class="frame">
+
+  <div class="appbar">
+    <div class="row">
+      <a class="back" href="index.html">←</a>
+      <div class="apptt"><span class="t">🌴 LA 七日</span><span class="s">11/26 – 12/02 · 2025</span></div>
+      <span class="cd" id="cd">🏁 已走过</span>
+    </div>
+    <div class="chipnav">
+      <a href="#over" class="on">🧭 概览</a><a href="#days">📅 行程</a><a href="#plans">🎢 园区攻略</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <span class="wm">🌴</span>
+    <h1>LA 七日 · 洛杉矶</h1>
+    <div class="sub">Ktown 美食 · 感恩节迪士尼 · Black Friday · Santa Monica · Joshua Tree 星空 · 环球</div>
+    <div class="hchips"><span>🍜 Ktown</span><span>🏰 迪士尼</span><span>🎬 环球</span><span>🌵 Joshua Tree</span><span>🧖 汗蒸</span></div>
+    <div class="stats">
+      <div class="st"><div class="v">11/26–12/2</div><div class="l">出行</div></div>
+      <div class="st"><div class="v">7</div><div class="l">天</div></div>
+      <div class="st"><div class="v">LAX</div><div class="l">进出</div></div>
+      <div class="st"><div class="v">2025</div><div class="l">已走过</div></div>
+    </div>
+  </div>
+
+  <div class="la-body">
+    <div id="over" class="a-over" style="scroll-margin-top:120px">
+      <div class="card over">
+        <div class="orow"><span class="k">✈️</span><span class="lab">航班</span><span class="v">11/26 5:24 PM LAX 落地 → 12/2 4:45 PM LAX 起飞（1 点必须出发、2:30 到机场）</span></div>
+        <div class="orow"><span class="k">🎢</span><span class="lab">主题</span><span class="v">Ktown 美食 · 感恩节迪士尼 · Black Friday · Santa Monica 落日 · Joshua Tree 星空 · 环球影城</span></div>
+        <div class="orow"><span class="k">🧖</span><span class="lab">汗蒸</span><span class="v">Wi Spa（2700 Wilshire, 24h）· New Vogue SPA · I Spa（Irvine）</span></div>
+      </div>
+    </div>
+
+    <div id="days" class="a-days" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">📅 每日行程</span></div>
+      <div class="daytabs" id="daytabs"></div>
+      <div class="daypanel" id="daypanel"></div>
+    </div>
+
+    <div id="plans" class="a-plans" style="scroll-margin-top:120px">
+      <div class="sech"><span class="h2">🎢 园区攻略</span></div>
+      <div class="plan" style="--pc:#3E6FB0">
+        <div class="pt">🏰 Disney 一日（11/27）</div>
+        <div class="ps">DCA 上午清空 → Disneyland 刷 LL → 落日飞车 → 烟花</div>
+        <ol>
+          <li><b>8:00 DCA</b>：Radiator Springs（落日飞车，早上先玩）→ WEB Slingers → Incredicoaster（只玩一次）</li>
+          <li>Soarin 飞跃地平线 → Little Mermaid → Monsters Inc → Animation Academy → 午餐 Pym / Smokejumpers（Mobile Order）</li>
+          <li><b>13:10 转 Disneyland</b>（LL 全刷）：Indiana Jones → Big Thunder → Space Mountain → Haunted Mansion</li>
+          <li><b>16:30 回 DCA</b>：Radiator Springs 落日二刷（16:45–17:10 峡谷金光）→ Silly Symphony Swings → Golden Zephyr</li>
+          <li>晚餐 Mobile Order（Plaza Inn / Jolly Holiday）</li>
+          <li><b>19:00 Fantasmic</b>（当日查场次）· <b>20:00 Small World 烟花</b>（人少、视野好、离场轻松）</li>
+        </ol>
+      </div>
+      <div class="plan" style="--pc:#B07A1E">
+        <div class="pt">🎬 Universal 一日（12/1）</div>
+        <div class="ps">Upper Lot 哈利波特 → Lower Lot 马里奥 → Studio Tour → WaterWorld</div>
+        <ol>
+          <li><b>Upper Lot</b>：Forbidden Journey 禁忌之旅（先冲）→ Flight of the Hippogriff 鹰马 → 买魔杖 / 黄油啤酒</li>
+          <li><b>Lower Lot</b>：Bowsers Challenge 马里奥赛车 → Jurassic World → Mummy 木乃伊 → Transformers 3D</li>
+          <li><b>回 Upper</b>：Studio Tour 小火车（坐第三节最左，末班 6:15 PM）→ WaterWorld（只 4 场：1:15 / 2:30 / 4:45 / 6:15）→ Minion Mayhem</li>
+          <li>霍格沃兹夜间灯光秀（提前 15–30 分钟占位）· 三把扫帚 Three Broomsticks 吃饭</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="a">为你定制 · LA 七日 · 洛杉矶 🌴</div>
+    <div class="b">按你 Google Doc 整理 · <a href="https://docs.google.com/document/d/1d67ePXEDEuA7k6uyoIY6aMGjrmtUXFHPODU1Xxad3yw/edit" target="_blank" rel="noopener">原始 Doc ↗</a> · 监修 Luba 本猫 🐾</div>
+  </div>
+
+</div></div>
+
+<script>
+const M='https://www.google.com/maps/search/?api=1&query=';
+const START=new Date('2025-11-26T00:00:00');
+
+const DAYS=[
+  {wd:'周三 11/26',short:'11/26',dd:'抵达 + Ktown',title:'落地 + 韩城宵夜',blocks:[
+    {time:'5:24 PM',title:'落地 LAX',note:'取车、进城。',map:''},
+    {time:'晚',title:'🍜 Ktown 韩餐',note:'Sun Nong Dan 芝士排骨锅 · Jinsol Gukbap 必点鸡爪汁炒饭 · ya sik na ra 辣鸡爪。',map:M+'Sun+Nong+Dan+Koreatown+Los+Angeles'},
+    {time:'打包',title:'TOGO + 采购',note:'Mongolian homemade pie 蒙古馅饼（11:30–21:00）· 99 Ranch 超市囤货。',map:''},
+  ]},
+  {wd:'周四 11/27',short:'11/27',dd:'Thanksgiving',title:'感恩节 · Disney 一日',blocks:[
+    {time:'6:30',title:'起床 · 7:00 出门',note:'早餐吃剩菜 · H W Taste 回味美食（天津）买午餐带上。',map:''},
+    {time:'全天',title:'🏰 Disneyland + DCA',note:'见右侧「Disney 一日」详细攻略：DCA 上午清空 → Disneyland 刷 LL → 落日飞车 → Small World 烟花。',map:M+'Disneyland+Park+Anaheim'},
+    {time:'晚',title:'晚餐待定',note:'',map:''},
+  ]},
+  {wd:'周五 11/28',short:'11/28',dd:'Black Friday',title:'早茶 · 中医 · 好莱坞 · 桑拿',blocks:[
+    {time:'早',title:'🥟 Dim Sum · Sea Harbour',note:'3939 Rosemead Blvd, Rosemead。',map:M+'Sea+Harbour+Seafood+Restaurant+Rosemead'},
+    {time:'上午',title:'中医',note:'2218 N San Gabriel Blvd #5 · 屠医生 (626) 375-3588，提前电话确认时间。',map:M+'2218+N+San+Gabriel+Blvd+Rosemead'},
+    {time:'11:00',title:'三喵',note:'432 E Valley Blvd Ste D, San Gabriel。',map:M+'432+E+Valley+Blvd+San+Gabriel'},
+    {time:'午后',title:'Little Tokyo',note:'停车：Joe Auto Parks（319 E 2nd St，$15 全天）或 Aiso St Garage（日最高 $14）。',map:M+'Little+Tokyo+Los+Angeles'},
+    {time:'下午',title:'🎬 好莱坞打卡 + Walk of Fame',note:'停车 1736 N Orange Dr；去 Dave and Buster 前台要 parking ticket（3 刀停 4 小时）：先投优惠票再投停车票。',map:M+'Hollywood+Walk+of+Fame'},
+    {time:'',title:'Museum of Death Hollywood',note:'',map:M+'Museum+of+Death+Hollywood'},
+    {time:'晚',title:'🍣 EAT S AYCE SUSHI + 桑拿',note:'寿司 17 W Main St, Alhambra；New Vogue SPA（17980 Castleton St, 10AM–9PM，626-965-2555）。',map:M+'EATS+AYCE+SUSHI+Alhambra'},
+  ]},
+  {wd:'周六 11/29',short:'11/29',dd:'Santa Monica',title:'剪头发 · Malibu · Santa Monica 落日 · Griffith',blocks:[
+    {time:'8:45',title:'出门 · Hawaii Hair Salon 剪头发',note:'预约 9:30 · 120 E Valley Blvd, San Gabriel。',map:M+'Hawaii+Hair+Salon+San+Gabriel'},
+    {time:'上午',title:'奶皮子糖葫芦 + Dolan 新疆菜',note:'Mei Xi Nuts（1635 S San Gabriel Blvd）· Dolan 新疆菜（742 W Valley Blvd, Alhambra, 11–21）· Molly Tea（425 W Valley Blvd）。',map:M+'Dolan+Uyghur+Cuisine+Alhambra'},
+    {time:'3:00',title:'🏖️ Malibu → 往回走',note:'',map:M+'Malibu+California'},
+    {time:'4:30',title:'🌅 Santa Monica 落日',note:'停 Parking structure 6 或 8（前 90 分钟免费）· 1431 / 1571 2nd St。',map:M+'Santa+Monica+Pier'},
+    {time:'夜',title:'Griffith Observatory 看 LA 夜景',note:'之后：Cha Redefine（3465 W 6th St）· 丰茂烤串（3901 W Olympic, 11:30–23）· Wi Spa（2700 Wilshire, 24h）。',map:M+'Griffith+Observatory'},
+  ]},
+  {wd:'周日 11/30',short:'11/30',dd:'Joshua Tree',title:'沙漠徒步 + 星空',blocks:[
+    {time:'8:00',title:'出发（防晒！）',note:'四海 Four Sea 早茶 6:30am（2020 S Hacienda Blvd, Hacienda Heights）· 打包路上吃。',map:M+'Four+Sea+Restaurant+Hacienda+Heights'},
+    {time:'白天',title:'🌵 Joshua Tree 徒步',note:'Visitor Center → Cholla Cactus Garden → Arch Rock → Skull Rock → Hidden Valley Loop（1 mi）→ Barker Dam Loop（1.3 mi）→ Cap Rock。',map:M+'Joshua+Tree+National+Park+Visitor+Center'},
+    {time:'小镇',title:'JT 小镇艺术',note:'World Famous Crochet Museum · Noah Purifoy Outdoor Desert Art Museum。',map:M+'Noah+Purifoy+Outdoor+Desert+Art+Museum'},
+    {time:'回程',title:'ALittle Tea + 老码头',note:'ALittle Tea（18343 Colima Rd）· 老码头（18938 Labin Ct, Rowland Heights, 17:00–21:30）。',map:M+'Lao+Ma+Tou+Rowland+Heights'},
+  ]},
+  {wd:'周一 12/1',short:'12/1',dd:'Universal',title:'环球影城一日',blocks:[
+    {time:'7:15',title:'出发 · Fortune NO1 早茶',note:'7am · 138 E Garvey Ave, Monterey Park。',map:M+'Fortune+No+1+Monterey+Park'},
+    {time:'9:00',title:'🎬 Universal Studios Hollywood',note:'9:00–20:00 · 见右侧「Universal 一日」攻略：哈利波特 → 马里奥 → Studio Tour → WaterWorld。',map:M+'Universal+Studios+Hollywood'},
+    {time:'晚',title:'Fei Xiang Gong 晚餐 + Wi Spa',note:'356 S Western Ave Unit 203 · Wi Spa（2700 Wilshire, 24h）。',map:M+'Fei+Xiang+Gong+Los+Angeles'},
+  ]},
+  {wd:'周二 12/2',short:'12/2',dd:'返程',title:'K-Town 最后一顿 → 飞',title2:'',blocks:[
+    {time:'上午',title:'🍜 K-Town 最后一顿',note:'Cha Redefine（3465 W 6th St）· Bak Kung Korean B.B.Q（3700 W Olympic）· Oakobing 甜品（3300 W 6th St）。',map:M+'Cha+Redefine+Koreatown+Los+Angeles'},
+    {time:'1:00 PM',title:'出发去机场',note:'必须 1 点出发、2:30 到 LAX。',map:''},
+    {time:'4:45 PM',title:'✈️ 起飞回家 🏠',note:'',map:''},
+  ]},
+];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+(function(){var d=Math.ceil((START-new Date())/86400000);document.getElementById('cd').textContent=d>0?('⏳ '+d+' 天后'):'🏁 已走过';})();
+
+let sel=0;
+function renderTabs(){document.getElementById('daytabs').innerHTML=DAYS.map((d,i)=>'<button class="daytab'+(i===sel?' on':'')+'" onclick="pick('+i+')"><span class="d">'+d.short+'</span><span class="dt">'+d.dd+'</span></button>').join('');}
+function renderDay(){
+  const d=DAYS[sel];
+  let h='<div class="dwd">'+d.wd+'</div><div class="dttl">'+esc(d.title)+'</div><div style="margin-top:10px">';
+  h+=d.blocks.map(b=>{
+    let nt=b.note?'<div class="note">'+b.note+'</div>':'';
+    let mp=b.map?'<a class="mapbtn" href="'+b.map+'" target="_blank" rel="noopener">🧭 地图</a>':'';
+    return '<div class="block"><div class="time">'+esc(b.time)+'</div><div class="ln"><span class="dot"></span><div class="bt">'+esc(b.title)+'</div>'+nt+mp+'</div></div>';
+  }).join('')+'</div>';
+  document.getElementById('daypanel').innerHTML=h;
+}
+function pick(i){sel=i;renderTabs();renderDay();}
+renderTabs();renderDay();
+</script>
+</body>
+</html>
