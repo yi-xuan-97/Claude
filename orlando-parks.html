@@ -79,15 +79,15 @@
   <div class="hero">
     <span class="wm">🗺️</span>
     <h1>各园逐时动线</h1>
-    <div class="sub">2 环球（3 园 2 天）+ 2 迪士尼（AK + EPCOT） · 每个园开门到闭园</div>
-    <div class="hchips"><span>🌌 Epic</span><span>🏰 IOA + USF</span><span>🌐 EPCOT</span><span>🐘 AK</span></div>
+    <div class="sub">2 环球（3 园 2 天·已买 Express）+ 2 迪士尼（EPCOT 从容日 + AK→好莱坞跳园） · 按圣诞周真实排队数据排</div>
+    <div class="hchips"><span>🌌 Epic</span><span>🏰 IOA + USF</span><span>🌐 EPCOT</span><span>🐘 AK + 🎬 DHS</span></div>
   </div>
 
   <div class="sech"><span class="h2">🧭 三条贯穿所有园的战术</span></div>
   <div class="tactics pk-3col">
-    <div class="tactic"><div class="t">① Rope drop · 开门前到</div><div class="b">每天提前 45–60 分钟到门口排队。头 90 分钟排队最短，能顶下午两三小时。</div></div>
-    <div class="tactic"><div class="t">② Single rider · 单人通道</div><div class="b">你们 2 人，环球老两园 + Epic 狂用单人通道——分开坐、省一大半。不买全套快通也能玩很多的关键。</div></div>
-    <div class="tactic"><div class="t">③ 按需买插队</div><div class="b">环球 Epic 买 Epic Express；迪士尼只给最热门那 1 个买 Single Pass（AK 的 Flight of Passage、EPCOT 的 Cosmic Rewind）。</div></div>
+    <div class="tactic"><div class="t">① Rope drop · 开门前到</div><div class="b">头 60–90 分钟排队全天最短（圣诞周也一样），把「不能插队的」放这时干掉；插队票留给 11am–5pm 高峰——那才是它最值的时段。</div></div>
+    <div class="tactic"><div class="t">② 插队票全配齐</div><div class="b">环球两天 Express 已买（每项一次）；迪士尼两天买 Multi Pass（~$35/人/天）+ 每天 1–2 个单项。圣诞周头牌普通队 90–225 分，这些就是你们的命。</div></div>
+    <div class="tactic"><div class="t">③ Single rider · 单人通道</div><div class="b">Express 用完、想二刷、或项目不含插队时（Hagrid、Dragon Racers Rally）就走单人通道——你们 2 人分开坐，常省一大半时间。</div></div>
   </div>
 
   <div class="legend">
@@ -100,7 +100,7 @@
   </div>
 
   <div class="footer">
-    <div class="a">钟点为估算，2026 圣诞周确切开放 / 演出时间未公布。<br>出发前 1–2 周用各园官方 App 核对当日开放、秀场次、单人通道。</div>
+    <div class="a">排队数字为 2025 圣诞周实测；2026 圣诞周确切开门 / 演出时间约 10 月底公布。<br>出发前 1–2 周用各园官方 App 核对当日开放、秀场次、单人通道。</div>
     <div class="b">配套「奥兰多圣诞 5 天 v2」· 监修 Luba 🐾</div>
   </div>
 
@@ -110,44 +110,54 @@
 const TAGNAME={head:'头牌',sr:'单人通道',buy:'买插队',show:'秀',eat:'吃饭',xmas:'圣诞限定'};
 
 const PARKS=[
-  {name:'Epic',date:'12/23',emoji:'🌌',full:'Epic Universe',strategy:'5 个世界 · 不买 Epic Express（省 ~$300/人）· 反人流 rope drop + 免费单人通道 + Ministry 留到最后 · 提前 45 分钟到',alert:'住园外没有提前入园（那是环球酒店客人的福利）。好消息：Epic 大多数项目都有免费单人通道（single rider），配合聪明的时间安排，基本能替代昂贵的 Epic Express。',blocks:[
-    {time:'8:00',title:'到门口排队（rope drop）',tags:[],note:'提前 1 小时到。Celestial Park 是中央枢纽，5 个世界从这里发散，先想好第一冲哪个。'},
-    {time:'9:00',title:'Harry Potter and the Battle at the Ministry',tags:['head','sr'],note:'⚠️ 它没有 Express！三条路：①开门第一个冲 ②单人通道 ③留闭园前刷。求稳=开门直奔走正常队；数据最优=先冲低需求的 Mario Kart / Mine-Cart，把 Ministry 留到晚 8–9 点（闭园前排队暴跌约 74%）。圣诞旺季可能开虚拟排队，进园先看 Universal App。'},
-    {time:'9:40',title:'Super Nintendo World 超级马里奥',tags:['sr'],note:'Mario Kart: Bowsers Challenge（AR 头盔赛车）+ Mine-Cart Madness（大金刚）。单人通道实测 15–20 分钟刷完。可买 Power-Up Band 手环（~$40）把整个世界变互动游戏。'},
-    {time:'11:00',title:'Stardust Racers',tags:['head','sr'],note:'Celestial Park 双轨竞速过山车（62 mph），园里最刺激。两条轨道（绿 / 黄）体感不同，两边都坐。'},
-    {time:'12:30',title:'午饭',tags:['eat'],note:'Super Nintendo World 的 Toadstool Cafe（蘑菇主题），或 Celestial Park 餐厅。避开 12:30–13:30 高峰、手机点单。'},
-    {time:'13:30',title:'How to Train Your Dragon · 驯龙高手',tags:['sr','show'],note:'Hiccups Wing Gliders（温和家庭过山车）· Dragon Racers Rally · 看现场秀 The Untrainable Dragon。'},
-    {time:'15:30',title:'Dark Universe · Monsters Unchained',tags:['head','sr'],note:'机械臂黑暗骑乘，环球自称「史上最吓人」，排队场景一流。下午用免费单人通道回刷最爱（Stardust / Mario Kart）；Ministry 和大多数项目都有 single rider。'},
-    {time:'闭园前',title:'Universal Celestial Goodnight 夜秀',tags:['show'],note:'中央水域夜间灯光 + 喷泉 + 烟花收尾。之后若还有力气，临走刷一次 Battle at the Ministry（这时人最少）。晚饭出园西区 Pocha 93 / Walala。'},
+  {name:'Epic',date:'12/23',emoji:'🌌',full:'Epic Universe',strategy:'✅ 已买 Express（每项一次）· 早上普通队干掉大过山车，Express 留给 11am–5pm 高峰，Ministry 用 Express 保底 + 闭园前普通队二刷',alert:'圣诞周实测：Ministry 中午普通队可超 180 分（旺季曾破 3 小时），闭园前 2–3 小时跌回 45–75 分；其他头牌中午 45–90 分+。你们的 Express 每项一次——别浪费在早上的短队上。唯一不含 Express 的是 Dragon Racers Rally。住园外无提前入园，开门前 35 分钟到即可。',blocks:[
+    {time:'8:25',title:'到门口排队（rope drop）',tags:[],note:'排队时打开 Universal App：绑好票和 Express、看今天各项目实时等待，定下开门第一冲。'},
+    {time:'9:00',title:'开门冲 Stardust Racers（普通队）',tags:['head'],note:'头 60–90 分钟全天最短——用普通队把最猛的双轨竞速（62 mph）先干掉，Express 一张都别动。绿 / 黄两轨体感不同，晚上还能用 Express 坐另一条。'},
+    {time:'9:45',title:'Super Nintendo World（普通队/单人通道）',tags:['sr'],note:'Mario Kart: Bowsers Challenge + Mine-Cart Madness——上午队还没炸，普通队或单人通道解决。可买 Power-Up Band 手环（~$40）把整个世界变互动游戏。'},
+    {time:'11:15',title:'Monsters Unchained（用 Express ①）',tags:['head','buy'],note:'中午起全园排队起飞（45–90 分+），Express 从现在开始发力。机械臂黑暗骑乘，环球自称「史上最吓人」。'},
+    {time:'12:15',title:'午饭 · Toadstool Cafe',tags:['eat'],note:'蘑菇主题，手机点单、赶在 12:30 高峰前坐下。'},
+    {time:'13:15',title:'Battle at the Ministry（用 Express ②）',tags:['head','buy'],note:'此刻普通队约 3 小时——这一下 Express 就值回大半票价。全园最强沉浸体验，排队场景也一流，不亏。'},
+    {time:'14:45',title:'驯龙高手 Isle of Berk',tags:['sr','show'],note:'Hiccups Wing Gliders（Express ③）· Dragon Racers Rally（⚠️ 不含 Express——普通队或单人通道）· 现场秀 The Untrainable Dragon 按场次插空看。'},
+    {time:'16:30',title:'Express 逐个放 + 补漏',tags:['buy'],note:'Mario Kart / Mine-Cart 的 Express 还没用就现在放（下午队最高）；Constellation Carousel、Celestial Park 逛拍。累了咖啡回血——今晚要撑到闭园。'},
+    {time:'20:30',title:'Celestial Goodnight 夜秀',tags:['show','xmas'],note:'中央水域灯光 + 喷泉 + 烟花。看完别急着走——最后一步才是压轴。'},
+    {time:'21:00',title:'闭园前 Ministry 普通队二刷',tags:['head'],note:'此时 45–75 分、全天最低，正好二刷收尾。出园 → Pocha 93 宵夜（~15 分车程）。'},
   ]},
-  {name:'IOA+USF',date:'12/24',emoji:'🏰',full:'IOA + Universal Studios',strategy:'Park-to-Park 票 · 一天扫两园 · ✅ 这天买 Express（~$300–360/人，两园全天最值）· 估开门 9:00（到 8:00）',alert:'⚡ Express 圣诞周会卖光，提前网上买、别等现场。⚠️ Hagrid 从 2026/7/1 起不在 Express 里了——就算买了快通也得排普通队，所以一开门第一个冲它。',blocks:[
-    {time:'8:00',title:'到 IOA 门口排队',tags:[],note:'今天从 Islands of Adventure 开始（头牌最多、排队涨最快）。'},
-    {time:'9:00',title:'Hagrids Magical Creatures Motorbike Adventure',tags:['head'],note:'全环球最好的过山车，排队涨最猛（中午就 120 分钟+）。⚠️ 不在 Express 里（2026/7 起）——一开门第一个冲它，别犹豫。早上单人通道未必开，趁早走正常队。'},
-    {time:'9:50',title:'Jurassic World VelociCoaster',tags:['head','sr'],note:'佛州最强过山车。紧接 Hagrids 之后冲，或用单人通道。'},
-    {time:'10:40',title:'IOA 其余头牌',tags:['sr'],note:'Forbidden Journey（霍格沃茨城堡里）· Hulk · Spider-Man · Jurassic Park River Adventure（12 月会湿会冷，选暖时段）。'},
-    {time:'12:00',title:'坐 Hogwarts Express → USF',tags:[],note:'从 Hogsmeade 站坐到 Kings Cross。趁中午前坐（通常 ≤30 分钟），两个方向车窗剧情不同。需要 Park-to-Park 票。'},
-    {time:'12:40',title:'到 USF · 午饭',tags:['eat'],note:'对角巷 The Leaky Cauldron（英式）或 Springfield（辛普森主题）。'},
-    {time:'13:30',title:'USF 头牌（用 Express 横扫）',tags:['sr'],note:'Escape from Gringotts（对角巷）· Revenge of the Mummy · Transformers 3-D · Men in Black —— 这天有 Express，直接刷。提醒：Hagrid 不在 Express，已在上午正常队解决。'},
-    {time:'傍晚',title:'平安夜圣诞特色',tags:['xmas'],note:'USF Macys 风格圣诞大游行；两园哈利波特城堡圣诞灯光投影秀（整点）；IOA Grinchmas；对角巷晚上等火龙喷火（slow-mo 拍很赞）；买互动魔杖做魔法。平安夜傍晚人流回落，是全周最舒服的夜晚，留下来玩。晚饭 Mills 50 的 SUSURU / Zaru。'},
+  {name:'IOA+USF',date:'12/24',emoji:'🏰',full:'IOA + Universal Studios · 平安夜',strategy:'✅ 已买 Express（两园通用·每项一次）· 开门唯一要抢的是 Hagrid（不含 Express）· 其余头牌全 Express 扫',alert:'圣诞周两园头牌普通队 90–120 分+。⚠️ Hagrid 自 2026/7/1 起退出 Express——所有人（包括 Express 持有者）都排普通队，所以开门第一个冲它，这是全天唯一的硬仗。VelociCoaster / Forbidden Journey / Gringotts / Mummy 都在 Express 里，不用赶。',blocks:[
+    {time:'8:25',title:'到 IOA 门口排队',tags:[],note:'从 IOA 开局——Hagrid 在这，且它是全天第一目标。环球停车场走到 IOA 较远，比 Epic 多留 5 分钟。'},
+    {time:'9:00',title:'开门直冲 Hagrid（普通队·别犹豫）',tags:['head'],note:'全环球最好的过山车，中午普通队 120 分+。不含 Express → 开门头一小时是全天唯一的低谷，进门直奔、别被路上任何东西勾住。早上单人通道未必开。'},
+    {time:'10:00',title:'VelociCoaster（Express ①）→ Forbidden Journey（Express ②）',tags:['head','buy'],note:'佛州最强过山车 + 霍格沃茨城堡。城堡排队场景本身是景点——不赶时间的话 Forbidden Journey 也可以慢走普通队看细节。'},
+    {time:'11:30',title:'Hulk（Express ③）· Spider-Man（Express ④）· Grinchmas',tags:['buy','xmas'],note:'IOA 的圣诞限定 Grinchmas（Seuss Landing）顺路看。Jurassic Park 漂流 12 月又湿又冷，想玩挑最暖时段。'},
+    {time:'12:30',title:'Hogwarts Express → USF',tags:['xmas'],note:'Hogsmeade 站 → Kings Cross。中午时段车次密、通常 ≤30 分钟。两个方向车窗剧情不同——晚上有力气可以坐回来再坐过去。'},
+    {time:'13:00',title:'对角巷午饭 + Gringotts（Express ⑤）',tags:['eat','head','buy'],note:'Leaky Cauldron 英式午饭（手机点单），饭后 Gringotts 用 Express 直接进。对角巷本身逛 30 分钟不亏：互动魔杖施法点最密。'},
+    {time:'14:30',title:'USF 头牌 Express 横扫',tags:['buy','sr'],note:'Revenge of the Mummy · Transformers · Men in Black · Simpsons——每项一次的 Express 逐个放；想二刷走单人通道。'},
+    {time:'16:30',title:'平安夜圣诞场',tags:['xmas','show'],note:'USF Macys 风格圣诞大游行（查 App 场次）· 两园哈利波特城堡圣诞灯光投影（整点）· 对角巷火龙喷火（slow-mo 拍超赞）。平安夜傍晚人流回落——全周最舒服的夜晚。'},
+    {time:'20:00',title:'夜场收尾 + 晚饭',tags:['eat'],note:'补漏、二刷、拍夜景。晚饭园内或 CityWalk 解决（⚠️ 平安夜外面很多餐厅早关，别指望 Mills 50）→ ~10:20 回酒店。'},
   ]},
-  {name:'EPCOT',date:'12/25',emoji:'🌐',full:'EPCOT · 圣诞当天',strategy:'买 Lightning Lane Multi Pass（~$40/人，7am App 买）刷常规项目 · Cosmic Rewind 另外搞定 · 提前 45 分钟到',alert:'⚡ Lightning Lane：Multi Pass（~$40/人）打包 Test Track / Frozen / Remy / Soarin 等。Cosmic Rewind 不在 Multi Pass：进园先在 App 看 7am / 1pm 有没有免费虚拟排队放号，抢到最省；没有就单买 Single Pass（圣诞约 $20–30/人）。日期票不用 park reservation。',blocks:[
-    {time:'8:15',title:'到门口排队',tags:[],note:'住外面没提前入园，但官方开门前 30–45 分钟到，跟第一批进。⏰ 7am 先在 App 抢 Cosmic Rewind 免费虚拟排队；没抢到再买它的 Single Pass（选中午窗口）。同时 7am 买 Multi Pass。'},
-    {time:'9:00',title:'Test Track 3.0',tags:['head'],note:'2025 翻新版，人气极高。一开门先冲它（Cosmic Rewind 用 VQ 或 Single Pass 搞定，不用挤开门）。'},
-    {time:'9:45',title:'World Showcase 两大热门',tags:[],note:'Frozen Ever After（挪威馆，涨得快，趁早）· Remys Ratatouille Adventure（法国馆）。🛍️ 法国馆礼品店买 Remy 磁吸肩膀玩偶（~$25–35，超出片，蹲你肩上逛园）。'},
-    {time:'11:30',title:'Cosmic Rewind',tags:['head','buy'],note:'用免费虚拟排队（抢到的话）或 Single Pass 在窗口去 —— 全迪士尼最好的过山车。'},
-    {time:'12:00',title:'Festival of the Holidays',tags:['eat','xmas'],note:'Holiday Kitchens 节日美食摊绕 World Showcase 一圈；玩 Cookie Stroll（集饼干）；各国 Storytellers 讲圣诞传统。其余骑乘 Soarin · Spaceship Earth · Mission: SPACE。'},
-    {time:'~17:00',title:'Candlelight Processional 烛光圣诞颂',tags:['show','xmas'],note:'America Gardens 剧场，名人朗读圣诞故事 + 50 人乐团合唱，每晚约 3 场（17:00 / 18:45 / 20:15）。圣诞当天爆满——想座位强烈建议订「餐饮套票」（含保留座），否则提前 60–90 分钟站队。'},
-    {time:'~21:00',title:'Luminous The Symphony of Us',tags:['show'],note:'World Showcase 湖面的夜间烟花灯光秀收尾。提前找好湖边位置。'},
+  {name:'EPCOT',date:'12/25',emoji:'🌐',full:'EPCOT · 圣诞当天 · 从容日',strategy:'你俩去过 LA 迪士尼 → 砍掉重播的 MK · 自然醒 10 点进园 · Multi Pass + Cosmic Rewind 单项 · 下午纯氛围：美食节 + 烛光颂 + 烟花',alert:'⚠️ Cosmic Rewind 免费虚拟排队 2025/2 已永久取消——只有单项快线（圣诞约 $20/人）或普通队（圣诞实测中午 170–225 分！）。Test Track 高峰约 195 分。→ 提前 3 天（12/22）在 App 买好 Multi Pass（~$37/人）+ Cosmic Rewind 单项，当天早上不用抢。烛光颂每晚 5:00 / 6:45 / 8:15 三场。',blocks:[
+    {time:'8:00',title:'自然醒 🎉 全周唯一不设闹钟',tags:[],note:'12/23·24 连早起、明天海牛又 5:45——今天故意慢。酒店厨房早餐，9:15 出发（~15 分车程）。'},
+    {time:'10:00',title:'进园 → Cosmic Rewind（单项窗口）',tags:['head','buy'],note:'全迪士尼最好的过山车。单项买上午窗口，落地直接刷——普通队此刻已 2 小时+，你们从旁边走过去就行。'},
+    {time:'11:15',title:'Test Track 3.0（Multi）→ Soarin（Multi）',tags:['head','buy'],note:'2025 翻新版 Test Track 人气极高（高峰 195 分），全程用 Multi Pass 的返场窗口连环刷，用完一个立刻订下一个。'},
+    {time:'12:30',title:'World Showcase 开逛 · Festival of the Holidays',tags:['eat','xmas'],note:'Holiday Kitchens 11 国圣诞美食摊当午饭（两人分着点、多试几摊）；玩 Cookie Stroll 集饼干换奖励。'},
+    {time:'14:30',title:'Frozen（Multi）→ Remy → 各国圣诞讲述人',tags:['buy','xmas'],note:'挪威馆 Frozen 用 Multi；法国馆 Remy 顺路。各国 Storytellers 圣诞传统表演按场次插空看。🛍️ 法国馆买 Remy 磁吸肩膀玩偶（~$25–35，蹲肩上逛园超出片）。'},
+    {time:'16:30',title:'甜点场 + 补漏',tags:['eat'],note:'继续美食节甜品摊当晚饭前菜；Spaceship Earth（大球）队短顺路刷。'},
+    {time:'17:45',title:'烛光颂占位',tags:['show','xmas'],note:'America Gardens 剧场。免费区提前 1 小时占位（圣诞当天更早更稳）；订到餐饮套餐（10/24 有提醒）就按预约直接入座，不用站队。'},
+    {time:'18:45',title:'Candlelight Processional 烛光颂',tags:['show','xmas'],note:'名人朗读圣诞故事 + 50 人乐团合唱，~40 分钟。EPCOT 圣诞夜的灵魂，就为它留的今天。'},
+    {time:'19:30',title:'World Showcase 夜景',tags:['xmas'],note:'各馆圣诞灯光 + 热饮，慢慢往湖边挪、提前占烟花位。'},
+    {time:'21:00',title:'Luminous 烟花收尾 → 回酒店',tags:['show'],note:'湖面烟花灯光秀。散场 ~15 分车程回酒店——明早海牛 5:45 起，别拖。'},
   ]},
-  {name:'AK',date:'12/27',emoji:'🐘',full:'Animal Kingdom · 末日',strategy:'Multi Pass（~$35/人，AK 最便宜）刷 Safaris / Everest / Navi · Flight of Passage 单买 Single Pass · AK 最早开（到 7:15）、关门最早，玩完回酒店；12/28 才 9:15am 飞',alert:'DinoLand 已于 2026/2 永久关闭（DINOSAUR 骑乘没了），正在改建 Tropical Americas。别按旧攻略找 DINOSAUR。⚡ Lightning Lane：Multi Pass 打包 Kilimanjaro Safaris / Expedition Everest / Navi River；Flight of Passage 不在 Multi Pass，单买 Single Pass（圣诞约 $20–30/人）。',blocks:[
-    {time:'7:15',title:'到门口排队（rope drop）',tags:[],note:'AK 是迪士尼最早开的园，7:15 到门口。今晚还住 Vistana、不用退房（明早 12/28 才飞），轻装来就行。'},
-    {time:'8:00',title:'Kilimanjaro Safaris 真动物巡游',tags:['head'],note:'一开门先冲 —— 动物清晨最活跃（中午都躲树荫睡）。值得刷两次：①开门；②闭园前 1–2 小时（金色光线、动物又活跃、常走入即上）。11am–3pm 最不值。'},
-    {time:'9:00',title:'Expedition Everest',tags:['head','sr'],note:'雪山过山车，有单人通道。接着 Pandora 的 Navi River Journey（涨得快，趁早）。'},
-    {time:'10:30',title:'Avatar Flight of Passage',tags:['head','buy'],note:'全迪士尼最佳骑乘之一，10 点后常飙到 180 分钟——用 Single Pass（圣诞约 $20–30/人）在窗口去，完美避开。'},
-    {time:'12:00',title:'午饭 + 步道',tags:['eat','xmas'],note:'Satuli Canteen（Pandora，公认 AK 最好的快餐，生物碗）。饭后走 Maharajah Jungle Trek（老虎）· Gorilla Falls（大猩猩）· Discovery Island Trails（生命之树）。🎄 在 Discovery Island 上找 Merry Menagerie 动物木偶 —— AK 的圣诞限定亮点。'},
-    {time:'14:00',title:'演出 + 凉快项目',tags:['show'],note:'Festival of the Lion King（必看音乐秀）· Finding Nemo 音乐剧 · Kali River Rapids（漂流，12 月会湿会冷——想玩选最暖时段）。'},
-    {time:'~16:30',title:'动物再活跃 + 收尾',tags:[],note:'傍晚动物又活跃起来，可二刷 Safaris 或看生命之树夜间 Tree of Life Awakenings 投影。'},
-    {time:'关门后',title:'送朋友去机场 → 回酒店睡',tags:[],note:'12/27 晚：你开车送朋友去 MCO 赶她 10:50PM 红眼（回 LAX），再开回 Vistana 住最后一晚。12/28 早：还 Turo 车（8:30am）→ 9:15am 飞回 DSM。别熬太晚。晚饭回程顺路 Jollibee / Disney Springs / Mills 50。'},
+  {name:'AK+DHS',date:'12/27',emoji:'🐘',full:'Animal Kingdom + 好莱坞影城 · 跳园末日',strategy:'AK 开门冲（8 点开·全迪士尼最早）→ 午后跳好莱坞（gate-to-gate 仅 ~16 分·全 WDW 最短一跳）→ 晚上送机 · FoP 单项必买；Rise LA 玩过可省',alert:'圣诞周实测：Flight of Passage 平均 92 分（峰值 180）；好莱坞是全 WDW 排队最狠的园（头牌 120 分+）——两园全靠 Multi Pass + 单项，别指望普通队。DinoLand 已关闭改建，别按旧攻略找 DINOSAUR。⚠️ Rise of the Resistance LA 迪士尼也有：玩过且不想二刷就省 $24，把时间给 LA 没有的 Slinky Dog 和原版惊魂古塔（LA 那台 2017 已改造）。',blocks:[
+    {time:'7:30',title:'到 AK 门口（rope drop）',tags:[],note:'AK 8 点开、全迪士尼最早。今晚送朋友机场——她的行李先收好放酒店，轻装进园。'},
+    {time:'8:00',title:'Flight of Passage（单项窗口）→ Navi River（普通队）',tags:['head','buy'],note:'FoP 圣诞周平均 92 分、上午 10 点后飙 180——单项买最早窗口，落地即刷。出来紧接 Navi River（此刻还短，越晚涨越猛）。潘多拉清晨最美，顺手拍。'},
+    {time:'9:15',title:'Kilimanjaro Safaris（Multi）→ Everest（单人通道）',tags:['head','buy','sr'],note:'Safaris 用 Multi 首窗——动物清晨最活跃（中午全躲树荫睡）。Everest 雪山过山车走单人通道，两人分开坐很快。'},
+    {time:'11:00',title:'Festival of the Lion King + 步道',tags:['show','xmas'],note:'狮子王音乐秀必看（查 App 场次）。Maharajah Jungle Trek（老虎）顺路；🎄 Discovery Island 找 Merry Menagerie 动物木偶——AK 圣诞限定。'},
+    {time:'12:00',title:'Satuli Canteen 午饭',tags:['eat'],note:'潘多拉里、公认 AK 最好吃的快餐（生物碗）。手机点单，12:45 前吃完出园。'},
+    {time:'12:45',title:'跳园 → 好莱坞影城',tags:[],note:'AK→DHS gate-to-gate 仅 ~16 分（全 WDW 最短一跳），停车不再收费（同天已付）。~13:35 进园。'},
+    {time:'13:35',title:'Rise of the Resistance（单项 $24 或跳过）',tags:['head','buy'],note:'LA 玩过、不想二刷 → 省 $24 直接下一项。想二刷 → 单项窗口刷（圣诞普通队 120 分+，别硬排）。'},
+    {time:'14:30',title:'Slinky Dog（Multi）→ Tower of Terror（Multi）',tags:['head','buy'],note:'这两台才是 LA 没有的：Slinky Dog Dash 户外家庭过山车 + 原版惊魂古塔自由落体。Multi 返场窗口连环订。'},
+    {time:'16:00',title:'米奇米妮疯狂铁道（Multi）+ 星战园区',tags:['buy','xmas'],note:'Runaway Railway 用 Multi；Galaxys Edge 逛拍 + 蓝牛奶；Sunset Blvd 圣诞灯饰顺路看。玩具总动员区 Toy Story Mania 队短就刷。'},
+    {time:'18:15',title:'离园 → 回酒店拿行李',tags:[],note:'~15 分回 Vistana，取朋友行李 + 你顺手把自己明早的行李归置好。'},
+    {time:'19:00',title:'Disney Springs 晚饭（顺路）',tags:['eat'],note:'去机场方向顺路；不想逛就 Jollibee（近 Florida Mall，也顺路）。'},
+    {time:'20:00',title:'送机 → 回酒店',tags:[],note:'开去 MCO ~20 分，8:45 送朋友进航站楼（10:50pm 红眼回 LAX，提前 2 小时）。你 ~9:15 回 Vistana 住最后一晚。12/28 早：5:45 起 → 6:15 出发 → 还 Turo 车 → 9:15am 飞回 DSM ✈️'},
   ]},
 ];
 
